@@ -1,6 +1,8 @@
-export default async function getCategories() {
+import { HOST } from "../../components/Token"
+export default async function getCategories(apiName) {
   try {
-    const data = await fetch(process.env.PUBLIC_URL + '/clientBack.json')
+    
+    const data = await fetch(HOST + `/${apiName}`)
     const categories = await data.json()
     return categories
   } catch (e) {
