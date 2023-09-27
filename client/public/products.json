@@ -481,7 +481,7 @@
   },
   {
     "title": "Tray",
-    "id" : "21",
+    "id": "21",
     "url": "1.png",
     "price": "$11.99",
     "category": "Crockery",
@@ -489,11 +489,11 @@
     "height": "3cm",
     "width": "38cm",
     "depth": "38cm",
-    "description":"A tray for both tasty party treats and beautiful collections. The brass colour gives a feel of everyday luxury and the discreet edge makes the things stay in place where they’re supposed to be."
+    "description": "A tray for both tasty party treats and beautiful collections. The brass colour gives a feel of everyday luxury and the discreet edge makes the things stay in place where they’re supposed to be."
   },
   {
     "title": "Red wine glass",
-    "id" : "22",
+    "id": "22",
     "url": "2.png",
     "price": "$3.59",
     "category": "Crockery",
@@ -501,11 +501,11 @@
     "height": "21.5cm",
     "width": "6.5cm",
     "depth": "6.5cm",
-    "description":"A glass for weekends and special weekdays of the very best kind. DYRGRIP red wine glass has the same benefits as traditional crystal glass but is also lead-free and dishwasher-safe. That’s worth a toast!"
+    "description": "A glass for weekends and special weekdays of the very best kind. DYRGRIP red wine glass has the same benefits as traditional crystal glass but is also lead-free and dishwasher-safe. That’s worth a toast!"
   },
   {
     "title": "Bowl",
-    "id" : "23",
+    "id": "23",
     "url": "3.png",
     "price": "$9.59",
     "category": "Crockery",
@@ -513,11 +513,11 @@
     "height": "8cm",
     "width": "11cm",
     "depth": "11cm",
-    "description":"This ocean-blue, glazed bowl, with golden-brown details, turns every meal into pure joy. Decorate your table with clean classic shapes and a strong crafted look. A timeless feel with a unique design."
+    "description": "This ocean-blue, glazed bowl, with golden-brown details, turns every meal into pure joy. Decorate your table with clean classic shapes and a strong crafted look. A timeless feel with a unique design."
   },
   {
     "title": "Plate",
-    "id" : "24",
+    "id": "24",
     "url": "4.png",
     "price": "$17.99",
     "category": "Crockery",
@@ -525,11 +525,11 @@
     "height": "2cm",
     "width": "25cm",
     "depth": "25cm",
-    "description":"This ocean-blue, glazed plate, with golden-brown details, turns every meal into pure joy. Decorate your table with clean classic shapes and a strong crafted look. A timeless feel with a unique design."
+    "description": "This ocean-blue, glazed plate, with golden-brown details, turns every meal into pure joy. Decorate your table with clean classic shapes and a strong crafted look. A timeless feel with a unique design."
   },
   {
     "title": "Side plate",
-    "id" : "25",
+    "id": "25",
     "url": "5.png",
     "price": "$9.59",
     "category": "Crockery",
@@ -537,11 +537,11 @@
     "height": "1.5cm",
     "width": "20cm",
     "depth": "20cm",
-    "description":"Your perfect start for many types of meals. FÄRGKLAR side plate comes in a straightforward design, a great base to match with other dinnerware."
+    "description": "Your perfect start for many types of meals. FÄRGKLAR side plate comes in a straightforward design, a great base to match with other dinnerware."
   },
   {
     "title": "Deep plate",
-    "id" : "26",
+    "id": "26",
     "url": "6.png",
     "price": "$9.59",
     "category": "Crockery",
@@ -549,11 +549,11 @@
     "height": "5cm",
     "width": "20cm",
     "depth": "20cm",
-    "description":"Your perfect start for many types of meals. FÄRGKLAR deep plate comes in a straightforward design, a great base to match with other dinnerware."
+    "description": "Your perfect start for many types of meals. FÄRGKLAR deep plate comes in a straightforward design, a great base to match with other dinnerware."
   },
   {
     "title": "Insulated tiffin box",
-    "id" : "27",
+    "id": "27",
     "url": "7.png",
     "price": "$17.99",
     "category": "Crockery",
@@ -561,11 +561,11 @@
     "height": "17cm",
     "width": "14cm",
     "depth": "14cm",
-    "description":"Be sure to always enjoy warm food for your outdoor adventures – or work lunches. This insulated tiffin box retains the temperature and has 2 tiers so you avoid mixing different food in one container."
+    "description": "Be sure to always enjoy warm food for your outdoor adventures – or work lunches. This insulated tiffin box retains the temperature and has 2 tiers so you avoid mixing different food in one container."
   },
   {
     "title": "Jar with lid",
-    "id" : "28",
+    "id": "28",
     "url": "8.png",
     "price": "$2.39",
     "category": "Crockery",
@@ -573,11 +573,11 @@
     "height": "16.5cm",
     "width": "12cm",
     "depth": "12cm",
-    "description":"KORKEN series is ideal for preserving pickles and jams, serving beverages or keeping your cookies crunchy. The airtight seal locks in all the goodness."
+    "description": "KORKEN series is ideal for preserving pickles and jams, serving beverages or keeping your cookies crunchy. The airtight seal locks in all the goodness."
   },
   {
     "title": "Mug",
-    "id" : "29",
+    "id": "29",
     "url": "9.png",
     "price": "$1.29",
     "category": "Crockery",
@@ -585,11 +585,11 @@
     "height": "11cm",
     "width": "6cm",
     "depth": "6cm",
-    "description":"Whether dressing your table up or down, the simple, functional design is easy to coordinate with other shapes and colours. FÄRGRIK series is a perfect base for all types of meals and every occasion."
+    "description": "Whether dressing your table up or down, the simple, functional design is easy to coordinate with other shapes and colours. FÄRGRIK series is a perfect base for all types of meals and every occasion."
   },
   {
     "title": "Glass",
-    "id" : "30",
+    "id": "30",
     "url": "10.png",
     "price": "$2.39",
     "category": "Crockery",
@@ -597,7 +597,7 @@
     "height": "9cm",
     "width": "7cm",
     "depth": "7cm",
-    "description":"A glass for weekends and special weekdays of the very best kind. DYRGRIP water glass has the same benefits as traditional crystal glass but is also lead-free and dishwasher-safe. How refreshing!"
+    "description": "A glass for weekends and special weekdays of the very best kind. DYRGRIP water glass has the same benefits as traditional crystal glass but is also lead-free and dishwasher-safe. How refreshing!"
   },
   {
     "title": "Malm",
@@ -840,5 +840,3 @@
     "description": "Why is a dedicated vegetable slicer a good idea? The answer is simple - the indentations on the blade prevent carrot circles from sticking when cutting. A small detail that makes a big difference. Thanks to the serrations on the blade of the knife, which allow air to pass through, the products will not stick to the knife during slicing. The product can be held firmly in the hands thanks to the well-thought-out design and material of the handle. Made of vanadium/molybdenum stainless steel, thanks to which the knives stay sharp for a long time."
   }
 ]
-
-
