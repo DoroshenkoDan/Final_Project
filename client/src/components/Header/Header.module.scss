@@ -13,18 +13,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .logo {
+  display: block;
   font-family: 'Clash Display Regular';
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
   color: #22202e;
+  width: max-content;
 }
 
 .icons {
   display: none;
+  position: absolute;
 }
 
 .icon-favorites {
@@ -62,19 +66,17 @@
 
   &__list {
     list-style: none;
+    box-sizing: border-box;
   }
 
   &__item {
     width: 100%;
-    font-family: 'Satoshi Regular';
-    font-weight: 400;
+    height: 40px;
     font-size: 16px;
     text-decoration: none;
-    color: #726e8d;
-    height: 40px;
-    line-height: 40px;
     border-bottom: 1px solid #726e8d50;
     padding-left: 15px;
+    box-sizing: border-box;
 
     &--display {
       display: block;
@@ -82,13 +84,15 @@
   }
 
   &__item:active {
-    font-family: 'Satoshi Medium';
-    font-weight: 600;
     border: 2px solid #726e8d;
   }
 
   &__link {
+    font-family: 'Satoshi Regular';
+    font-weight: 400;
     text-decoration: none;
+    color: #726e8d;
+    line-height: 40px;
   }
 }
 
@@ -98,19 +102,27 @@
   }
   .top-menu {
     height: 66px;
+    display: block;
 
     &::after {
       content: '';
       position: absolute;
-      top: 50%;
+      top: 100%;
       left: 0;
       right: 0;
-      border-top: 1px solid #00000020; // Стиль горизонтальной линии
+      border-top: 1px solid #00000020;
       transform: translateY(-50%);
     }
   }
+  .logo {
+    margin: 0 auto;
+    line-height: 66px;
+  }
   .icons {
     display: block;
+    position: absolute;
+    top: 23px;
+    right: 0;
   }
   .icon-menu {
     display: none;
@@ -137,7 +149,6 @@
       width: max-content;
       border-bottom: 0;
       height: 66px;
-      line-height: 66px;
       padding-left: 0;
 
       &--display {
@@ -147,15 +158,14 @@
 
     &__item:active {
       border: 0;
-      font-family: 'Satoshi Regular';
-      font-weight: 400;
     }
 
-    &__item:hover {
-      font-family: 'Satoshi Medium';
-      font-weight: 600;
-      color: #726e8d;
-      border: 0;
+    &__link {
+      line-height: 66px;
+    }
+
+    &__link:hover {
+      color: #342d42;
     }
   }
 }
