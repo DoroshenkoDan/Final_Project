@@ -1,8 +1,6 @@
 import React from 'react'
+import Advantages from '../components/AdvantagesSection/index'
+
 export default function HomePage() {
-  return (
-    <>
-      <p>Хелоу</p>
-    </>
-  )
+  return <Advantages />
 }
