@@ -1,3 +1,4 @@
+@import url(../../scss/fonts.scss);
 html,
 body {
   height: 100%;
@@ -7,12 +8,28 @@ body {
 
 .footer {
   @media screen and (max-width: 960px) {
+    .footer__top {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .footer__line-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding-top: 30px;
+    }
+
     .footer__line {
-      width: 364px;
+      display: flex;
+      width: 100%;
       border: 1px solid #4e4d93;
       transform: rotate(0deg);
-      position: absolute;
-      bottom: -635px;
+      bottom: 0;
     }
 
     .footer__copyright {
@@ -20,18 +37,21 @@ body {
       display: flex;
       flex-direction: column;
       width: 364px;
-      position: absolute;
-      bottom: -675px;
       color: #fff;
+      padding-top: 15px;
     }
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    color: #fff;
+    font-family: 'Clash Display';
+    font-weight: 400;
     background-color: #2a254b;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden; /* Добавляем overflow: hidden для ограничения фона */
+    position: relative;
     height: 540px;
+    padding-top: 45px;
 
     .footer__content-desktop {
       display: none;
@@ -40,15 +60,20 @@ body {
     .footer__content-mobile {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      max-width: 390px;
+      align-items: center;
+      flex-wrap: wrap;
       width: 100%;
-      margin-left: 24px;
-      margin-top: -80px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1440px;
+      height: 350px;
+      position: relative;
+      padding-right: 40px;
+      padding-left: 40px;
 
       .footer__avion {
         color: #fff;
-        font-family: Clash Display;
+        font-family: 'Clash Display';
         font-weight: 400;
         line-height: 50px;
         position: relative;
@@ -61,7 +86,7 @@ body {
       }
 
       .footer__address {
-        font-family: Satoshi;
+        font-family: 'Satoshi';
         font-size: 14px;
         font-weight: 400;
         line-height: 25px;
@@ -99,7 +124,6 @@ body {
             font-size: 14px;
             color: #ffffff;
             cursor: pointer;
-
           }
 
           li:hover {
@@ -108,17 +132,9 @@ body {
         }
       }
 
-      .footer__right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        position: relative;
-        top: 3px;
-      }
-
       .footer__social {
         color: #fff;
-        font-family: Clash Display;
+        font-family: 'Clash Display';
         font-weight: 400;
         line-height: 50px;
         position: relative;
@@ -135,7 +151,7 @@ body {
       }
 
       .footer__tagSocial {
-        font-family: Satoshi;
+        font-family: 'Satoshi';
         font-size: 14px;
         font-weight: 400;
         line-height: 19px;
@@ -195,13 +211,15 @@ body {
 
   @media screen and (min-width: 960px) {
     color: #fff;
-    font-family: Clash Display;
+    font-family: 'Clash Display';
     font-weight: 400;
     background-color: #2a254b;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Добавляем overflow: hidden для ограничения фона */
+    position: relative;
 
     .footer__content-mobile {
       display: none;
@@ -213,10 +231,13 @@ body {
       align-items: center;
       flex-wrap: wrap;
       width: 100%;
-      margin-left: 80px;
-      margin-right: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1440px;
       height: 350px;
       position: relative;
+      padding-right: 40px;
+      padding-left: 40px;
 
       .footer__line-container {
         flex-basis: 100%;
@@ -259,8 +280,6 @@ body {
           margin: 0px;
           font-size: 14px;
         }
-
-
       }
 
       .footer__address {
@@ -303,9 +322,11 @@ body {
         }
       }
 
-      .footer__categories, .footer__social, .footer__menu {
-                &-line {
-cursor: pointer;
+      .footer__categories,
+      .footer__social,
+      .footer__menu {
+        &-line {
+          cursor: pointer;
         }
       }
 

@@ -11,6 +11,7 @@ export const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__content-mobile">
+      
         <div className="footer__left">
           <div className="footer__avion">
             <p className="footer__avion-text">Avion</p>
@@ -86,9 +87,14 @@ export const Footer = () => {
           </div>
         </div>
 
+
+<div className="footer__line-container">
         <div className="footer__line"></div>
         <div className="footer__copyright">Copyright 2022 Avion LTD</div>
+        </div>
       </div>
+
+
 
       <div className="footer__content-desktop">
         <div className="footer__address">
