@@ -150,6 +150,15 @@ export const Footer = () => {
           <p className="footer__menu-line">Chairs</p>
         </div>
 
+        <div className="footer__company">
+            <p className="footer__company-heading">Our company</p>
+            <p className="footer__company-line">About us</p>
+            <p className="footer__company-line">Vacancies</p>
+            <p className="footer__company-line">Contact us</p>
+            <p className="footer__company-line">Privacy</p>
+            <p className="footer__company-line">Returns policy</p>
+          </div>
+
         <div className="footer__line-container">
           <div className="footer__line"></div>
         </div>
