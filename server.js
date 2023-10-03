@@ -24,6 +24,7 @@ const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
 // const mainRoute = require('./routes/index');
+const cors = require('cors');
 
 const app = express();
 
@@ -45,6 +46,8 @@ app.use(passport.initialize());
 
 // Passport Config
 require('./config/passport')(passport);
+
+app.use(cors());
 
 // Use Routes
 app.use('/api/configs', globalConfigs);
