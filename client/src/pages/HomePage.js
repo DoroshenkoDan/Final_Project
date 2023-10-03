@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductsContainer from '../Components/ProductsContainer'
+import ProductsContainer from '../components/ProductsContainer'
 export default function HomePage() {
     return (
         <>
