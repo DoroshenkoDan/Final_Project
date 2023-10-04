@@ -36,10 +36,8 @@ export default function ProductsContainer() {
       ) {
         resultArray.push(randomObject)
       }
-
       sourceCopy.splice(randomIndex, 1)
     }
-
     setProductsContainerArray([...resultArray])
   }
 
