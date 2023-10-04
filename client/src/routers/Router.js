@@ -17,35 +17,35 @@ import CutleryPage from '../pages/CutleryPage'
 import PageNotFound from '../pages/PageNotFound'
 
 function Routes() {
-    return useRoutes([
-        {
-            path: '/',
-            element: <Layout />,
-            children: [
-                { path: '', element: <Navigate to="home/" /> },
-                { path: 'home/', element: <HomePage /> },
-                { path: 'cart/', element: <CartPage /> },
-                { path: 'favorites/', element: <FavoritesPage /> },
-                { path: 'catalog/', element: <CatalogPage /> },
-                { path: 'catalog/plantPots/', element: <PlantPotsPage /> },
-                { path: 'catalog/ceramics/', element: <CeramicsPage /> },
-                { path: 'catalog/tables/', element: <TablesPage /> },
-                { path: 'catalog/chairs/', element: <ChairsPage /> },
-                { path: 'catalog/crockery/', element: <CrockeryPage /> },
-                { path: 'catalog/nightstands/', element: <NightstandsPage /> },
-                { path: 'catalog/cutlery/', element: <CutleryPage /> },
-                { path: '*', element: <PageNotFound /> },
-            ],
-        },
-    ])
+  return useRoutes([
+    {
+      path: '/',
+      element: <Layout />,
+      children: [
+        { path: '', element: <Navigate to="home/" /> },
+        { path: 'home/', element: <HomePage /> },
+        { path: 'cart/', element: <CartPage /> },
+        { path: 'favorites/', element: <FavoritesPage /> },
+        { path: 'catalog/', element: <CatalogPage /> },
+        { path: 'catalog/plantPots/', element: <PlantPotsPage /> },
+        { path: 'catalog/ceramics/', element: <CeramicsPage /> },
+        { path: 'catalog/tables/', element: <TablesPage /> },
+        { path: 'catalog/chairs/', element: <ChairsPage /> },
+        { path: 'catalog/crockery/', element: <CrockeryPage /> },
+        { path: 'catalog/nightstands/', element: <NightstandsPage /> },
+        { path: 'catalog/cutlery/', element: <CutleryPage /> },
+        { path: '*', element: <PageNotFound /> },
+      ],
+    },
+  ])
 }
 
 export default function Router() {
-    return (
-        <Store>
-            <BrowserRouter>
-                <Routes />
-            </BrowserRouter>
-        </Store>
-    )
+  return (
+    <Store>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Store>
+  )
 }
