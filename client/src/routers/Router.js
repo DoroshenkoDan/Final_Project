@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Store from '../Redux/store.js'
 
 import Layout from '../layouts/Layout'
@@ -8,16 +8,12 @@ import CartPage from '../pages/CartPage'
 import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import PlantPotsPage from '../pages/PlantPotsPage'
-import CeramicsPage from '../pages/CeramicsPage'
-import TablesPage from '../pages/TablesPage'
-import ChairsPage from '../pages/ChairsPage'
-import CrockeryPage from '../pages/CrockeryPage'
-import NightstandsPage from '../pages/NightstandsPage'
-import CutleryPage from '../pages/CutleryPage'
-import PageNotFound from '../pages/PageNotFound'
+
 
 function Routes() {
-    return useRoutes([
+
+
+    return createBrowserRouter([
         {
             path: '/',
             element: <Layout />,
@@ -27,14 +23,7 @@ function Routes() {
                 { path: 'cart/', element: <CartPage /> },
                 { path: 'favorites/', element: <FavoritesPage /> },
                 { path: 'catalog/', element: <CatalogPage /> },
-                { path: 'catalog/plantPots/', element: <PlantPotsPage /> },
-                { path: 'catalog/ceramics/', element: <CeramicsPage /> },
-                { path: 'catalog/tables/', element: <TablesPage /> },
-                { path: 'catalog/chairs/', element: <ChairsPage /> },
-                { path: 'catalog/crockery/', element: <CrockeryPage /> },
-                { path: 'catalog/nightstands/', element: <NightstandsPage /> },
-                { path: 'catalog/cutlery/', element: <CutleryPage /> },
-                { path: '*', element: <PageNotFound /> },
+                { path: 'category/:categoryId', element: <PlantPotsPage /> },
             ],
         },
     ])
@@ -43,9 +32,7 @@ function Routes() {
 export default function Router() {
     return (
         <Store>
-            <BrowserRouter>
-                <Routes />
-            </BrowserRouter>
+            <RouterProvider router={Routes()} />
         </Store>
     )
 }

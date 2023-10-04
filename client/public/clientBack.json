@@ -1,0 +1,58 @@
+[
+    {
+    "_id": "10001",
+    "id": "plant-pots-store",
+    "name": "Plant pots",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10002",
+    "id": "ceramics-store",
+    "name": "Ceramics",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10003",
+    "id": "tables-store",
+    "name": "Tables",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10004",
+    "id": "chairs-store",
+    "name": "Chairs",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10005",
+    "id": "crockery-store",
+    "name": "Crockery",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10006",
+    "id": "nightstands-store",
+    "name": "Nightstands",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  },
+  {
+    "_id": "10007",
+    "id": "cutleru-store",
+    "name": "Cutlery",
+    "parentId": "null",
+    "__v": 0,
+    "date": "2019-10-06T13:50:11.859Z"
+  }
+]

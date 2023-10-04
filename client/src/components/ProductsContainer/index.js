@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductsContainer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../Redux/reducers/productsReducers";
+import {fetchCategories} from "../../Redux/reducers/categoriesReducers";
 
 export default function ProductsContainer() {
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export default function ProductsContainer() {
     const [productsContainerArray, setProductsContainerArray] = useState([]);
 
     function getProducts() {
-        dispatch(fetchProducts());
+        dispatch(fetchCategories());
     }
 
     useEffect(() => {

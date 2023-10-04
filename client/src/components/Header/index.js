@@ -1,100 +1,84 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {NavLink} from 'react-router-dom'
 import CartIcon from '../CartIcon'
 import FavoritesIcon from '../FavoritesIcon'
 import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
+import {useDispatch, useSelector} from "react-redux";
+import {fetchProducts} from "../../Redux/reducers/productsReducers";
 
 export default function Header() {
-  const [isMenuHidden, setIsMenuHidden] = useState(true)
+    const categories = useSelector((state) => state.categories.categories);
+    const [isMenuHidden, setIsMenuHidden] = useState(true)
+    const dispatch = useDispatch();
 
-  const toggleHideItems = () => {
-    setIsMenuHidden(!isMenuHidden)
-  }
+    function getCategories() {
+        dispatch(fetchProducts());
+    }
 
-  return (
-    <div className={styles['header-container']}>
-      <div className={styles['top-menu']}>
-        <span className={styles.logo}>Avion</span>
-        <span className={styles.icons}>
-          <NavLink className={styles['icon-favorites']} to="/favorites/">
-            <FavoritesIcon />
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    const toggleHideItems = () => {
+        setIsMenuHidden(!isMenuHidden)
+    }
+
+    return (
+        <header className={styles.headerContainer}>
+            <div className={styles.topMenu}>
+                <span className={styles.logo}>Avion</span>
+                <span className={styles.icons}>
+          <NavLink className={styles.iconFavorites} to="/favorites/">
+            <FavoritesIcon/>
           </NavLink>
-          <NavLink className={styles['icon-cart']} to="/cart/">
-            <CartIcon />
+          <NavLink className={styles.iconCart} to="/cart/">
+            <CartIcon/>
           </NavLink>
         </span>
-        <span
-          className={`${styles['icon-menu']} ${
-            !isMenuHidden ? styles['icon-menu--display'] : ''
-          }`}
-          onClick={toggleHideItems}
-        >
-          <MenuIcon />
+                <span
+                    className={`${styles.iconMenu} ${
+                        !isMenuHidden ? styles.iconMenuDisplay : ''
+                    }`}
+                    onClick={toggleHideItems}
+                >
+          <MenuIcon/>
         </span>
-        <span
-          className={`${styles['icon-menu']} ${
-            isMenuHidden ? styles['icon-menu--display'] : ''
-          }`}
-          onClick={toggleHideItems}
-        >
-          <CloseBtnIcon />
+                <span
+                    className={`${styles.iconMenu} ${
+                        isMenuHidden ? styles.iconMenuDisplay : ''
+                    }`}
+                    onClick={toggleHideItems}
+                >
+          <CloseBtnIcon/>
         </span>
-      </div>
-      <nav
-        className={`${styles.nav} ${
-          isMenuHidden ? styles['nav--display'] : ''
-        }`}
-      >
-        <ul className={styles.nav__list}>
-          <li className={`${styles.nav__item} ${styles['nav__item--display']}`}>
-            <NavLink className={styles.nav__link} to="/cart/">
-              Cart
-            </NavLink>
-          </li>
-          <li className={`${styles.nav__item} ${styles['nav__item--display']}`}>
-            <NavLink className={styles.nav__link} to="/favorites/">
-              Favorites
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/plantPots/">
-              Plant pots
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/ceramics/">
-              Ceramics
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/tables/">
-              Tables
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/chairs/">
-              Chairs
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/crockery/">
-              Crockery
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/nightstands/">
-              Nightstands
-            </NavLink>
-          </li>
-          <li className={styles.nav__item}>
-            <NavLink className={styles.nav__link} to="/catalog/cutlery/">
-              Cutlery
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  )
+            </div>
+            <nav
+                className={`${styles.nav} ${
+                    isMenuHidden ? styles.navDisplay : ''
+                }`}
+            >
+                <ul className={styles.navList}>
+                    <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
+                        <NavLink className={styles.navLink} to="/cart/">
+                            Cart
+                        </NavLink>
+                    </li>
+                    <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
+                        <NavLink className={styles.navLink} to="/favorites/">
+                            Favorites
+                        </NavLink>
+                    </li>
+                    {categories.map(category => (
+                        <li key={category.id} className={styles.navItem}>
+                            <NavLink to={`/category/${category.id}/`}>
+                                {category.name}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </header>
+    )
 }
