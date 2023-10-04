@@ -7,7 +7,7 @@ const initialState = {
     error: null,
 }
 export const fetchCategories = createAsyncThunk(
-    'products/fetchProducts',
+    'categoriesReducer/fetchProducts',
     async () => {
         const response = await getCategories()
         return response

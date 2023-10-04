@@ -1,7 +1,7 @@
 import React from 'react'
 import {useParams} from "react-router-dom";
 
-export default function PlantPotsPage() {
+export default function CategoryPage() {
   const {categoryId} = useParams()
   return <>
     {categoryId}

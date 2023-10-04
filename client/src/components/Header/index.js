@@ -6,7 +6,7 @@ import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts} from "../../Redux/reducers/productsReducers";
+import {fetchCategories} from "../../Redux/reducers/categoriesReducers"
 
 export default function Header() {
     const categories = useSelector((state) => state.categories.categories);
@@ -14,7 +14,7 @@ export default function Header() {
     const dispatch = useDispatch();
 
     function getCategories() {
-        dispatch(fetchProducts());
+        dispatch(fetchCategories());
     }
 
     useEffect(() => {
@@ -72,7 +72,7 @@ export default function Header() {
                     </li>
                     {categories.map(category => (
                         <li key={category.id} className={styles.navItem}>
-                            <NavLink to={`/category/${category.id}/`}>
+                            <NavLink to={`/category/${category.id}/`} className={styles.navLink}>
                                 {category.name}
                             </NavLink>
                         </li>
