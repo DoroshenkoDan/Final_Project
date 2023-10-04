@@ -32,7 +32,7 @@ export default function ProductsContainer() {
             const randomIndex = getRandomInt(0, sourceCopy.length - 1);
             const randomObject = sourceCopy[randomIndex];
 
-            if (!resultArray.some((item) => item.category === randomObject.category)) {
+            if (!resultArray.some((item) => item.categories === randomObject.categories)) {
                 resultArray.push(randomObject);
             }
 
@@ -51,9 +51,9 @@ export default function ProductsContainer() {
             <div className={styles["products-container"]}>
                 {productsContainerArray.map((product, index) => (
                     <div className={styles["products-container-item"]} key={index}>
-                        <img src={isLink(product.url) ? product.url : `/img/${product.category.toLowerCase()}/${product.url}`} className={styles["products-container-item-img"]} />
-                        <p className={styles["products-container-item-name"]}>{product.title}</p>
-                        <p className={styles["products-container-item-price"]}>{product.price}</p>
+                        <img src={isLink(product.imageUrls) ? product.imageUrls : `${product.imageUrls}`} className={styles["products-container-item-img"]} />
+                        <p className={styles["products-container-item-name"]}>{product.name}</p>
+                        <p className={styles["products-container-item-price"]}>{product.currentPrice}</p>
                     </div>
                 ))}
             </div>
