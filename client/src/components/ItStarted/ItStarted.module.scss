@@ -8,6 +8,7 @@
 .text-block {
   background-color: #2a254b;
   padding: 32px;
+  width: 100%;
 }
 .text-heading {
   font-family: 'Clash Display Regular';
@@ -33,35 +34,35 @@
   display: inline-block;
   text-align: center;
   text-decoration: none;
-  padding-top: 17px;
+  padding-top: 19px;
 }
 .button-collection:hover {
   background-color: #f9f9f934;
 }
-.itstarted-image-wrapper {
+.itStarted-image-wrapper {
   margin-top: 24px;
   width: 100%;
 }
-.itstarted-image {
+.itStarted-image {
   width: 100%;
   height: 100%;
 }
-@media only screen and (min-width: 786px) {
+@media only screen and (min-width: 768px) {
   .flex-wrapper {
     flex-wrap: nowrap;
     justify-content: space-around;
   }
   .text-block {
-    padding: 50px;
+    padding: 48px;
     width: 48%;
     position: relative;
   }
   .button-collection {
     width: 170px;
     position: absolute;
-    bottom: 50px;
+    bottom: 36px;
   }
-  .itstarted-image-wrapper {
+  .itStarted-image-wrapper {
     margin-top: 0;
     width: 48%;
   }
@@ -73,6 +74,9 @@
   .text-p {
     font-size: 18px;
     line-height: 24px;
+  }
+  .button-collection {
+    bottom: 50px;
   }
 }
 @media only screen and (min-width: 1400px) {

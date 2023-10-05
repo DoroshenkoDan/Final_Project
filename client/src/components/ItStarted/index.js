@@ -15,9 +15,9 @@ export default function ItStarted() {
           View Collection
         </NavLink>
       </div>
-      <div className={styles['itstarted-image-wrapper']}>
+      <div className={styles['itStarted-image-wrapper']}>
         <img
-          className={styles['itstarted-image']}
+          className={styles['itStarted-image']}
           src="../img/ItStarted.png"
         ></img>
       </div>
