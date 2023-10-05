@@ -4,8 +4,22 @@ import './scss/reset.scss'
 import axios from "axios"
 
 function App() {
+
+//  const getCatalog = async ()=>{
+//   try {
+//     const response = await fetch('http://localhost:4000');
+//     const data =  await response;
+//     console.log(await data);
+    
+// } catch (e) {
+//     return ( console.log(e.message))
+    
+// }
+// }
+// getCatalog()
+
   axios 
-  .get( "/catalog" ) 
+  .get( "http://localhost:4000/api/catalog" ) 
   .then( catalog => {
     console.log(catalog); 
   }) 
