@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import styles from './MainImage.module.scss'
 
-function MainImage() {
-        const [size, setSize] = useState('large')
+function MainImages() {
+  const [size, setSize] = useState('large')
 
-        useEffect(() => {
-          const handleResize = () => {
-            if (window.innerWidth <= 481) {
-              setSize('small')
-            } else if (window.innerWidth <= 912) {
-              setSize('medium')
-            } else {
-              setSize('large')
-            }
-          }
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 481) {
+        setSize('small')
+      } else if (window.innerWidth <= 912) {
+        setSize('medium')
+      } else {
+        setSize('large')
+      }
+    }
 
-          window.addEventListener('resize', handleResize)
-          handleResize() 
+    window.addEventListener('resize', handleResize)
+    handleResize()
 
-          return () => window.removeEventListener('resize', handleResize)
-        }, [])
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
   return (
-    <div className={styles.container}>
-      <div className={styles.banner} data-size={size}>
-        <div className={styles.text}>
+    <div className={styles.container} data-size={size}>
+      <div className={styles.text}>
+        <div className={styles.texts}>
           <h2>
-            The furniture brand for the
+            Luxury homeware for people
             <br />
-            future, with timeless designs
+            who love timeless design quality
           </h2>
+          <h1>
+            With our new collectin, view over 400 bespoke pieces from homeware
+            through to forniture today
+          </h1>
+          <p>Shop the new Spring 2022 collection today</p>
           <button className={styles.button}>View collection</button>
-          <p>
-            A new era in eco friendly furniture with Avelon, the French luxury
-            retail brand with nice fonts, tasteful colors and a beautiful way to
-            display things digitally using modern web technologies
-          </p>
-        </div>
-        <div className={styles.image}>
-          <img src="/img/baner/main.jpg" alt="Main" />
+          <img src="/img/baner/Baner1.jpg" alt="Main" />
         </div>
       </div>
     </div>
   )
 }
 
-export default MainImage
+export default MainImages
