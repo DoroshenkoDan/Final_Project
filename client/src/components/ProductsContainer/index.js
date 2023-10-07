@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../Redux/reducers/productsReducers";
 import PropTypes from "prop-types";
 
-export default function ProductsContainer({ props }) {
+export default function ProductsContainer({ category, id }) {
     const dispatch = useDispatch();
     const list = useSelector((state) => state.products.data);
     const [productsContainerArray, setProductsContainerArray] = useState([]);
@@ -16,7 +16,7 @@ export default function ProductsContainer({ props }) {
     }
     useEffect(() => {
         getProducts();
-        if (props) {
+        if (category) {
             setPropsStatus(true)
         } else {
             setPropsStatus(false)
@@ -26,11 +26,12 @@ export default function ProductsContainer({ props }) {
 
     if (propsStatus) {
         useEffect(() => {
-            findCeramicsObjects(list, props)
+            findCeramicsObjects(list, category, id)
+            console.log("id");
         }, [list]);
 
-        function findCeramicsObjects(data, categories) {
-            const ceramicsObjects = data.filter(item => item.categories === categories);
+        function findCeramicsObjects(data, categories, idToExclude) {
+            const ceramicsObjects = data.filter(item => item.categories === categories && item.id !== idToExclude);
             if (ceramicsObjects.length <= 4) {
                 return ceramicsObjects;
             }
@@ -80,7 +81,7 @@ export default function ProductsContainer({ props }) {
     return (<>
 
         <div className={styles["products-container-container"]}>
-            {props ? (
+            {category ? (
                 <h2 className={styles["products-container-tittle"]}>You might also like</h2>
             ) : null}
             <div className={styles["products-container"]}>
@@ -100,5 +101,6 @@ export default function ProductsContainer({ props }) {
 
 
 ProductsContainer.propTypes = {
-    props: PropTypes.string,
+    category: PropTypes.string,
+    id: PropTypes.string,
 };

@@ -5,7 +5,7 @@ export default function ProductPage() {
 
     return (<>
         <ProductItem props="cer98765" />
-        <ProductsContainer props="Ceramics" />
+        <ProductsContainer category="Ceramics" id="cer98765" />
     </>)
 
-}
+} 
