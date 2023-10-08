@@ -1,27 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from './MainImage.module.scss'
 
 function MainImages() {
-  const [size, setSize] = useState('large')
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 481) {
-        setSize('small')
-      } else if (window.innerWidth <= 912) {
-        setSize('medium')
-      } else {
-        setSize('large')
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-    handleResize()
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+ 
   return (
-    <div className={styles.container} data-size={size}>
+    <div className={styles.container}>
       <div className={styles.text}>
         <div className={styles.texts}>
           <h2>
@@ -35,7 +18,7 @@ function MainImages() {
           </h1>
           <p>Shop the new Spring 2022 collection today</p>
           <button className={styles.button}>View collection</button>
-          <img src="/img/baner/Baner1.jpg" alt="Main" />
+          <img src="/img/baner/Baner2.webp" alt="Main" />
         </div>
       </div>
     </div>
