@@ -1,5 +1,5 @@
 module.exports = {
   mongoURI:
-    'mongodb+srv://helenkolgasheva:fbtXiBDIob2XNIZU@cluster0.zkd7phu.mongodb.net/storage?retryWrites=true&w=majority&appName=AtlasApp',
-  secretOrKey: 'fbtXiBDIob2XNIZU',
+    'mongodb+srv://stepclient18:K625UgJg3QbJriYm@cluster0.avpsmcu.mongodb.net/first?retryWrites=true&w=majority',
+  secretOrKey: 'K625UgJg3QbJriYm',
 };
