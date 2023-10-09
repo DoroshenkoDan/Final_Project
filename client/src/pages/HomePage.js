@@ -1,10 +1,12 @@
 import React from 'react'
 import ProductsContainer from '../components/ProductsContainer'
-// import ProductPage from './ProductPage'
+import ItStarted from '../components/ItStarted'
 export default function HomePage() {
-    return (
-        <>
-             <ProductsContainer />
-        </>
-    )
+  return (
+    <>
+      <p>Хелоу</p>
+      <ProductsContainer />
+      <ItStarted />
+    </>
+  )
 }
