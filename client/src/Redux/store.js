@@ -10,6 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 // Импорт редюсерів
 import productsReducer from './reducers/productsReducers.js'
+import categoriesReducer from './reducers/categoriesReducers.js'
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -31,6 +32,7 @@ const store = configureStore({
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
     products: productsReducer,
+    categories: categoriesReducer,
   },
 })
 
