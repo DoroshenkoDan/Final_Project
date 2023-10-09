@@ -21,7 +21,7 @@ export default function ProductsContainer() {
     console.log("hello" + list);
 
 
-    console.log("hello" + catalog);
+    console.log( catalog);
 
     useEffect(() => {
         getRandomObjects(list, productsContainerArray);

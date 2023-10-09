@@ -3,9 +3,9 @@ import axios from "axios";
 import  {HOST} from "../../components/Token"
 
 export const initialState = {
-    data: [],
-    status: 'idle',
-    error: null,
+    catalog: [],
+    status: '',
+    
 };
 
 // 
@@ -13,7 +13,7 @@ export const initialState = {
 
 export const fetchAsync = createAsyncThunk(
     'catalogSlice/fetchAsync',    
-    async () => {       
+    async (_, {rejectWithValue}) => {       
   
         // axiosApiInstance.interceptors.response.use((response) => {
         //     return response
@@ -27,6 +27,8 @@ export const fetchAsync = createAsyncThunk(
         //     }
         //     return Promise.reject(error);
         //   });
+
+        
 
          return  axios
            .get( HOST + "/catalog")
