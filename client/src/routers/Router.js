@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,  useEffect } from 'react'
 import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
 import Store from '../Redux/store.js'
 
@@ -15,8 +15,20 @@ import CrockeryPage from '../pages/CrockeryPage'
 import NightstandsPage from '../pages/NightstandsPage'
 import CutleryPage from '../pages/CutleryPage'
 import PageNotFound from '../pages/PageNotFound'
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAsync } from "../Redux/reducers/catalogSlice.js";
 
 function Routes() {
+    const dispatch = useDispatch();
+    
+  useEffect(() => {
+      dispatch(fetchAsync());
+}, []);  
+
+  const catalog = useSelector(state => state.catalogSlice.catalog);
+
+  console.log(catalog);
+
     return useRoutes([
         {
             path: '/',
