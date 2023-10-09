@@ -1,10 +1,12 @@
 import React from 'react'
-import ProductsContainer from '../components/ProductsContainer'
+// import ProductsContainer from '../components/ProductsContainer'
+import ProductPage from './ProductPage'
 export default function HomePage() {
     return (
         <>
-            <p>Хелоу</p>
-            <ProductsContainer />
+            <ProductPage />
+            {/* <ProductsContainer /> */}
+
         </>
     )
 }
