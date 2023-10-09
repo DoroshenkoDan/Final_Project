@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductsContainer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../Redux/reducers/productsReducers";
 import { fetchAsync } from "../../Redux/reducers/catalogSlice";
 
 export default function ProductsContainer() {
     const dispatch = useDispatch();
-    const catalog = useSelector((state) => state.catalogSlice.catalog);
+    const list = useSelector((state) => state.products.data);
+    const catalog = useSelector((state) => state.catalog.data);
     const [productsContainerArray, setProductsContainerArray] = useState([]);
 
-    function getCatalog() {
+   
+
+    useEffect(() => {
+        dispatch(fetchProducts());
         dispatch(fetchAsync());
-    }
-
-    useEffect(() => {
-        getCatalog();
+       
     }, []);
+   
+    console.log("hello" + list);
 
-    console.log(catalog);
+
+    console.log("hello" + catalog);
 
     useEffect(() => {
-        getRandomObjects(catalog, productsContainerArray);
+        getRandomObjects(list, productsContainerArray);
         console.log("prod", productsContainerArray);
-    }, [catalog]);
+    }, [list]);
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;

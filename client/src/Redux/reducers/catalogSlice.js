@@ -1,10 +1,11 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
-import  {refreshAccessToken, axiosApiInstance, HOST, token} from "../../components/Token"
+import  {HOST} from "../../components/Token"
 
 export const initialState = {
-    catalog: [],
-    status: '',
+    data: [],
+    status: 'idle',
+    error: null,
 };
 
 // 
@@ -14,24 +15,25 @@ export const fetchAsync = createAsyncThunk(
     'catalogSlice/fetchAsync',    
     async () => {       
   
-        axiosApiInstance.interceptors.response.use((response) => {
-            return response
-          }, async function (error) {
-            const originalRequest = error.config;
-            if (error.response.status === 403 && !originalRequest._retry) {
-              originalRequest._retry = true;
-              await refreshAccessToken()
-              axios.defaults.headers.common.Authorization = token;
-              return axiosApiInstance(originalRequest);
-            }
-            return Promise.reject(error);
-          });
+        // axiosApiInstance.interceptors.response.use((response) => {
+        //     return response
+        //   }, async function (error) {
+        //     const originalRequest = error.config;
+        //     if (error.response.status === 403 && !originalRequest._retry) {
+        //       originalRequest._retry = true;
+        //       await refreshAccessToken()
+        //       axios.defaults.headers.common.Authorization = token;
+        //       return axiosApiInstance(originalRequest);
+        //     }
+        //     return Promise.reject(error);
+        //   });
 
-           axios
+         return  axios
            .get( HOST + "/catalog")
            .then( catalog => {
-            return console.log(catalog);;
+            return console.log(catalog);
         })
+        .then(data=>{return data})
         .catch( err => {
             console.log("err" + err);
         });          
@@ -39,22 +41,26 @@ export const fetchAsync = createAsyncThunk(
 )
 
 const catalogSlice = createSlice({
-    name: 'catalogSlice',
+    name: 'catalog',
     initialState,   
-    extraReducers: {
-        [fetchAsync.pending]: (state) => {
-            state.status = 'loading';
-        },
-        [fetchAsync.fulfilled]: (state, action) => {
-            state.status = 'loaded';
-            state.catalog = action.payload;
-        },
-        [fetchAsync.rejected]: (state, action) => {
-            state.status = 'rejected: error ' + action.payload;
-            state.catalog = [];
-        }
-
-    }
+    reducers: {
+        // omit existing reducers here
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(fetchAsync.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchAsync.fulfilled, (state, action) => {
+                console.log('action', action)
+                state.status = 'succeeded'
+                state.data = action.payload
+            })
+            .addCase(fetchAsync.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+    },
 });
 // export  {} = catalogtSlice.actions;
 
