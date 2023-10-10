@@ -2,9 +2,6 @@ import React from 'react'
 import Router from './routers/Router'
 import './scss/reset.scss'
 import Store from './Redux/store.js'
-import React from 'react';
-import Router from './routers/Router';
-import './scss/reset.scss';
 // import { useSelector, useDispatch, useEffect } from 'react-redux';
 // import { fetchAsync } from "./Redux/reducers/catalogSlice";
 
@@ -86,7 +83,7 @@ function App() {
   //   console.log("err" + err);
   // });
   
-  return  <Router></Router>
+  
 
 }
 

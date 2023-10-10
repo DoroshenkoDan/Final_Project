@@ -38,4 +38,16 @@ const userData = {
       error => {
         Promise.reject(error)
       });
-  
+      
+  // axiosApiInstance.interceptors.response.use((response) => {
+        //     return response
+        //   }, async function (error) {
+        //     const originalRequest = error.config;
+        //     if (error.response.status === 403 && !originalRequest._retry) {
+        //       originalRequest._retry = true;
+        //       await refreshAccessToken()
+        //       axios.defaults.headers.common.Authorization = token;
+        //       return axiosApiInstance(originalRequest);
+        //     }
+        //     return Promise.reject(error);
+        //   });

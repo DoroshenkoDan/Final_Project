@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 export default function ProductsContainer({ category, id }) {
     const dispatch = useDispatch();
     const list = useSelector((state) => state.products.data);
-    const catalog = useSelector((state) => state.catalog.data);
     const [productsContainerArray, setProductsContainerArray] = useState([]);
 
     const [propsStatus, setPropsStatus] = useState(false)
