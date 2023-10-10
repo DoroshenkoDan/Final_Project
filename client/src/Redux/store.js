@@ -59,27 +59,21 @@ Store.propTypes = {
 // import PropTypes from 'prop-types'
 // import React from 'react'
 
-
-
 // const allReducers = combineReducers({
 //     catalogSlice,
 //     productsReducer
 // });
-
-
 
 // const store = configureStore({
 //     reducer: allReducers,
 //     middleware: [thunk],
 // });
 
-
 // export default function Store(props) {
-  
-   
+
 //     return (
-//         <Provider store={store}>            
-//                 {props.children}        
+//         <Provider store={store}>
+//                 {props.children}
 //         </Provider>
 //     )
 // }

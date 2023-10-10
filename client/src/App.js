@@ -8,7 +8,6 @@ import Store from './Redux/store.js'
 // import axios from "axios";
 // import  {refreshAccessToken, axiosApiInstance, token} from "./components/Token"
 
-
 // const HOST = 'http://localhost:4000/api'
 
 // axiosApiInstance.interceptors.response.use((response) => {
@@ -24,23 +23,21 @@ import Store from './Redux/store.js'
 //   return Promise.reject(error);
 // });
 
-
-
 function App() {
   return (
     <Store>
       <Router></Router>
     </Store>
   )
-//   const dispatch = useDispatch();
-    
-//   useEffect(() => {
-//       dispatch(fetchAsync());
-// }, []);  
+  //   const dispatch = useDispatch();
 
-//   const catalog = useSelector(state => state.catalogSlice.catalog);
+  //   useEffect(() => {
+  //       dispatch(fetchAsync());
+  // }, []);
 
-//   console.log(catalog);
+  //   const catalog = useSelector(state => state.catalogSlice.catalog);
+
+  //   console.log(catalog);
 
   // const newCatalog = {
   //   "id": "pots",
@@ -50,17 +47,15 @@ function App() {
   //   "date": "2019-10-06T13:50:11.859Z"
   // }
 
-  
-
   // axiosApiInstance
   //       .post(HOST + "/catalog", newCatalog)
   //       .then(res => {
-  //           console.log('New product added', res)          
+  //           console.log('New product added', res)
   //       })
   //       .catch(err => {
   //           console.error('Error on add product', err)
   //       });
-  
+
   // axios
   //   .get(HOST + "/catalog")
   //   .then(res => {
@@ -69,22 +64,17 @@ function App() {
   //   .catch(err => {
   //     console.log(err);
   //   });
-  
-  // Child category
-  
-  
 
-  // axios 
-  // .get( HOST + "/catalog") 
+  // Child category
+
+  // axios
+  // .get( HOST + "/catalog")
   // .then( products => {
-  //   console.log(products); 
-  // }) 
+  //   console.log(products);
+  // })
   // .catch( err => {
   //   console.log("err" + err);
   // });
-  
-  
-
 }
 
 export default App

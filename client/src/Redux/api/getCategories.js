@@ -1,4 +1,4 @@
-import { HOST } from "../../components/Token"
+import { HOST } from '../../components/Token'
 export default async function getCategories() {
   try {
     const data = await fetch(HOST + '/catalog')
