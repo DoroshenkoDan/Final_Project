@@ -18,7 +18,7 @@ export default function Header() {
   }
 
   useEffect(() => {
-    getCategories("products")
+    getCategories("catalog")
   }, [])
 
   const toggleHideItems = () => {

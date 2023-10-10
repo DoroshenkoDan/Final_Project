@@ -9,7 +9,7 @@ const initialState = {
 export const fetchCategories = createAsyncThunk(
   'categoriesReducer/fetchProducts',
   async () => {
-    const response = await getCategories("products")
+    const response = await getCategories("catalog")
     return response
   },
 )
