@@ -1,5 +1,5 @@
 import { HOST } from "../../components/Token"
-export default async function getCategories(apiName) {
+export default async function api(apiName) {
   try {
     
     const data = await fetch(HOST + `/${apiName}`)

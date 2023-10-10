@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import getCategories from '../api/getCategories'
+import api from '../api/api'
 
 const initialState = {
   categories: [],
@@ -9,7 +9,7 @@ const initialState = {
 export const fetchCategories = createAsyncThunk(
   'categoriesReducer/fetchProducts',
   async () => {
-    const response = await getCategories("catalog")
+    const response = await api("catalog")
     return response
   },
 )
