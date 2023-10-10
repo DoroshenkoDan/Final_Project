@@ -1,3 +1,7 @@
+import React from 'react'
+import Router from './routers/Router'
+import './scss/reset.scss'
+import Store from './Redux/store.js'
 import React from 'react';
 import Router from './routers/Router';
 import './scss/reset.scss';
@@ -26,6 +30,11 @@ import './scss/reset.scss';
 
 
 function App() {
+  return (
+    <Store>
+      <Router></Router>
+    </Store>
+  )
 //   const dispatch = useDispatch();
     
 //   useEffect(() => {
