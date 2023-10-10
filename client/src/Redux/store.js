@@ -49,3 +49,34 @@ export default function Store(props) {
 Store.propTypes = {
   children: PropTypes.node,
 }
+
+// import {Provider} from "react-redux";
+// import {configureStore} from "@reduxjs/toolkit";
+// import { combineReducers } from 'redux';
+// import thunk from "redux-thunk";
+// import catalogSlice from './reducers/catalogSlice.js'
+// import productsReducer from './reducers/productsReducers.js'
+// import PropTypes from 'prop-types'
+// import React from 'react'
+
+// const allReducers = combineReducers({
+//     catalogSlice,
+//     productsReducer
+// });
+
+// const store = configureStore({
+//     reducer: allReducers,
+//     middleware: [thunk],
+// });
+
+// export default function Store(props) {
+
+//     return (
+//         <Provider store={store}>
+//                 {props.children}
+//         </Provider>
+//     )
+// }
+// Store.propTypes = {
+//     children: PropTypes.node,
+// }
