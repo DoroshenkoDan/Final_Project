@@ -6,12 +6,12 @@ import logoInstagram from './img/Logo--instagram.png'
 import logoSkype from './img/Logo--skype.png'
 import logoTwitter from './img/Logo--twitter.png'
 import logoPinterest from './img/Logo--pinterest.png'
+import { NavLink } from 'react-router-dom'
 
 export const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__content-mobile">
-      
         <div className="footer__left">
           <div className="footer__avion">
             <p className="footer__avion-text">Avion</p>
@@ -87,14 +87,11 @@ export const Footer = () => {
           </div>
         </div>
 
-
-<div className="footer__line-container">
-        <div className="footer__line"></div>
-        <div className="footer__copyright">Copyright 2022 Avion LTD</div>
+        <div className="footer__line-container">
+          <div className="footer__line"></div>
+          <div className="footer__copyright">Copyright 2022 Avion LTD</div>
         </div>
       </div>
-
-
 
       <div className="footer__content-desktop">
         <div className="footer__address">
@@ -144,7 +141,9 @@ export const Footer = () => {
           <p className="footer__menu-line">Best sellers</p>
           <p className="footer__menu-line">Recently viewed</p>
           <p className="footer__menu-line">Popular this week</p>
-          <p className="footer__menu-line">All products</p>
+          <NavLink className="footer__menu-line" to="/allproducts/">
+            All products
+          </NavLink>
         </div>
 
         <div className="footer__categories">
@@ -157,13 +156,13 @@ export const Footer = () => {
         </div>
 
         <div className="footer__company">
-            <p className="footer__company-heading">Our company</p>
-            <p className="footer__company-line">About us</p>
-            <p className="footer__company-line">Vacancies</p>
-            <p className="footer__company-line">Contact us</p>
-            <p className="footer__company-line">Privacy</p>
-            <p className="footer__company-line">Returns policy</p>
-          </div>
+          <p className="footer__company-heading">Our company</p>
+          <p className="footer__company-line">About us</p>
+          <p className="footer__company-line">Vacancies</p>
+          <p className="footer__company-line">Contact us</p>
+          <p className="footer__company-line">Privacy</p>
+          <p className="footer__company-line">Returns policy</p>
+        </div>
 
         <div className="footer__line-container">
           <div className="footer__line"></div>

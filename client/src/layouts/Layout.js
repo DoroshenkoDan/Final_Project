@@ -4,15 +4,15 @@ import Header from '../components/Header'
 import { Footer } from '../components/Footer/Footer'
 
 export default function Layout() {
-    return (
-        <>
-            <header>
-                <Header />
-            </header>
-            <main className="container">
-                <Outlet />
-            </main>
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <header>
+        <Header />
+      </header>
+      <main className="container">
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  )
 }

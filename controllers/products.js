@@ -1,5 +1,4 @@
 const Product = require("../models/Product");
-
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
 
@@ -100,6 +99,63 @@ exports.updateProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
+  const mongooseQuery = filterParser(req.query);
+  const addItems = Number(mongooseQuery.addItems);
+  const items = Number(mongooseQuery.items);
+
+  if (mongooseQuery?.currentPrice) {
+    const priceRange = mongooseQuery?.currentPrice?.split('-');
+
+    if (priceRange.length === 2 && !isNaN(priceRange[0]) && !isNaN(priceRange[1])) {
+      const minPrice = Number(priceRange[0]);
+      const maxPrice = Number(priceRange[1]);
+
+      const priceFilter = {
+        $gte: minPrice,
+        $lte: maxPrice
+      };
+
+      mongooseQuery['currentPrice'] = priceFilter;
+    }
+  }
+
+  delete mongooseQuery.addItems;
+  delete mongooseQuery.items;
+
+  if (mongooseQuery.brand === "") {
+    delete mongooseQuery.brand;
+  }
+
+  if (mongooseQuery.categories === "") {
+    delete mongooseQuery.categories;
+  }
+
+  if (mongooseQuery.currentPrice === "") {
+    delete mongooseQuery.currentPrice;
+  }
+
+  let applyLimit = true;
+  if (mongooseQuery.brand?.length > 0 || mongooseQuery.currentPrice?.length > 0 || mongooseQuery.categories?.length > 0) {
+    applyLimit = true;
+  }
+
+  let query = Product.find(mongooseQuery);
+  if (applyLimit) {
+    query = query.limit(addItems + items);
+  }
+  query.then((products) => {
+    res.send(products);
+  });
+  query.catch((err) =>
+    res.status(400).json({
+      message: `Error happened on server: "${err}"`,
+    })
+  );
+};
+
+
+
+exports.getProductsHome = (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
@@ -116,41 +172,50 @@ exports.getProducts = (req, res, next) => {
     );
 };
 
-exports.getProductById = (req, res, next) => {
-  Product.findOne({
-    itemNo: req.params.itemNo
-  })
-    .then(product => {
-      if (!product) {
-        res.status(400).json({
-          message: `Product with itemNo ${req.params.itemNo} is not found`
-        });
-      } else {
-        res.json(product);
-      }
-    })
-    .catch(err =>
-      res.status(400).json({
-        message: `Error happened on server: "${err}" `
-      })
-    );
-};
+// exports.getProductById = (req, res, next) => {
+//   Product.findOne({
+//     itemNo: req.params.itemNo
+//   })
+//     .then(product => {
+//       if (!product) {
+//         res.status(400).json({
+//           message: `Product with itemNo ${req.params.itemNo} is not found`
+//         });
+//       } else {
+//         res.json(product);
+//       }
+//     })
+//     .catch(err =>
+//       res.status(400).json({
+//         message: `Error happened on server: "${err}" `
+//       })
+//     );
+// };
 
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  const perPage = Number(req.query.perPage);
-  const startPage = Number(req.query.startPage);
-  const sort = req.query.sort;
-
+  // const perPage = Number(req.query.perPage);
+  // const startPage = Number(req.query.startPage);
+  // const sort = req.query.sort;
   try {
+    if (mongooseQuery.brand === "") {
+      delete mongooseQuery.brand;
+    }
+
+    if (mongooseQuery.categories === "") {
+      delete mongooseQuery.categories;
+    }
+
+    if (mongooseQuery.currentPrice === "") {
+      delete mongooseQuery.currentPrice;
+    }
+
     const products = await Product.find(mongooseQuery)
-      .skip(startPage * perPage - perPage)
-      .limit(perPage)
-      .sort(sort);
-
-    const productsQuantity = await Product.find(mongooseQuery);
-
-    res.json({ products, productsQuantity: productsQuantity.length });
+    // .skip(startPage * perPage - perPage)
+    // .limit(perPage)
+    // .sort(sort);
+    // const productsQuantity = await Product.find(mongooseQuery);
+    res.json(products);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `

@@ -1,29 +1,36 @@
 @font-face {
   font-family: 'Clash Display Light';
-  src: url(../fonts/ClashDisplay/ClashDisplay-Light.otf) format('opentype');
+  src: url(../../src/fonts/ClashDisplay/ClashDisplay-Light.otf)
+    format('opentype');
 }
 
 @font-face {
   font-family: 'Clash Display Regular';
-  src: url(../fonts/ClashDisplay/ClashDisplay-Regular.otf) format('opentype');
+  src: url(../../src/fonts/ClashDisplay/ClashDisplay-Regular.otf)
+    format('opentype');
 }
 
 @font-face {
   font-family: 'Clash Display Medium';
-  src: url(../fonts/ClashDisplay/ClashDisplay-Medium.otf) format('opentype');
+  src: url(../../src/fonts/ClashDisplay/ClashDisplay-Medium.otf)
+    format('opentype');
 }
 
 @font-face {
   font-family: 'Satoshi Light';
-  src: url(../fonts/Satoshi/Satoshi-Light.otf) format('opentype');
+  src: url(../../src/fonts/Satoshi/Satoshi-Light.otf) format('opentype');
 }
 
 @font-face {
   font-family: 'Satoshi Regular';
-  src: url(../fonts/Satoshi/Satoshi-Regular.otf) format('opentype');
+  src: url(../../src/fonts/Satoshi/Satoshi-Regular.otf) format('opentype');
 }
 
 @font-face {
   font-family: 'Satoshi Medium';
-  src: url(../fonts/Satoshi/Satoshi-Medium.otf) format('opentype');
+  src: url(../../src/fonts/Satoshi/Satoshi-Medium.otf) format('opentype');
+}
+
+body {
+  font-family: 'ClashDisplay', sans-serif !important;
 }
