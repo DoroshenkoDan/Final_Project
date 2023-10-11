@@ -60,7 +60,7 @@ async function getAllProducts(input) {
   }
 }
 
-const exportedObject = {
+const  exportedObject = {
   getProducts,
   getAllProducts,
 }

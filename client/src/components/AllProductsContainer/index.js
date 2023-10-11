@@ -12,7 +12,7 @@ export default function AllProductsContainer() {
   const list = useSelector((state) => state.filters.data)
   const [items, setItems] = useState(9)
   const [addItems, setAdditems] = useState(0)
-  const [showLoadMore, setShowLoadMore] = useState(true)
+  const [, setShowLoadMore] = useState(true)
   const [previousLength, setPreviousLength] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
@@ -97,7 +97,7 @@ export default function AllProductsContainer() {
       {selectedCategories.length === 0 &&
         selectedPrices.length === 0 &&
         selectedBrands.length === 0 &&
-        showLoadMore && (
+          (
           <button
             className={styles['products-container-btn']}
             onClick={buttonClick}
