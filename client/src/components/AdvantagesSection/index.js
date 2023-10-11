@@ -10,7 +10,7 @@ export default function Advantages() {
       <div className={styles['advantages-block']}>
         <div className={styles['advantages-block__item']}>
           <img src="../img/advantages/Delivery.png" alt="advantage" />
-          <h4 className={styles['advantages-block__item__header']}>
+          <h4 className={styles['advantages-block__item__title']}>
             Next day as standard
           </h4>
           <p className={styles['advantages-block__item__text']}>
@@ -19,7 +19,7 @@ export default function Advantages() {
         </div>
         <div className={styles['advantages-block__item']}>
           <img src="../img/advantages/Checkmark--outline.png" alt="advantage" />
-          <h4 className={styles['advantages-block__item__header']}>
+          <h4 className={styles['advantages-block__item__title']}>
             Made by true artisans
           </h4>
           <p className={styles['advantages-block__item__text']}>
@@ -28,7 +28,7 @@ export default function Advantages() {
         </div>
         <div className={styles['advantages-block__item']}>
           <img src="../img/advantages/Purchase.png" alt="advantage" />
-          <h4 className={styles['advantages-block__item__header']}>
+          <h4 className={styles['advantages-block__item__title']}>
             Unbeatable prices
           </h4>
           <p className={styles['advantages-block__item__text']}>
@@ -37,7 +37,7 @@ export default function Advantages() {
         </div>
         <div className={styles['advantages-block__item']}>
           <img src="../img/advantages/Sprout.png" alt="advantage" />
-          <h4 className={styles['advantages-block__item__header']}>
+          <h4 className={styles['advantages-block__item__title']}>
             Recycled packaging
           </h4>
           <p className={styles['advantages-block__item__text']}>
