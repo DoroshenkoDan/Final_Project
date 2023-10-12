@@ -1,11 +1,13 @@
 import React from 'react'
 import ProductItem from '../components/ProductItem'
 import ProductsContainer from '../components/ProductsContainer'
+import { useParams } from 'react-router-dom'
 export default function ProductPage() {
+  const { productId } = useParams()
   return (
     <>
-      <ProductItem props="cer98765" />
-      <ProductsContainer category="Ceramics" id="cer98765" />
+      <ProductItem props={productId} />
+      <ProductsContainer category="Ceramics" id={productId} />
     </>
   )
 }

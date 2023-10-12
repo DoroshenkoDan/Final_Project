@@ -3,6 +3,7 @@ import styles from './ProductsContainer.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
 export default function ProductsContainer({ category, id }) {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export default function ProductsContainer({ category, id }) {
   function getProducts() {
     dispatch(fetchProducts())
   }
+
   useEffect(() => {
     getProducts()
     if (category) {
@@ -91,7 +93,11 @@ export default function ProductsContainer({ category, id }) {
         ) : null}
         <div className={styles['products-container']}>
           {productsContainerArray.map((product, index) => (
-            <div className={styles['products-container-item']} key={index}>
+            <NavLink
+              to={`/products/${product.id}`}
+              key={product.id}
+              className={styles['products-container-item']}
+            >
               <img
                 src={
                   isLink(product.imageUrls)
@@ -106,7 +112,7 @@ export default function ProductsContainer({ category, id }) {
               <p className={styles['products-container-item-price']}>
                 ${product.currentPrice}
               </p>
-            </div>
+            </NavLink>
           ))}
         </div>
         <button className={styles['products-container-btn']}>
