@@ -291,7 +291,7 @@ export default function CartPage() {
 //     try {
 //       const response = await axiosApiInstance.post(`${HOST}/cart/${productId}`, {
 //         кількість: count,
-//       }); // Використовуємо Axios для POST запиту
+//       }); // Axios для POST запиту
 //       if (!response.data) {
 //         throw new Error('Помилка при додаванні товару');
 //       }
