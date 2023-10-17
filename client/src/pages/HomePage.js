@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <p>Хелоу</p>
-      <MainImages/>
+      <MainImages />
       <ProductsContainer />
       <ItStarted />
     </>
