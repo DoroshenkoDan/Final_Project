@@ -1,10 +1,12 @@
-import { HOST } from '../../components/Token'
+import axios from 'axios'
+import {HOST} from '../../components/Token'
+
 export default async function api(apiName) {
-  try {
-    const data = await fetch(HOST + `/${apiName}`)
-    const categories = await data.json()
-    return categories
-  } catch (e) {
-    console.log(e)
-  }
+    try {
+        const response = await axios.get(HOST + `/${apiName}`);
+        const data = response.data;
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 }
