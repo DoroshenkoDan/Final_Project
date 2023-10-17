@@ -1,16 +1,16 @@
 import React from 'react'
 import './Footer.scss'
-import logoLinkedin from './img/Logo--linkedin.svg'
-import logoFacebook from './img/Logo--facebook.svg'
-import logoInstagram from './img/Logo--instagram.svg'
-import logoSkype from './img/Logo--skype.svg'
-import logoTwitter from './img/Logo--twitter.svg'
-import logoPinterest from './img/Logo--pinterest.svg'
+import logoLinkedin from './img/Logo--linkedin.png'
+import logoFacebook from './img/Logo--facebook.png'
+import logoInstagram from './img/Logo--instagram.png'
+import logoSkype from './img/Logo--skype.png'
+import logoTwitter from './img/Logo--twitter.png'
+import logoPinterest from './img/Logo--pinterest.png'
 import { NavLink } from 'react-router-dom'
 
 export const Footer = () => {
   return (
-    <footer className="footer" style={{position: 'relative'}}>
+    <footer className="footer">
       <div className="footer__content-mobile">
         <div className="footer__left">
           <div className="footer__avion">

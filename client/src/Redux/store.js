@@ -10,7 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 // Импорт редюсерів
 import productsReducer from './reducers/productsReducers.js'
-import FilterReducers from './reducers/FilterReducers.js'
+import categoriesReducer from './reducers/categoriesReducers.js';
+import filterReducer from './reducers/filterReducers.js'
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -32,7 +33,8 @@ const store = configureStore({
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
     products: productsReducer,
-    filters: FilterReducers,
+    categories: categoriesReducer,
+    filters: filterReducer,
   },
 })
 
@@ -49,3 +51,34 @@ export default function Store(props) {
 Store.propTypes = {
   children: PropTypes.node,
 }
+
+// import {Provider} from "react-redux";
+// import {configureStore} from "@reduxjs/toolkit";
+// import { combineReducers } from 'redux';
+// import thunk from "redux-thunk";
+// import catalogSlice from './reducers/catalogSlice.js'
+// import productsReducer from './reducers/productsReducers.js'
+// import PropTypes from 'prop-types'
+// import React from 'react'
+
+// const allReducers = combineReducers({
+//     catalogSlice,
+//     productsReducer
+// });
+
+// const store = configureStore({
+//     reducer: allReducers,
+//     middleware: [thunk],
+// });
+
+// export default function Store(props) {
+
+//     return (
+//         <Provider store={store}>
+//                 {props.children}
+//         </Provider>
+//     )
+// }
+// Store.propTypes = {
+//     children: PropTypes.node,
+// }

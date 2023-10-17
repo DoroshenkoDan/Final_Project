@@ -60,7 +60,6 @@ video {
   border: 0;
   font-size: 100%;
   font: inherit;
-
   vertical-align: baseline;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -102,7 +101,7 @@ table {
   border-spacing: 0;
 }
 
-// input {
-//   -webkit-appearance: none;
-//   border-radius: 0;
-// }
+input {
+  // -webkit-appearance: none;
+  border-radius: 0;
+}

@@ -6,9 +6,7 @@ import { Footer } from '../components/Footer/Footer'
 export default function Layout() {
   return (
     <>
-      <header>
-        <Header />
-      </header>
+      <Header />
       <main className="container">
         <Outlet />
       </main>

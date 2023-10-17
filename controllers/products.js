@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+
 const uniqueRandom = require("unique-random");
 const rand = uniqueRandom(0, 999999);
 
@@ -98,6 +99,23 @@ exports.updateProduct = (req, res, next) => {
     );
 };
 
+// exports.getProducts = (req, res, next) => {
+//   const perPage = Number(req.query.perPage);
+//   const startPage = Number(req.query.startPage);
+//   const sort = req.query.sort;
+
+//   Product.find()
+//     .skip(startPage * perPage - perPage)
+//     .limit(perPage)
+//     .sort(sort)
+//     .then(products => res.send(products))
+//     .catch(err =>
+//       res.status(400).json({
+//         message: `Error happened on server: "${err}" `
+//       })
+//     );
+// };
+
 exports.getProducts = (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
   const addItems = Number(mongooseQuery.addItems);
@@ -153,18 +171,19 @@ exports.getProducts = (req, res, next) => {
   );
 };
 
-
-
-exports.getProductsHome = (req, res, next) => {
-  const perPage = Number(req.query.perPage);
-  const startPage = Number(req.query.startPage);
-  const sort = req.query.sort;
-
-  Product.find()
-    .skip(startPage * perPage - perPage)
-    .limit(perPage)
-    .sort(sort)
-    .then(products => res.send(products))
+exports.getProductById = (req, res, next) => {
+  Product.findOne({
+    itemNo: req.params.itemNo
+  })
+    .then(product => {
+      if (!product) {
+        res.status(400).json({
+          message: `Product with itemNo ${req.params.itemNo} is not found`
+        });
+      } else {
+        res.json(product);
+      }
+    })
     .catch(err =>
       res.status(400).json({
         message: `Error happened on server: "${err}" `
@@ -172,50 +191,21 @@ exports.getProductsHome = (req, res, next) => {
     );
 };
 
-// exports.getProductById = (req, res, next) => {
-//   Product.findOne({
-//     itemNo: req.params.itemNo
-//   })
-//     .then(product => {
-//       if (!product) {
-//         res.status(400).json({
-//           message: `Product with itemNo ${req.params.itemNo} is not found`
-//         });
-//       } else {
-//         res.json(product);
-//       }
-//     })
-//     .catch(err =>
-//       res.status(400).json({
-//         message: `Error happened on server: "${err}" `
-//       })
-//     );
-// };
-
 exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
-  // const perPage = Number(req.query.perPage);
-  // const startPage = Number(req.query.startPage);
-  // const sort = req.query.sort;
+  const perPage = Number(req.query.perPage);
+  const startPage = Number(req.query.startPage);
+  const sort = req.query.sort;
+
   try {
-    if (mongooseQuery.brand === "") {
-      delete mongooseQuery.brand;
-    }
-
-    if (mongooseQuery.categories === "") {
-      delete mongooseQuery.categories;
-    }
-
-    if (mongooseQuery.currentPrice === "") {
-      delete mongooseQuery.currentPrice;
-    }
-
     const products = await Product.find(mongooseQuery)
-    // .skip(startPage * perPage - perPage)
-    // .limit(perPage)
-    // .sort(sort);
-    // const productsQuantity = await Product.find(mongooseQuery);
-    res.json(products);
+      .skip(startPage * perPage - perPage)
+      .limit(perPage)
+      .sort(sort);
+
+    const productsQuantity = await Product.find(mongooseQuery);
+
+    res.json({ products, productsQuantity: productsQuantity.length });
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `

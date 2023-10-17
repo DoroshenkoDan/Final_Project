@@ -23,6 +23,7 @@ const comments = require('./routes/comments');
 const shippingMethods = require('./routes/shippingMethods');
 const paymentMethods = require('./routes/paymentMethods');
 const partners = require('./routes/partners');
+const cors = require('cors');
 // const mainRoute = require('./routes/index');
 
 const app = express();
@@ -30,15 +31,16 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors())
 
 // DB Config
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,  useFindAndModify: false,   })
+  .connect(db, { useNewUrlParser: true, useFindAndModify: false })
   .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.log("asdasdasd", err));
+  .catch((err) => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());

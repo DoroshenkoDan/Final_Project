@@ -10,7 +10,6 @@ const {
   addProduct,
   updateProduct,
   getProducts,
-  getProductsHome,
   getProductById,
   getProductsFilterParams,
   searchProducts
@@ -19,13 +18,13 @@ const {
 // Configurations for multer
 const storage = multer.diskStorage({
   // Destination, where files should be stored (image url)
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     var newDestination = req.headers.path; // We sen image url in header ("path"), when making axios request
     fse.mkdirsSync(newDestination); // We creating folder in destination, specified in headers "path"
     cb(null, newDestination); // Saving file
   },
 
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     cb(null, file.originalname); // We accept original file-name
   }
 });
@@ -83,7 +82,6 @@ router.put(
 // @route   GET /products
 // @desc    GET existing products
 // @access  Public
-/*ALL PRODUCTS */
 router.get("/", getProducts);
 
 // @route   GET /products/filter
@@ -99,9 +97,6 @@ router.post("/search", searchProducts);
 // @route   GET /products/:id
 // @desc    GET existing product by id
 // @access  Public
-// router.get("/:itemNo", getProductById);
-
-/*HOME */
-router.get("/home", getProductsHome);
+router.get("/:itemNo", getProductById);
 
 module.exports = router;
