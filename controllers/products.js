@@ -122,17 +122,28 @@ exports.getProducts = (req, res, next) => {
   const items = Number(mongooseQuery.items);
 
   if (mongooseQuery?.currentPrice) {
-    const priceRange = mongooseQuery?.currentPrice?.split('-');
+    if (typeof mongooseQuery.currentPrice === 'string') {
+      const priceRange = mongooseQuery?.currentPrice?.split('-');
+      if (priceRange.length === 2 && !isNaN(priceRange[0]) && !isNaN(priceRange[1])) {
+        const minPrice = Number(priceRange[0]);
+        const maxPrice = Number(priceRange[1]);
 
-    if (priceRange.length === 2 && !isNaN(priceRange[0]) && !isNaN(priceRange[1])) {
-      const minPrice = Number(priceRange[0]);
-      const maxPrice = Number(priceRange[1]);
+        const priceFilter = {
+          $gte: minPrice,
+          $lte: maxPrice
+        };
 
+        mongooseQuery['currentPrice'] = priceFilter;
+      }
+    } else {
+      const firstRange = mongooseQuery?.currentPrice?.$in[0].split('-');
+      const secondRange = mongooseQuery?.currentPrice?.$in[1].split('-');
+      const leftNumber = String(firstRange[0]);
+      const rightNumber = String(secondRange[1]);
       const priceFilter = {
-        $gte: minPrice,
-        $lte: maxPrice
+        $gte: leftNumber,
+        $lte: rightNumber
       };
-
       mongooseQuery['currentPrice'] = priceFilter;
     }
   }

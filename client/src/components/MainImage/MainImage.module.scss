@@ -97,7 +97,7 @@
   .text {
     width: calc(50% - 60px);
     width: 630px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -157,10 +157,8 @@
 }
 
 @media only screen and (min-width: 1440px) {
-  .container{
+  .container {
     max-width: 1440px;
     margin: 0 auto;
   }
-  
 }
-

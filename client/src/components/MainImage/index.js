@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './MainImage.module.scss'
 
 function MainImages() {
- 
   return (
     <div className={styles.container}>
       <div className={styles.text}>
