@@ -15,10 +15,13 @@ export default function AuthorithationPage() {
             <div className={styles['auth-container']}>
                 <h1 className={styles['auth-title']}>My account</h1>
                 <button
-                    className={`${styles['auth-btn']} ${styles['auth-btn--sign']} ${activeBtn === 'Sign in' && styles['auth-btn--active']}`}>Sign
-                    in
+                    className={`${styles['auth-btn']} ${styles['auth-btn--sign']} ${activeBtn === 'Sign in' && styles['auth-btn--active']}`}
+                    onClick={setActiveBtnSignIn}
+                >Sign in
                 </button>
-                <button className={styles['auth-btn']}>Register</button>
+                <button className={`${styles['auth-btn']} ${activeBtn === 'Register' && styles['auth-btn--active']}`}
+                onClick={setActiveBtnRegister}
+                >Register</button>
             </div>
         </div>
     )
