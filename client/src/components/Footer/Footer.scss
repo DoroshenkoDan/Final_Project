@@ -167,11 +167,9 @@
   @media screen and (min-width: 728px) {
     font-weight: 400;
     width: 100%;
-    max-width: 1440px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
 
     .footer__content-mobile {
       display: none;
@@ -187,6 +185,7 @@
       position: relative;
       padding-right: 40px;
       padding-left: 40px;
+      max-width: 1440px;
 
       .footer__line-container {
         flex-basis: 100%;

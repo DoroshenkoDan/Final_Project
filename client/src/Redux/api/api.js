@@ -12,7 +12,6 @@ async function api(apiName) {
 }
 
 async function getAllProducts(input) {
-  console.log(input)
   const selectedBrands = []
   const selectedCategories = []
   const selectedPrices = []

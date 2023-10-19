@@ -22,19 +22,47 @@ export default function AllProductsContainer() {
   const selectedCategories = []
   const selectedPrices = []
   const selectedBrands = []
+
   for (const category in categories) {
     if (categories[category] === true) {
       selectedCategories.push(category)
     }
   }
+
   for (const price in prices) {
     if (prices[price] === true) {
       selectedPrices.push(price)
     }
   }
+
   for (const brand in brands) {
     if (brands[brand] === true) {
       selectedBrands.push(brand)
+    }
+  }
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  function buttonClick() {
+    setItems(items);
+    setAdditems(addItems + 6);
+    if (!showScrollButton) {
+      setShowScrollButton(true);
     }
   }
 
@@ -56,11 +84,6 @@ export default function AllProductsContainer() {
     }
   }, [list])
 
-  function buttonClick() {
-    setItems(items)
-    setAdditems(addItems + 6)
-  }
-
   useEffect(() => {
     if (list !== undefined) {
       setIsLoading(false)
@@ -73,8 +96,8 @@ export default function AllProductsContainer() {
         <div className={styles.loading}>Загрузка данных...</div>
       ) : (
         <div className={styles['products-container']}>
-          {list !== undefined &&
-            list?.map((product, index) => (
+          {list !== undefined && list?.length > 0 ?
+           ( list?.map((product, index) => (
               <div className={styles['products-container-item']} key={index}>
                 <img
                   src={
@@ -91,12 +114,19 @@ export default function AllProductsContainer() {
                   $ {product.currentPrice}
                 </p>
               </div>
-            ))}
+            )) ) : (
+              <div className={styles['products-container-item']}>
+                <p className={styles['products-container-item-name']}>
+                  No products found
+                </p>
+              </div>
+            )}
         </div>
       )}
       {selectedCategories.length === 0 &&
         selectedPrices.length === 0 &&
-        selectedBrands.length === 0 && (
+        selectedBrands.length === 0 &&
+        list.length !== 71 && (
           <button
             className={styles['products-container-btn']}
             onClick={buttonClick}
@@ -104,6 +134,16 @@ export default function AllProductsContainer() {
             Load more
           </button>
         )}
+      {showScrollButton && (
+        <button
+          className={styles['scroll-to-top-button']}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          Scroll to Top
+        </button>
+      )}
     </div>
   )
 }

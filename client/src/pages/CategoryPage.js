@@ -11,13 +11,14 @@ export default function CategoryPage() {
   let { categoryId } = useParams()
   const dispatch = useDispatch()
   const list = useSelector((state) => state.filters.data)
-  // const [items, setItems] = useState(9)
-  // const [addItems, setAdditems] = useState(0)
   const [, setShowLoadMore] = useState(true)
   const [previousLength, setPreviousLength] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const filters = useSelector((state) => state.filters)
-  // const { categories } = filters;
+
+  if (categoryId === 'plant-pots') {
+    categoryId = 'plant pots'
+  }
 
   if (categoryId === 'nightstands') {
     categoryId = 'nightstand'
@@ -29,23 +30,10 @@ export default function CategoryPage() {
     dispatch(toggleCategory(upperCaseCategoryId))
     const params = { ...filters }
     const newCategories = {}
-    newCategories[upperCaseCategoryId] = true // Set the selected category to true
+    newCategories[upperCaseCategoryId] = true
     params.categories = newCategories
-    console.log(params)
     dispatch(fetchFilter(params))
   }, [upperCaseCategoryId])
-
-  // const selectedCategories = []
-
-  // function getProducts() {
-  //   dispatch(fetchFilter({ items, addItems }));
-  //   dispatch(toggleItems(items));
-  //   dispatch(toggleAddItems(addItems));
-  // }
-
-  // useEffect(() => {
-  //   getProducts();
-  // }, [items, addItems]);
 
   useEffect(() => {
     if (list?.length === previousLength) {
@@ -54,11 +42,6 @@ export default function CategoryPage() {
       setPreviousLength(list?.length)
     }
   }, [list])
-
-  // function buttonClick() {
-  //   setItems(items)
-  //   setAdditems(addItems + 6)
-  // }
 
   useEffect(() => {
     if (list !== undefined) {
@@ -93,11 +76,6 @@ export default function CategoryPage() {
             ))}
         </div>
       )}
-      {/* {(selectedCategories.length === 0) && (
-        <button className={styles["products-container-btn"]} onClick={buttonClick}>
-          Load more
-        </button>
-      )} */}
     </div>
   )
 }

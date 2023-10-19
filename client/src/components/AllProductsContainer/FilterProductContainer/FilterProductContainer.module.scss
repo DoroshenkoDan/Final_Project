@@ -6,7 +6,7 @@
 
 .products-container-container {
   max-width: 385px;
-  padding: 24px 0px 0px 160px;
+  padding: 24px 0px 0px 30px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -90,11 +90,14 @@
 @media (min-width: 1440px) {
   .products-container-container {
     max-width: 385px;
+    height: 960px;
   }
 }
 
 @media (max-width: 767px) {
   .products-container-container {
+    max-width: 1060px;
+    width: 1420px;
     padding: 24px 0px 0px 20px;
   }
 }
