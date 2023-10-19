@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import styles from './Input.module.scss'
 
 export default function Input(props) {
     const {field, form, label, ...rest} = props;
     const {name} = field;
 
     return (
-        <div className="mt-2">
+        <div className={styles['input-container']}>
             <label >
-                <input {...field} {...rest} className="form-control"/>
+                <input {...field} {...rest} className={styles['form-input']} />
                 {form.errors[name] && form.touched[name] &&
-                    <div>{form.errors[name]}</div>}
+                    <div className={styles['text-error']}>{form.errors[name]}</div>}
             </label>
         </div>
     )

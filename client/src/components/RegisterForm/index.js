@@ -1,48 +1,64 @@
 import React from 'react'
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
+import { HOST} from "../Token";
+import styles from './RegisterForm.module.scss'
+
 
 import Input from "../Input";
+import axios from "axios";
 
 export default function OrderForm() {
 
-    const handleSubmit = (orderInfo) => {
-        const {firstname, lastname, age, email, country, city, address, postal, mobile} = orderInfo;
-        console.log(firstname, lastname, age, email, country, city, address, postal, mobile, orderInfo)
+    const handleSubmit = (orderInfo, { resetForm }) => {
+        const {firstName, lastName, login, email, password, telephone} = orderInfo;
+        console.log(firstName, lastName, login, email, password, telephone, orderInfo)
+        axios.post(HOST + "/customers", orderInfo)
+            .then(savedCustomer => {
+                console.log('fine', savedCustomer)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        resetForm()
     }
 
     return (
         <Formik
-            initialValues={{firstname: '', lastname: '', age: '',email:'', country:'',city:'',address: '', postal:'', mobile: ''}}
+            initialValues={{
+                firstName: '',
+                lastName: '',
+                login: '',
+                email: '',
+                password: '',
+                telephone: ''
+            }}
             onSubmit={handleSubmit}
             validationSchema={Yup.object({
-                firstname: Yup.string().max(15, 'Must be 15 characters or less').required('Firstname is required').matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid firstname format'),
-                lastname: Yup.string().max(20, 'Must be 20 characters or less').required('Lastname is required').matches(/^[^\p{P}\p{S}\d]+$/u,'Invalid lastname format'),
-                age: Yup.number().integer('Age must be an integer').min(0, 'Age cannot be less than 0').max(130, 'The age cannot be that great. Enter your real age').required('Age is required'),
+                firstName: Yup.string().max(25, 'Must be 25 characters or less').min(2, 'Must be more than 1 characters').required('Firstname is required').matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid firstname format'),
+                lastName: Yup.string().max(25, 'Must be 25 characters or less').min(2, 'Must be more than 1 character').required('Lastname is required').matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid lastname format'),
+                login: Yup.string().max(10, 'Login must be between 3 and 10 characters').min(3, 'Login must be between 3 and 10 characters').matches(/^[a-zA-Z0-9]+$/, 'Invalid login format').required('Email is required'),
                 email: Yup.string().matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Invalid email format').required('Email is required'),
-                country: Yup.string().required('Country is required').max(30, 'Must be 30 characters or less').matches(/^[a-zA-Zа-яА-ЯїЇіІєЄёЁ\s'.,-]+$/u, 'Invalid country format'),
-                city: Yup.string().required('City address is required').max(30, 'Must be 30 characters or less').matches(/^[a-zA-Zа-яА-ЯїЇіІєЄёЁ\s'.,-]+$/u, 'Invalid city format'),
-                address: Yup.string().required('Address is required').max(30, 'Must be 30 characters or less').matches(/^[a-zA-Zа-яА-ЯїЇіІєЄёЁ0-9\s'.,-]+$/u, 'Invalid address format'),
-                postal: Yup.string().required('Delivery postal is required').matches(/^[0-9]*$/, 'postal must contain only numbers').max(5, 'The maximum length of the postal is 5 characters'),
-                mobile: Yup.string().matches(/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/, 'Invalid mobile format. Example: +0501231212').required('Mobile is required'),
+                password: Yup.string().matches(/^[a-zA-Z0-9]+$/, 'Allowed characters for password is a-z, A-Z, 0-9.').required('Email is required').max(30, 'Password must be between 7 and 30 characters').min(7, 'Password must be between 7 and 30 characters'),
+                telephone: Yup.string().matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, 'That is not a valid phone number').required('Mobile is required'),
             })}>
             <Form className='form__user-address' noValidate>
                 <Field
                     type='text'
-                    placeholder='firstname'
-                    name='firstname'
+                    placeholder='firstName'
+                    name='firstName'
                     component={Input}
                 />
                 <Field
                     type='text'
-                    placeholder='lastname'
-                    name='lastname'
+                    placeholder='lastName'
+                    name='lastName'
                     component={Input}
                 />
                 <Field
-                    type='number'
-                    placeholder='age'
-                    name='age'
+                    type='text'
+                    placeholder='login'
+                    name='login'
                     component={Input}
                 />
                 <Field
@@ -52,37 +68,19 @@ export default function OrderForm() {
                     component={Input}
                 />
                 <Field
-                    type='text'
-                    placeholder='country'
-                    name='country'
-                    component={Input}
-                />
-                <Field
-                    type='text'
-                    placeholder='city'
-                    name='city'
-                    component={Input}
-                />
-                <Field
-                    type='text'
-                    placeholder='address'
-                    name='address'
-                    component={Input}
-                />
-                <Field
-                    type='number'
-                    placeholder='postal'
-                    name='postal'
+                    type='password'
+                    placeholder='password'
+                    name='password'
                     component={Input}
                 />
                 <Field
                     type='tel'
-                    placeholder='mobile'
-                    name='mobile'
+                    placeholder='telephone'
+                    name='telephone'
                     component={Input}
                 />
                 <div>
-                    <button type="submit">Send</button>
+                    <button className={styles['btn-send--register']} type="submit">Send</button>
                 </div>
             </ Form>
         </Formik>

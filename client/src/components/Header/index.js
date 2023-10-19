@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import CartIcon from '../CartIcon'
 import FavoritesIcon from '../FavoritesIcon'
@@ -6,40 +6,51 @@ import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
 import {useDispatch, useSelector} from 'react-redux'
-import {fetchCategories} from '../../Redux/reducers/categoriesReducers'
+import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
 import IconLogin from "../IconLogin";
+import LogOutIcon from "../LogOutIcon";
+import {setAuthToken} from "../Token";
+import NavContainer from "../NavContainer";
 
 export default function Header() {
-    const categories = useSelector((state) => state.categories.categories)
+    const status = useSelector((state) => state.user.status)
     const [isMenuHidden, setIsMenuHidden] = useState(true)
     const dispatch = useDispatch()
-
-    function getCategories() {
-        dispatch(fetchCategories())
-    }
-
-    useEffect(() => {
-        getCategories()
-    }, [])
 
     const toggleHideItems = () => {
         setIsMenuHidden(!isMenuHidden)
     }
 
+    const logOutUser = () => {
+        dispatch(resetStatus())
+        dispatch(resetData())
+        dispatch(resetToken())
+        setAuthToken(false)
+    }
+
     return (
         <header className={styles.headerContainer}>
             <div className={styles.topMenu}>
-                <span className={styles.logo}>Avion</span>
+                <NavLink className={styles.logoLink} to="/">
+                    <span className={styles.logo}>Avion</span>
+                </NavLink>
                 <span className={styles.icons}>
-          <NavLink className={styles.iconFavorites} to="/favorites/">
-            <FavoritesIcon/>
-          </NavLink>
-          <NavLink className={styles.iconCart} to="/cart/">
-            <CartIcon/>
-          </NavLink>
-          <NavLink to="/login/">
-            <IconLogin/>
-          </NavLink>
+                    <NavLink className={styles.icon} to="/favorites/">
+                        <FavoritesIcon/>
+                    </NavLink>
+                    <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/cart/">
+                        <CartIcon/>
+                    </NavLink>
+                    {status &&
+                        <NavLink onClick={logOutUser} className={`${styles.icon}`} to="/login/">
+                            <LogOutIcon/>
+                        </NavLink>
+                    }
+                    {!status &&
+                        <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/login/">
+                            <IconLogin/>
+                        </NavLink>}
+
         </span>
                 <span
                     className={`${styles.iconMenu} ${
@@ -58,30 +69,7 @@ export default function Header() {
           <CloseBtnIcon/>
         </span>
             </div>
-            <nav className={`${styles.nav} ${isMenuHidden ? styles.navDisplay : ''}`}>
-                <ul className={styles.navList}>
-                    <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-                        <NavLink className={styles.navLink} to="/cart/">
-                            Cart
-                        </NavLink>
-                    </li>
-                    <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-                        <NavLink className={styles.navLink} to="/favorites/">
-                            Favorites
-                        </NavLink>
-                    </li>
-                    {categories.map((category) => (
-                        <li key={category.id} className={styles.navItem}>
-                            <NavLink
-                                to={`/category/${category.id}/`}
-                                className={styles.navLink}
-                            >
-                                {category.name}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+            <NavContainer isMenuHidden={isMenuHidden}></NavContainer>
         </header>
     )
 }
