@@ -71,7 +71,7 @@ export default function AuthorithationPage() {
                 {
                     activeBtn === 'Register' &&
                     <div className={styles['form-container']}>
-                        <RegisterForm></RegisterForm>
+                        <RegisterForm setActiveBtnSignIn={setActiveBtnSignIn}></RegisterForm>
                     </div>
                 }
                 {

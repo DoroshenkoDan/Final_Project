@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import CartIcon from '../CartIcon'
 import FavoritesIcon from '../FavoritesIcon'
@@ -38,20 +38,19 @@ export default function Header() {
                     <NavLink className={styles.icon} to="/favorites/">
                         <FavoritesIcon/>
                     </NavLink>
-                    <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/cart/">
+                    <NavLink className={styles.icon} to="/cart/">
                         <CartIcon/>
                     </NavLink>
-                    {status &&
-                        <NavLink onClick={logOutUser} className={`${styles.icon}`} to="/login/">
-                            <LogOutIcon/>
-                        </NavLink>
-                    }
-                    {!status &&
-                        <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/login/">
-                            <IconLogin/>
-                        </NavLink>}
-
-        </span>
+                </span>
+                {status &&
+                    <NavLink onClick={logOutUser} className={styles.iconAuth} to="/login/">
+                        <LogOutIcon/>
+                    </NavLink>
+                }
+                {!status &&
+                    <NavLink className={styles.iconAuth} to="/login/">
+                        <IconLogin/>
+                    </NavLink>}
                 <span
                     className={`${styles.iconMenu} ${
                         !isMenuHidden ? styles.iconMenuDisplay : ''
