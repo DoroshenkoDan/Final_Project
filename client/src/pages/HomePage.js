@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ProductsContainer from '../components/ProductsContainer'
 import ItStarted from '../components/ItStarted'
 import MainImages from '../components/MainImage'

@@ -2,32 +2,21 @@ import React from 'react'
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import styles from './SignInForm.module.scss'
-import { HOST, setAuthToken} from "../Token";
+// import { HOST, setAuthToken} from "../Token";
 import Input from "../Input";
-import {useDispatch} from "react-redux";
-import {changeData, changeStatusTrue, setToken} from "../../Redux/reducers/userReducers";
-import axios from "axios";
+// import {useDispatch} from "react-redux";
+// import {changeData, changeStatusTrue, setToken} from "../../Redux/reducers/userReducers";
+// import axios from "axios";
+
+import { Login } from '../../Redux/reducers/customerReduser';
 
 export default function OrderForm() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const handleSubmit = async (userData, {resetForm}) => {
-        const {loginOrEmail, password} = userData;
-        resetForm()
-        console.log('LOG!!!!!!!!!!!', loginOrEmail, password, userData)
-        await axios
-            .post(HOST + "/customers/login", userData)
-            .then(loginResult => {
-                console.log('fine', loginResult)
-                dispatch(changeData(userData))
-                dispatch(changeStatusTrue())
-                const token = loginResult.data.token
-                dispatch(setToken(token))
-                setAuthToken(token)
-            })
-            .catch(err => {
-                console.log(err)
-            });
+    const handleSubmit = (values) => {
+        const {loginOrEmail, password} = values;
+        Login(loginOrEmail, password)
+        
 
     }
 
