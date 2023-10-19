@@ -92,8 +92,10 @@ export default function ProductsContainer({ id }) {
 
                             <img
                                 src={product.imageUrls}
+
                                 className={styles['products-container-item-img']}
                             />
+
                             <p className={styles['products-container-item-name']}>
                                 {product.name}
                             </p>

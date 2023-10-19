@@ -5,6 +5,7 @@ export default async function api(apiName) {
   try {
 
     const response = await axios.get(HOST + `/products`);
+
     const data = response.data;
     return data;
   } catch (e) {
