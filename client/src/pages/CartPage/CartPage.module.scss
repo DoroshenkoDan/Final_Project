@@ -1,0 +1,67 @@
+.cart-container {
+    max-width: 1064px;
+    margin: 0 auto;
+    padding: 24px 24px 55px 24px;
+    background-color: #FFFFFF;
+}
+
+
+
+.cart-tittle-welcome {
+    font-family: "Clash Display";
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34px;
+    margin-bottom: 32px;
+    color: #2A254B;
+}
+
+.cart-section-names {
+    display: none;
+}
+
+.cart-list-container {
+
+    border-bottom: 1px solid #EBE8F4;
+}
+
+.cart-total-and-order-btn-container {
+    margin-top: 15px;
+}
+
+.cart-total-price {
+    font-family: "Clash Display";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #4E4D93;
+    float: right;
+}
+
+.cart-total-price span {
+    font-size: 24px;
+    color: #2A254B;
+
+}
+
+.cart-total-and-order-btn-container p:last-of-type {
+
+    font-family: "Satoshi";
+    font-size: 14px;
+    font-weight: 400;
+    color: #4E4D93;
+    float: right;
+    margin: 10px 0px 36px 0px;
+}
+
+.cart-order-btn {
+    width: 100%;
+    padding: 16px 0px;
+    font-family: "Satoshi";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    background-color: #2A254B;
+    color: white;
+
+}

@@ -1,0 +1,82 @@
+.cart-product-container {
+    max-width: 100%;
+    display: flex;
+    padding-bottom: 36px;
+    position: relative;
+}
+
+.cart-product-container img:first-of-type {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+}
+
+.cart-product-container img:last-of-type {
+    width: 133px;
+    max-height: 100%;
+    margin-right: 22px;
+}
+
+
+.cart-product-info-box {}
+
+.cart-product-name {
+    font-family: "Clash Display";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    color: #2A254B;
+}
+
+.cart-product-discribe,
+.cart-product-price {
+    font-family: "Satoshi";
+    font-weight: 400;
+    line-height: 21px;
+    color: #2A254B;
+}
+
+.cart-product-discribe {
+    font-size: 14px;
+    padding: 8px 0px;
+}
+
+.cart-product-price {
+    font-size: 16px;
+}
+
+.cart-product-quantity {
+    display: flex;
+    max-width: 122px;
+    max-height: 46px;
+    background-color: #F9F9F9;
+    padding: 12px 16px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-product-quantity p {
+    color: #2A254B;
+    font-family: "Satoshi";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+
+}
+
+.cart-product-quantity button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Satoshi";
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #807f83;
+}
+
+.total-price-one-product {
+    display: none;
+}
