@@ -24,6 +24,8 @@ export default function OrderForm() {
                 dispatch(changeStatusTrue())
                 const token = loginResult.data.token
                 dispatch(setToken(token))
+                localStorage.setItem('statusLoginUser', true)
+                localStorage.setItem('token', token)
                 setAuthToken(token)
                 setFormStatus({type: 'success', message: 'Welcome to Avion'})
             })

@@ -25,6 +25,8 @@ export default function Header() {
         dispatch(resetStatus())
         dispatch(resetData())
         dispatch(resetToken())
+        localStorage.setItem('statusLoginUser', false)
+        localStorage.removeItem('token')
         setAuthToken(false)
     }
 
