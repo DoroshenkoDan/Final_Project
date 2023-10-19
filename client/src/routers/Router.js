@@ -8,6 +8,9 @@ import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
 import ProductPage from '../pages/ProductPage'
+import AuthPage from "../pages/AuthPage";
+
+
 
 function Routes() {
   return useRoutes([
@@ -19,6 +22,7 @@ function Routes() {
         { path: 'home/', element: <HomePage /> },
         { path: 'cart/', element: <CartPage /> },
         { path: 'favorites/', element: <FavoritesPage /> },
+        { path: 'login/', element: <AuthPage /> },
         { path: 'catalog/', element: <CatalogPage /> },
         { path: 'category/:categoryId', element: <CategoryPage /> },
         { path: 'products/:productId', element: <ProductPage /> },
