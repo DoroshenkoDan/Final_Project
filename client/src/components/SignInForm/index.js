@@ -31,7 +31,7 @@ export default function OrderForm() {
                 const massageData = err.response.data;
                 const objectKey = Object.keys(massageData)[0];
                 const errorMessage = massageData[objectKey];
-                setFormStatus({type: 'error', message: `Registration failed! ${errorMessage}`});
+                setFormStatus({type: 'error', message: `Login failed! ${errorMessage}`});
                 console.log(err)
             });
 

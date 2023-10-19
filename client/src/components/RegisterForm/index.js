@@ -50,7 +50,7 @@ export default function RegisterForm(props) {
                     login: Yup.string().max(10, 'Login must be between 3 and 10 characters').min(3, 'Login must be between 3 and 10 characters').matches(/^[a-zA-Z0-9]+$/, 'Invalid login format').required('Email is required'),
                     email: Yup.string().matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Invalid email format').required('Email is required'),
                     password: Yup.string().matches(/^[a-zA-Z0-9]+$/, 'Allowed characters for password is a-z, A-Z, 0-9.').required('Email is required').max(30, 'Password must be between 7 and 30 characters').min(7, 'Password must be between 7 and 30 characters'),
-                    telephone: Yup.string().matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, 'That is not a valid phone number').required('Mobile is required'),
+                    telephone: Yup.string().matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, 'That is not a valid phone number. Example valid form number: +380501234567').required('Mobile is required'),
                 })}>
                 <Form className='form__user-address' noValidate>
                     <Field
