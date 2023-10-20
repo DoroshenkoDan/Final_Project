@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ModalWindow from '../components/Modal'
 import styles from '../scss/CartPage.module.scss'
+import OrderForm from "../components/OrderForm";
 
 export default function CartPage() {
   const [cart, setCart] = useState(null)
@@ -173,7 +174,7 @@ export default function CartPage() {
     }
   }
 
-  if (!cart) return <div>Завантаження...</div>
+  if (!cart) return <OrderForm></OrderForm>
 
   return (
     <div className={styles.cartContainer}>
