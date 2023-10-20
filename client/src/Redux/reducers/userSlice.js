@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { login, registration, logout } from '../../services/AuthService.ts'
-import { API_URL } from '../../http/index.js';
-import axios from 'axios';
+import $api, { API_URL } from '../../http/index.js';
+// import axios from 'axios';
 
 const initialState = {
     user: {},
@@ -26,8 +26,7 @@ export const Registration = createAsyncThunk(
         async ({firstName, lastName, login, email, password, telephone}) => {
             const response = await registration({firstName, lastName, login, email, password, telephone});
             console.log(response);
-            
-          return response
+            return response.data
         },
     );
 
@@ -46,7 +45,7 @@ export const Registration = createAsyncThunk(
     export const checkAuth = createAsyncThunk(
         'checkAuth/isAuth',
         async () => {
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
+            const response = await $api.get(`${API_URL}/refresh`, {withCredentials: true});
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
           return response
