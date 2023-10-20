@@ -8,6 +8,7 @@ import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
 import ProductPage from '../pages/ProductPage'
+import AboutPage from '../pages/AboutPage'
 
 function Routes() {
   return useRoutes([
@@ -22,6 +23,7 @@ function Routes() {
         { path: 'catalog/', element: <CatalogPage /> },
         { path: 'category/:categoryId', element: <CategoryPage /> },
         { path: 'products/:productId', element: <ProductPage /> },
+        { path: 'about/', element: <AboutPage /> },
       ],
     },
   ])

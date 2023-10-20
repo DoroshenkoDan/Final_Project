@@ -6,6 +6,7 @@ import logoInstagram from './img/Logo--instagram.png'
 import logoSkype from './img/Logo--skype.png'
 import logoTwitter from './img/Logo--twitter.png'
 import logoPinterest from './img/Logo--pinterest.png'
+import { NavLink } from 'react-router-dom'
 
 export const Footer = () => {
   return (
@@ -24,7 +25,9 @@ export const Footer = () => {
           <div className="footer__company">
             <p className="footer__company-heading">Our company</p>
             <ul className="footer__company-list">
-              <li>About us</li>
+              <li>
+                <NavLink to="/about/">About us</NavLink>
+              </li>
               <li>Vacancies</li>
               <li>Contact us</li>
               <li>Privacy</li>
@@ -154,7 +157,9 @@ export const Footer = () => {
 
         <div className="footer__company">
           <p className="footer__company-heading">Our company</p>
-          <p className="footer__company-line">About us</p>
+          <NavLink className="footer__company-line" to="/about/">
+            About us
+          </NavLink>
           <p className="footer__company-line">Vacancies</p>
           <p className="footer__company-line">Contact us</p>
           <p className="footer__company-line">Privacy</p>
