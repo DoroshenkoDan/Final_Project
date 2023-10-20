@@ -31,7 +31,7 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
 
 // DB Config
 const db = require('./config/keys').mongoURI;
