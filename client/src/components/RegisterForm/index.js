@@ -3,7 +3,7 @@ import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 // import { HOST} from "../Token";
 import styles from './RegisterForm.module.scss'
-import { Registration } from '../../Redux/reducers/customerReduser';
+import { Registration } from '../../Redux/reducers/userSlice';
 import {useDispatch} from "react-redux";
 
 
@@ -24,7 +24,7 @@ export default function OrderForm() {
         //     }
         //     )
             
-        // resetForm()
+        resetForm()
     }
 
     return (

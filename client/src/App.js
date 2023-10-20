@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Router from './routers/Router'
 import './scss/reset.scss'
 import Store from './Redux/store.js'
+import { checkAuth } from './Redux/reducers/userSlice'
+// import {useSelector} from "react-redux";
+// import {useDispatch} from "react-redux";
+
 
 // import { fetchAsync } from "./Redux/reducers/catalogSlice";
 
@@ -24,11 +28,28 @@ import Store from './Redux/store.js'
 // });
 
 function App() {
-  return (
-    <Store>
+  // const { isAuth } = useSelector((store) => store.userSlice)
+
+  // const { user } = useSelector((store) => store.userSlice)
+
+  // const isAuth = useSelector(state => state.userSlice.isAuth);
+  
+  // const user = useSelector(state => state.userSlice.user); 
+  // const dispatch = useDispatch();
+  useEffect(()=>{
+    if (localStorage.getItem('token')) {
+      checkAuth()
+    }
+
+  },[])
+  return (  
+     <Store>
+            {/* <h1>{isAuth ? `Пользователь зарегистрирован ${user.email}` : `АВТОРИЗУЙТЕЬ`}</h1> */}
       <Router></Router>
     </Store>
-  )
+      )
+    
+   
   //   const dispatch = useDispatch();
 
   //   useEffect(() => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit'
 import PropTypes from 'prop-types'
 
 // Імпорт-модулів,необхідних-для-зберігання-стейджу-між-перезавантаженнями
@@ -12,7 +12,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
 // import userReducers from "./reducers/userReducers";
-import userSlice from "./reducers/customerReduser.js"
+import userSlice from "./reducers/userSlice.js"
+
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -40,6 +41,9 @@ const store = configureStore({
     categories: categoriesReducer,
     user: userSlice,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 })
 
 const persistedStore = persistStore(store)

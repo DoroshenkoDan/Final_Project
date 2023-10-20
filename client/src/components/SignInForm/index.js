@@ -4,18 +4,19 @@ import * as Yup from 'yup';
 import styles from './SignInForm.module.scss'
 // import { HOST, setAuthToken} from "../Token";
 import Input from "../Input";
-// import {useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 // import {changeData, changeStatusTrue, setToken} from "../../Redux/reducers/userReducers";
 // import axios from "axios";
 
-import { Login } from '../../Redux/reducers/customerReduser';
+import { Login } from '../../Redux/reducers/userSlice';
 
 export default function OrderForm() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleSubmit = (values) => {
         const {loginOrEmail, password} = values;
-        Login(loginOrEmail, password)
+        dispatch(Login({loginOrEmail, password}))
+        
         
 
     }

@@ -2,8 +2,8 @@ import $api from "../http";
 // import { AxiosResponse } from "axios";
 
 
-export async function login(email, password) {
-return $api.post('/customers', {email, password})
+export async function login({loginOrEmail, password}) {
+return $api.post('/customers/login', {loginOrEmail, password})
 }
 
 export async function registration({firstName, lastName, login, email, password, telephone}) {
