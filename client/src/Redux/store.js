@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
 import userReducers from "./reducers/userReducers";
+import wishlistReducers from './reducers/wishlistReducers.js'
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -22,6 +23,7 @@ const storeReducers = combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   user: userReducers,
+  wishlist: wishlistReducers,
 })
 
 const persistedReducers = persistReducer(

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
+import {addToWishlist} from "../../Redux/reducers/wishlistReducers";
 
 export default function ProductItem({ props }) {
     const dispatch = useDispatch()
@@ -76,7 +77,7 @@ export default function ProductItem({ props }) {
                         <button>+</button>
                     </div>
                     <div className={styles['product-item-information-btns-container']}>
-                        <button>Save to favorites</button>
+                        <button onClick={() => { dispatch(addToWishlist(product._id)) }}>Save to favorites</button>
                         <button>Add to cart</button>
                     </div>
                 </div>
