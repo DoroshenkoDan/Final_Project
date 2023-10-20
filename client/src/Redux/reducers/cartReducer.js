@@ -12,28 +12,28 @@ export const cartReducer = createSlice({
         addToCart(state, action) {
             const itemToAdd = action.payload;
 
-            // Ищем товар в корзине по id
-            const existingItem = state.cart.find(item => item.id === itemToAdd.id);
+
+            const existingItem = state.cart.find(item => item._id === itemToAdd._id);
             if (existingItem) {
-                // Если товар уже есть в корзине, добавляем переданное количество к текущему количеству
+
                 existingItem.Quantity += itemToAdd.Quantity;
             } else {
-                // Если товар не найден, добавляем новый товар в корзину
+
                 state.cart.push(itemToAdd);
             }
         },
         removeFromCart(state, action) {
             const idToRemove = action.payload;
-            const itemIndex = state.cart.findIndex(item => item.id === idToRemove);
+            const itemIndex = state.cart.findIndex(item => item._id === idToRemove);
             if (itemIndex !== -1) {
-                state.cart.splice(itemIndex, 1); // Удаляем объект по индексу
+                state.cart.splice(itemIndex, 1);
             }
         },
         incrementQuantity(state, action) {
             const id = action.payload;
 
 
-            const product = state.cart.find((item) => item.id === id);
+            const product = state.cart.find((item) => item._id === id);
             if (product) {
 
                 product.prodQuantity += 1;
@@ -43,8 +43,7 @@ export const cartReducer = createSlice({
             const id = action.payload;
 
 
-            const product = state.cart.find((item) => item.id === id);
-            console.log("asdjasjdjaksjkdl", product, id);
+            const product = state.cart.find((item) => item._id === id);
             if (product) {
 
                 product.prodQuantity = product.prodQuantity - 1;

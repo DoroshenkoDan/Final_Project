@@ -23,7 +23,6 @@ const storeReducers = combineReducers({
 
     // для прикладу додавати так: "cart: cartReducer,"
     cart: cartReducer,
-
     products: productsReducer,
     categories: categoriesReducer,
     user: userReducers,

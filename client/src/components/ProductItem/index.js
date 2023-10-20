@@ -35,6 +35,7 @@ export default function ProductItem({ props }) {
         width,
         depth,
         description,
+        _id,
     } = product
 
     const increaseQuantity = () => {
@@ -84,7 +85,7 @@ export default function ProductItem({ props }) {
                     </div>
                     <div className={styles['product-item-information-btns-container']}>
                         <button>Save to favorites</button>
-                        <button onClick={() => { dispatch(addToCart({ id, prodQuantity: productQuantity })) }}>Add to cart</button>
+                        <button onClick={() => { dispatch(addToCart({ _id, prodQuantity: productQuantity })) }}>Add to cart</button>
                     </div>
                 </div>
             </div>
