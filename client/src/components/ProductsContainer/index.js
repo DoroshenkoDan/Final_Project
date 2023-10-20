@@ -89,10 +89,13 @@ export default function ProductsContainer({ id }) {
                             key={product.id}
                             className={styles['products-container-item']}
                         >
+
                             <img
-                                src={product.imageUrls.startsWith('http://') || product.imageUrls.startsWith('https://') ? product.imageUrls : `${product.imageUrls}`}
+                                src={product.imageUrls}
+
                                 className={styles['products-container-item-img']}
                             />
+
                             <p className={styles['products-container-item-name']}>
                                 {product.name}
                             </p>
