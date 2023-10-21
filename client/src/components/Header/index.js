@@ -5,7 +5,7 @@ import FavoritesIcon from '../FavoritesIcon'
 import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
 import IconLogin from "../IconLogin";
 import LogOutIcon from "../LogOutIcon";
@@ -13,7 +13,7 @@ import {setAuthToken} from "../Token";
 import NavContainer from "../NavContainer";
 
 export default function Header() {
-    const status = useSelector((state) => state.user.status)
+    // const status = useSelector((state) => state.user.status)
     const [isMenuHidden, setIsMenuHidden] = useState(true)
     const dispatch = useDispatch()
 

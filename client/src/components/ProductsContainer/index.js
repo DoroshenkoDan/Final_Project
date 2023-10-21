@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 
 export default function ProductsContainer({ id }) {
     const dispatch = useDispatch()
-    const list = useSelector((state) => state.products.data)
+    const list = useSelector((state) => state.productsReducer.data)
     const [productsContainerArray, setProductsContainerArray] = useState([])
 
 

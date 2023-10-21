@@ -1,12 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { login, registration, logout } from '../../services/AuthService.ts'
-import $api, { API_URL } from '../../http/index.js';
+import { login, registration, logout, checkAuth } from '../../services/AuthService.ts'
+// import { API_URL } from '../../http/index.js';
+// import $api from '../../http/index.js';
+// import axios from 'axios';
+// import axios from 'axios';
 // import axios from 'axios';
 
 const initialState = {
-    user: {},
+    user: {
+        loginOrEmail: "",
+        password: ""
+    },
     isAuth: false,
-    status: ""
+    status: '',
 }
 
 
@@ -42,12 +48,12 @@ export const Registration = createAsyncThunk(
         },
     );
 
-    export const checkAuth = createAsyncThunk(
+    export const CheckAuth = createAsyncThunk(
         'checkAuth/isAuth',
         async () => {
-            const response = await $api.get(`${API_URL}/refresh`, {withCredentials: true});
+            const response = await checkAuth();
             console.log(response);
-            localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('token', response.data.token);
           return response
         },
     );
@@ -62,7 +68,7 @@ export const Registration = createAsyncThunk(
             [Login.fulfilled]: (state, action) => {
                 state.status = 'loaded';
                 state.isAuth = true;
-                state.user = action.payload.user;
+                state.user = action.payload;
             },
             [Login.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
@@ -74,7 +80,7 @@ export const Registration = createAsyncThunk(
             [Registration.fulfilled]: (state, action) => {
                 state.status = 'loaded';
                 state.isAuth = true;
-                state.user = action.payload.user;
+                state.user = action.payload;
             },
             [Registration.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
@@ -101,7 +107,7 @@ export const Registration = createAsyncThunk(
             },
             [checkAuth.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
-                state.user = action.payload.user;
+                state.user = action.payload;
             },
 
     
