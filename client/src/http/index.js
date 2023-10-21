@@ -1,5 +1,5 @@
 import axios from "axios";
-import { token } from "../components/Token";
+
 
 export const API_URL = `http://localhost:4000/api` 
 
@@ -9,7 +9,7 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use((config) => {
-    config.headers.Autorization = token
+    config.headers.Autorization = `${localStorage.getItem('token')}`
     return config;
 })
 export default $api

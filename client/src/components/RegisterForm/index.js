@@ -14,9 +14,9 @@ export default function OrderForm() {
      const dispatch = useDispatch();
 
     const handleSubmit = (orderInfo, { resetForm }) => {
-        const {firstName, lastName, login, email, password, telephone} = orderInfo;
+        const {firstName, lastName, login, email, password, telephone, isAdmin} = orderInfo;
         console.log(firstName, lastName, login, email, password, telephone, orderInfo);
-        dispatch(Registration({firstName, lastName, login, email, password, telephone}))
+        dispatch(Registration({firstName, lastName, login, email, password, telephone, isAdmin}))
         
         // axios.post(HOST + "/customers", orderInfo)
         //     .then(savedCustomer => {
@@ -35,7 +35,8 @@ export default function OrderForm() {
                 login: '',
                 email: '',
                 password: '',
-                telephone: ''
+                telephone: '',
+                isAdmin: 'false'
             }}
             onSubmit={handleSubmit}
             validationSchema={Yup.object({
