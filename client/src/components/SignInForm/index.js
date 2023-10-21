@@ -5,7 +5,7 @@ import styles from './SignInForm.module.scss'
 import {HOST, setAuthToken} from "../Token";
 import Input from "../Input";
 import {useDispatch} from "react-redux";
-import {changeData, changeStatusTrue, setToken} from "../../Redux/reducers/userReducers";
+import {changeData, changeStatusTrue, setToken, changeUser} from "../../Redux/reducers/userReducers";
 import axios from "axios";
 
 export default function OrderForm() {
@@ -22,6 +22,7 @@ export default function OrderForm() {
                 console.log('fine', loginResult)
                 dispatch(changeData(userData))
                 dispatch(changeStatusTrue())
+                dispatch(changeUser(userData))
                 const token = loginResult.data.token
                 dispatch(setToken(token))
                 localStorage.setItem('statusLoginUser', true)

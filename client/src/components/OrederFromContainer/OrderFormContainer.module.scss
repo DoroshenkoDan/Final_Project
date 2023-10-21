@@ -1,0 +1,14 @@
+.order-container{
+  display: block;
+  margin: 50px auto 50px auto;
+  width: 60%;
+  min-width: 300px;
+}
+
+
+@media (min-width: 768px) {
+  .order-container {
+    width: 500px;
+  }
+}
+

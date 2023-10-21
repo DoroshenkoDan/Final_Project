@@ -41,7 +41,6 @@ export default function AuthPage() {
                     <div className={styles['form-container']}>
                         <SignInForm></SignInForm>
                     </div>
-
                 }
             </div>
         </div>
