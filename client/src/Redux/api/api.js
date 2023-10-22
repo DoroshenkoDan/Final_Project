@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { HOST } from '../../components/Token'
 
-async function api(apiName) {
+export async function api(apiName) {
   try {
     const response = await axios.get(HOST + `/${apiName}`)
     const data = response.data

@@ -2,7 +2,6 @@ import React from 'react'
 import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
 
 import Layout from '../layouts/Layout'
-import HomePage from '../pages/HomePage'
 import CartPage from '../pages/CartPage'
 import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
@@ -17,7 +16,7 @@ function Routes() {
       element: <Layout />,
       children: [
         { path: '', element: <Navigate to="home/" /> },
-        { path: 'home/', element: <HomePage /> },
+        { path: 'home/', element: <AllProductsPage /> },
         { path: 'cart/', element: <CartPage /> },
         { path: 'favorites/', element: <FavoritesPage /> },
         { path: 'catalog/', element: <CatalogPage /> },
