@@ -1,16 +1,15 @@
 import React from 'react'
 import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
+import Store from '../Redux/store.js'
 
 import Layout from '../layouts/Layout'
 import HomePage from '../pages/HomePage'
-import CartPage from '../pages/CartPage/index.js'
+import CartPage from '../pages/CartPage'
 import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
 import ProductPage from '../pages/ProductPage'
-import AuthPage from "../pages/AuthPage";
-
-
+import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
 
 function Routes() {
 
@@ -25,6 +24,7 @@ function Routes() {
                 { path: 'favorites/', element: <FavoritesPage /> },
                 { path: 'login/', element: <AuthPage /> },
                 { path: 'catalog/', element: <CatalogPage /> },
+                { path: 'allproducts/', element: <AllProductsPage /> },
                 { path: 'category/:categoryId', element: <CategoryPage /> },
                 { path: 'products/:productId', element: <ProductPage /> },
             ],
@@ -35,8 +35,10 @@ function Routes() {
 
 export default function Router() {
     return (
-        <BrowserRouter>
-            <Routes />
-        </BrowserRouter>
+        <Store>
+            <BrowserRouter>
+                <Routes />
+            </BrowserRouter>
+        </Store>
     )
 }

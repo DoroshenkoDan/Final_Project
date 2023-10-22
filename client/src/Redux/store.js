@@ -14,6 +14,7 @@ import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
 import userReducers from "./reducers/userReducers";
 import cartReducer from "./reducers/cartReducer";
+import FilterReducers from './reducers/FilterReducers.js'
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -40,6 +41,7 @@ const store = configureStore({
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
     products: productsReducer,
+    filters: FilterReducers,
   },
 })
 

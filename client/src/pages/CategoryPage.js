@@ -1,46 +1,81 @@
-import React from 'react'
-import axios from "axios";
-import {HOST} from "../components/Token";
-import {useSelector} from "react-redux";
+import React, { useEffect, useState } from 'react'
+import styles from '../components/AllProductsContainer/AllProductsContainer.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  fetchFilter,
+  toggleCategory,
+} from '../Redux/reducers/FilterReducers.js'
+import { useParams } from 'react-router-dom'
 
+export default function CategoryPage() {
+  let { categoryId } = useParams()
+  const dispatch = useDispatch()
+  const list = useSelector((state) => state.filters.data)
+  const [, setShowLoadMore] = useState(true)
+  const [previousLength, setPreviousLength] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+  const filters = useSelector((state) => state.filters)
 
-export default function AuthorithationPage() {
-    const status = useSelector(state => state.user.status)
+  if (categoryId === 'plant-pots') {
+    categoryId = 'plant pots'
+  }
 
-    async function send() {
-        // const tokenRefresh = await refreshAccessToken(status, data);
-        // setAuthToken(tokenRefresh)
+  if (categoryId === 'nightstands') {
+    categoryId = 'nightstand'
+  }
+  const upperCaseCategoryId =
+    categoryId.charAt(0).toUpperCase() + categoryId.slice(1)
 
-        const newProduct = {
-            name: "new product for testing purposes",
-            currentPrice: 199.99,
-            previousPrice: 250,
-            categories: "men",
-            imageUrls: [
-                "img/products/men/001.png",
-                "img/products/men/002.png",
-                "img/products/men/003.png",
-                "img/products/men/004.png"
-            ],
-            quantity: 100,
-            color: "red",
-            productUrl: "/men",
-            brand: "braaaand",
-            myCustomParam: "some string or json for custom param"
-        };
-        if (status === true) {
-            axios
-                .post(HOST + "/products", newProduct)
-                .then(newProduct => {
-                    console.log('ONO BLYAT', newProduct)
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-        }
+  useEffect(() => {
+    dispatch(toggleCategory(upperCaseCategoryId))
+    const params = { ...filters }
+    const newCategories = {}
+    newCategories[upperCaseCategoryId] = true
+    params.categories = newCategories
+    dispatch(fetchFilter(params))
+  }, [upperCaseCategoryId])
+
+  useEffect(() => {
+    if (list?.length === previousLength) {
+      setShowLoadMore(false)
+    } else {
+      setPreviousLength(list?.length)
     }
+  }, [list])
 
-    return (
-        <button onClick={send}>ТЕСТ</button>
-    )
+  useEffect(() => {
+    if (list !== undefined) {
+      setIsLoading(false)
+    }
+  }, [list])
+
+  return (
+    <div className={styles['products-container-container']}>
+      {isLoading ? (
+        <div className={styles.loading}>Загрузка данных...</div>
+      ) : (
+        <div className={styles['products-container']}>
+          {list !== undefined &&
+            list?.map((product, index) => (
+              <div className={styles['products-container-item']} key={index}>
+                <img
+                  src={
+                    product.imageUrls
+                      ? product.imageUrls[0]
+                      : `${product.imageUrls}`
+                  }
+                  className={styles['products-container-item-img']}
+                />
+                <p className={styles['products-container-item-name']}>
+                  {product.name}
+                </p>
+                <p className={styles['products-container-item-price']}>
+                  $ {product.currentPrice}
+                </p>
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
+  )
 }
