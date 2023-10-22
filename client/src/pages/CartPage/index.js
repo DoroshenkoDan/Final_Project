@@ -3,12 +3,12 @@ import CartProductList from "../../components/CartProductList/index.js"
 import styles from "./CartPage.module.scss"
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { HOST } from "../../components/Token/index.js"
+import { HOST } from "../../components/Token"
 export default function Cart() {
 
     const cartReducer = useSelector(state => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
-    const userStatus = useSelector((state) => state.user.status)
+    const userStatus = useSelector((state) => state.store.user.status)
 
     useEffect(() => {
         const fetchData = async () => {
