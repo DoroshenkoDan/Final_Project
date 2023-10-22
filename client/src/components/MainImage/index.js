@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './MainImage.module.scss'
-import {NavLink} from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 
 function MainImages() {
- 
   return (
     <div className={styles.container}>
       <div className={styles.text}>
@@ -18,8 +17,8 @@ function MainImages() {
             through to forniture today
           </h1>
           <p>Shop the new Spring 2022 collection today</p>
-          <NavLink to='/allProducts/'>
-          <button className={styles.button}>View collection</button>
+          <NavLink to="/allProducts/">
+            <button className={styles.button}>View collection</button>
           </NavLink>
           <img src="/img/baner/Baner2.webp" alt="Main" />
         </div>

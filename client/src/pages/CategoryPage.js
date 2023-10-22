@@ -5,7 +5,7 @@ import {
   fetchFilter,
   toggleCategory,
 } from '../Redux/reducers/FilterReducers.js'
-import {NavLink, useParams} from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 export default function CategoryPage() {
   let { categoryId } = useParams()
@@ -57,11 +57,11 @@ export default function CategoryPage() {
         <div className={styles['products-container']}>
           {list !== undefined &&
             list?.map((product, index) => (
-                <NavLink
-                    to={`/products/${product.id}`}
-                    key={product.id}
-                    className={styles['products-container-item']}
-                >
+              <NavLink
+                to={`/products/${product.id}`}
+                key={product.id}
+                className={styles['products-container-item']}
+              >
                 <img
                   src={
                     product.imageUrls
@@ -76,7 +76,7 @@ export default function CategoryPage() {
                 <p className={styles['products-container-item-price']}>
                   $ {product.currentPrice}
                 </p>
-                </NavLink>
+              </NavLink>
             ))}
         </div>
       )}

@@ -89,18 +89,18 @@ export default function FilterProductContainer() {
           <h1 className={styles['products-header']}>Brand</h1>
           {isMobileView ? (
             <div className={styles['products-container-mobile']}>
-            {Object.keys(brands).map((brand) => (
-              <span key={brands}>
-                <input
-                  type="checkbox"
-                  checked={brands[brand]}
-                  onChange={() => handleBrandChange(brand)}
-                  className={styles['products-checkbox']}
-                />
-                {brand}
-              </span>
-            ))}
-          </div>
+              {Object.keys(brands).map((brand) => (
+                <span key={brands}>
+                  <input
+                    type="checkbox"
+                    checked={brands[brand]}
+                    onChange={() => handleBrandChange(brand)}
+                    className={styles['products-checkbox']}
+                  />
+                  {brand}
+                </span>
+              ))}
+            </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(brands).map((brand) => (
@@ -123,18 +123,18 @@ export default function FilterProductContainer() {
           <h1 className={styles['products-header']}>Price</h1>
           {isMobileView ? (
             <div className={styles['products-container-mobile']}>
-            {Object.keys(prices).map((price) => (
-              <span key={price}>
-                <input
-                  type="checkbox"
-                  checked={prices[price]}
-                  onChange={() => handlePriceChange(price)}
-                  className={styles['products-checkbox']}
-                />
-                {price}
-              </span>
-            ))}
-          </div>
+              {Object.keys(prices).map((price) => (
+                <span key={price}>
+                  <input
+                    type="checkbox"
+                    checked={prices[price]}
+                    onChange={() => handlePriceChange(price)}
+                    className={styles['products-checkbox']}
+                  />
+                  {price}
+                </span>
+              ))}
+            </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(prices).map((price) => (
