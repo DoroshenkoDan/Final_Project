@@ -20,7 +20,6 @@ import userReducers from "./reducers/userReducers";
 
 const storeReducers = combineReducers({
   // для прикладу додавати так: "cart: cartReducer,"
-  products: productsReducer,
   categories: categoriesReducer,
   user: userReducers,
 })
@@ -34,14 +33,12 @@ const persistedReducers = persistReducer(
 // Для виклику в файлі використовувати такий шлях  "const list = useSelector(state => state.cart(name in store).)"
 console.log('=======ReducerPersist',persistedReducers)
 const store = configureStore({
-  reducer: persistedReducers
-  //     {
-  //   // для прикладу додавати так: "cart: cartReducer,"
-  //   store: persistedReducers,
-  //   products: productsReducer,
-  //   categories: categoriesReducer,
-  //   user: userReducers,
-  // },
+  reducer:
+      {
+    // для прикладу додавати так: "cart: cartReducer,"
+    store: persistedReducers,
+    products: productsReducer,
+  },
 })
 
 
