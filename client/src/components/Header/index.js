@@ -6,11 +6,14 @@ import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
 import {useDispatch, useSelector} from 'react-redux'
-import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
+import {
+    resetStatus,
+    resetData,
+} from '../../Redux/reducers/userReducers'
 import IconLogin from "../IconLogin";
 import LogOutIcon from "../LogOutIcon";
-import {setAuthToken} from "../Token";
 import NavContainer from "../NavContainer";
+import {setAuthToken} from "../Token";
 
 export default function Header() {
     const status = useSelector((state) => state.user.status)
@@ -24,12 +27,10 @@ export default function Header() {
     const logOutUser = () => {
         dispatch(resetStatus())
         dispatch(resetData())
-        dispatch(resetToken())
-        localStorage.setItem('statusLoginUser', false)
-        localStorage.removeItem('token')
         setAuthToken(false)
     }
 
+    console.log(status)
     return (
         <header className={styles.headerContainer}>
             <div className={styles.topMenu}>
