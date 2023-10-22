@@ -33,6 +33,7 @@ exports.placeOrder = async (req, res, next) => {
       order.customerId = req.body.customerId;
 
       cartProducts = await subtractProductsFromCart(order.customerId);
+      console.log(cartProducts)
     }
 
     if (!req.body.products && cartProducts.length < 1) {
@@ -40,13 +41,13 @@ exports.placeOrder = async (req, res, next) => {
         .status(400)
         .json({ message: "The list of products is required, but absent!" });
     }
-
+    console.log('cartProducts.length',cartProducts.length)
     if (cartProducts.length > 0) {
       order.products = _.cloneDeep(cartProducts);
     } else {
       order.products = req.body.products;
     }
-
+    console.log('orderProducts', order.products)
     order.totalSum = order.products.reduce(
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,

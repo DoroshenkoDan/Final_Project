@@ -9,15 +9,10 @@ export default function OrderFormContainer() {
 
     const [cart, setCart] = useState('')
 
-    const apiGet = async () => {
-        const wishList = api('wishlist')
-        console.log(wishList)
-    }
     const getCard =async () => {
         const cart = await api('cart')
         setCart(cart)
         console.log(cart)
-        apiGet()
     }
 
     return (

@@ -55,6 +55,7 @@ export default function CartProductList({ img, name, quantity, price, discribe, 
             <p className={styles["total-price-one-product"]}>{totalPriceOneProduct}$</p>
         </div>
     );
+
 }
 CartProductList.propTypes = {
     img: PropTypes.string.isRequired,

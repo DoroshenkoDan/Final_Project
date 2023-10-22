@@ -6,37 +6,71 @@ import {HOST} from "../Token";
 import Input from "../Input";
 import styles from './OrderForm.module.scss'
 import PropTypes from "prop-types";
+// import {useSelector} from "react-redux";
 import axios from "axios";
+
 
 export default function OrderForm(props) {
     const {cart} = props
-    const handleSubmit = (orderInfo) => {
+    // const listProducts = useSelector(state => state.products.data)
+    console.log(cart)
+
+    // const findCartProducts = () => {
+    //     const cartProducts = []
+    //     for (const product of listProducts) {
+    //         for (const obj of cart) {
+    //             if (obj._id === product._id) {
+    //                 cartProducts.push({
+    //                     product: product,
+    //                     cartQuantity: obj.prodQuantity
+    //                 })
+    //             }
+    //         }
+    //     }
+    //     return cartProducts;
+    // }
+
+    async function getCart () {
+        try {
+            const response = await axios.get(HOST + '/cart')
+            return response.data;
+        } catch (err){
+            console.log(err);
+        }
+    }
+
+    const findCustomers = async () => {
+        try {
+            const response = await axios.get(HOST + "/customers/customer");
+            return response.data; // Возвращаем данные
+        } catch (err) {
+            console.log(err);
+            return null; // Либо обработка ошибки
+        }
+    }
+    const handleSubmit = async (orderInfo) => {
         const {email, mobile, country, city, address, postal} = orderInfo;
         console.log(email, country, city, address, postal, mobile, orderInfo)
         console.log('Cart in Order form', cart)
-        console.log(cart.customerId._id)
-        const products=cart.products
-        console.log(products)
-        const productsJson = JSON.stringify(cart.products)
+        const productsInCart = await getCart()
+        console.log(productsInCart)
+        const customer = await findCustomers()
+        console.log(customer._id)
         const newOrder = {
-            customerId: cart.customerId._id,
+            customerId: productsInCart.customerId._id,
             deliveryAddress: {
                 country: country,
                 city: city,
                 address: address,
                 postal: `${postal}`,
             },
-            products: productsJson,
+            // products: productsInCart.products,
             email: email,
             mobile: mobile,
             letterSubject: 'Thank you for order! You are welcome!',
             letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>"
         }
-        if (cart.products[0] && cart.products[0].product && cart.products[0].product.currentPrice) {
-            console.log('Есть бля', cart.products[0].product.currentPrice)
-        } else {
-            console.log("Не удается найти 'currentPrice' в cart.products[0].product");
-        }
+        console.log(newOrder)
         axios
             .post(HOST + "/orders", newOrder)
             .then(newOrder => {

@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import CartProductList from "../../components/CartProductList/index.js"
 import styles from "./CartPage.module.scss"
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { HOST } from "../../components/Token"
+import OrderForm from "../../components/OrderForm";
 export default function Cart() {
+    const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
 
     const cartReducer = useSelector(state => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
@@ -17,10 +19,10 @@ export default function Cart() {
                     const dataExist = await getCart();
                     console.log("DataStatus", dataExist.data);
                     if (dataExist.data !== null) {
-                        updateServerCart()
+                        await updateServerCart()
 
                     } else {
-                        createServerCart()
+                        await createServerCart()
                     }
                 } catch (error) {
                     console.error("Error fetching cart data:", error);
@@ -29,7 +31,6 @@ export default function Cart() {
                 console.log("User is not logged in");
             }
         };
-
         fetchData();
     }, [cartReducer]);
 
@@ -53,7 +54,13 @@ export default function Cart() {
 
 
     async function updateServerCart() {
-        const arrayToSend = { products: cartReducer }
+        const cartData = cartReducer.map(item => {
+            return {
+                product: item._id,
+                cartQuantity: item.prodQuantity
+            }
+        })
+        const arrayToSend = { products: cartData }
         axios
             .put(HOST + "/cart", arrayToSend)
             .then(updatedCart => {
@@ -67,7 +74,13 @@ export default function Cart() {
     }
 
     async function createServerCart() {
-        const arrayToSend = { products: cartReducer }
+        const cartData = cartReducer.map(item => {
+            return {
+                product: item._id,
+                cartQuantity: item.prodQuantity
+            }
+        })
+        const arrayToSend = { products: cartData }
         axios
             .post(HOST + "/cart", arrayToSend)
             .then(updatedCart => {
@@ -103,6 +116,9 @@ export default function Cart() {
         return total + productValue;
     }, 0);
 
+    function showOrderForm () {
+        setVisibilityOrderForm(true)
+    }
 
 
 
@@ -129,8 +145,11 @@ export default function Cart() {
                 <span style={{ color: '#2A254B', fontSize: '24px', padding: "0px 0px 0px 15px" }}>${totalCurrentPrice}</span>
             </p>
             <p>Taxes and shipping are calculated at checkout</p>
-            <button onClick={() => { getCart() }} className={styles["cart-order-btn"]}>Go to checkout</button>
+            <button onClick={() => { showOrderForm() }} className={styles["cart-order-btn"]}>Go to checkout</button>
         </div>
+        {
+            visibilityOrderForm && <OrderForm cart={cartReducer}></OrderForm>
+        }
 
     </div>)
 }

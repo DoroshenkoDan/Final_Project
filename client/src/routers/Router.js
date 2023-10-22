@@ -3,7 +3,7 @@ import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
 
 import Layout from '../layouts/Layout'
 import HomePage from '../pages/HomePage'
-import CartPage from '../pages/CartPage/index.js'
+import CartPage from '../pages/CartPage'
 import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
