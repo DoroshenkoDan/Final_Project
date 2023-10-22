@@ -106,25 +106,28 @@
   .products-container-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
   }
 
   .products-container {
     padding: 0px 5px;
-  }
-
-  .products-container-button {
-    margin-top: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .products-container span {
-    display: none;
+  .products-container-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0px 5px;
   }
 
   .products-select {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding: 8px;
     font-size: 16px;

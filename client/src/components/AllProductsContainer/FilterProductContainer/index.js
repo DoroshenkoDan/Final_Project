@@ -49,58 +49,25 @@ export default function FilterProductContainer() {
     dispatch(fetchFilter(params))
   }
 
-  const resetFilters = () => {
-    const initialFilters = {
-      categories: {
-        Plantpots: false,
-        Ceramics: false,
-        Tables: false,
-        Chairs: false,
-        Crockery: false,
-        Nightstand: false,
-        Cutlery: false,
-      },
-      prices: {
-        '0-50': false,
-        '51-100': false,
-        '101-999': false,
-      },
-      brands: {
-        Sinsay: false,
-        Reserved: false,
-        JYSK: false,
-        Ceramico: false,
-        ArtCeramics: false,
-        KitchenCeramics: false,
-        CeramicCraft: false,
-        Vitra: false,
-        Ikea: false,
-        FÄRGKLAR: false,
-      },
-      items: 9,
-      addItems: 0,
-    }
-
-    dispatch(fetchFilter(initialFilters))
-  }
-
   return (
     <>
       <div className={styles['products-container-container']}>
         <div className={styles['products-container']}>
-          {' '}
           <h1 className={styles['products-header']}>Categories</h1>
           {isMobileView ? (
-            <select
-              className={styles['products-select']}
-              onChange={(e) => handleCategoryChange(e.target.value)}
-            >
+            <div className={styles['products-container-mobile']}>
               {Object.keys(categories).map((category) => (
-                <option key={category} value={category}>
+                <span key={category}>
+                  <input
+                    type="checkbox"
+                    checked={categories[category]}
+                    onChange={() => handleCategoryChange(category)}
+                    className={styles['products-checkbox']}
+                  />
                   {category}
-                </option>
+                </span>
               ))}
-            </select>
+            </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(categories).map((category) => (
@@ -119,19 +86,21 @@ export default function FilterProductContainer() {
         </div>
 
         <div className={styles['products-container']}>
-          {' '}
           <h1 className={styles['products-header']}>Brand</h1>
           {isMobileView ? (
-            <select
-              className={styles['products-select']}
-              onChange={(e) => handleBrandChange(e.target.value)}
-            >
-              {Object.keys(brands).map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
+            <div className={styles['products-container-mobile']}>
+            {Object.keys(brands).map((brand) => (
+              <span key={brands}>
+                <input
+                  type="checkbox"
+                  checked={brands[brand]}
+                  onChange={() => handleBrandChange(brand)}
+                  className={styles['products-checkbox']}
+                />
+                {brand}
+              </span>
+            ))}
+          </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(brands).map((brand) => (
@@ -153,16 +122,19 @@ export default function FilterProductContainer() {
           {' '}
           <h1 className={styles['products-header']}>Price</h1>
           {isMobileView ? (
-            <select
-              className={styles['products-select']}
-              onChange={(e) => handlePriceChange(e.target.value)}
-            >
-              {Object.keys(prices).map((price) => (
-                <option key={price} value={price}>
-                  {price}
-                </option>
-              ))}
-            </select>
+            <div className={styles['products-container-mobile']}>
+            {Object.keys(prices).map((price) => (
+              <span key={price}>
+                <input
+                  type="checkbox"
+                  checked={prices[price]}
+                  onChange={() => handlePriceChange(price)}
+                  className={styles['products-checkbox']}
+                />
+                {price}
+              </span>
+            ))}
+          </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(prices).map((price) => (
@@ -179,19 +151,6 @@ export default function FilterProductContainer() {
             </div>
           )}
         </div>
-      </div>
-
-      <div className={styles['products-container-button']}>
-        {isMobileView ? (
-          <button
-            className={styles['products-container-btn']}
-            onClick={resetFilters}
-          >
-            Clear Filters
-          </button>
-        ) : (
-          <></>
-        )}
       </div>
     </>
   )
