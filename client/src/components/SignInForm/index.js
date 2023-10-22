@@ -13,10 +13,6 @@ export default function OrderForm() {
     const [formStatus, setFormStatus] = useState({type: null, message: ''});
 
     const handleSubmit = async (userData, {resetForm}) => {
-        const {loginOrEmail, password} = userData;
-        console.log(password)
-        resetForm()
-        console.log('LOG!!!!!!!!!!!', loginOrEmail, password, userData)
         await axios
             .post(HOST + "/customers/login", userData)
             .then(loginResult => {
@@ -32,7 +28,7 @@ export default function OrderForm() {
                 const errorMessage = massageData[objectKey];
                 setFormStatus({type: 'error', message: `Login failed! ${errorMessage}`});
             });
-
+        resetForm()
     }
 
     return (
