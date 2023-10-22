@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../components/AllProductsContainer/AllProductsContainer.module.scss'
+import styles from '../../components/AllProductsContainer/AllProductsContainer.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchFilter,
   toggleCategory,
-} from '../Redux/reducers/FilterReducers.js'
+} from '../../Redux/reducers/FilterReducers.js'
 import { NavLink, useParams } from 'react-router-dom'
 
 export default function CategoryPage() {

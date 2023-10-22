@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthContainer from '../components/AuthContainer'
+import AuthContainer from '../../components/AuthContainer'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
