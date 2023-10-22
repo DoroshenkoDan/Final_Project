@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const HOST = 'http://localhost:4000/api'
 
 export let token
