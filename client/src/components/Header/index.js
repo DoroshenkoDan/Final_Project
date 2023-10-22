@@ -16,7 +16,7 @@ import NavContainer from "../NavContainer";
 import {setAuthToken} from "../Token";
 
 export default function Header() {
-    const status = useSelector((state) => state.user.status)
+    const status = useSelector((state) => state.store.user.status)
     const [isMenuHidden, setIsMenuHidden] = useState(true)
     const dispatch = useDispatch()
 
