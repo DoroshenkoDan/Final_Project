@@ -9,10 +9,7 @@ import { setAuthToken } from '../../components/Token/index.js';
 // import axios from 'axios';
 
 const initialState = {
-    user: {
-        loginOrEmail: "",
-        password: ""
-    },
+    user: {},
     isAuth: false,
     status: '',
 }
@@ -35,7 +32,7 @@ export const Registration = createAsyncThunk(
         async ({firstName, lastName, login, email, password, telephone, isAdmin}) => {
             const response = await registration({firstName, lastName, login, email, password, telephone, isAdmin});
             console.log(response);
-            return response.data
+            return response
         },
     );
 
@@ -56,7 +53,7 @@ export const Registration = createAsyncThunk(
         async () => {
             const response = await checkAuth();
             console.log(response);
-            localStorage.setItem('token', response.data.token);
+            // localStorage.setItem('token', response.data.token);
           return response
         },
     );
@@ -71,7 +68,7 @@ export const Registration = createAsyncThunk(
             [Login.fulfilled]: (state, action) => {
                 state.status = 'loaded';
                 state.isAuth = true;
-                state.user = action.payload;
+                state.user = JSON.parse(action.payload.config.data).loginOrEmail;
             },
             [Login.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
@@ -83,7 +80,7 @@ export const Registration = createAsyncThunk(
             [Registration.fulfilled]: (state, action) => {
                 state.status = 'loaded';
                 state.isAuth = true;
-                state.user = action.payload;
+                state.user = action.payload.data;
             },
             [Registration.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
@@ -106,7 +103,7 @@ export const Registration = createAsyncThunk(
             },
             [CheckAuth.fulfilled]: (state, action) => {
                 state.isAuth = true;
-                state.user = {};
+                state.user = action.payload.data.email;
             },
             [CheckAuth.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;

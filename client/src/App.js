@@ -51,7 +51,7 @@ function App() {
   },[])
   return (  
      <Store>
-            <h1>{isAuth ? `Пользователь зарегистрирован ${user.data}` : `АВТОРИЗУЙТЕCЬ`}</h1>
+            <h1>{isAuth ? `Пользователь  ${user} зарегистрирован` : `АВТОРИЗУЙТЕCЬ`}</h1>
       <Router></Router>
     </Store>
       )
