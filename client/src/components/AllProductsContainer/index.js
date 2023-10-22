@@ -6,6 +6,7 @@ import {
   toggleAddItems,
   fetchFilter,
 } from '../../Redux/reducers/FilterReducers.js'
+import {NavLink} from "react-router-dom";
 
 export default function AllProductsContainer() {
   const dispatch = useDispatch()
@@ -98,7 +99,11 @@ export default function AllProductsContainer() {
         <div className={styles['products-container']}>
           {list !== undefined && list?.length > 0 ?
            ( list?.map((product, index) => (
-              <div className={styles['products-container-item']} key={index}>
+               <NavLink
+                   to={`/products/${product.id}`}
+                   key={product.id}
+                   className={styles['products-container-item']}
+               >
                 <img
                   src={
                     product.imageUrls
@@ -113,7 +118,7 @@ export default function AllProductsContainer() {
                 <p className={styles['products-container-item-price']}>
                   $ {product.currentPrice}
                 </p>
-              </div>
+               </NavLink>
             )) ) : (
               <div className={styles['products-container-item']}>
                 <p className={styles['products-container-item-name']}>

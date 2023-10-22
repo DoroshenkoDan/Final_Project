@@ -89,7 +89,6 @@ export default function ProductsContainer({ id }) {
                             key={product.id}
                             className={styles['products-container-item']}
                         >
-
                             <img
                                 src={product.imageUrls}
 
@@ -105,9 +104,11 @@ export default function ProductsContainer({ id }) {
                         </NavLink>
                     ))}
                 </div>
+                <NavLink to='/allProducts/'>
                 <button className={styles['products-container-btn']}>
                     View collection
                 </button>
+                </NavLink>
             </div>
         </>
     )

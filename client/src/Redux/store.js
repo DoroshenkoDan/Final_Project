@@ -22,7 +22,6 @@ import FilterReducers from './reducers/FilterReducers.js'
 
 const storeReducers = combineReducers({
   // для прикладу додавати так: "cart: cartReducer,"
-  categories: categoriesReducer,
   user: userReducers,
   cart: cartReducer,
 })
@@ -42,6 +41,7 @@ const store = configureStore({
     store: persistedReducers,
     products: productsReducer,
     filters: FilterReducers,
+    categories: categoriesReducer,
   },
 })
 

@@ -4,12 +4,13 @@ import Store from '../Redux/store.js'
 
 import Layout from '../layouts/Layout'
 import HomePage from '../pages/HomePage'
-import CartPage from '../pages/CartPage'
+import CartPage from '../pages/CartPage/index'
 import FavoritesPage from '../pages/FavoritesPage'
 import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
 import ProductPage from '../pages/ProductPage'
 import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
+import AuthPage from "../pages/AuthPage";
 
 function Routes() {
 
@@ -22,9 +23,9 @@ function Routes() {
                 { path: 'home/', element: <HomePage /> },
                 { path: 'cart/', element: <CartPage /> },
                 { path: 'favorites/', element: <FavoritesPage /> },
-                { path: 'login/', element: <AuthPage /> },
+                { path: 'login/', element: <AuthPage/> },
                 { path: 'catalog/', element: <CatalogPage /> },
-                { path: 'allproducts/', element: <AllProductsPage /> },
+                { path: 'allProducts/', element: <AllProductsPage /> },
                 { path: 'category/:categoryId', element: <CategoryPage /> },
                 { path: 'products/:productId', element: <ProductPage /> },
             ],
