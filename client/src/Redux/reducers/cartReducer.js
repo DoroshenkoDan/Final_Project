@@ -42,10 +42,8 @@ export const cartReducer = createSlice({
         dicrementQuantity(state, action) {
             const id = action.payload;
 
-
             const product = state.cart.find((item) => item._id === id);
-            if (product) {
-
+            if (product && product.prodQuantity > 1) {
                 product.prodQuantity = product.prodQuantity - 1;
             }
         },

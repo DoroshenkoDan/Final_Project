@@ -18,14 +18,40 @@
 
 .cart-section-names {
     display: none;
+    border-bottom: 1px solid #EBE8F4;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.cart-section-names p {
+    font-family: "Clash Display";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #2A254B;
+}
+
+.cart-section-names p:nth-child(2) {
+    margin-left: 55%;
+}
+
+.cart-section-names p:nth-child(3) {
+    margin-left: 15%;
+}
+
+.cart-section-names p:last-of-type {
+    margin-right: 35px;
 }
 
 .cart-list-container {
-
     border-bottom: 1px solid #EBE8F4;
 }
 
 .cart-total-and-order-btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
     margin-top: 15px;
 }
 
@@ -35,7 +61,6 @@
     font-weight: 400;
     line-height: 28px;
     color: #4E4D93;
-    float: right;
 }
 
 .cart-total-price span {
@@ -45,12 +70,10 @@
 }
 
 .cart-total-and-order-btn-container p:last-of-type {
-
     font-family: "Satoshi";
     font-size: 14px;
     font-weight: 400;
     color: #4E4D93;
-    float: right;
     margin: 10px 0px 36px 0px;
 }
 
@@ -63,5 +86,24 @@
     line-height: 24px;
     background-color: #2A254B;
     color: white;
+    transition: all 0.1s ease-in-out;
+    transform: scale(1);
+    cursor: pointer;
+}
 
+.cart-order-btn:hover {
+    transform: scale(1.1);
+}
+
+
+
+@media (min-width:768px) {
+    .cart-section-names {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cart-order-btn {
+        width: 172px;
+    }
 }
