@@ -48,5 +48,5 @@ export default function NavContainer (props) {
 }
 
 NavContainer.propTypes = {
-    isMenuHidden: PropTypes.object.isRequired,
+    isMenuHidden: PropTypes.bool.isRequired,
 };

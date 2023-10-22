@@ -6,7 +6,6 @@ const initialState = {
         password: '',
     },
     status: false,
-    token:''
 }
 
 const userReducers = createSlice({
@@ -22,13 +21,6 @@ const userReducers = createSlice({
 
             state.data = {...updatedData}
         },
-        setToken(state,action) {
-            state.token = action.payload
-            console.log(state.token)
-        },
-        resetToken(state) {
-            state.token = ''
-        },
         resetData(state) {
             const data = {
                     login: '',
@@ -42,6 +34,6 @@ const userReducers = createSlice({
     },
 })
 
-export const {changeData, changeStatusTrue, setToken, resetStatus, resetData, resetToken} = userReducers.actions
+export const {changeData, changeStatusTrue, resetStatus, resetData} = userReducers.actions
 
 export default userReducers.reducer

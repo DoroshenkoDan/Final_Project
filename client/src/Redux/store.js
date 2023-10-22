@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+// import { legacy_createStore as createStore } from 'redux'
+import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import PropTypes from 'prop-types'
 
 // Імпорт-модулів,необхідних-для-зберігання-стейджу-між-перезавантаженнями
@@ -31,22 +32,25 @@ const persistedReducers = persistReducer(
 
 // Сюди додавати звичайні редюсери
 // Для виклику в файлі використовувати такий шлях  "const list = useSelector(state => state.cart(name in store).)"
+console.log('=======ReducerPersist',persistedReducers)
 const store = configureStore({
-  reducer: {
-    // для прикладу додавати так: "cart: cartReducer,"
-    store: persistedReducers,
-    products: productsReducer,
-    categories: categoriesReducer,
-    user: userReducers,
-  },
+  reducer: persistedReducers
+  //     {
+  //   // для прикладу додавати так: "cart: cartReducer,"
+  //   store: persistedReducers,
+  //   products: productsReducer,
+  //   categories: categoriesReducer,
+  //   user: userReducers,
+  // },
 })
+
 
 const persistedStore = persistStore(store)
 
 export default function Store(props) {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistedStore}>{props.children}</PersistGate>
+      <PersistGate loading={null} persistor={persistedStore}>{props.children}</PersistGate>
     </Provider>
   )
 }
