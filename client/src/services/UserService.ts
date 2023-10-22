@@ -1,5 +1,5 @@
-import $api from "../http"
+import axios from 'axios'
 
 export function fetchUsers(){
-return $api.get('/customers')
+return axios.get('/customers')
 }

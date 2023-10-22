@@ -1,8 +1,8 @@
-import $api from "../http";
-// import { AxiosResponse } from "axios";
+import axios from "axios";
+import { API_URL } from "../http";
 
 
 export async function getCatalog() {
-return $api.get('/catalog')
+return axios(API_URL + '/catalog')
 }
 

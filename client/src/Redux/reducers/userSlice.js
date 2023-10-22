@@ -101,14 +101,14 @@ export const Registration = createAsyncThunk(
                 state.status = 'rejected: error ' + action.payload;
                 state.user = {};
             },
-            [checkAuth.pending]: (state) => {
+            [CheckAuth.pending]: (state) => {
                 state.status = 'loading';
             },
-            [checkAuth.fulfilled]: (state, action) => {
+            [CheckAuth.fulfilled]: (state, action) => {
                 state.isAuth = true;
                 state.user = {};
             },
-            [checkAuth.rejected]: (state, action) => {
+            [CheckAuth.rejected]: (state, action) => {
                 state.status = 'rejected: error ' + action.payload;
                 state.user = action.payload;
             },
