@@ -12,7 +12,6 @@ function App() {
             loginOrEmail: user.data.loginOrEmail,
             password: user.data.password,
         }
-        console.log(userData)
         try {
             const loginResult = await axios.post(HOST + "/customers/login", userData);
             const token = loginResult.data.token;
@@ -29,9 +28,6 @@ function App() {
         console.log(user)
         if (user.status === true) {
             loginUser(user)
-            console.log('ураааа ЕБАТЬ')
-        } else {
-            console.log('ебанутьсяя')
         }
     })
 
