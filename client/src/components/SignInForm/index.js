@@ -5,7 +5,7 @@ import styles from './SignInForm.module.scss'
 import {HOST, setAuthToken} from "../Token";
 import Input from "../Input";
 import {useDispatch} from "react-redux";
-import {changeData, changeStatusTrue, setToken, changeUser} from "../../Redux/reducers/userReducers";
+import {changeData, changeStatusTrue} from "../../Redux/reducers/userReducers";
 import axios from "axios";
 
 export default function OrderForm() {
@@ -13,20 +13,12 @@ export default function OrderForm() {
     const [formStatus, setFormStatus] = useState({type: null, message: ''});
 
     const handleSubmit = async (userData, {resetForm}) => {
-        const {loginOrEmail, password} = userData;
-        resetForm()
-        console.log('LOG!!!!!!!!!!!', loginOrEmail, password, userData)
         await axios
             .post(HOST + "/customers/login", userData)
             .then(loginResult => {
-                console.log('fine', loginResult)
                 dispatch(changeData(userData))
                 dispatch(changeStatusTrue())
-                dispatch(changeUser(userData))
                 const token = loginResult.data.token
-                dispatch(setToken(token))
-                localStorage.setItem('statusLoginUser', true)
-                localStorage.setItem('token', token)
                 setAuthToken(token)
                 setFormStatus({type: 'success', message: 'Welcome to Avion'})
             })
@@ -35,9 +27,8 @@ export default function OrderForm() {
                 const objectKey = Object.keys(massageData)[0];
                 const errorMessage = massageData[objectKey];
                 setFormStatus({type: 'error', message: `Login failed! ${errorMessage}`});
-                console.log(err)
             });
-
+        resetForm()
     }
 
     return (

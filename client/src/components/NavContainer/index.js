@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 
 export default function NavContainer (props) {
-    const categories = useSelector((state) => state.categories.categories)
+    const categories = useSelector((state) => state.store.categories.categories)
     const dispatch = useDispatch()
 
     function getCategories() {
@@ -48,5 +48,5 @@ export default function NavContainer (props) {
 }
 
 NavContainer.propTypes = {
-    isMenuHidden: PropTypes.object.isRequired,
+    isMenuHidden: PropTypes.bool.isRequired,
 };
