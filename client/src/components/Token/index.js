@@ -8,11 +8,9 @@ export let token
 export const setAuthToken = token => {
     if (token) {
         axios.defaults.headers.common.Authorization = token;
-        console.log(token)
     } else {
         // Delete auth header
         delete axios.defaults.headers.common.Authorization;
-        console.log('blyat no token')
     }
 };
 
