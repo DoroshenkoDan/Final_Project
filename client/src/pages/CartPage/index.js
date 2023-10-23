@@ -38,15 +38,6 @@ export default function Cart() {
     return response
   }
 
-  // async function getCart() {
-  //    await axios
-  //        .get(HOST + "/cart")
-  //        .then(cartReturned => {
-  //            console.log("cartGet", cartReturned);
-  //            return cartReturned
-  //        })
-  // }
-
   async function updateServerCart() {
     const arrayToSend = { products: cartReducer }
     axios
