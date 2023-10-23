@@ -66,6 +66,7 @@ export default function OrderForm(props) {
             },
             // products: productsInCart.products,
             email: email,
+            canceled: false,
             mobile: mobile,
             letterSubject: 'Thank you for order! You are welcome!',
             letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>"
