@@ -1,10 +1,8 @@
 @import url(../../scss/fonts.scss);
-@media (min-width: 360px) {
   .text {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 803px;
     box-sizing: border-box;
 
     h2 {
@@ -36,12 +34,21 @@
       display: none;
     }
 
-    button {
+    .link {
+      text-decoration: none;
+      display: block;
+      max-width: 337px;
+      width: 100%;
       order: 3;
-      width: 337px;
+    }
+
+    button {
+      max-width: 337px;
+      width: 100%;
       color: #2a254b;
       background-color: #f9f9f9;
       border: 0;
+      display: block;
       margin-top: 32px;
       height: 56px;
       margin-left: 24px;
@@ -70,8 +77,6 @@
       max-width: 100%;
     }
   }
-}
-
 @media (min-width: 768px) {
   .container {
     background-image: url(../../../public/img/baner/Baner2.webp);
