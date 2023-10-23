@@ -107,6 +107,7 @@ export default function Cart() {
     }
 
     const cartProducts = mergeObjectsWithSameId(cartReducer, allProducts);
+    console.log('CardReducer AllProducts', cartReducer, allProducts)
 
 
 
