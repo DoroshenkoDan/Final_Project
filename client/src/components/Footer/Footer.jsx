@@ -143,7 +143,9 @@ export const Footer = () => {
           <p className="footer__menu-line">Best sellers</p>
           <p className="footer__menu-line">Recently viewed</p>
           <p className="footer__menu-line">Popular this week</p>
-          <p className="footer__menu-line">All products</p>
+          <NavLink className="footer__menu-line" to="/allproducts/">
+            All products
+          </NavLink>
         </div>
 
         <div className="footer__categories">

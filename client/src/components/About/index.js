@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import styles from './About.module.scss'
-import { NavLink } from 'react-router-dom'
 
 export default function About() {
   useEffect(() => {
@@ -31,9 +30,6 @@ export default function About() {
                 hotbed for the London interior design community.
               </p>
             </div>
-            <div className={styles.section__block__btn}>
-              <NavLink to="/contacts">Get in touch</NavLink>
-            </div>
           </div>
           <img
             src="../img/about/About1.png"
@@ -62,9 +58,6 @@ export default function About() {
                 live, breathe and design so our Chelsea boutique become the
                 hotbed for the London interior design community.
               </p>
-            </div>
-            <div className={styles.section__block__btn}>
-              <NavLink to="/contacts">Get in touch</NavLink>
             </div>
           </div>
         </div>

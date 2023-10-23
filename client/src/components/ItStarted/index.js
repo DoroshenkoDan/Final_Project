@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './ItStarted.module.scss'
 import { NavLink } from 'react-router-dom'
 export default function ItStarted() {
-  console.log('hello')
   return (
     <div className={styles['flex-wrapper']}>
       <div className={styles['text-block']}>
@@ -11,7 +10,7 @@ export default function ItStarted() {
           A global brand with local beginnings, our story begain in a small
           studio in South London in early 2014
         </p>
-        <NavLink className={styles['button-collection']} to="/catalog/">
+        <NavLink className={styles['button-collection']} to="/allProducts/">
           View Collection
         </NavLink>
       </div>
