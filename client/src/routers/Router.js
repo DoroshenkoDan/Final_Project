@@ -8,6 +8,7 @@ import CatalogPage from '../pages/CatalogPage'
 import CategoryPage from '../pages/CategoryPage'
 import ProductPage from '../pages/ProductPage'
 import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
+import HomePage from "../pages/HomePage";
 
 function Routes() {
   return useRoutes([
@@ -16,7 +17,7 @@ function Routes() {
       element: <Layout />,
       children: [
         { path: '', element: <Navigate to="home/" /> },
-        { path: 'home/', element: <AllProductsPage /> },
+        { path: 'home/', element: <HomePage /> },
         { path: 'cart/', element: <CartPage /> },
         { path: 'favorites/', element: <FavoritesPage /> },
         { path: 'catalog/', element: <CatalogPage /> },
