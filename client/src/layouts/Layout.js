@@ -6,24 +6,23 @@ import { fetchProducts } from '../Redux/reducers/productsReducers'
 import { useDispatch } from 'react-redux'
 
 export default function Layout() {
+  const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
+  function getProducts() {
+    dispatch(fetchProducts())
+  }
 
-    function getProducts() {
-        dispatch(fetchProducts())
-    }
+  useEffect(() => {
+    getProducts()
+  }, [])
 
-    useEffect(() => {
-        getProducts()
-    }, [])
-
-    return (
-        <>
-            <Header />
-            <main className="container">
-                <Outlet />
-            </main>
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Header />
+      <main className="container">
+        <Outlet />
+      </main>
+        <Footer></Footer>
+    </>
+  )
 }

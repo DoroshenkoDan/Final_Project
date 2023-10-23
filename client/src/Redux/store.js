@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 // import { legacy_createStore as createStore } from 'redux'
-import {combineReducers, configureStore} from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import PropTypes from 'prop-types'
 
 // Імпорт-модулів,необхідних-для-зберігання-стейджу-між-перезавантаженнями
@@ -12,8 +12,9 @@ import { PersistGate } from 'redux-persist/integration/react'
 // Импорт редюсерів
 import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
-import userReducers from "./reducers/userReducers";
-import cartReducer from "./reducers/cartReducer";
+import userReducers from './reducers/userReducers'
+import cartReducer from './reducers/cartReducer'
+import FilterReducers from './reducers/FilterReducers.js'
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -21,7 +22,6 @@ import cartReducer from "./reducers/cartReducer";
 
 const storeReducers = combineReducers({
   // для прикладу додавати так: "cart: cartReducer,"
-  categories: categoriesReducer,
   user: userReducers,
   cart: cartReducer,
 })
@@ -33,23 +33,25 @@ const persistedReducers = persistReducer(
 
 // Сюди додавати звичайні редюсери
 // Для виклику в файлі використовувати такий шлях  "const list = useSelector(state => state.cart(name in store).)"
-console.log('=======ReducerPersist',persistedReducers)
+console.log('=======ReducerPersist', persistedReducers)
 const store = configureStore({
-  reducer:
-      {
+  reducer: {
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
     products: productsReducer,
+    filters: FilterReducers,
+    categories: categoriesReducer,
   },
 })
-
 
 const persistedStore = persistStore(store)
 
 export default function Store(props) {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistedStore}>{props.children}</PersistGate>
+      <PersistGate loading={null} persistor={persistedStore}>
+        {props.children}
+      </PersistGate>
     </Provider>
   )
 }

@@ -4,13 +4,13 @@ export const HOST = 'http://localhost:4000/api'
 
 export let token
 
-export const setAuthToken = token => {
-    if (token) {
-        axios.defaults.headers.common.Authorization = token;
-    } else {
-        delete axios.defaults.headers.common.Authorization;
-    }
-};
+export const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common.Authorization = token
+  } else {
+    delete axios.defaults.headers.common.Authorization
+  }
+}
 
 // function checkUserData(status, data) {
 //     let userData
@@ -46,4 +46,3 @@ export const setAuthToken = token => {
 //         return null; // Вернуть null или другое значение в случае ошибки
 //     }
 // }
-
