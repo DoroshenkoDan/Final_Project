@@ -33,7 +33,7 @@ exports.placeOrder = async (req, res, next) => {
       order.customerId = req.body.customerId;
 
       cartProducts = await subtractProductsFromCart(order.customerId);
-      console.log(cartProducts)
+      // console.log(cartProducts)
     }
 
     if (!req.body.products && cartProducts.length < 1) {
@@ -41,13 +41,13 @@ exports.placeOrder = async (req, res, next) => {
         .status(400)
         .json({ message: "The list of products is required, but absent!" });
     }
-    console.log('cartProducts.length',cartProducts.length)
+    // console.log('cartProducts.length',cartProducts.length)
     if (cartProducts.length > 0) {
       order.products = _.cloneDeep(cartProducts);
     } else {
       order.products = req.body.products;
     }
-    console.log('orderProducts', order.products)
+    // console.log('orderProducts', order.products)
     order.totalSum = order.products.reduce(
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,
@@ -98,12 +98,13 @@ exports.placeOrder = async (req, res, next) => {
       newOrder
         .save()
         .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+          console.log(order, 123);
+          // const mailResult = await sendMail(
+          //   subscriberMail,
+          //   letterSubject,
+          //   letterHtml,
+          //   res
+          // );
 
           for (item of order.products){
             const id = item.product._id;
@@ -112,11 +113,11 @@ exports.placeOrder = async (req, res, next) => {
             await Product.findOneAndUpdate({ _id: id }, { quantity: productQuantity - item.cartQuantity }, { new: true })
           }
 
-          res.json({ order, mailResult });
+          res.json({ order });
         })
         .catch(err =>
           res.status(400).json({
-            message: `Error happened on server: "${err}" `
+            message: `Error happened on server123: "${err}" `
           })
         );
     }
