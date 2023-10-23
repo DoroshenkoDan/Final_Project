@@ -87,7 +87,13 @@
   letter-spacing: 0em;
   border: none;
   cursor: pointer;
-  transition: all 0.4s ease-in-out 0s;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    top 0.1s ease-in-out;
+  transform: scale(1);
+  position: relative;
+  top: 0;
 }
 
 .products-container-btn:hover {
@@ -126,7 +132,8 @@
   }
 
   .products-container {
-    gap: none;
+    gap: 54px 0px;
+    justify-content: space-between;
   }
 
   .products-container-item {

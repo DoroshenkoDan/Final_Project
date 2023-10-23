@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { api } from '../api/api'
-// import exportedObject from '../api/api.js'
 
 const initialState = {
   categories: [],
@@ -8,7 +7,7 @@ const initialState = {
   error: null,
 }
 export const fetchCategories = createAsyncThunk(
-  'categoriesReducer/fetchProducts',
+  'categoriesReducer/fetchCategories',
   async () => {
     const response = await api('catalog')
     return response
@@ -27,6 +26,7 @@ const categoriesReducer = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
+        console.log('action', action)
         state.status = 'succeeded'
         state.categories = action.payload
       })

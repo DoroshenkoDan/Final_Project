@@ -99,22 +99,22 @@ exports.updateProduct = (req, res, next) => {
     );
 };
 
-// exports.getProducts = (req, res, next) => {
-//   const perPage = Number(req.query.perPage);
-//   const startPage = Number(req.query.startPage);
-//   const sort = req.query.sort;
+exports.getAllProducts = (req, res, next) => {
+  const perPage = Number(req.query.perPage);
+  const startPage = Number(req.query.startPage);
+  const sort = req.query.sort;
 
-//   Product.find()
-//     .skip(startPage * perPage - perPage)
-//     .limit(perPage)
-//     .sort(sort)
-//     .then(products => res.send(products))
-//     .catch(err =>
-//       res.status(400).json({
-//         message: `Error happened on server: "${err}" `
-//       })
-//     );
-// };
+  Product.find()
+    .skip(startPage * perPage - perPage)
+    .limit(perPage)
+    .sort(sort)
+    .then(products => res.send(products))
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
+};
 
 exports.getProducts = (req, res, next) => {
   const mongooseQuery = filterParser(req.query);

@@ -10,7 +10,7 @@ export default function ItStarted() {
           A global brand with local beginnings, our story begain in a small
           studio in South London in early 2014
         </p>
-        <NavLink className={styles['button-collection']} to="/catalog/">
+        <NavLink className={styles['button-collection']} to="/allProducts/">
           View Collection
         </NavLink>
       </div>

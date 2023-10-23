@@ -6,6 +6,7 @@ import {
   toggleAddItems,
   fetchFilter,
 } from '../../Redux/reducers/FilterReducers.js'
+import { NavLink } from 'react-router-dom'
 
 export default function AllProductsContainer() {
   const dispatch = useDispatch()
@@ -41,28 +42,28 @@ export default function AllProductsContainer() {
     }
   }
 
-  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false)
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
-      setShowScrollButton(true);
+      setShowScrollButton(true)
     } else {
-      setShowScrollButton(false);
+      setShowScrollButton(false)
     }
-  };
+  }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   function buttonClick() {
-    setItems(items);
-    setAdditems(addItems + 6);
+    setItems(items)
+    setAdditems(addItems + 6)
     if (!showScrollButton) {
-      setShowScrollButton(true);
+      setShowScrollButton(true)
     }
   }
 
@@ -96,9 +97,13 @@ export default function AllProductsContainer() {
         <div className={styles.loading}>Загрузка данных...</div>
       ) : (
         <div className={styles['products-container']}>
-          {list !== undefined && list?.length > 0 ?
-           ( list?.map((product, index) => (
-              <div className={styles['products-container-item']} key={index}>
+          {list !== undefined && list?.length > 0 ? (
+            list?.map((product, index) => (
+              <NavLink
+                to={`/products/${product.id}`}
+                key={product.id}
+                className={styles['products-container-item']}
+              >
                 <img
                   src={
                     product.imageUrls
@@ -113,14 +118,15 @@ export default function AllProductsContainer() {
                 <p className={styles['products-container-item-price']}>
                   $ {product.currentPrice}
                 </p>
-              </div>
-            )) ) : (
-              <div className={styles['products-container-item']}>
-                <p className={styles['products-container-item-name']}>
-                  No products found
-                </p>
-              </div>
-            )}
+              </NavLink>
+            ))
+          ) : (
+            <div className={styles['products-container-item']}>
+              <p className={styles['products-container-item-name']}>
+                No products found
+              </p>
+            </div>
+          )}
         </div>
       )}
       {selectedCategories.length === 0 &&
@@ -138,7 +144,7 @@ export default function AllProductsContainer() {
         <button
           className={styles['scroll-to-top-button']}
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         >
           Scroll to Top
