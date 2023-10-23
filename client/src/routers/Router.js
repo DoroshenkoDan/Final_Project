@@ -1,6 +1,5 @@
 import React from 'react'
 import { Navigate, useRoutes, BrowserRouter } from 'react-router-dom'
-import Store from '../Redux/store.js'
 
 import Layout from '../layouts/Layout'
 import HomePage from '../pages/HomePage/HomePage'
@@ -32,10 +31,8 @@ function Routes() {
 
 export default function Router() {
   return (
-    <Store>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </Store>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   )
 }
