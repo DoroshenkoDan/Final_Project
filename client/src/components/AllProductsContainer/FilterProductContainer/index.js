@@ -90,7 +90,7 @@ export default function FilterProductContainer() {
           {isMobileView ? (
             <div className={styles['products-container-mobile']}>
             {Object.keys(brands).map((brand) => (
-              <span key={brands}>
+              <span key={brand}>
                 <input
                   type="checkbox"
                   checked={brands[brand]}
