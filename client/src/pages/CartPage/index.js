@@ -8,7 +8,6 @@ export default function Cart() {
   const cartReducer = useSelector((state) => state.store.cart.cart)
   const allProducts = useSelector((state) => state.products.data)
   const userStatus = useSelector((state) => state.store.user.status)
-  console.log('ОХУЕННО', cartReducer)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +27,6 @@ export default function Cart() {
         console.log('User is not logged in')
       }
     }
-
     fetchData()
   }, [cartReducer, userStatus])
 
@@ -80,7 +78,6 @@ export default function Cart() {
 
   const cartProducts = mergeObjectsWithSameId(cartReducer, allProducts)
   console.log('CartReducer, ProductReducer', cartReducer, allProducts)
-  console.log('Пизда', cartProducts)
 
   const totalCurrentPrice = cartProducts.reduce((total, product) => {
     const productValue = product.currentPrice * product.prodQuantity
