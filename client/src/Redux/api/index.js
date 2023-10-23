@@ -4,7 +4,7 @@ import { HOST } from '../../components/Token'
 export default async function api(apiName) {
     let result
     await axios
-        .get(HOST + "/products")
+        .get(HOST + "/products/allProducts")
         .then(products => {
             result = products.data
             console.log('products fetched', products.data)
