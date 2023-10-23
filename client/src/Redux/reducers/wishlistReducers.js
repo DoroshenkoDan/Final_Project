@@ -11,6 +11,9 @@ export const fetchWishlist = createAsyncThunk(
   'wishlistReducer/fetchWishlist',
   async () => {
     const response = await api('wishlist')
+    if (response === null){
+      return;
+    }
     return response.products
   },
 )
@@ -33,7 +36,21 @@ const wishlistReducer = createSlice({
   name: 'wishlistReducer',
   initialState,
   reducers: {
-
+    addToWishlistAnon(state, action) {
+      const itemToAdd = action.payload
+      const existingItem = state.wishlist.find((item) => item._id === itemToAdd._id)
+      if (!existingItem) {
+        state.wishlist.push(itemToAdd);
+      }
+    },
+deleteFromWishlistAnon(state, action) {
+      const wishlist = Array.from(state.wishlist);
+      let realWishlist = wishlist.map(proxyObject=>{return {...proxyObject}})
+      realWishlist = realWishlist.filter((product)=>{
+        return product._id !== action.payload
+      })
+      state.wishlist = realWishlist;
+    }
   },
   extraReducers(builder) {
     builder
@@ -41,29 +58,34 @@ const wishlistReducer = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchWishlist.fulfilled, (state, action) => {
-        console.log('action', action)
         state.status = 'succeeded'
-        state.wishlist = action.payload
-        console.log(state.wishlist)
+        if(action.payload){state.wishlist = action.payload} else {
+          state.wishlist = [];
+        }
       })
       .addCase(fetchWishlist.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
+        console.log(state.error)
       })
       .addCase(removeFromWishlist.pending, (state) => {
         state.status = 'loading'
       })
       .addCase(removeFromWishlist.fulfilled, (state, action) => {
-        console.log('action', action)
         state.status = 'succeeded'
         state.wishlist = action.payload.products
-        console.log(state.wishlist)
       })
       .addCase(removeFromWishlist.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
+        console.log(state.error)
       })
   },
 })
 
 export default wishlistReducer.reducer
+
+export const {
+  addToWishlistAnon,
+  deleteFromWishlistAnon,
+} = wishlistReducer.actions

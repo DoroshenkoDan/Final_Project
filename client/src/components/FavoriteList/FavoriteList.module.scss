@@ -11,6 +11,12 @@
     padding-top: 40px;
     margin-bottom: 40px;
 }
+.favourite-text{
+    font-family: 'Satoshi Regular';
+    font-size: 14px;
+    color: #2A254B;
+    padding-bottom: 40px;
+}
 @media only screen and (min-width: 768px) {
     .favourite-list{
         display: flex;
@@ -26,10 +32,16 @@
     margin-top: 40px;
     padding-top: 0;
 }
+.favourite-text{
+    font-size: 16px;
+}
 }
 
 @media only screen and (min-width: 1400px) {
     .favourite-heading{
         font-size: 36px;
+    }
+    .favourite-text{
+        font-size: 18px;
     }
 }

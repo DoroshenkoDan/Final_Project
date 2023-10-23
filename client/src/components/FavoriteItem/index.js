@@ -2,17 +2,23 @@ import React from "react";
 import PropTypes from 'prop-types';
 import styles from "./FavoriteItem.module.scss"
 import { NavLink } from 'react-router-dom'
-import { removeFromWishlist } from "../../Redux/reducers/wishlistReducers";
-import {useDispatch} from "react-redux";
+import { removeFromWishlist, deleteFromWishlistAnon } from "../../Redux/reducers/wishlistReducers";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export default function FavoriteItem (props) {
     const dispatch = useDispatch();
-    
+    const userStatus = useSelector((state) => state.store.user.status)
 
 
-    function selfDestruction (){
+    function deleteFavItem (){
+        if(userStatus){
         dispatch(removeFromWishlist(props.product._id))
+    }
+    else {
+        console.log("I mana sou en se xeri! Log in!")
+        dispatch(deleteFromWishlistAnon(props.product._id))
+    }
     }
     return(<> 
             <NavLink className={styles['favourite-item']} to={`/products/${props.product.id}`}>
@@ -24,7 +30,7 @@ export default function FavoriteItem (props) {
                     
                 </div>
             </NavLink>
-            <button onClick={()=>{selfDestruction()}}>delete</button></>
+            <button onClick={()=>{deleteFavItem()}}>delete</button></>
                 )
 }
 

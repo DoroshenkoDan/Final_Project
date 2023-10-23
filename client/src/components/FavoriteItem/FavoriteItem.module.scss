@@ -4,9 +4,9 @@
     margin-bottom: 33px;
     display: flex;
     text-decoration: none;
+    color: #2A254B;
 }
 .favourite-img{
-    object-fit: cover;
     width: 133px;
     height: 166px;
 }
@@ -39,6 +39,7 @@
     justify-content: space-evenly;
 }
 .favourite-item-text{
+    max-height: 88px;
     padding-top: 0;
 }
 .favourite-item-price{
