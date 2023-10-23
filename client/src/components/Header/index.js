@@ -5,27 +5,24 @@ import FavoritesIcon from '../FavoritesIcon'
 import styles from './Header.module.scss'
 import MenuIcon from '../MenuIcon'
 import CloseBtnIcon from '../CloseBtnIcon'
-import {useDispatch} from 'react-redux'
-import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
+import {useDispatch, useSelector} from 'react-redux'
 import IconLogin from "../IconLogin";
 import LogOutIcon from "../LogOutIcon";
-import {setAuthToken} from "../Token";
 import NavContainer from "../NavContainer";
+import { Logout } from '../../Redux/reducers/userSlice'
 
 export default function Header() {
-    // const status = useSelector((state) => state.user.status)
+    
     const [isMenuHidden, setIsMenuHidden] = useState(true)
+    const { isAuth } = useSelector((store) => store.userSlice);
     const dispatch = useDispatch()
 
     const toggleHideItems = () => {
         setIsMenuHidden(!isMenuHidden)
     }
 
-    const logOutUser = () => {
-        dispatch(resetStatus())
-        dispatch(resetData())
-        dispatch(resetToken())
-        setAuthToken(false)
+    const logOutUser = () => {       
+        dispatch(Logout())
     }
 
     return (
@@ -41,15 +38,12 @@ export default function Header() {
                     <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/cart/">
                         <CartIcon/>
                     </NavLink>
-                    {status &&
-                        <NavLink onClick={logOutUser} className={`${styles.icon}`} to="/login/">
+                    {isAuth ? <NavLink onClick={logOutUser} className={`${styles.icon}`} to="/login/">
                             <LogOutIcon/>
-                        </NavLink>
-                    }
-                    {!status &&
+                        </NavLink> : 
                         <NavLink className={`${styles.icon}  ${styles.iconPosition}`} to="/login/">
                             <IconLogin/>
-                        </NavLink>}
+                        </NavLink>}                    
 
         </span>
                 <span

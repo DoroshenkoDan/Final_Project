@@ -4,10 +4,10 @@ import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 
 export default function AuthPage() {
-    const status = useSelector(state => state.userSlice.status)
+    const { isAuth } = useSelector((store) => store.userSlice);
 
-    if (status) {
-        return (<Navigate to="/catalog/"/>)
+    if (isAuth) {
+        return (<Navigate to="/home/"/>)
     }
 
     return(

@@ -10,9 +10,6 @@ return await axios.post(API_URL + '/customers/login', {loginOrEmail, password})
 export async function registration({firstName, lastName, login, email, password, telephone, isAdmin}) {
     return await axios.post(API_URL + '/customers', {firstName, lastName, login, email, password, telephone, isAdmin})
     }
-export async function logout() {
-        return await axios.post(API_URL + '/logout')
-        }
 
 export async function checkAuth() {
         setAuthToken(localStorage.getItem('token'))
