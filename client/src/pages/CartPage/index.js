@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import CartProductList from "../../components/CartProductList/index.js"
 import styles from "./CartPage.module.scss"
-import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 import axios from 'axios'
-import { HOST } from "../../components/Token"
+import {HOST} from "../../components/Token"
 import OrderForm from "../../components/OrderForm";
+
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
 
     const cartReducer = useSelector(state => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
+    const [orderPlaced, setOrderPlaced] = useState({status:'', massage:''})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +35,6 @@ export default function Cart() {
         };
         fetchData();
     }, [cartReducer]);
-
 
 
     async function getCart() {
@@ -60,7 +61,7 @@ export default function Cart() {
                 cartQuantity: item.prodQuantity
             }
         })
-        const arrayToSend = { products: cartData }
+        const arrayToSend = {products: cartData}
         axios
             .put(HOST + "/cart", arrayToSend)
             .then(updatedCart => {
@@ -80,7 +81,7 @@ export default function Cart() {
                 cartQuantity: item.prodQuantity
             }
         })
-        const arrayToSend = { products: cartData }
+        const arrayToSend = {products: cartData}
         axios
             .post(HOST + "/cart", arrayToSend)
             .then(updatedCart => {
@@ -99,7 +100,7 @@ export default function Cart() {
         for (const obj1 of array1) {
             const matchingObject = array2.find((obj2) => obj2._id === obj1._id);
             if (matchingObject) {
-                mergedObjects.push({ ...obj1, ...matchingObject });
+                mergedObjects.push({...obj1, ...matchingObject});
             }
         }
 
@@ -110,23 +111,29 @@ export default function Cart() {
     console.log('CardReducer AllProducts', cartReducer, allProducts)
 
 
-
-
     const totalCurrentPrice = cartProducts.reduce((total, product) => {
         const productValue = product.currentPrice * product.prodQuantity;
         return total + productValue;
     }, 0);
 
-    function showOrderForm () {
+    function showOrderForm() {
         setVisibilityOrderForm(true)
     }
 
+    function changeOrderPlaced(orderInfo) {
+        setOrderPlaced(orderInfo)
+    }
 
 
     if (cartProducts.length === 0) {
-        return <p>loading...</p>
+        return (
+            <>
+                <p>loading...</p>
+                {
+                    orderPlaced.status && <div className={styles['text-container']}><h1 className={styles['order-text--placed']}>{orderPlaced.massage}</h1></div>
+                }
+            </>)
     }
-
 
 
     return (<div className={styles["cart-container"]}>
@@ -138,18 +145,27 @@ export default function Cart() {
         </div>
         <div className={styles["cart-list-container"]}>
             {cartProducts.map((product) => (
-                <CartProductList key={product.id} img={product.imageUrls} name={product.name} quantity={product.prodQuantity} price={product.currentPrice} discribe={product.description} id={product._id} />
+                <CartProductList key={product.id} img={product.imageUrls} name={product.name}
+                                 quantity={product.prodQuantity} price={product.currentPrice}
+                                 discribe={product.description} id={product._id}/>
             ))}
         </div>
         <div className={styles["cart-total-and-order-btn-container"]}>
             <p className={styles["cart-total-price"]}>Subtotal
-                <span style={{ color: '#2A254B', fontSize: '24px', padding: "0px 0px 0px 15px" }}>${totalCurrentPrice}</span>
+                <span style={{
+                    color: '#2A254B',
+                    fontSize: '24px',
+                    padding: "0px 0px 0px 15px"
+                }}>${totalCurrentPrice}</span>
             </p>
             <p>Taxes and shipping are calculated at checkout</p>
-            <button onClick={() => { showOrderForm() }} className={styles["cart-order-btn"]}>Go to checkout</button>
+            <button onClick={() => {
+                showOrderForm()
+            }} className={styles["cart-order-btn"]}>Go to checkout
+            </button>
         </div>
         {
-            visibilityOrderForm && <OrderForm cart={cartReducer}></OrderForm>
+            visibilityOrderForm && <OrderForm changeOrderPlaced={changeOrderPlaced} orderPlaced={orderPlaced}></OrderForm>
         }
 
     </div>)

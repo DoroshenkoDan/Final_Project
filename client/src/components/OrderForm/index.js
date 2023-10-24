@@ -2,88 +2,81 @@ import React from 'react'
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import {HOST} from "../Token";
-
+import {useNavigate} from 'react-router-dom';
 import Input from "../Input";
 import styles from './OrderForm.module.scss'
 import PropTypes from "prop-types";
-// import {useSelector} from "react-redux";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {clearCart} from "../../Redux/reducers/cartReducer";
 
 
 export default function OrderForm(props) {
-    const {cart} = props
-    // const listProducts = useSelector(state => state.products.data)
-    console.log(cart)
+    const userStatus = useSelector((state) => state.store.user.status)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    // const findCartProducts = () => {
-    //     const cartProducts = []
-    //     for (const product of listProducts) {
-    //         for (const obj of cart) {
-    //             if (obj._id === product._id) {
-    //                 cartProducts.push({
-    //                     product: product,
-    //                     cartQuantity: obj.prodQuantity
-    //                 })
-    //             }
-    //         }
-    //     }
-    //     return cartProducts;
-    // }
 
-    async function getCart () {
+    const getCart = async () => {
         try {
             const response = await axios.get(HOST + '/cart')
             return response.data;
-        } catch (err){
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    const deleteCart = async () => {
+        try {
+            await axios.delete(HOST + '/cart')
+        } catch (err) {
             console.log(err);
         }
     }
 
-    const findCustomers = async () => {
-        try {
-            const response = await axios.get(HOST + "/customers/customer");
-            return response.data; // Возвращаем данные
-        } catch (err) {
-            console.log(err);
-            return null; // Либо обработка ошибки
+    const
+    handleSubmit = async (orderInfo) => {
+        if (userStatus) {
+            const {email, mobile, country, city, address, postal} = orderInfo;
+            const productsInCart = await getCart()
+            const newOrder = {
+                customerId: productsInCart.customerId._id,
+                deliveryAddress: {
+                    country: country,
+                    city: city,
+                    address: address,
+                    postal: `${postal}`,
+                },
+                email: email,
+                canceled: false,
+                mobile: mobile,
+                letterSubject: 'Thank you for order! You are welcome!',
+                letterHtml: "<h1>Your order is placed.</h1>"
+            }
+            axios
+                .post(HOST + "/orders", newOrder)
+                .then(newOrder => {
+                    props.changeOrderPlaced({status: true, massage: 'Thank you for order! You are welcome!'})
+                })
+                .catch(err => {
+                    props.changeOrderPlaced({status: false, massage: 'The order has not been processed. Check that the entered data is correct and that you are logged in'})
+                    console.log(err)
+                });
+            dispatch(clearCart())
+            await deleteCart()
+        } else {
+            navigate('/login/');
         }
-    }
-    const handleSubmit = async (orderInfo) => {
-        const {email, mobile, country, city, address, postal} = orderInfo;
-        console.log(email, country, city, address, postal, mobile, orderInfo)
-        console.log('Cart in Order form', cart)
-        const productsInCart = await getCart()
-        console.log(productsInCart)
-        const customer = await findCustomers()
-        console.log(customer._id)
-        const newOrder = {
-            customerId: productsInCart.customerId._id,
-            deliveryAddress: {
-                country: country,
-                city: city,
-                address: address,
-                postal: `${postal}`,
-            },
-            // products: productsInCart.products,
-            email: email,
-            canceled: false,
-            mobile: mobile,
-            letterSubject: 'Thank you for order! You are welcome!',
-            letterHtml: "<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>"
-        }
-        console.log(newOrder)
-        axios
-            .post(HOST + "/orders", newOrder)
-            .then(newOrder => {
-                console.log('Zakazano ebana', newOrder)
-            })
-            .catch(err => {
-                console.log('Hyi tebe, a ne order', err)
-            });
-        console.log(newOrder)
     }
 
     return (
+        <>
+            {
+                props.orderPlaced.status === false &&
+                <div className={styles['order__text-container']}>
+                    <h1 className={styles['order-text--error']}>{props.orderPlaced.massage}
+                    </h1>
+                </div>
+            }
         <Formik
             initialValues={{email: '', mobile: '', country: '', city: '', address: '', postal: ''}}
             onSubmit={handleSubmit}
@@ -127,19 +120,21 @@ export default function OrderForm(props) {
                     component={Input}
                 />
                 <Field
-                    type='number'
+                    type='text'
                     placeholder='postal'
                     name='postal'
                     component={Input}
                 />
-                <div>
+                <div className={styles['btn-container']}>
                     <button className={styles['btn-send--order']} type="submit">Send</button>
                 </div>
             </ Form>
         </Formik>
+        </>
     )
 }
 
 OrderForm.propTypes = {
-    cart: PropTypes.object
+    changeOrderPlaced: PropTypes.func,
+    orderPlaced: PropTypes.object
 }

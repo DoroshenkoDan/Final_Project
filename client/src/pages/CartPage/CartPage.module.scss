@@ -92,10 +92,22 @@
   transform: scale(1.1);
 }
 
+.text-container{
+  margin: 40px auto 0 auto;
+  width: 90%;
+}
+
 @media (min-width: 768px) {
   .cart-section-names {
     display: flex;
     justify-content: space-between;
+  }
+  .text-container{
+    max-width: 1440px;
+    width: 85%;
+  }
+  .order-text--placed {
+    font-size: 24px;
   }
 
   .cart-order-btn {
