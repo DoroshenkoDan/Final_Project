@@ -11,16 +11,6 @@ export default function RegisterForm(props) {
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
   const handleSubmit = (orderInfo, { resetForm }) => {
-    const { firstName, lastName, login, email, password, telephone } = orderInfo
-    console.log(
-      firstName,
-      lastName,
-      login,
-      email,
-      password,
-      telephone,
-      orderInfo,
-    )
     axios
       .post(HOST + '/customers', orderInfo)
       .then((savedCustomer) => {

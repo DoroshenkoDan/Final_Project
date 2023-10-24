@@ -2,12 +2,15 @@ import axios from 'axios'
 import { HOST } from '../../components/Token'
 
 export default async function api(apiName) {
-  try {
-    const response = await axios.get(HOST + `/products`)
-
-    const data = response.data
-    return data
-  } catch (e) {
-    console.log(e)
-  }
+    let result
+    await axios
+        .get(HOST + "/products/allproducts")
+        .then(products => {
+            result = products.data
+            console.log('products fetched', products.data)
+        })
+        .catch(err => {
+            console.error('fetch products failed',err)
+        });
+    return result
 }

@@ -6,6 +6,7 @@ import logoInstagram from './img/Logo--instagram.png'
 import logoSkype from './img/Logo--skype.png'
 import logoTwitter from './img/Logo--twitter.png'
 import logoPinterest from './img/Logo--pinterest.png'
+import { NavLink } from 'react-router-dom'
 
 export const Footer = () => {
   return (
@@ -140,7 +141,9 @@ export const Footer = () => {
           <p className="footer__menu-line">Best sellers</p>
           <p className="footer__menu-line">Recently viewed</p>
           <p className="footer__menu-line">Popular this week</p>
-          <p className="footer__menu-line">All products</p>
+          <NavLink className="footer__menu-line" to="/allproducts/">
+            All products
+          </NavLink>
         </div>
 
         <div className="footer__categories">

@@ -2,6 +2,7 @@ import styles from './producItem.module.scss'
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import { addToCart } from '../../Redux/reducers/cartReducer'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
 
@@ -10,21 +11,27 @@ export default function ProductItem({ props }) {
   const list = useSelector((state) => state.products.data)
   const userStatus = useSelector((state) => state.store.user.status)
   const [product, setProduct] = useState({})
+    const [productQuantity, setProductQuantity] = useState(1)
 
-  function getProducts() {
-    dispatch(fetchProducts())
-  }
-  function putToWishlist() {
+    useEffect(() => {
+        findObj(list, props)
+        setProductQuantity(1)
+    }, [list, props])
+
+    function putToWishlist() {
     if (userStatus) {
       dispatch(addToWishlist(product._id))
     }
   }
-  useEffect(() => {
-    getProducts()
-  }, [])
+
+  const dispatch = useDispatch()
+  const list = useSelector((state) => state.products.data)
+  const [product, setProduct] = useState({})
+  const [productQuantity, setProductQuantity] = useState(1)
 
   useEffect(() => {
     findObj(list, props)
+    setProductQuantity(1)
   }, [list, props])
 
   function findObj(array, id) {
@@ -45,7 +52,18 @@ export default function ProductItem({ props }) {
     width,
     depth,
     description,
+    _id,
   } = product
+
+  const increaseQuantity = () => {
+    setProductQuantity(productQuantity + 1)
+  }
+
+  const decreaseQuantity = () => {
+    if (productQuantity > 1) {
+      setProductQuantity(productQuantity - 1)
+    }
+  }
 
   return (
     <div key={id} className={styles['product-item-background']}>
@@ -77,13 +95,19 @@ export default function ProductItem({ props }) {
           </div>
           <h5>Quantitity</h5>
           <div className={styles['product-item-information-quantitity-select']}>
-            <button>-</button>
-            <p>1</p>
-            <button>+</button>
+            <button onClick={decreaseQuantity}>-</button>
+            <p>{productQuantity}</p>
+            <button onClick={increaseQuantity}>+</button>
           </div>
           <div className={styles['product-item-information-btns-container']}>
             <button onClick={() => putToWishlist()}>Save to favorites</button>
-            <button>Add to cart</button>
+            <button
+              onClick={() => {
+                dispatch(addToCart({ _id, prodQuantity: productQuantity }))
+              }}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>

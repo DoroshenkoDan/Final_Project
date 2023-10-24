@@ -1,25 +1,22 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import CartIcon from '../CartIcon'
-import FavoritesIcon from '../FavoritesIcon'
+import CartIcon from '../Icons/CartIcon'
+import FavoritesIcon from '../Icons/FavoritesIcon'
 import styles from './Header.module.scss'
-import MenuIcon from '../MenuIcon'
-import CloseBtnIcon from '../CloseBtnIcon'
+import MenuIcon from '../Icons/MenuIcon'
+import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  resetStatus,
-  resetData,
-  resetToken,
-} from '../../Redux/reducers/userReducers'
-import IconLogin from '../IconLogin'
-import LogOutIcon from '../LogOutIcon'
-import { setAuthToken } from '../Token'
+import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
+import IconLogin from '../Icons/IconLogin'
+import LogOutIcon from '../Icons/LogOutIcon'
 import NavContainer from '../NavContainer'
+import { setAuthToken } from '../Token'
 
 export default function Header() {
-  const status = useSelector((state) => state.user.status)
+  const status = useSelector((state) => state.store.user.status)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
+  console.log(isMenuHidden)
 
   const toggleHideItems = () => {
     setIsMenuHidden(!isMenuHidden)
@@ -29,11 +26,10 @@ export default function Header() {
     dispatch(resetStatus())
     dispatch(resetData())
     dispatch(resetToken())
-    localStorage.setItem('statusLoginUser', false)
-    localStorage.removeItem('token')
     setAuthToken(false)
   }
 
+  console.log(status)
   return (
     <header className={styles.headerContainer}>
       <div className={styles.topMenu}>

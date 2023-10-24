@@ -103,9 +103,11 @@ export default function ProductsContainer({ id }) {
             </NavLink>
           ))}
         </div>
-        <button className={styles['products-container-btn']}>
-          View collection
-        </button>
+        <NavLink to="/allProducts/">
+          <button className={styles['products-container-btn']}>
+            View collection
+          </button>
+        </NavLink>
       </div>
     </>
   )

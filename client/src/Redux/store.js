@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+// import { legacy_createStore as createStore } from 'redux'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import PropTypes from 'prop-types'
 
 // Імпорт-модулів,необхідних-для-зберігання-стейджу-між-перезавантаженнями
@@ -12,6 +13,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
 import userReducers from './reducers/userReducers'
+import cartReducer from './reducers/cartReducer'
+import FilterReducers from './reducers/FilterReducers.js'
 import wishlistReducers from './reducers/wishlistReducers.js'
 
 // Об'єднання редюсерів
@@ -23,6 +26,7 @@ const storeReducers = combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   user: userReducers,
+  cart: cartReducer,
   wishlist: wishlistReducers,
 })
 
@@ -38,8 +42,8 @@ const store = configureStore({
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
     products: productsReducer,
+    filters: FilterReducers,
     categories: categoriesReducer,
-    user: userReducers,
   },
 })
 
@@ -48,7 +52,9 @@ const persistedStore = persistStore(store)
 export default function Store(props) {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistedStore}>{props.children}</PersistGate>
+      <PersistGate loading={null} persistor={persistedStore}>
+        {props.children}
+      </PersistGate>
     </Provider>
   )
 }

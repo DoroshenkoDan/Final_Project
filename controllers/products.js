@@ -99,7 +99,7 @@ exports.updateProduct = (req, res, next) => {
     );
 };
 
-exports.getProducts = (req, res, next) => {
+exports.getAllProducts = (req, res, next) => {
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
   const sort = req.query.sort;
@@ -114,6 +114,72 @@ exports.getProducts = (req, res, next) => {
         message: `Error happened on server: "${err}" `
       })
     );
+};
+
+exports.getProducts = (req, res, next) => {
+  const mongooseQuery = filterParser(req.query);
+  const addItems = Number(mongooseQuery.addItems);
+  const items = Number(mongooseQuery.items);
+
+  if (mongooseQuery?.currentPrice) {
+    if (typeof mongooseQuery.currentPrice === 'string') {
+      const priceRange = mongooseQuery?.currentPrice?.split('-');
+      if (priceRange.length === 2 && !isNaN(priceRange[0]) && !isNaN(priceRange[1])) {
+        const minPrice = Number(priceRange[0]);
+        const maxPrice = Number(priceRange[1]);
+
+        const priceFilter = {
+          $gte: minPrice,
+          $lte: maxPrice
+        };
+
+        mongooseQuery['currentPrice'] = priceFilter;
+      }
+    } else {
+      const firstRange = mongooseQuery?.currentPrice?.$in[0].split('-');
+      const secondRange = mongooseQuery?.currentPrice?.$in[1].split('-');
+      const leftNumber = String(firstRange[0]);
+      const rightNumber = String(secondRange[1]);
+      const priceFilter = {
+        $gte: leftNumber,
+        $lte: rightNumber
+      };
+      mongooseQuery['currentPrice'] = priceFilter;
+    }
+  }
+
+  delete mongooseQuery.addItems;
+  delete mongooseQuery.items;
+
+  if (mongooseQuery.brand === "") {
+    delete mongooseQuery.brand;
+  }
+
+  if (mongooseQuery.categories === "") {
+    delete mongooseQuery.categories;
+  }
+
+  if (mongooseQuery.currentPrice === "") {
+    delete mongooseQuery.currentPrice;
+  }
+
+  let applyLimit = true;
+  if (mongooseQuery.brand?.length > 0 || mongooseQuery.currentPrice?.length > 0 || mongooseQuery.categories?.length > 0) {
+    applyLimit = true;
+  }
+
+  let query = Product.find(mongooseQuery);
+  if (applyLimit) {
+    query = query.limit(addItems + items);
+  }
+  query.then((products) => {
+    res.send(products);
+  });
+  query.catch((err) =>
+    res.status(400).json({
+      message: `Error happened on server: "${err}"`,
+    })
+  );
 };
 
 exports.getProductById = (req, res, next) => {
