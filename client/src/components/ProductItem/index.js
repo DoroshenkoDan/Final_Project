@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addToCart } from '../../Redux/reducers/cartReducer'
 import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
+import {useNavigate } from 'react-router-dom';
 
 export default function ProductItem({ props }) {
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ export default function ProductItem({ props }) {
   const userStatus = useSelector((state) => state.store.user.status)
   const [product, setProduct] = useState({})
   const [productQuantity, setProductQuantity] = useState(1)
+  const navigate = useNavigate();
 
     useEffect(() => {
         findObj(list, props)
@@ -20,6 +22,8 @@ export default function ProductItem({ props }) {
     function putToWishlist() {
     if (userStatus) {
       dispatch(addToWishlist(product._id))
+    } else {
+      navigate('/login/');
     }
   }
 
