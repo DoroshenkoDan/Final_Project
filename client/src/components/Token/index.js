@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const HOST = 'http://localhost:4000/api'
 
 // function checkUserData() {
@@ -74,16 +73,16 @@ export let token
 //     },
 // )
 
-export const setAuthToken = token => {
-    if (token) {
-        axios.defaults.headers.common.Authorization = token;
-        console.log(token)
-    } else {
-        // Delete auth header
-        delete axios.defaults.headers.common.Authorization;
-        console.log('blyat no token')
-    }
-};
+export const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common.Authorization = token
+    console.log(token)
+  } else {
+    // Delete auth header
+    delete axios.defaults.headers.common.Authorization
+    console.log('blyat no token')
+  }
+}
 
 // function checkUserData(status, data) {
 //     let userData
@@ -119,4 +118,3 @@ export const setAuthToken = token => {
 //         return null; // Вернуть null или другое значение в случае ошибки
 //     }
 // }
-

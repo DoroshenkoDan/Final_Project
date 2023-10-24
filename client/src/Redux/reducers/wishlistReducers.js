@@ -11,8 +11,8 @@ export const fetchWishlist = createAsyncThunk(
   'wishlistReducer/fetchWishlist',
   async () => {
     const response = await api('wishlist')
-    if (response === null){
-      return;
+    if (response === null) {
+      return
     }
     return response.products
   },
@@ -21,14 +21,14 @@ export const fetchWishlist = createAsyncThunk(
 export const addToWishlist = createAsyncThunk(
   'wishlistReducer/addToWishlist',
   async (id) => {
-    const response = await apiWishlist('wishlist/'+id)
+    const response = await apiWishlist('wishlist/' + id)
     return response
   },
 )
 export const removeFromWishlist = createAsyncThunk(
   'wishlistReducer/addToWishlist',
   async (id) => {
-    const response = await deleteFromList('wishlist/'+id)
+    const response = await deleteFromList('wishlist/' + id)
     return response
   },
 )
@@ -38,19 +38,23 @@ const wishlistReducer = createSlice({
   reducers: {
     addToWishlistAnon(state, action) {
       const itemToAdd = action.payload
-      const existingItem = state.wishlist.find((item) => item._id === itemToAdd._id)
+      const existingItem = state.wishlist.find(
+        (item) => item._id === itemToAdd._id,
+      )
       if (!existingItem) {
-        state.wishlist.push(itemToAdd);
+        state.wishlist.push(itemToAdd)
       }
     },
-deleteFromWishlistAnon(state, action) {
-      const wishlist = Array.from(state.wishlist);
-      let realWishlist = wishlist.map(proxyObject=>{return {...proxyObject}})
-      realWishlist = realWishlist.filter((product)=>{
+    deleteFromWishlistAnon(state, action) {
+      const wishlist = Array.from(state.wishlist)
+      let realWishlist = wishlist.map((proxyObject) => {
+        return { ...proxyObject }
+      })
+      realWishlist = realWishlist.filter((product) => {
         return product._id !== action.payload
       })
-      state.wishlist = realWishlist;
-    }
+      state.wishlist = realWishlist
+    },
   },
   extraReducers(builder) {
     builder
@@ -59,8 +63,10 @@ deleteFromWishlistAnon(state, action) {
       })
       .addCase(fetchWishlist.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        if(action.payload){state.wishlist = action.payload} else {
-          state.wishlist = [];
+        if (action.payload) {
+          state.wishlist = action.payload
+        } else {
+          state.wishlist = []
         }
       })
       .addCase(fetchWishlist.rejected, (state, action) => {
@@ -85,7 +91,5 @@ deleteFromWishlistAnon(state, action) {
 
 export default wishlistReducer.reducer
 
-export const {
-  addToWishlistAnon,
-  deleteFromWishlistAnon,
-} = wishlistReducer.actions
+export const { addToWishlistAnon, deleteFromWishlistAnon } =
+  wishlistReducer.actions

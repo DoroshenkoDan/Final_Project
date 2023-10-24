@@ -11,7 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 // Импорт редюсерів
 import productsReducer from './reducers/productsReducers.js'
 import categoriesReducer from './reducers/categoriesReducers.js'
-import userReducers from "./reducers/userReducers";
+import userReducers from './reducers/userReducers'
 import wishlistReducers from './reducers/wishlistReducers.js'
 
 // Об'єднання редюсерів
