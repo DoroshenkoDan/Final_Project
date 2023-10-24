@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addToCart } from '../../Redux/reducers/cartReducer'
-import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
 
 export default function ProductItem({ props }) {
@@ -11,7 +10,7 @@ export default function ProductItem({ props }) {
   const list = useSelector((state) => state.products.data)
   const userStatus = useSelector((state) => state.store.user.status)
   const [product, setProduct] = useState({})
-    const [productQuantity, setProductQuantity] = useState(1)
+  const [productQuantity, setProductQuantity] = useState(1)
 
     useEffect(() => {
         findObj(list, props)
@@ -24,10 +23,6 @@ export default function ProductItem({ props }) {
     }
   }
 
-  const dispatch = useDispatch()
-  const list = useSelector((state) => state.products.data)
-  const [product, setProduct] = useState({})
-  const [productQuantity, setProductQuantity] = useState(1)
 
   useEffect(() => {
     findObj(list, props)
