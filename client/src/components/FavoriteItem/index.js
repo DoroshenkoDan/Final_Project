@@ -2,10 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './FavoriteItem.module.scss'
 import { NavLink } from 'react-router-dom'
-import {
-  removeFromWishlist,
-  deleteFromWishlistAnon,
-} from '../../Redux/reducers/wishlistReducers'
+import { removeFromWishlist } from '../../Redux/reducers/wishlistReducers'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function FavoriteItem(props) {
@@ -15,9 +12,6 @@ export default function FavoriteItem(props) {
   function deleteFavItem() {
     if (userStatus) {
       dispatch(removeFromWishlist(props.product._id))
-    } else {
-      console.log('I mana sou en se xeri! Log in!')
-      dispatch(deleteFromWishlistAnon(props.product._id))
     }
   }
   return (
@@ -59,7 +53,6 @@ export default function FavoriteItem(props) {
           <path d="M7.719 6.281L6.28 7.72 23.563 25 6.28 42.281 7.72 43.72 25 26.437 42.281 43.72l1.438-1.438L26.437 25 43.72 7.719 42.28 6.28 25 23.563z"></path>
         </svg>
       </div>
-      {/* <p onClick={()=>{deleteFavItem()}}>delete</p> */}
     </>
   )
 }

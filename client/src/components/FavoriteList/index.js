@@ -20,19 +20,21 @@ export default function FavoriteList() {
   useEffect(() => {
     getWishlist()
   }, [])
-  useEffect(() => {}, [wishlist])
 
   return (
     <div className={styles['favourite-list']}>
       <div className={styles['favourite-list-wrapper']}>
         <h2 className={styles['favourite-heading']}>Wishlist</h2>
-        {(realWishlist.length > 0 &&
-          realWishlist.map((product, index) => {
-            return <FavoriteItem product={product} key={index}></FavoriteItem>
-          })) || (
-          <p className={styles['favourite-text']}>
-            Wow, it&apos;s so empty here
-          </p>
+        {(userStatus &&
+          ((realWishlist.length > 0 &&
+            realWishlist.map((product, index) => {
+              return <FavoriteItem product={product} key={index}></FavoriteItem>
+            })) || (
+            <p className={styles['favourite-text']}>
+              Wow, it&apos;s so empty here
+            </p>
+          ))) || (
+          <p className={styles['favourite-text']}>You are not authorized.</p>
         )}
       </div>
     </div>

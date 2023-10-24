@@ -37,6 +37,8 @@
 }
 .favourite-close-icon {
   cursor: pointer;
+  box-sizing: content-box;
+  flex-shrink: 0;
 }
 @media only screen and (min-width: 768px) {
   .favourite-item-description {

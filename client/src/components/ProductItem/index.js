@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
-import {
-  addToWishlist,
-  addToWishlistAnon,
-} from '../../Redux/reducers/wishlistReducers'
+import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
 
 export default function ProductItem({ props }) {
   const dispatch = useDispatch()
@@ -20,8 +17,6 @@ export default function ProductItem({ props }) {
   function putToWishlist() {
     if (userStatus) {
       dispatch(addToWishlist(product._id))
-    } else {
-      dispatch(addToWishlistAnon(product))
     }
   }
   useEffect(() => {

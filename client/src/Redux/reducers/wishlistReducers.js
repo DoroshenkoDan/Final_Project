@@ -35,27 +35,7 @@ export const removeFromWishlist = createAsyncThunk(
 const wishlistReducer = createSlice({
   name: 'wishlistReducer',
   initialState,
-  reducers: {
-    addToWishlistAnon(state, action) {
-      const itemToAdd = action.payload
-      const existingItem = state.wishlist.find(
-        (item) => item._id === itemToAdd._id,
-      )
-      if (!existingItem) {
-        state.wishlist.push(itemToAdd)
-      }
-    },
-    deleteFromWishlistAnon(state, action) {
-      const wishlist = Array.from(state.wishlist)
-      let realWishlist = wishlist.map((proxyObject) => {
-        return { ...proxyObject }
-      })
-      realWishlist = realWishlist.filter((product) => {
-        return product._id !== action.payload
-      })
-      state.wishlist = realWishlist
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchWishlist.pending, (state) => {
@@ -90,6 +70,3 @@ const wishlistReducer = createSlice({
 })
 
 export default wishlistReducer.reducer
-
-export const { addToWishlistAnon, deleteFromWishlistAnon } =
-  wishlistReducer.actions
