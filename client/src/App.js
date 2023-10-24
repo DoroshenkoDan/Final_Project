@@ -1,38 +1,26 @@
 import React, { useEffect } from 'react'
 import Router from './routers/Router'
 import './scss/reset.scss'
-import Store from './Redux/store.js'
-import axios from 'axios'
-import { HOST, setAuthToken } from './components/Token'
+import {useDispatch} from "react-redux";
+import {CheckAuth} from "./Redux/reducers/userReducers";
+import {setAuthToken} from "./components/Token";
 
 function App() {
-  const loginUser = async (user) => {
-    const userData = {
-      loginOrEmail: user.data.loginOrEmail,
-      password: user.data.password,
-    }
-    try {
-      const loginResult = await axios.post(HOST + '/customers/login', userData)
-      const token = loginResult.data.token
-      setAuthToken(token)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const persistRoot = JSON.parse(localStorage.getItem('persist:root'))
     const user = JSON.parse(persistRoot.user)
-    console.log(user)
     if (user.status === true) {
-      loginUser(user)
+      setAuthToken(user.token)
+      dispatch(CheckAuth())
+    } else {
+      setAuthToken(false)
     }
   })
 
   return (
-    <Store>
       <Router></Router>
-    </Store>
   )
 }
 
