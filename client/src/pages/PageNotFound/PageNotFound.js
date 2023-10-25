@@ -22,7 +22,7 @@ const PageNotFound = () => {
       </p>
       <button
         className={styles.NotFoundButton}
-        onClick={() => navigate.push('home/')}
+        onClick={() => navigate.push('/home/')}
       >
         Back to home
       </button>
