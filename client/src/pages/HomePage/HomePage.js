@@ -1,18 +1,16 @@
 import React from 'react'
-// import ProductsContainer from '../../components/ProductsContainer'
-// import ItStarted from '../../components/ItStarted'
-// import MainImages from '../../components/MainImage'
-// import Advantages from '../../components/AdvantagesSection'
-import PageNotFound from '../PageNotFound/PageNotFound'
+import ProductsContainer from '../../components/ProductsContainer'
+import ItStarted from '../../components/ItStarted'
+import MainImages from '../../components/MainImage'
+import Advantages from '../../components/AdvantagesSection'
 
 export default function HomePage() {
   return (
     <>
-      <PageNotFound />
-      {/* <MainImages />
+      <MainImages />
       <Advantages />
       <ProductsContainer />
-      <ItStarted /> */}
+      <ItStarted />
     </>
   )
 }
