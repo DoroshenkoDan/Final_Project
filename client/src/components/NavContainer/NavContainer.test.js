@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
-import {useDispatch, useSelector} from 'react-redux';
+//import {useDispatch, useSelector} from 'react-redux';
 import NavContainer from './index.js';
 // import {createStore} from 'redux';
 // import {Provider} from 'react-redux';
@@ -9,24 +9,24 @@ import * as reactRedux from 'react-redux';
 
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
-    useDispatch: jest.fn(),
+    useDispatch: () => jest.fn(),
 }));
 
 describe('NavContainer', () => {
     beforeEach(() => {
-        useDispatchMock.mockImplementation(() => () => {});
+        useDispatchMock.mockImplementation(() => () => {
+        });
         useSelectorMock.mockImplementation(selector => selector(mockStore));
-    })
-    afterEach(() => {
-        useDispatchMock.mockClear();
-        useSelectorMock.mockClear();
     })
 
     const useSelectorMock = reactRedux.useSelector;
     const useDispatchMock = reactRedux.useDispatch;
 
     const mockStore = {
-        categories: 'this is thing1',
+        categories: [
+            {id: 1, name: 'Category 1'},
+            {id: 2, name: 'Category 2'}
+        ],
         status: 'succeeded',
         error: null
     };
@@ -54,5 +54,8 @@ describe('NavContainer', () => {
         expect(useDispatch).toHaveBeenCalledWith(fetchCategories());
 
     });
-
+    afterEach(() => {
+        useDispatchMock.mockClear();
+        useSelectorMock.mockClear();
+    })
 });
