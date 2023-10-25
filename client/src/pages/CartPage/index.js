@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import CartProductList from '../../components/CartProductList/index.js'
 import styles from './CartPage.module.scss'
 import { useSelector } from 'react-redux'
@@ -16,9 +16,9 @@ export default function Cart() {
           const dataExist = await getCart()
           console.log('DataStatus', dataExist.data)
           if (dataExist.data !== null) {
-            updateServerCart()
+            await updateServerCart()
           } else {
-            createServerCart()
+            await createServerCart()
           }
         } catch (error) {
           console.error('Error fetching cart data:', error)
@@ -27,24 +27,14 @@ export default function Cart() {
         console.log('User is not logged in')
       }
     }
-
     fetchData()
-  }, [cartReducer])
+  }, [cartReducer, userStatus])
 
   async function getCart() {
     const response = await axios.get(HOST + '/cart')
     console.log('cartGet', response)
     return response
   }
-
-  // async function getCart() {
-  //    await axios
-  //        .get(HOST + "/cart")
-  //        .then(cartReturned => {
-  //            console.log("cartGet", cartReturned);
-  //            return cartReturned
-  //        })
-  // }
 
   async function updateServerCart() {
     const arrayToSend = { products: cartReducer }
@@ -83,11 +73,11 @@ export default function Cart() {
         mergedObjects.push({ ...obj1, ...matchingObject })
       }
     }
-
     return mergedObjects
   }
 
   const cartProducts = mergeObjectsWithSameId(cartReducer, allProducts)
+  console.log('CartReducer, ProductReducer', cartReducer, allProducts)
 
   const totalCurrentPrice = cartProducts.reduce((total, product) => {
     const productValue = product.currentPrice * product.prodQuantity

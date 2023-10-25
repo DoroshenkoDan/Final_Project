@@ -7,7 +7,7 @@ export default function AuthPage() {
   const status = useSelector((state) => state.store.user.status)
 
   if (status) {
-    return <Navigate to="/allProducts/" />
+    return <Navigate to="/" />
   }
 
   return <AuthContainer></AuthContainer>
