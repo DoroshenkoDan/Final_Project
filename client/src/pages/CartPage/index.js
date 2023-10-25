@@ -64,6 +64,7 @@ export default function Cart() {
 
     async function updateServerCart() {
         const arrayToSend = { products: cartReducer }
+        console.log("UpdateCartReducer", arrayToSend);
         axios
             .put(HOST + '/cart', arrayToSend)
             .then((response) => {
@@ -109,9 +110,8 @@ export default function Cart() {
     }, 0)
 
     if (cartProducts.length === 0) {
-        return <div>
-            <p>Cart</p>
-            <p>Your cart is empty </p>
+        return <div className={styles['cart-no-item-wrapper']}>
+            <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
         </div>
     }
 
@@ -126,7 +126,7 @@ export default function Cart() {
             <div className={styles['cart-list-container']}>
                 {cartProducts.map((product) => (
                     <CartProductList
-                        key={product.id}
+                        key={product._id}
                         img={product.imageUrls}
                         name={product.name}
                         quantity={product.prodQuantity}
