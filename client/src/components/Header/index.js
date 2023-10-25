@@ -1,42 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import CartIcon from '../CartIcon'
-import FavoritesIcon from '../FavoritesIcon'
+import CartIcon from '../Icons/CartIcon'
+import FavoritesIcon from '../Icons/FavoritesIcon'
 import styles from './Header.module.scss'
-import MenuIcon from '../MenuIcon'
-import CloseBtnIcon from '../CloseBtnIcon'
+import MenuIcon from '../Icons/MenuIcon'
+import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategories } from '../../Redux/reducers/categoriesReducers'
+import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
+import IconLogin from '../Icons/IconLogin'
+import LogOutIcon from '../Icons/LogOutIcon'
+import NavContainer from '../NavContainer'
+import { setAuthToken } from '../Token'
 
 export default function Header() {
-  const categories = useSelector((state) => state.categories.categories)
+  const status = useSelector((state) => state.store.user.status)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
-
-  function getCategories() {
-    dispatch(fetchCategories())
-  }
-
-  useEffect(() => {
-    getCategories()
-  }, [])
+  console.log(isMenuHidden)
 
   const toggleHideItems = () => {
     setIsMenuHidden(!isMenuHidden)
   }
 
+  const logOutUser = () => {
+    dispatch(resetStatus())
+    dispatch(resetData())
+    dispatch(resetToken())
+    setAuthToken(false)
+  }
+
+  console.log(status)
   return (
     <header className={styles.headerContainer}>
       <div className={styles.topMenu}>
-        <span className={styles.logo}>Avion</span>
+        <NavLink className={styles.logoLink} to="/">
+          <span className={styles.logo}>Avion</span>
+        </NavLink>
         <span className={styles.icons}>
-          <NavLink className={styles.iconFavorites} to="/favorites/">
+          <NavLink className={styles.icon} to="/favorites/">
             <FavoritesIcon />
           </NavLink>
-          <NavLink className={styles.iconCart} to="/cart/">
+          <NavLink className={styles.icon} to="/cart/">
             <CartIcon />
           </NavLink>
         </span>
+        {status && (
+          <NavLink
+            onClick={logOutUser}
+            className={styles.iconAuth}
+            to="/login/"
+          >
+            <LogOutIcon />
+          </NavLink>
+        )}
+        {!status && (
+          <NavLink className={styles.iconAuth} to="/login/">
+            <IconLogin />
+          </NavLink>
+        )}
         <span
           className={`${styles.iconMenu} ${
             !isMenuHidden ? styles.iconMenuDisplay : ''
@@ -54,30 +75,7 @@ export default function Header() {
           <CloseBtnIcon />
         </span>
       </div>
-      <nav className={`${styles.nav} ${isMenuHidden ? styles.navDisplay : ''}`}>
-        <ul className={styles.navList}>
-          <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-            <NavLink className={styles.navLink} to="/cart/">
-              Cart
-            </NavLink>
-          </li>
-          <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-            <NavLink className={styles.navLink} to="/favorites/">
-              Favorites
-            </NavLink>
-          </li>
-          {categories.map((category) => (
-            <li key={category.id} className={styles.navItem}>
-              <NavLink
-                to={`/category/${category.id}/`}
-                className={styles.navLink}
-              >
-                {category.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <NavContainer isMenuHidden={isMenuHidden}></NavContainer>
     </header>
   )
 }

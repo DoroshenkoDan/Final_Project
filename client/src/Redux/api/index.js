@@ -1,9 +1,16 @@
-export default async function getProducts() {
-  try {
-    const data = await fetch(process.env.PUBLIC_URL + '/products.json')
-    const products = await data.json()
-    return products
-  } catch (e) {
-    console.log(e)
-  }
+import axios from 'axios'
+import { HOST } from '../../components/Token'
+
+export default async function api(apiName) {
+    let result
+    await axios
+        .get(HOST + "/products/allproducts")
+        .then(products => {
+            result = products.data
+            console.log('products fetched', products.data)
+        })
+        .catch(err => {
+            console.error('fetch products failed',err)
+        });
+    return result
 }

@@ -3,35 +3,32 @@ import styles from './ProductsContainer.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
-export default function ProductsContainer({ category, id }) {
+export default function ProductsContainer({ id }) {
   const dispatch = useDispatch()
   const list = useSelector((state) => state.products.data)
   const [productsContainerArray, setProductsContainerArray] = useState([])
 
-  const [propsStatus, setPropsStatus] = useState(false)
-
   function getProducts() {
     dispatch(fetchProducts())
   }
+
   useEffect(() => {
     getProducts()
-    if (category) {
-      setPropsStatus(true)
-    } else {
-      setPropsStatus(false)
-    }
   }, [])
 
-  if (propsStatus) {
+  if (id) {
     useEffect(() => {
-      findCeramicsObjects(list, category, id)
-      console.log('id')
-    }, [list])
+      findCeramicsObjects(list, id)
+    }, [list, id])
 
-    function findCeramicsObjects(data, categories, idToExclude) {
+    function findCeramicsObjects(data, idToExclude) {
+      const selectedObjects = data.find((item) => item.id === idToExclude)
       const ceramicsObjects = data.filter(
-        (item) => item.categories === categories && item.id !== idToExclude,
+        (item) =>
+          item.categories === selectedObjects.categories &&
+          item.id !== idToExclude,
       )
       if (ceramicsObjects.length <= 4) {
         return ceramicsObjects
@@ -77,41 +74,40 @@ export default function ProductsContainer({ category, id }) {
     }
   }
 
-  function isLink(str) {
-    return str.startsWith('http://') || str.startsWith('https://')
-  }
-
   return (
     <>
       <div className={styles['products-container-container']}>
-        {category ? (
+        {id && (
           <h2 className={styles['products-container-tittle']}>
             You might also like
           </h2>
-        ) : null}
+        )}
         <div className={styles['products-container']}>
           {productsContainerArray.map((product, index) => (
-            <div className={styles['products-container-item']} key={index}>
+            <NavLink
+              to={`/products/${product.id}`}
+              key={product.id}
+              className={styles['products-container-item']}
+            >
               <img
-                src={
-                  isLink(product.imageUrls)
-                    ? product.imageUrls
-                    : `${product.imageUrls}`
-                }
+                src={product.imageUrls}
                 className={styles['products-container-item-img']}
               />
+
               <p className={styles['products-container-item-name']}>
                 {product.name}
               </p>
               <p className={styles['products-container-item-price']}>
                 ${product.currentPrice}
               </p>
-            </div>
+            </NavLink>
           ))}
         </div>
-        <button className={styles['products-container-btn']}>
-          View collection
-        </button>
+        <NavLink to="/allProducts/">
+          <button className={styles['products-container-btn']}>
+            View collection
+          </button>
+        </NavLink>
       </div>
     </>
   )
