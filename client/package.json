@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "proxy": "http://localhost:3000",
   "dependencies": {
@@ -49,6 +50,10 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "axios-mock-adapter": "^1.22.0",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
@@ -57,11 +62,19 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
+    "esm": "^3.2.25",
     "husky": "^8.0.3",
+    "jest": "^27.5.1",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "react-router-dom": "^6.16.0",
+    "react-test-renderer": "^18.2.0",
     "sass": "^1.69.2",
     "sass-loader": "^13.3.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
