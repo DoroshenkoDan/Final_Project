@@ -2,8 +2,14 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import Advantages from './index'
 
-test('Advantages component snapshot', () => {
-  const { asFragment } = render(<Advantages />)
+test('Advantages component ', () => {
+  const { getByText, getAllByAltText } = render(<Advantages />)
 
-  expect(asFragment()).toMatchSnapshot()
+  const headerElement = getByText(
+    'What makes our brand different',
+  )
+  expect(headerElement).toBeInTheDocument()
+
+  const advantageImages = getAllByAltText('advantage');
+  expect(advantageImages).toHaveLength(4);
 })
