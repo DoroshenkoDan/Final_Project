@@ -1,8 +1,9 @@
 import React from 'react';
 import {render} from '@testing-library/react';
 import {useDispatch, useSelector} from 'react-redux';
-import NavContainer from './index.js';
+import Header from './index.js';
 import {MemoryRouter} from 'react-router-dom';
+import {fireEvent} from '@testing-library/react';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
@@ -37,26 +38,21 @@ describe('testing NavContainer component', () => {
     })
     it('renders the component', () => {
         render(<MemoryRouter>
-                <NavContainer isMenuHidden={false}/>
+                <Header/>
             </MemoryRouter>
         );
     })
-    it('check PropTypes', () => {
-        const spy = jest.spyOn(console, 'error').mockImplementation(() => {
-        });
-        render(
+    test('Toggle menu visibility on menu icon click', () => {
+        const {getByTestId} = render(
             <MemoryRouter>
-                <NavContainer/>
+                <Header/>
             </MemoryRouter>);
-        expect(spy).toHaveBeenCalled();
-        spy.mockRestore();
-    })
-    it('display categories', () => {
-        const {getByText} = render(
-            <MemoryRouter>
-                <NavContainer isMenuHidden={true}/>
-            </MemoryRouter>);
-        expect(getByText('Category 1')).toBeInTheDocument();
-        expect(getByText('Category 2')).toBeInTheDocument();
-    })
+        const menuIcon = getByTestId('menu-icon');
+
+        fireEvent.click(menuIcon);
+        expect(getByTestId('menu-hidden')).not.toBeInTheDocument();
+
+        fireEvent.click(menuIcon);
+        expect(getByTestId('menu-hidden')).toBeInTheDocument();
+    });
 });
