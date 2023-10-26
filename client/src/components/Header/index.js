@@ -16,7 +16,6 @@ export default function Header() {
   const status = useSelector((state) => state.store.user.status)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
-  console.log(isMenuHidden)
 
   const toggleHideItems = () => {
     setIsMenuHidden(!isMenuHidden)
@@ -29,7 +28,6 @@ export default function Header() {
     setAuthToken(false)
   }
 
-  console.log(status)
   return (
     <header className={styles.headerContainer}>
       <div className={styles.topMenu}>
