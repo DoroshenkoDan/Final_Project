@@ -3,12 +3,39 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addToCart } from '../../Redux/reducers/cartReducer'
+import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductItem({ props }) {
   const dispatch = useDispatch()
   const list = useSelector((state) => state.products.data)
+  const userStatus = useSelector((state) => state.store.user.status)
   const [product, setProduct] = useState({})
   const [productQuantity, setProductQuantity] = useState(1)
+  const navigate = useNavigate();
+  const [isInCart, setIsInCart] = useState(false);
+  console.log('isInCart', isInCart);
+
+  const cartReducer = useSelector((state) => state.store.cart.cart)
+  console.log('cartReducer', cartReducer);
+
+
+
+  useEffect(() => {
+    findObj(list, props)
+    setProductQuantity(1)
+
+    const isProductInCart = cartReducer.some((cartProduct) => cartProduct._id === product._id);
+    setIsInCart(isProductInCart);
+  }, [list, props, isInCart])
+
+  function putToWishlist() {
+    if (userStatus) {
+      dispatch(addToWishlist(product._id))
+    } else {
+      navigate('/login/');
+    }
+  }
 
   useEffect(() => {
     findObj(list, props)
@@ -81,13 +108,18 @@ export default function ProductItem({ props }) {
             <button onClick={increaseQuantity}>+</button>
           </div>
           <div className={styles['product-item-information-btns-container']}>
-            <button>Save to favorites</button>
+            <button onClick={() => putToWishlist()}>Save to favorites</button>
             <button
               onClick={() => {
-                dispatch(addToCart({ _id, prodQuantity: productQuantity }))
+                if (!isInCart) {
+                  dispatch(addToCart({ _id, prodQuantity: productQuantity }))
+                  setIsInCart(true)
+                }
               }}
+              className={isInCart ? styles['disabled-button'] : ''}
+              disabled={isInCart}
             >
-              Add to cart
+              {isInCart ? 'Already in Cart' : 'Add to Cart'}
             </button>
           </div>
         </div>
