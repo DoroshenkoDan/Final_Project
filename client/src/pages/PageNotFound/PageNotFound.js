@@ -9,7 +9,6 @@ const PageNotFound = () => {
 
   return (
     <div className={styles.NotFoundContainer}>
-      
       <img
         className={styles.NotFoundImg}
         src={notFoundImage}
@@ -22,6 +21,7 @@ const PageNotFound = () => {
       </p>
       <button
         className={styles.NotFoundButton}
+        type="button"
         onClick={() => navigate.push('/home/')}
       >
         Back to home
