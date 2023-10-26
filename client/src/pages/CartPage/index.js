@@ -22,7 +22,6 @@ export default function Cart() {
 
     }, [userStatus])
 
-
     useEffect(() => {
         const fetchData = async () => {
             if (userStatus) {
@@ -146,7 +145,7 @@ export default function Cart() {
                             padding: '0px 0px 0px 15px',
                         }}
                     >
-                        ${totalCurrentPrice}
+                        {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}
                     </span>
                 </p>
                 <p>Taxes and shipping are calculated at checkout</p>

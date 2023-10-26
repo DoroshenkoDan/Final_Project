@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { addToCart } from '../../Redux/reducers/cartReducer'
 import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductItem({ props }) {
   const dispatch = useDispatch()
@@ -13,20 +13,29 @@ export default function ProductItem({ props }) {
   const [product, setProduct] = useState({})
   const [productQuantity, setProductQuantity] = useState(1)
   const navigate = useNavigate();
+  const [isInCart, setIsInCart] = useState(false);
+  console.log('isInCart', isInCart);
 
-    useEffect(() => {
-        findObj(list, props)
-        setProductQuantity(1)
-    }, [list, props])
+  const cartReducer = useSelector((state) => state.store.cart.cart)
+  console.log('cartReducer', cartReducer);
 
-    function putToWishlist() {
+
+
+  useEffect(() => {
+    findObj(list, props)
+    setProductQuantity(1)
+
+    const isProductInCart = cartReducer.some((cartProduct) => cartProduct._id === product._id);
+    setIsInCart(isProductInCart);
+  }, [list, props, isInCart])
+
+  function putToWishlist() {
     if (userStatus) {
       dispatch(addToWishlist(product._id))
     } else {
       navigate('/login/');
     }
   }
-
 
   useEffect(() => {
     findObj(list, props)
@@ -102,10 +111,15 @@ export default function ProductItem({ props }) {
             <button onClick={() => putToWishlist()}>Save to favorites</button>
             <button
               onClick={() => {
-                dispatch(addToCart({ _id, prodQuantity: productQuantity }))
+                if (!isInCart) {
+                  dispatch(addToCart({ _id, prodQuantity: productQuantity }))
+                  setIsInCart(true)
+                }
               }}
+              className={isInCart ? styles['disabled-button'] : ''}
+              disabled={isInCart}
             >
-              Add to cart
+              {isInCart ? 'Already in Cart' : 'Add to Cart'}
             </button>
           </div>
         </div>

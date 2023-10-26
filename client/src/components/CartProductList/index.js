@@ -83,7 +83,7 @@ export default function CartProductList({
                 </button>
             </div>
             <p className={styles['total-price-one-product']}>
-                {totalPriceOneProduct}$
+            {totalPriceOneProduct && Math.round(totalPriceOneProduct * 100) / 100}
             </p>
         </div>
     )
