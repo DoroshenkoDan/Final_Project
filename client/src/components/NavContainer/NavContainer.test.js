@@ -8,7 +8,7 @@ jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
     useDispatch: jest.fn(), useSelector: jest.fn()
 }));
-describe('NavContainer component', () => {
+describe('testing NavContainer component', () => {
     const dispatchMock = jest.fn();
     beforeEach(() => {
         useDispatch.mockReturnValue(dispatchMock);
@@ -30,13 +30,27 @@ describe('NavContainer component', () => {
     afterEach(() => {
         jest.clearAllMocks()
     })
-    it('dispatch not have been called', () => {
-        expect(dispatchMock).not.toHaveBeenCalled()
-    })
     it('renders the component', () => {
         render(<MemoryRouter>
             <NavContainer isMenuHidden={false}/> </MemoryRouter>
         );
     })
-
+    it('check PropTypes', () => {
+        const spy = jest.spyOn(console, 'error').mockImplementation(() => {
+        });
+        render(
+            <MemoryRouter>
+                <NavContainer/>
+            </MemoryRouter>);
+        expect(spy).toHaveBeenCalled();
+        spy.mockRestore();
+    })
+    it('display categories', () => {
+        const { getByText } = render(
+            <MemoryRouter>
+                <NavContainer isMenuHidden={true}/>
+            </MemoryRouter>);
+        expect(getByText('Category 1')).toBeInTheDocument();
+        expect(getByText('Category 2')).toBeInTheDocument();
+    })
 });
