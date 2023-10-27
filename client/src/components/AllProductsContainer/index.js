@@ -67,10 +67,14 @@ export default function AllProductsContainer() {
     }
   }
 
-  function getProducts() {
-    dispatch(fetchFilter({ items, addItems }))
-    dispatch(toggleItems(items))
-    dispatch(toggleAddItems(addItems))
+  async function getProducts() {
+    try {
+      await dispatch(fetchFilter({ items, addItems })); // Wait for the asynchronous action to complete
+      dispatch(toggleItems(items));
+      dispatch(toggleAddItems(addItems));
+    } catch (error) {
+     console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -92,7 +96,7 @@ export default function AllProductsContainer() {
   }, [list])
 
   return (
-    <div className={styles['products-container-container']}>
+    <div data-testid="data-products-container" className={styles['products-container-container']}>
       {isLoading ? (
         <div className={styles.loading}>Загрузка данных...</div>
       ) : (
