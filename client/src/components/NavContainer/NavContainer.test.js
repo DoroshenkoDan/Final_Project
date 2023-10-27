@@ -40,7 +40,7 @@ describe('testing NavContainer component', () => {
                 <NavContainer isMenuHidden={false}/>
             </MemoryRouter>
         );
-    })
+    });
     it('check PropTypes', () => {
         const spy = jest.spyOn(console, 'error').mockImplementation(() => {
         });
@@ -50,7 +50,7 @@ describe('testing NavContainer component', () => {
             </MemoryRouter>);
         expect(spy).toHaveBeenCalled();
         spy.mockRestore();
-    })
+    });
     it('display categories', () => {
         const {getByText} = render(
             <MemoryRouter>
@@ -58,5 +58,5 @@ describe('testing NavContainer component', () => {
             </MemoryRouter>);
         expect(getByText('Category 1')).toBeInTheDocument();
         expect(getByText('Category 2')).toBeInTheDocument();
-    })
+    });
 });

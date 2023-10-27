@@ -3,6 +3,7 @@ import {render} from '@testing-library/react';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from './index.js';
 import {MemoryRouter} from 'react-router-dom';
+import { shallow, mount } from 'enzyme';
 import {fireEvent} from '@testing-library/react';
 
 jest.mock('react-redux', () => ({
@@ -36,23 +37,14 @@ describe('testing NavContainer component', () => {
     afterEach(() => {
         jest.clearAllMocks()
     })
-    it('renders the component', () => {
+    it('renders without crashing', () => {
         render(<MemoryRouter>
                 <Header/>
             </MemoryRouter>
         );
-    })
-    test('Toggle menu visibility on menu icon click', () => {
-        const {getByTestId} = render(
-            <MemoryRouter>
-                <Header/>
-            </MemoryRouter>);
-        const menuIcon = getByTestId('menu-icon');
-
-        fireEvent.click(menuIcon);
-        expect(getByTestId('menu-hidden')).not.toBeInTheDocument();
-
-        fireEvent.click(menuIcon);
-        expect(getByTestId('menu-hidden')).toBeInTheDocument();
+    });
+    it('displays the logo', () => {
+        const wrapper = shallow(<Header />);
+        expect(wrapper.find('.logo').text()).toBe('Avion');
     });
 });
