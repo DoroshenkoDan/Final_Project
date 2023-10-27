@@ -33,21 +33,19 @@ exports.createCart = (req, res, next) => {
 };
 
 exports.updateCart = (req, res, next) => {
-  Cart.findOne({ customerId: req.user.id })
+  const customerId = req.user.id;
+  const products = req.body.products;
+
+  Cart.findOne({ customerId: customerId })
     .then((cart) => {
       if (!cart) {
-        const initialQuery = _.cloneDeep(req.body);
-        initialQuery.customerId = req.user.id;
+        // If the cart doesn't exist, create a new one with the given products
+        const newCart = new Cart({
+          customerId: customerId,
+          products: products,
+        });
 
-        const newCart = new Cart(queryCreator(initialQuery));
-
-        newCart
-          .populate('products.product')
-          .populate('customerId')
-          .execPopulate();
-
-        newCart
-          .save()
+        newCart.save()
           .then((cart) => res.json(cart))
           .catch((err) =>
             res.status(400).json({
@@ -55,16 +53,10 @@ exports.updateCart = (req, res, next) => {
             })
           );
       } else {
-        const initialQuery = _.cloneDeep(req.body);
-        const updatedCart = queryCreator(initialQuery);
+        // If the cart exists, add or update products
+        cart.products = products; // Set the products array to the new value
 
-        Cart.findOneAndUpdate(
-          { customerId: req.user.id },
-          { $set: updatedCart },
-          { new: true }
-        )
-          .populate('products.product')
-          .populate('customerId')
+        cart.save()
           .then((cart) => res.json(cart))
           .catch((err) =>
             res.status(400).json({
@@ -79,6 +71,7 @@ exports.updateCart = (req, res, next) => {
       })
     );
 };
+
 
 exports.addProductToCart = async (req, res, next) => {
   let productToAdd;
@@ -172,7 +165,7 @@ exports.decreaseCartProductQuantity = async (req, res, next) => {
   Cart.findOne({ customerId: req.user.id })
     .then((cart) => {
       if (!cart) {
-        res.status(400).json({ message: 'Cart does not exists' });
+        res.status(400).json({ message: 'OrederFromContainer does not exists' });
       } else {
         const cartData = {};
 
