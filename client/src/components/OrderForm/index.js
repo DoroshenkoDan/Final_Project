@@ -92,7 +92,7 @@ export default function OrderForm(props) {
                 address: Yup.string().required('Address is required').max(30, 'Must be 30 characters or less').matches(/^[a-zA-Zа-яА-ЯїЇіІєЄёЁ0-9\s'.,-]+$/u, 'Invalid address format'),
                 postal: Yup.string().required('Delivery postal is required').matches(/^[0-9]*$/, 'postal must contain only numbers').max(5, 'The maximum length of the postal is 5 characters'),
             })}>
-            <Form className='form__user-address' noValidate>
+            <Form className={styles['form__user-address']} noValidate>
                 <Field
                     type='email'
                     placeholder='email'
