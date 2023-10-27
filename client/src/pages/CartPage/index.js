@@ -7,14 +7,15 @@ import {HOST} from "../../components/Token"
 import OrderForm from "../../components/OrderForm";
 // eslint-disable-next-line
 import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
+import {useNavigate} from "react-router-dom";
 
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
     const [orderPlaced, setOrderPlaced] = useState({status: '', massage: ''})
-
     const cartReducer = useSelector((state) => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
+    const navigate = useNavigate();
     // eslint-disable-next-line
     const dispatch = useDispatch()
 
@@ -115,7 +116,11 @@ export default function Cart() {
     }, 0)
 
     function showOrderForm() {
-        setVisibilityOrderForm(true)
+        if(userStatus) {
+            setVisibilityOrderForm(true)
+        } else {
+            navigate('/login/')
+        }
     }
 
     function changeOrderPlaced(orderInfo) {
