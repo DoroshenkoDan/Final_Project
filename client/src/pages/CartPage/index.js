@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react'
-import CartProductList from '../../components/CartProductList/index.js'
-import styles from './CartPage.module.scss'
-// eslint-disable-next-line
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useEffect, useState} from 'react'
+import styles from "./CartPage.module.scss"
+import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
-import { HOST } from '../../components/Token'
+import CartProductList from '../../components/CartProductList/index.js'
+import {HOST} from "../../components/Token"
+import OrderForm from "../../components/OrderForm";
 // eslint-disable-next-line
-import { addArrayToCart } from '../../Redux/reducers/cartReducer.js'
+import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
+
 export default function Cart() {
+    const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
+    const [orderPlaced, setOrderPlaced] = useState({status: '', massage: ''})
+
     const cartReducer = useSelector((state) => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
@@ -62,7 +66,7 @@ export default function Cart() {
     }
 
     async function updateServerCart() {
-        const arrayToSend = { products: cartReducer }
+        const arrayToSend = {products: cartReducer}
         console.log("UpdateCartReducer", arrayToSend);
         axios
             .put(HOST + '/cart', arrayToSend)
@@ -76,7 +80,7 @@ export default function Cart() {
     }
 
     async function createServerCart() {
-        const arrayToSend = { products: cartReducer }
+        const arrayToSend = {products: cartReducer}
         axios
             .post(HOST + '/cart', arrayToSend)
             .then(() => {
@@ -95,7 +99,7 @@ export default function Cart() {
             const matchingObject = array2.find((obj2) => obj2._id === obj1.product)
             console.log("matchingObject", matchingObject);
             if (matchingObject) {
-                mergedObjects.push({ ...obj1, ...matchingObject })
+                mergedObjects.push({...obj1, ...matchingObject})
             }
         }
         console.log("mergedObjects", mergedObjects);
@@ -110,56 +114,76 @@ export default function Cart() {
         return total + productValue
     }, 0)
 
-    if (cartProducts.length === 0) {
-        return <div className={styles['cart-no-item-wrapper']}>
-            <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
-        </div>
+    function showOrderForm() {
+        setVisibilityOrderForm(true)
     }
 
-    return (
-        <div className={styles['cart-container']}>
-            <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-            <div className={styles['cart-section-names']}>
-                <p>Product</p>
-                <p>Quantity</p>
-                <p>Price</p>
-            </div>
-            <div className={styles['cart-list-container']}>
-                {cartProducts.map((product) => (
-                    <CartProductList
-                        key={product._id}
-                        img={product.imageUrls}
-                        name={product.name}
-                        quantity={product.cartQuantity}
-                        price={product.currentPrice}
-                        discribe={product.description}
-                        id={product._id}
-                    />
-                ))}
-            </div>
-            <div className={styles['cart-total-and-order-btn-container']}>
-                <p className={styles['cart-total-price']}>
-                    Subtotal
-                    <span
-                        style={{
-                            color: '#2A254B',
-                            fontSize: '24px',
-                            padding: '0px 0px 0px 15px',
-                        }}
-                    >
+    function changeOrderPlaced(orderInfo) {
+        setOrderPlaced(orderInfo)
+    }
+
+    if (cartProducts.length === 0) {
+        return (
+            <>
+                <div className={styles['cart-no-item-wrapper']}>
+                    <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
+                </div>
+                {
+                    orderPlaced.status && <div className={styles['cart-no-item-wrapper']}>
+                        <h1 className={styles['cart-tittle-welcome']}>{orderPlaced.massage}</h1>
+                    </div>
+                }
+            </>)
+    }
+
+        return (
+            <div className={styles['cart-container']}>
+                <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
+                <div className={styles['cart-section-names']}>
+                    <p>Product</p>
+                    <p>Quantity</p>
+                    <p>Price</p>
+                </div>
+                <div className={styles['cart-list-container']}>
+                    {cartProducts.map((product) => (
+                        <CartProductList
+                            key={product._id}
+                            img={product.imageUrls}
+                            name={product.name}
+                            quantity={product.cartQuantity}
+                            price={product.currentPrice}
+                            discribe={product.description}
+                            id={product._id}
+                        />
+                    ))}
+                </div>
+                <div className={styles['cart-total-and-order-btn-container']}>
+                    <p className={styles['cart-total-price']}>
+                        Subtotal
+                        <span
+                            style={{
+                                color: '#2A254B',
+                                fontSize: '24px',
+                                padding: '0px 0px 0px 15px',
+                            }}
+                        >
                         {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}$
                     </span>
-                </p>
-                <p>Taxes and shipping are calculated at checkout</p>
-                <button
-                    onClick={() => {
-                        getCart()
-                    }}
-                    className={styles['cart-order-btn']}
-                >
-                    Go to checkout
-                </button>
+                    </p>
+                    <p>Taxes and shipping are calculated at checkout</p>
+                    <button
+                        onClick={() => {
+                            showOrderForm()
+                        }}
+                        className={styles['cart-order-btn']}
+                    >
+                        Go to checkout
+                    </button>
+                </div>
+                {
+                    visibilityOrderForm &&
+                    <OrderForm changeOrderPlaced={changeOrderPlaced} orderPlaced={orderPlaced}></OrderForm>
+                }
             </div>
-        </div>
-    )
-}
+        )
+    }
