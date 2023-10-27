@@ -6,7 +6,7 @@ import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetStatus, resetData } from '../../Redux/reducers/userReducers'
+import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
 import IconLogin from '../Icons/IconLogin'
 import LogOutIcon from '../Icons/LogOutIcon'
 import NavContainer from '../NavContainer'
@@ -16,7 +16,6 @@ export default function Header() {
   const status = useSelector((state) => state.store.user.status)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
-  console.log(isMenuHidden)
 
   const toggleHideItems = () => {
     setIsMenuHidden(!isMenuHidden)
@@ -25,10 +24,10 @@ export default function Header() {
   const logOutUser = () => {
     dispatch(resetStatus())
     dispatch(resetData())
+    dispatch(resetToken())
     setAuthToken(false)
   }
 
-  console.log(status)
   return (
     <header className={styles.headerContainer}>
       <div className={styles.topMenu}>

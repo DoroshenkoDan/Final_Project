@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 
 export default function Input(props) {
-  const { field, form, label, ...rest } = props
+  const { field, form, ...rest } = props
   const { name } = field
 
   return (
@@ -21,5 +21,4 @@ export default function Input(props) {
 Input.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
 }
