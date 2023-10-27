@@ -12,6 +12,7 @@ export default function ProductItem({ props }) {
     const userStatus = useSelector((state) => state.store.user.status)
     const [product, setProduct] = useState({})
     const [productQuantity, setProductQuantity] = useState(1)
+
     const navigate = useNavigate();
     const [isInCart, setIsInCart] = useState(false);
     console.log('isInCart', isInCart);
@@ -25,7 +26,7 @@ export default function ProductItem({ props }) {
         findObj(list, props)
         setProductQuantity(1)
 
-        const isProductInCart = cartReducer.some((cartProduct) => cartProduct._id === product._id);
+        const isProductInCart = cartReducer.some((cartProduct) => cartProduct.product === product._id);
         setIsInCart(isProductInCart);
     }, [list, props, isInCart])
 

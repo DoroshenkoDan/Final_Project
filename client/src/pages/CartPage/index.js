@@ -92,11 +92,13 @@ export default function Cart() {
         const mergedObjects = []
 
         for (const obj1 of array1) {
-            const matchingObject = array2.find((obj2) => obj2._id === obj1._id)
+            const matchingObject = array2.find((obj2) => obj2._id === obj1.product)
+            console.log("matchingObject", matchingObject);
             if (matchingObject) {
                 mergedObjects.push({ ...obj1, ...matchingObject })
             }
         }
+        console.log("mergedObjects", mergedObjects);
         return mergedObjects
     }
 
@@ -104,7 +106,7 @@ export default function Cart() {
     console.log('CartReducer, ProductReducer', cartReducer, allProducts)
 
     const totalCurrentPrice = cartProducts.reduce((total, product) => {
-        const productValue = product.currentPrice * product.prodQuantity
+        const productValue = product.currentPrice * product.cartQuantity
         return total + productValue
     }, 0)
 
@@ -128,7 +130,7 @@ export default function Cart() {
                         key={product._id}
                         img={product.imageUrls}
                         name={product.name}
-                        quantity={product.prodQuantity}
+                        quantity={product.cartQuantity}
                         price={product.currentPrice}
                         discribe={product.description}
                         id={product._id}
@@ -145,7 +147,7 @@ export default function Cart() {
                             padding: '0px 0px 0px 15px',
                         }}
                     >
-                        {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}
+                        {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}$
                     </span>
                 </p>
                 <p>Taxes and shipping are calculated at checkout</p>
