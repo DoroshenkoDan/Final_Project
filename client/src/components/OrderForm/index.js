@@ -73,10 +73,14 @@ export default function OrderForm(props) {
             {
                 props.orderPlaced.status === false &&
                 <div className={styles['order__text-container']}>
-                    <h1 className={styles['order-text--error']}>{props.orderPlaced.massage}
+                    <h1 className={`${styles['order-text']} ${styles['order-text--error']}`}> {props.orderPlaced.massage}
                     </h1>
                 </div>
             }
+                <div className={styles['order__text-container']}>
+                    <h1 className={styles['order-text']}>Fill the required fields to order
+                    </h1>
+                </div>
         <Formik
             initialValues={{email: '', mobile: '', country: '', city: '', address: '', postal: ''}}
             onSubmit={handleSubmit}

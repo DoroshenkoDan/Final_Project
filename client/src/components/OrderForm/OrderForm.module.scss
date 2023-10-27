@@ -14,17 +14,17 @@
 }
 .order__text-container {
   margin: 40px auto 0 auto;
-  width: 90%;
+  width: max-content;
 }
 
 
-.order-text--error {
-  margin-left: auto;
-  font-family: 'Satoshi Regular';
+.order-text {
+  font-family: 'Clash Display';
+  font-size: 24px;
   font-weight: 400;
-  font-size: 18px;
-  color: #22202e;
-  line-height: 24px;
+  line-height: 34px;
+  margin-bottom: 32px;
+  color: #2a254b;
 }
 
 .form-massage__error {
@@ -38,7 +38,7 @@
   }
   .order__text-container {
     max-width: 1440px;
-    width: 85%;
+    width: max-content;
   }
   .btn-send--order {
     width: 172px;
