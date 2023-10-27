@@ -3,8 +3,6 @@ import {render} from '@testing-library/react';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from './index.js';
 import {MemoryRouter} from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
-import {fireEvent} from '@testing-library/react';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
