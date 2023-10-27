@@ -95,4 +95,20 @@ describe('FilterProductContainer', () => {
     
 
   });
+
+  it('all checkbox in document', () => {
+
+    const { getAllByRole } = render(
+      <Provider store={store}>
+        <FilterProductContainer />
+      </Provider>
+    );
+
+    
+    const checkboxes = getAllByRole('checkbox')
+        checkboxes.forEach(checkbox => expect(checkbox).toBeInTheDocument())
+
+    
+
+  });
 });
