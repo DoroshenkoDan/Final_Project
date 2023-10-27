@@ -12,16 +12,16 @@ export const cartReducer = createSlice({
         addToCart(state, action) {
             const itemToAdd = action.payload
 
-            const existingItem = state.cart.find((item) => item._id === itemToAdd._id)
+            const existingItem = state.cart.find((item) => item.product === itemToAdd.product)
             if (existingItem) {
-                existingItem.Quantity += itemToAdd.Quantity
+                existingItem.cartQuantity += itemToAdd.cartQuantity
             } else {
                 state.cart.push(itemToAdd)
             }
         },
         removeFromCart(state, action) {
             const idToRemove = action.payload
-            const itemIndex = state.cart.findIndex((item) => item._id === idToRemove)
+            const itemIndex = state.cart.findIndex((item) => item.product === idToRemove)
             if (itemIndex !== -1) {
                 state.cart.splice(itemIndex, 1)
             }
@@ -29,17 +29,17 @@ export const cartReducer = createSlice({
         incrementQuantity(state, action) {
             const id = action.payload
 
-            const product = state.cart.find((item) => item._id === id)
+            const product = state.cart.find((item) => item.product === id)
             if (product) {
-                product.prodQuantity += 1
+                product.cartQuantity += 1
             }
         },
         dicrementQuantity(state, action) {
             const id = action.payload
 
-            const product = state.cart.find((item) => item._id === id)
-            if (product && product.prodQuantity > 1) {
-                product.prodQuantity = product.prodQuantity - 1
+            const product = state.cart.find((item) => item.product === id)
+            if (product && product.cartQuantity > 1) {
+                product.cartQuantity = product.cartQuantity - 1
             }
         },
         clearCart(state, action) {
@@ -50,24 +50,30 @@ export const cartReducer = createSlice({
         },
         closeCartForm(state) {
             state.status = false
-        }, addArrayToCart(state, action) {
+        },
+        addArrayToCart(state, action) {
             const itemsToAdd = Array.isArray(action.payload) ? action.payload : [];
-
-            // Проверяем, что itemsToAdd является массивом
             if (!Array.isArray(itemsToAdd)) {
                 return;
             }
-
-            // Фильтруем элементы, чтобы исключить дубликаты по _id
-            const uniqueItemsToAdd = itemsToAdd.filter(itemToAdd =>
-                !state.cart.some(existingItem => existingItem._id === itemToAdd._id)
+            const modifiedArray = itemsToAdd.map(item => ({
+                product: item.product._id,
+                cartQuantity: item.cartQuantity
+            }));
+            console.log('Items to add:', itemsToAdd);
+            console.log('Items modifiedArray:', modifiedArray);
+            const uniqueItemsToAdd = modifiedArray.filter(itemToAdd =>
+                !state.cart.some(existingItem => {
+                    console.log('Existing Item Product:', existingItem);
+                    console.log('Item to Add Product:', itemToAdd.product);
+                    return existingItem.product === itemToAdd.product;
+                })
             );
 
-            // Добавляем уникальные элементы в существующий массив cart
+            console.log('Unique Items to Add:', uniqueItemsToAdd);
+
             state.cart = [...state.cart, ...uniqueItemsToAdd];
         },
-
-
     },
 })
 

@@ -136,23 +136,37 @@ export const Footer = () => {
         </div>
 
         <div className="footer__menu">
-          <p className="footer__menu-heading">Menu</p>
+        <p className="footer__menu-heading">Menu</p>
+        <NavLink className="footer__menu-line" to="/allproducts/">
+            All products
+          </NavLink>
           <p className="footer__menu-line">New arrivals</p>
           <p className="footer__menu-line">Best sellers</p>
           <p className="footer__menu-line">Recently viewed</p>
           <p className="footer__menu-line">Popular this week</p>
-          <NavLink className="footer__menu-line" to="/allproducts/">
-            All products
-          </NavLink>
+          <p className="footer__menu-line">Somethings</p>
         </div>
 
         <div className="footer__categories">
           <p className="footer__categories-heading">Categories</p>
-          <p className="footer__menu-line">Crockery</p>
-          <p className="footer__menu-line">Furniture</p>
-          <p className="footer__menu-line">Homeware</p>
-          <p className="footer__menu-line">Plant pots</p>
-          <p className="footer__menu-line">Chairs</p>
+          <NavLink className="footer__menu-line" to="/category/cutlery/">
+            Cutlery
+          </NavLink>
+          <NavLink className="footer__menu-line" to="/category/Nightstand/">
+          Nightstands
+          </NavLink>
+          <NavLink className="footer__menu-line" to="/category/Crockery/">
+          Crockery
+          </NavLink>
+          <NavLink className="footer__menu-line" to="/category/Chairs/">
+          Chairs
+          </NavLink>
+          <NavLink className="footer__menu-line" to="/category/Tables/">
+          Tables
+          </NavLink>
+          <NavLink className="footer__menu-line" to="/category/Ceramics/">
+          Ceramisc
+          </NavLink>
         </div>
 
         <div className="footer__company">
@@ -162,6 +176,7 @@ export const Footer = () => {
           <p className="footer__company-line">Contact us</p>
           <p className="footer__company-line">Privacy</p>
           <p className="footer__company-line">Returns policy</p>
+          <p className="footer__company-line">News</p>
         </div>
 
         <div className="footer__line-container">
