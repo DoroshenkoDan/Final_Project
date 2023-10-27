@@ -166,7 +166,7 @@ export default function Cart() {
                 <p>Taxes and shipping are calculated at checkout</p>
                 <button
                     onClick={() => {
-                        getCart()
+                        showOrderForm()
                     }}
                     className={styles['cart-order-btn']}
                 >
