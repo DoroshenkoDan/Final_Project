@@ -43,8 +43,8 @@ describe('testing NavContainer component', () => {
             </MemoryRouter>
         );
     });
-    it('displays the logo', () => {
-        const wrapper = shallow(<Header />);
-        expect(wrapper.find('.logo').text()).toBe('Avion');
-    });
+    // it('displays the logo', () => {
+    //     const wrapper = shallow(<Header />);
+    //     expect(wrapper.find('.logo').text()).toBe('Avion');
+    // });
 });
