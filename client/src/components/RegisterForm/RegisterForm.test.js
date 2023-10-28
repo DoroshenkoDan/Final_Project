@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import RegisterForm from './index.js';
 import axios from "axios";
 
+
 jest.mock('axios');
 
 jest.mock('react-redux', () => ({

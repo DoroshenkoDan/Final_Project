@@ -9,6 +9,7 @@ jest.mock('react-redux', () => ({
     useDispatch: jest.fn(), useSelector: jest.fn()
 }));
 
+
 describe('testing Header component', () => {
     const dispatchMock = jest.fn();
     beforeEach(() => {
