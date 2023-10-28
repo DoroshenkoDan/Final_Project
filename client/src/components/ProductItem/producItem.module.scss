@@ -157,6 +157,17 @@
   color: #ffffff;
 }
 
+.product-item-information-btns-container button.disabled-button {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.product-item-information-btns-container button.disabled-button:hover {
+  transform: scale(1);
+  font-size: 16px;
+}
+
 .product-item-information-btns-container button:hover {
   font-size: 18px;
   transform: scale(1.1);
