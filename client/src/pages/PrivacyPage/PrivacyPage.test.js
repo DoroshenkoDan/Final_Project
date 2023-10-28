@@ -1,7 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import PrivacyPage from './PrivacyPage'
-import styles from './PrivacyPage.module.scss'
 
 // /* eslint-env jest */
 

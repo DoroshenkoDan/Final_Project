@@ -1,7 +1,7 @@
-@import url(../../src/scss/fonts.scss);
+@import url(../../scss/fonts.scss);
 
 .privacyBanner {
-  background-image: url(../../public/img/baner/PrivacyBaner.jpg);
+  background-image: url('PrivacyBaner.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -76,7 +76,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    background-image: url(../../public/img/baner/PrivacyBaner.jpg);
+    background-image: url('PrivacyBaner.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

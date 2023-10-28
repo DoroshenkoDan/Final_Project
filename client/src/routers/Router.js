@@ -11,7 +11,9 @@ import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
 import AuthPage from '../pages/AuthPage/AuthPage'
 import AboutPage from "../pages/AboutPage/AboutPage";
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
+import PrivacyPage from "../pages/PrivacyPage/PrivacyPage";
 import ScrollToTop from "./ScrollToTop";
+
 
 function Routes() {
   return useRoutes([
@@ -28,6 +30,7 @@ function Routes() {
         { path: 'category/:categoryId', element: <CategoryPage /> },
         { path: 'products/:productId', element: <ProductPage /> },
         { path: 'about-us/', element: <AboutPage /> },
+        { path: 'privacy-page/', element: <PrivacyPage /> },
         { path: '*', element: <PageNotFound /> },
       ],
     },
