@@ -3,7 +3,6 @@ import axios from 'axios'
 import {configureStore} from "@reduxjs/toolkit"
 import {HOST} from "../../components/Token"
 
-
 jest.mock('axios')
 
 describe('categoriesReducers', () => {
