@@ -10,6 +10,7 @@ import ProductPage from '../pages/ProductPage/ProductPage'
 import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
 import AuthPage from '../pages/AuthPage/AuthPage'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
+import ScrollToTop from "./ScrollToTop";
 
 function Routes() {
   return useRoutes([
@@ -34,6 +35,7 @@ function Routes() {
 export default function Router() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes />
     </BrowserRouter>
   )
