@@ -32,6 +32,18 @@ export default function NavContainer(props) {
             Favorites
           </NavLink>
         </li>
+        {/* {categories &&
+          categories.length > 0 &&
+          categories.map((category) => (
+            <li key={category.id} className={styles.navItem}>
+              <NavLink
+                to={`/category/${category.id}/`}
+                className={styles.navLink}
+              >
+                {category.name}
+              </NavLink>
+            </li>
+          ))} */}
         {categories.map((category) => (
           <li key={category.id} className={styles.navItem}>
             <NavLink

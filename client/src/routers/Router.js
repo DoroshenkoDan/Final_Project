@@ -9,6 +9,7 @@ import CategoryPage from '../pages/CategoryPage/CategoryPage'
 import ProductPage from '../pages/ProductPage/ProductPage'
 import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
 import AuthPage from '../pages/AuthPage/AuthPage'
+import AboutPage from "../pages/AboutPage/AboutPage";
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import ScrollToTop from "./ScrollToTop";
 
@@ -26,6 +27,7 @@ function Routes() {
         { path: 'allProducts/', element: <AllProductsPage /> },
         { path: 'category/:categoryId', element: <CategoryPage /> },
         { path: 'products/:productId', element: <ProductPage /> },
+        { path: 'about-us/', element: <AboutPage /> },
         { path: '*', element: <PageNotFound /> },
       ],
     },
