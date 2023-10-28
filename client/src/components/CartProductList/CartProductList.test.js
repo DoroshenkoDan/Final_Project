@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import CartProductList from './index';
 
 
+
 jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
 }));

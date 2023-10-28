@@ -6,6 +6,7 @@ import AllProductsContainer from './index';
 
 
 
+
 const mockStore = configureStore([]);
 
 const initialState = {
