@@ -115,6 +115,11 @@ body {
             transform: scale(1);
           }
 
+          li > a {
+            text-decoration: none;
+            color: #ffffff;
+          }
+
           li:hover {
             color: #544f5f;
           }
@@ -282,6 +287,8 @@ body {
           transform: scale(1);
           margin: 0;
           font-size: 14px;
+          color: #ffffff;
+          text-decoration: none;
         }
       }
 
