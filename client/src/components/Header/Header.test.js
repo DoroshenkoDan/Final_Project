@@ -8,7 +8,8 @@ jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
     useDispatch: jest.fn(), useSelector: jest.fn()
 }));
-describe('testing NavContainer component', () => {
+
+describe('testing Header component', () => {
     const dispatchMock = jest.fn();
     beforeEach(() => {
         useDispatch.mockReturnValue(dispatchMock);

@@ -6,7 +6,8 @@ import {MemoryRouter} from 'react-router-dom';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
-    useDispatch: jest.fn(), useSelector: jest.fn()
+    useDispatch: jest.fn(),
+    useSelector: jest.fn()
 }));
 describe('testing NavContainer component', () => {
     const dispatchMock = jest.fn();
@@ -41,6 +42,7 @@ describe('testing NavContainer component', () => {
             </MemoryRouter>
         );
     });
+
     it('check PropTypes', () => {
         const spy = jest.spyOn(console, 'error').mockImplementation(() => {
         });
