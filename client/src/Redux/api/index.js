@@ -7,10 +7,9 @@ export default async function api(apiName) {
         .get(HOST + "/products/allproducts")
         .then(products => {
             result = products.data
-            console.log('products fetched', products.data)
         })
         .catch(err => {
-            console.error('fetch products failed',err)
+            console.error('fetch products failed', err)
         });
     return result
 }

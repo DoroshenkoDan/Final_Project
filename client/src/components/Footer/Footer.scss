@@ -7,11 +7,25 @@ body {
 }
 
 .footer {
+  align-self: flex-end;
   color: #fff;
   font-family: 'Satoshi Regular';
   background-color: #2a254b;
+  position: relative;
+  bottom: 0;
 
   @media screen and (max-width: 727px) {
+    position: relative;
+    bottom: 0;
+    color: #fff;
+    font-family: 'Clash Display';
+    font-weight: 400;
+    background-color: #2a254b;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
     height: 540px;
     padding-top: 45px;
 
@@ -21,13 +35,13 @@ body {
       align-items: center;
       flex-direction: column;
       padding-top: 40px;
+      width: 100%;
 
       .footer__line {
         display: flex;
         width: 100%;
         border: 1px solid #4e4d93;
         transform: rotate(0deg);
-        bottom: 0;
       }
     }
 
@@ -39,18 +53,6 @@ body {
       color: #fff;
       padding-top: 15px;
     }
-    color: #fff;
-    font-family: 'Clash Display';
-    font-weight: 400;
-    background-color: #2a254b;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow: hidden; /* Добавляем overflow: hidden для ограничения фона */
-    position: relative;
-    height: 540px;
-    padding-top: 45px;
 
     .footer__content-desktop {
       display: none;
@@ -62,6 +64,7 @@ body {
       align-items: center;
       flex-wrap: wrap;
       padding-left: 28px;
+      padding-right: 20px;
 
       .footer__avion {
         color: #fff;
@@ -331,6 +334,8 @@ body {
       .footer__company {
         &-line {
           cursor: pointer;
+          color: white;
+          text-decoration: none;
         }
       }
 

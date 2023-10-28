@@ -39,6 +39,8 @@ const filterReducers = createSlice({
       Vitra: false,
       Ikea: false,
       FÄRGKLAR: false,
+      'Contemporary Living': false,
+      'Rustic Home Decor': false,
     },
     items: 9,
     addItems: 0,
