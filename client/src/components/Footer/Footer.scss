@@ -94,11 +94,17 @@ body {
           line-height: 19.69px;
         }
 
+        &-list:hover {
+          color: #544f5f;
+        }
+
         &-list {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           gap: 12px;
+          color: white;
+          text-decoration: none;
 
           li {
             font-size: 14px;
@@ -164,6 +170,15 @@ body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+
+        &-line {
+          color: white;
+          text-decoration: none;
+        }
+
+        &-line:hover {
+          color: #544f5f;
+        }
 
         &-heading {
           color: #fff;
