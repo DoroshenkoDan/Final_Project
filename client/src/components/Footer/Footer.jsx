@@ -25,12 +25,14 @@ export const Footer = () => {
           <div className="footer__company">
             <p className="footer__company-heading">Our company</p>
             <ul className="footer__company-list">
-              <li>
-                <NavLink to="/about/">About us</NavLink>
-              </li>
+              <NavLink className="footer__company-list" to="/about-us">
+                About us
+              </NavLink>
+              <NavLink className="footer__company-list" to="/privacy-page">
+                Privacy page
+              </NavLink>
               <li>Vacancies</li>
               <li>Contact us</li>
-              <li>Privacy</li>
               <li>Returns policy</li>
             </ul>
           </div>
@@ -80,11 +82,13 @@ export const Footer = () => {
           <div className="footer__menu">
             <p className="footer__menu-heading">Menu</p>
             <ul className="footer__menu-list">
+              <NavLink className="footer__menu-line" to="/allproducts/">
+                All products
+              </NavLink>
               <li>New arrivals</li>
               <li>Best sellers</li>
               <li>Recently viewed</li>
               <li>Popular this week</li>
-              <li>All products</li>
             </ul>
           </div>
         </div>
@@ -138,8 +142,8 @@ export const Footer = () => {
         </div>
 
         <div className="footer__menu">
-        <p className="footer__menu-heading">Menu</p>
-        <NavLink className="footer__menu-line" to="/allproducts/">
+          <p className="footer__menu-heading">Menu</p>
+          <NavLink className="footer__menu-line" to="/allproducts/">
             All products
           </NavLink>
           <p className="footer__menu-line">New arrivals</p>
@@ -155,30 +159,32 @@ export const Footer = () => {
             Cutlery
           </NavLink>
           <NavLink className="footer__menu-line" to="/category/Nightstand/">
-          Nightstands
+            Nightstands
           </NavLink>
           <NavLink className="footer__menu-line" to="/category/Crockery/">
-          Crockery
+            Crockery
           </NavLink>
           <NavLink className="footer__menu-line" to="/category/Chairs/">
-          Chairs
+            Chairs
           </NavLink>
           <NavLink className="footer__menu-line" to="/category/Tables/">
-          Tables
+            Tables
           </NavLink>
           <NavLink className="footer__menu-line" to="/category/Ceramics/">
-          Ceramisc
+            Ceramisc
           </NavLink>
         </div>
 
         <div className="footer__company">
           <p className="footer__company-heading">Our company</p>
-          <NavLink className="footer__company-line" to="/about-us/">
+          <NavLink className="footer__company-line" to="/about-us">
             About us
+          </NavLink>
+          <NavLink className="footer__company-line" to="/privacy-page">
+            Privacy page
           </NavLink>
           <p className="footer__company-line">Vacancies</p>
           <p className="footer__company-line">Contact us</p>
-          <p className="footer__company-line">Privacy</p>
           <p className="footer__company-line">Returns policy</p>
           <p className="footer__company-line">News</p>
         </div>
