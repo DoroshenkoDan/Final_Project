@@ -96,13 +96,17 @@ export default function Cart() {
     function mergeObjectsWithSameId(array1, array2) {
         const mergedObjects = []
 
-        for (const obj1 of array1) {
+        if (Array.isArray(array1) && array1.length > 0) {
+            for (const obj1 of array1) {
             const matchingObject = array2.find((obj2) => obj2._id === obj1.product)
             console.log("matchingObject", matchingObject);
             if (matchingObject) {
                 mergedObjects.push({...obj1, ...matchingObject})
             }
         }
+        }
+
+       
         console.log("mergedObjects", mergedObjects);
         return mergedObjects
     }
