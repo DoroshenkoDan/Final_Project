@@ -139,9 +139,12 @@ export default function Cart() {
             <>
                 <div className={styles['cart-no-item-wrapper']}>
                     <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
-                    <NavLink to="/orders/" className={styles['link-order']}>
-                        <button className={styles['btn-order']}>Your orders</button>
-                    </NavLink>
+                    {
+                        userStatus &&
+                        <NavLink to="/orders/" className={styles['link-order']}>
+                            <button className={styles['btn-order']}>Your orders</button>
+                        </NavLink>
+                    }
                 </div>
                 {
                     orderPlaced.status && <div className={styles['cart-no-item-wrapper']}>
@@ -154,9 +157,12 @@ export default function Cart() {
     return (
         <div className={styles['cart-container']}>
             <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-            <NavLink to="/orders/" className={styles['link-order']}>
-                <button className={styles['btn-order']}>Your orders</button>
-            </NavLink>
+            {
+                userStatus &&
+                <NavLink to="/orders/" className={styles['link-order']}>
+                    <button className={styles['btn-order']}>Your orders</button>
+                </NavLink>
+            }
             <div className={styles['cart-section-names']}>
                 <p>Product</p>
                 <p>Quantity</p>
