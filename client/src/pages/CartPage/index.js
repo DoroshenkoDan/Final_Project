@@ -55,15 +55,18 @@ export default function Cart() {
     }
 
     async function getChekCart() {
-        const response = await axios.get(HOST + '/cart')
-        if (response && response.data && response.data.products) {
-            dispatch(addArrayToCart(response.data.products))
-            console.log('cartCheckGet', response)
-        } else {
-            console.error(' getChekCart: объект или свойство products отсутствуют');
+        try {
+            const response = await axios.get(HOST + '/cart')
+            if (response && response.data && response.data.products) {
+                dispatch(addArrayToCart(response.data.products))
+                console.log('cartCheckGet', response)
+            } else {
+                console.error(' getChekCart: объект или свойство products отсутствуют');
+            }
+            return response
+        } catch (error) {
+            console.log(error)
         }
-
-        return response
     }
 
     async function updateServerCart() {
@@ -98,15 +101,15 @@ export default function Cart() {
 
         if (Array.isArray(array1) && array1.length > 0) {
             for (const obj1 of array1) {
-            const matchingObject = array2.find((obj2) => obj2._id === obj1.product)
-            console.log("matchingObject", matchingObject);
-            if (matchingObject) {
-                mergedObjects.push({...obj1, ...matchingObject})
+                const matchingObject = array2.find((obj2) => obj2._id === obj1.product)
+                console.log("matchingObject", matchingObject);
+                if (matchingObject) {
+                    mergedObjects.push({...obj1, ...matchingObject})
+                }
             }
         }
-        }
 
-       
+
         console.log("mergedObjects", mergedObjects);
         return mergedObjects
     }
@@ -120,7 +123,7 @@ export default function Cart() {
     }, 0)
 
     function showOrderForm() {
-        if(userStatus) {
+        if (userStatus) {
             setVisibilityOrderForm(true)
         } else {
             navigate('/login/')
@@ -145,54 +148,54 @@ export default function Cart() {
             </>)
     }
 
-        return (
-            <div className={styles['cart-container']}>
-                <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-                <div className={styles['cart-section-names']}>
-                    <p>Product</p>
-                    <p>Quantity</p>
-                    <p>Price</p>
-                </div>
-                <div className={styles['cart-list-container']}>
-                    {cartProducts.map((product) => (
-                        <CartProductList
-                            key={product._id}
-                            img={product.imageUrls}
-                            name={product.name}
-                            quantity={product.cartQuantity}
-                            price={product.currentPrice}
-                            discribe={product.description}
-                            id={product._id}
-                        />
-                    ))}
-                </div>
-                <div className={styles['cart-total-and-order-btn-container']}>
-                    <p className={styles['cart-total-price']}>
-                        Subtotal
-                        <span
-                            style={{
-                                color: '#2A254B',
-                                fontSize: '24px',
-                                padding: '0px 0px 0px 15px',
-                            }}
-                        >
+    return (
+        <div className={styles['cart-container']}>
+            <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
+            <div className={styles['cart-section-names']}>
+                <p>Product</p>
+                <p>Quantity</p>
+                <p>Price</p>
+            </div>
+            <div className={styles['cart-list-container']}>
+                {cartProducts.map((product) => (
+                    <CartProductList
+                        key={product._id}
+                        img={product.imageUrls}
+                        name={product.name}
+                        quantity={product.cartQuantity}
+                        price={product.currentPrice}
+                        discribe={product.description}
+                        id={product._id}
+                    />
+                ))}
+            </div>
+            <div className={styles['cart-total-and-order-btn-container']}>
+                <p className={styles['cart-total-price']}>
+                    Subtotal
+                    <span
+                        style={{
+                            color: '#2A254B',
+                            fontSize: '24px',
+                            padding: '0px 0px 0px 15px',
+                        }}
+                    >
                         {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}$
                     </span>
-                    </p>
-                    <p>Taxes and shipping are calculated at checkout</p>
-                    <button
-                        onClick={() => {
-                            showOrderForm()
-                        }}
-                        className={styles['cart-order-btn']}
-                    >
-                        Go to checkout
-                    </button>
-                </div>
-                {
-                    visibilityOrderForm &&
-                    <OrderForm changeOrderPlaced={changeOrderPlaced} orderPlaced={orderPlaced}></OrderForm>
-                }
+                </p>
+                <p>Taxes and shipping are calculated at checkout</p>
+                <button
+                    onClick={() => {
+                        showOrderForm()
+                    }}
+                    className={styles['cart-order-btn']}
+                >
+                    Go to checkout
+                </button>
             </div>
-        )
-    }
+            {
+                visibilityOrderForm &&
+                <OrderForm changeOrderPlaced={changeOrderPlaced} orderPlaced={orderPlaced}></OrderForm>
+            }
+        </div>
+    )
+}
