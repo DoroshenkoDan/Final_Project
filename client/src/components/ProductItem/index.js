@@ -18,17 +18,18 @@ export default function ProductItem({ props }) {
     console.log('isInCart', isInCart);
 
     const cartReducer = useSelector((state) => state.store.cart.cart)
-    console.log('cartReducer', cartReducer);
+    // console.log('cartReducer', cartReducer);
 
 
 
     useEffect(() => {
         findObj(list, props)
         setProductQuantity(1)
-
-        const isProductInCart = cartReducer.some((cartProduct) => cartProduct.product === product._id);
-        setIsInCart(isProductInCart);
-    }, [list, props, isInCart])
+        if (product && cartReducer) {
+            const isProductInCart = cartReducer.some((cartProduct) => cartProduct?.product === product._id);
+            setIsInCart(isProductInCart);
+        }
+    }, [list, props, isInCart, cartReducer, navigate, product])
 
     function putToWishlist() {
         if (userStatus) {
@@ -102,12 +103,13 @@ export default function ProductItem({ props }) {
                             <p>{depth}</p>
                         </div>
                     </div>
-                    <h5>Quantitity</h5>
-                    <div className={styles['product-item-information-quantitity-select']}>
-                        <button onClick={decreaseQuantity}>-</button>
-                        <p>{productQuantity}</p>
-                        <button onClick={increaseQuantity}>+</button>
-                    </div>
+                    {!isInCart &&
+                        <> <h5>Quantitity</h5>
+                            <div className={styles['product-item-information-quantitity-select']}>
+                                <button onClick={decreaseQuantity}>-</button>
+                                <p>{productQuantity}</p>
+                                <button onClick={increaseQuantity}>+</button>
+                            </div></>}
                     <div className={styles['product-item-information-btns-container']}>
                         <button onClick={() => putToWishlist()}>Save to favorites</button>
                         <button
