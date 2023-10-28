@@ -10,6 +10,7 @@ describe('PrivacyPage additional tests', () => {
     render(<PrivacyPage />)
   })
 
+
   test('renders all list items correctly', () => {
     const lists = {
       'Your Rights': [

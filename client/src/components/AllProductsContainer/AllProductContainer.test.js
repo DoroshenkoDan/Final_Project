@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import AllProductsContainer from './index';
 
 
+
 const mockStore = configureStore([]);
 
 const initialState = {
