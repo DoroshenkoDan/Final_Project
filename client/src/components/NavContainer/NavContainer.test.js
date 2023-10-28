@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import NavContainer from './index.js';
 import {MemoryRouter} from 'react-router-dom';
 
-
 jest.mock('react-redux', () => ({
     ...jest.requireActual("react-redux"),
     useDispatch: jest.fn(),
