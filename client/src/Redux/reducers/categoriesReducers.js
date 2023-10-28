@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { api } from '../api/api'
 
-const initialState = {
+export const initialState = {
   categories: [],
   status: 'idle',
   error: null,
@@ -26,7 +26,7 @@ const categoriesReducer = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        console.log('action', action)
+        // console.log('action', action)
         state.status = 'succeeded'
         state.categories = action.payload
       })

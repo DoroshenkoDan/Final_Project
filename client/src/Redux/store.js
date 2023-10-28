@@ -25,7 +25,6 @@ import wishlistReducers from './reducers/wishlistReducers.js'
 const storeReducers = combineReducers({
   // для прикладу додавати так: "cart: cartReducer,"
   products: productsReducer,
-  categories: categoriesReducer,
   user: userReducers,
   cart: cartReducer,
   wishlist: wishlistReducers,

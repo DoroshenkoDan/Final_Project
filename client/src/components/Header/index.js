@@ -60,6 +60,7 @@ export default function Header() {
           className={`${styles.iconMenu} ${
             !isMenuHidden ? styles.iconMenuDisplay : ''
           }`}
+          data-testid="menu-icon"
           onClick={toggleHideItems}
         >
           <MenuIcon />
