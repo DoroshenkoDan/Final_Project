@@ -173,7 +173,7 @@ export const Footer = () => {
 
         <div className="footer__company">
           <p className="footer__company-heading">Our company</p>
-          <NavLink className="footer__company-line" to="/about/">
+          <NavLink className="footer__company-line" to="/about-us/">
             About us
           </NavLink>
           <p className="footer__company-line">Vacancies</p>
