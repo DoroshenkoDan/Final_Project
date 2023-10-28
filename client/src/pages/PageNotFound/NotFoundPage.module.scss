@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: flex-start;
   padding-top: 3vh;
-  height: 67.3vh;
   background-color: #ffffff;
 
   .NotFoundImg {
@@ -46,6 +45,7 @@
     cursor: pointer;
     transition: background-color 0.3s;
     border-radius: 5px;
+    margin-bottom: 30px;
 
     &:hover {
       background-color: #413766;
