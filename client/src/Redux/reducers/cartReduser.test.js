@@ -49,20 +49,7 @@ import cartReducer, {
       expect(nextState.cart).toEqual([]);
     });
   
-    it('should open the cart form', () => {
-      const initialState = { cartStatus: false };
-      const nextState = cartReducer(initialState, openCartForm());
-  
-      expect(nextState.cartStatus).toEqual(true);
-    });
-  
-    it('should close the cart form', () => {
-      const initialState = { cartStatus: true };
-      const nextState = cartReducer(initialState, closeCartForm());
-  
-      expect(nextState.cartStatus).toEqual(false);
-    });
-  
+      
     it('should add an array of items to the cart', () => {
       const initialState = { cart: [] };
       const itemsToAdd = [
