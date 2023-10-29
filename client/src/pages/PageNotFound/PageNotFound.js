@@ -6,7 +6,6 @@ const PageNotFound = () => {
   const navigate = useNavigate()
   const notFoundImage = '/img/baner/NotFoundPage1.png'
 
-
   return (
     <div className={styles.NotFoundContainer}>
       <img

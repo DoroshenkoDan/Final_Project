@@ -6,7 +6,11 @@ import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import {resetStatus, resetData, resetToken} from '../../Redux/reducers/userReducers'
+import {
+  resetStatus,
+  resetData,
+  resetToken,
+} from '../../Redux/reducers/userReducers'
 import IconLogin from '../Icons/IconLogin'
 import LogOutIcon from '../Icons/LogOutIcon'
 import NavContainer from '../NavContainer'

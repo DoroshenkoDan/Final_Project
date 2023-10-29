@@ -10,11 +10,10 @@ import ProductPage from '../pages/ProductPage/ProductPage'
 import AllProductsPage from '../pages/AllProductsPage/AllProductsPage.js'
 import AuthPage from '../pages/AuthPage/AuthPage'
 import OrderPage from '../pages/OrderPage/OrderPage'
-import AboutPage from "../pages/AboutPage/AboutPage";
+import AboutPage from '../pages/AboutPage/AboutPage'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
-import PrivacyPage from "../pages/PrivacyPage/PrivacyPage";
-import ScrollToTop from "./ScrollToTop";
-
+import PrivacyPage from '../pages/PrivacyPage/PrivacyPage'
+import ScrollToTop from './ScrollToTop'
 
 function Routes() {
   return useRoutes([

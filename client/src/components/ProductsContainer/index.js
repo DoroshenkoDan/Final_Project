@@ -26,9 +26,9 @@ export default function ProductsContainer({ id }) {
     function findCeramicsObjects(data, idToExclude) {
       const selectedObjects = data.find((item) => item.id === idToExclude)
       const ceramicsObjects = data.filter(
-          (item) =>
-              item.categories === selectedObjects.categories &&
-              item.id !== idToExclude,
+        (item) =>
+          item.categories === selectedObjects.categories &&
+          item.id !== idToExclude,
       )
       if (ceramicsObjects.length <= 4) {
         return ceramicsObjects
@@ -60,9 +60,9 @@ export default function ProductsContainer({ id }) {
         const randomObject = sourceCopy[randomIndex]
 
         if (
-            !resultArray.some(
-                (item) => item.categories === randomObject.categories,
-            )
+          !resultArray.some(
+            (item) => item.categories === randomObject.categories,
+          )
         ) {
           resultArray.push(randomObject)
         }
@@ -75,41 +75,41 @@ export default function ProductsContainer({ id }) {
   }
 
   return (
-      <>
-        <div className={styles['products-container-container']}>
-          {id && (
-              <h2 className={styles['products-container-tittle']}>
-                You might also like
-              </h2>
-          )}
-          <div className={styles['products-container']}>
-            {productsContainerArray.map((product, index) => (
-                <NavLink
-                    to={`/products/${product.id}`}
-                    key={product.id}
-                    className={styles['products-container-item']}
-                >
-                  <img
-                      src={product.imageUrls}
-                      className={styles['products-container-item-img']}
-                  />
+    <>
+      <div className={styles['products-container-container']}>
+        {id && (
+          <h2 className={styles['products-container-tittle']}>
+            You might also like
+          </h2>
+        )}
+        <div className={styles['products-container']}>
+          {productsContainerArray.map((product, index) => (
+            <NavLink
+              to={`/products/${product.id}`}
+              key={product.id}
+              className={styles['products-container-item']}
+            >
+              <img
+                src={product.imageUrls}
+                className={styles['products-container-item-img']}
+              />
 
-                  <p className={styles['products-container-item-name']}>
-                    {product.name}
-                  </p>
-                  <p className={styles['products-container-item-price']}>
-                    ${product.currentPrice}
-                  </p>
-                </NavLink>
-            ))}
-          </div>
-          <NavLink to="/allProducts/">
-            <button className={styles['products-container-btn']}>
-              View collection
-            </button>
-          </NavLink>
+              <p className={styles['products-container-item-name']}>
+                {product.name}
+              </p>
+              <p className={styles['products-container-item-price']}>
+                ${product.currentPrice}
+              </p>
+            </NavLink>
+          ))}
         </div>
-      </>
+        <NavLink to="/allProducts/">
+          <button className={styles['products-container-btn']}>
+            View collection
+          </button>
+        </NavLink>
+      </div>
+    </>
   )
 }
 

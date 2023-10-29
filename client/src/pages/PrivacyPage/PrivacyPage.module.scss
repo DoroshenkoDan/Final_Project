@@ -6,7 +6,6 @@
   background-repeat: no-repeat;
   background-position: center center;
   margin-bottom: 40px;
-
 }
 
 .privacyContainer {
@@ -47,12 +46,12 @@
 }
 
 .registrationTexts {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    font-family: Satoshi;
-      font-size: 22px;
-      line-height: 45px;
-      margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: Satoshi;
+  font-size: 22px;
+  line-height: 45px;
+  margin-left: 10px;
 }
 
 .subHeader,
@@ -65,11 +64,11 @@
   font-weight: 400;
   line-height: 29.52px;
   margin-left: 10px;
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 @media (max-width: 360px) {
-    .privacyBanner {
+  .privacyBanner {
     width: 100%;
     height: 400px;
     display: flex;
@@ -97,13 +96,13 @@
     margin-left: 5px;
     margin-right: 5px;
   }
-//   .privacyHeader {
-//     font-size: 20px;
-//   }
+  //   .privacyHeader {
+  //     font-size: 20px;
+  //   }
 
-//   .texts {
-//     font-size: 14px;
-//   }
+  //   .texts {
+  //     font-size: 14px;
+  //   }
 }
 
 @media (min-width: 361px) and (max-width: 768px) {

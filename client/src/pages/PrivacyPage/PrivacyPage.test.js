@@ -51,43 +51,43 @@ describe('PrivacyPage additional tests', () => {
     })
   })
 
-    test('all style classes are applied', () => {
-      const privacyContainer = screen.getByTestId('privacy-container')
-      expect(privacyContainer).toHaveClass(styles.privacyContainer)
+  test('all style classes are applied', () => {
+    const privacyContainer = screen.getByTestId('privacy-container')
+    expect(privacyContainer).toHaveClass(styles.privacyContainer)
 
-      const privacyBanner = screen.getByTestId('privacy-banner')
-      expect(privacyBanner).toHaveClass(styles.privacyBanner)
+    const privacyBanner = screen.getByTestId('privacy-banner')
+    expect(privacyBanner).toHaveClass(styles.privacyBanner)
 
-      const privacyHeader = screen.getByTestId('privacy-header')
-      expect(privacyHeader).toHaveClass(styles.privacyHeader)
+    const privacyHeader = screen.getByTestId('privacy-header')
+    expect(privacyHeader).toHaveClass(styles.privacyHeader)
 
-      const privacyTexts = screen.getByTestId('privacy-texts')
-      expect(privacyTexts).toHaveClass(styles.privacyTexts)
+    const privacyTexts = screen.getByTestId('privacy-texts')
+    expect(privacyTexts).toHaveClass(styles.privacyTexts)
 
-      const termsSection = screen.getByTestId('terms-section')
-      expect(termsSection).toHaveClass(styles.termsSection)
+    const termsSection = screen.getByTestId('terms-section')
+    expect(termsSection).toHaveClass(styles.termsSection)
 
-      const subHeader = screen.getByTestId('sub-header')
-      expect(subHeader).toHaveClass(styles.subHeader)
+    const subHeader = screen.getByTestId('sub-header')
+    expect(subHeader).toHaveClass(styles.subHeader)
 
-      const texts = screen.getAllByTestId('texts')
-      texts.forEach((text) => {
-        expect(text).toHaveClass(styles.texts)
-      })
-
-      const registrationTexts = screen.getByTestId('registration-texts')
-      expect(registrationTexts).toHaveClass(styles.registrationTexts)
-
-      const sectionHeaders = screen.getAllByTestId('section-header')
-      sectionHeaders.forEach((header) => {
-        expect(header).toHaveClass(styles.sectionHeader)
-      })
-
-      const lists = screen.getAllByTestId('list')
-      lists.forEach((list) => {
-        expect(list).toHaveClass(styles.list)
-      })
+    const texts = screen.getAllByTestId('texts')
+    texts.forEach((text) => {
+      expect(text).toHaveClass(styles.texts)
     })
+
+    const registrationTexts = screen.getByTestId('registration-texts')
+    expect(registrationTexts).toHaveClass(styles.registrationTexts)
+
+    const sectionHeaders = screen.getAllByTestId('section-header')
+    sectionHeaders.forEach((header) => {
+      expect(header).toHaveClass(styles.sectionHeader)
+    })
+
+    const lists = screen.getAllByTestId('list')
+    lists.forEach((list) => {
+      expect(list).toHaveClass(styles.list)
+    })
+  })
 
   test('renders all headers with correct text', () => {
     const h1 = screen.getByRole('heading', { level: 1 })

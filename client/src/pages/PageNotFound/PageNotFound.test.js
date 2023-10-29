@@ -17,30 +17,29 @@ jest.mock('react-router-dom', () => {
   }
 })
 
-
 describe('PageNotFound', () => {
   test('renders PageNotFound component', () => {
     render(
-        <Router>
-          <PageNotFound/>
-        </Router>,
+      <Router>
+        <PageNotFound />
+      </Router>,
     )
 
     expect(
-        screen.getByText(/This page could not be found!/i),
+      screen.getByText(/This page could not be found!/i),
     ).toBeInTheDocument()
     expect(
-        screen.getByText(
-            /We are sorry\. But the page you are looking for is not available\./i,
-        ),
+      screen.getByText(
+        /We are sorry\. But the page you are looking for is not available\./i,
+      ),
     ).toBeInTheDocument()
   })
 
   test('renders image with correct src', () => {
     render(
-        <Router>
-          <PageNotFound/>
-        </Router>,
+      <Router>
+        <PageNotFound />
+      </Router>,
     )
 
     const image = screen.getByAltText('Not Found Image')
@@ -50,9 +49,9 @@ describe('PageNotFound', () => {
 
   test('image and button have correct attributes', () => {
     render(
-        <Router>
-          <PageNotFound/>
-        </Router>,
+      <Router>
+        <PageNotFound />
+      </Router>,
     )
 
     const image = screen.getByAltText('Not Found Image')
@@ -61,5 +60,4 @@ describe('PageNotFound', () => {
     const button = screen.getByText(/Back to home/i)
     expect(button).toHaveAttribute('type', 'button')
   })
-
 })

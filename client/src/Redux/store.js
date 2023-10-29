@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import thunk from "redux-thunk";
+import thunk from 'redux-thunk'
 
 // Импорт редюсерів
 import productsReducer from './reducers/productsReducers.js'
@@ -45,9 +45,8 @@ const store = configureStore({
     products: productsReducer,
     filters: FilterReducers,
     categories: categoriesReducer,
-    
   },
-  middleware: [thunk]
+  middleware: [thunk],
 })
 
 const persistedStore = persistStore(store)

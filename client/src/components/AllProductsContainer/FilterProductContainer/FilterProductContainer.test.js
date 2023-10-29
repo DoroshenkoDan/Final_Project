@@ -1,12 +1,11 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
 
-import FilterProductContainer from './index';
+import FilterProductContainer from './index'
 
-
-const mockStore = configureStore([]);
+const mockStore = configureStore([])
 const initialState = {
   filters: {
     categories: {
@@ -36,79 +35,62 @@ const initialState = {
       FÄRGKLAR: false,
     },
   },
-};
+}
 
-const store = mockStore(initialState);
+const store = mockStore(initialState)
 
 describe('FilterProductContainer', () => {
   it('renders the component', () => {
     const { getByText } = render(
       <Provider store={store}>
         <FilterProductContainer />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    
-    expect(getByText('Categories')).toBeInTheDocument();
-  });
+    expect(getByText('Categories')).toBeInTheDocument()
+  })
 
   it('handles category change', () => {
     const { getByText } = render(
       <Provider store={store}>
         <FilterProductContainer />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    
-    const categoryLabel = getByText('Plant pots');    
-    fireEvent.click(categoryLabel);
-    
-
-  });
+    const categoryLabel = getByText('Plant pots')
+    fireEvent.click(categoryLabel)
+  })
 
   it('handles brand change', () => {
     const { getByText } = render(
       <Provider store={store}>
         <FilterProductContainer />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    
-    const brandLabel = getByText('Sinsay');   
-    fireEvent.click(brandLabel);
-    
-    
-
-    
-  });
+    const brandLabel = getByText('Sinsay')
+    fireEvent.click(brandLabel)
+  })
 
   it('handles price change', () => {
     const { getByText } = render(
       <Provider store={store}>
         <FilterProductContainer />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    
-    const priceLabel = getByText('0-50');   
-    fireEvent.click(priceLabel);
-    
-
-  });
+    const priceLabel = getByText('0-50')
+    fireEvent.click(priceLabel)
+  })
 
   it('all checkbox in document', () => {
-
     const { getAllByRole } = render(
       <Provider store={store}>
         <FilterProductContainer />
-      </Provider>
-    );
+      </Provider>,
+    )
 
-    
     const checkboxes = getAllByRole('checkbox')
-        checkboxes.forEach(checkbox => expect(checkbox).toBeInTheDocument())
-
-    
-
-  });
-});
+    checkboxes.forEach((checkbox) => expect(checkbox).toBeInTheDocument())
+  })
+})

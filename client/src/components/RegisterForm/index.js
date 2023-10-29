@@ -14,7 +14,6 @@ export default function RegisterForm(props) {
     axios
       .post(HOST + '/customers', orderInfo)
       .then((savedCustomer) => {
-        console.log('API Call:', HOST + '/customers', orderInfo); // Add this line
         setFormStatus({
           type: 'success',
           message: 'You are successfully registered',
@@ -22,21 +21,21 @@ export default function RegisterForm(props) {
         props.setActiveBtnSignIn()
       })
       .catch((err) => {
-          if (err.response && err.response.data) {
-              const massageData = err.response.data
-              const objectKey = Object.keys(massageData)[0]
-              const errorMessage = massageData[objectKey]
-              setFormStatus({
-                  type: 'error',
-                  message: `Registration failed! ${errorMessage}`,
-              })
-          } else {
-              // Fallback error message in case the structure of the error object is unexpected
-              setFormStatus({
-                  type: 'error',
-                  message: 'Registration failed due to an unknown error.',
-              });
-          }
+        if (err.response && err.response.data) {
+          const massageData = err.response.data
+          const objectKey = Object.keys(massageData)[0]
+          const errorMessage = massageData[objectKey]
+          setFormStatus({
+            type: 'error',
+            message: `Registration failed! ${errorMessage}`,
+          })
+        } else {
+          // Fallback error message in case the structure of the error object is unexpected
+          setFormStatus({
+            type: 'error',
+            message: 'Registration failed due to an unknown error.',
+          })
+        }
       })
     resetForm()
   }
