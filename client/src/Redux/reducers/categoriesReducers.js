@@ -26,7 +26,6 @@ const categoriesReducer = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        // console.log('action', action)
         state.status = 'succeeded'
         state.categories = action.payload
       })

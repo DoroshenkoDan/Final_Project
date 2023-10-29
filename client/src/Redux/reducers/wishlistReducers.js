@@ -52,7 +52,6 @@ const wishlistReducer = createSlice({
       .addCase(fetchWishlist.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
-        console.log(state.error)
       })
       .addCase(removeFromWishlist.pending, (state) => {
         state.status = 'loading'
@@ -64,7 +63,6 @@ const wishlistReducer = createSlice({
       .addCase(removeFromWishlist.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
-        console.log(state.error)
       })
   },
 })

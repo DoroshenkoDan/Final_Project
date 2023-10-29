@@ -21,34 +21,27 @@ const initialState = {
   },
 }
 
-const store = mockStore(initialState);
+const store = mockStore(initialState)
 
 describe('AllProductsContainer', () => {
+  it('Renders the AllProductsContainer component', () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <AllProductsContainer />
+      </Provider>,
+    )
 
-it('Renders the AllProductsContainer component', () => {
-  const { getByTestId } = render(
-    <Provider store={store}>
-      <AllProductsContainer />
-    </Provider>
-  );
+    expect(getByTestId('data-products-container')).toBeInTheDocument()
+  })
 
-  
-  expect(getByTestId('data-products-container')).toBeInTheDocument();
-  
-});
+  it('Simulates the "Load more" button click', () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <AllProductsContainer />
+      </Provider>,
+    )
 
-it('Simulates the "Load more" button click', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <AllProductsContainer />
-    </Provider>,
-  )
-
-  const loadMoreButton = getByText('Load more');
-  fireEvent.click(loadMoreButton);
-
-  
+    const loadMoreButton = getByText('Load more')
+    fireEvent.click(loadMoreButton)
+  })
 })
-})
-
-

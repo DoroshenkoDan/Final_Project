@@ -24,8 +24,6 @@ const userReducers = createSlice({
     },
     changeData(state, action) {
       const updatedData = { ...action.payload }
-      console.log(updatedData)
-
       state.data = { ...updatedData }
     },
     setToken(state, action) {
@@ -49,10 +47,8 @@ const userReducers = createSlice({
         state.statusCustomer = 'loading'
       })
       .addCase(CheckAuth.fulfilled, (state, action) => {
-        console.log('action', action)
         state.statusCustomer = 'succeeded'
         state.data = action.payload
-        console.log(state.statusCustomer, state.data)
       })
       .addCase(CheckAuth.rejected, (state, action) => {
         state.statusCustomer = 'failed'
