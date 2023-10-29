@@ -53,7 +53,7 @@ export default function OrderPage(props) {
           </NavLink>
         </div>
       ))}
-      <span className={styles['btn-close']} onClick={deleteOrders}>
+      <span data-testid="btn-close" className={styles['btn-close']} onClick={deleteOrders}>
         <CloseBtnIcon></CloseBtnIcon>
       </span>
     </>
