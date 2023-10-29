@@ -7,6 +7,19 @@ import OrderItem from "../OrderItem"
 export default function FavoritesPage() {
     const [orders, setOrders] = useState([])
 
+   function changeOrders (idToRemove) {
+        const newOrders= [...orders]
+
+       const index = newOrders.findIndex(item => item._id === idToRemove);
+
+       if (index !== -1) {
+           newOrders.splice(index, 1);
+       }
+
+       setOrders(newOrders)
+       console.log(newOrders)
+   }
+
     useEffect(() => {
         axios
             .get(HOST + "/orders")
@@ -20,6 +33,9 @@ export default function FavoritesPage() {
 
     }, [])
 
+    useEffect(() => {
+
+    }, [orders])
 
     return (
         <div className={styles['wrapper-orders']}>
@@ -34,8 +50,8 @@ export default function FavoritesPage() {
                 {
                     orders.length >= 0 &&
                     orders.map(order => (
-                        <div key={order._id}>
-                            <OrderItem order={order}></OrderItem>
+                        <div key={order._id} className={styles['order-container--item']}>
+                            <OrderItem order={order} changeOrders={changeOrders} ></OrderItem>
                         </div>
                     ))
                 }
