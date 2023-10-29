@@ -4,7 +4,6 @@ import Cart from './index';
 import { useSelector } from 'react-redux';
 
 
-
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(),

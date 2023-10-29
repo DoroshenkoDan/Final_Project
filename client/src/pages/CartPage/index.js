@@ -7,7 +7,7 @@ import {HOST} from "../../components/Token"
 import OrderForm from "../../components/OrderForm";
 // eslint-disable-next-line
 import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
@@ -139,6 +139,12 @@ export default function Cart() {
             <>
                 <div className={styles['cart-no-item-wrapper']}>
                     <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
+                    {
+                        userStatus &&
+                        <NavLink to="/orders/" className={styles['link-order']}>
+                            <button className={styles['btn-order']}>Your orders</button>
+                        </NavLink>
+                    }
                 </div>
                 {
                     orderPlaced.status && <div className={styles['cart-no-item-wrapper']}>
@@ -151,6 +157,12 @@ export default function Cart() {
     return (
         <div className={styles['cart-container']}>
             <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
+            {
+                userStatus &&
+                <NavLink to="/orders/" className={styles['link-order']}>
+                    <button className={styles['btn-order']}>Your orders</button>
+                </NavLink>
+            }
             <div className={styles['cart-section-names']}>
                 <p>Product</p>
                 <p>Quantity</p>
