@@ -27,8 +27,9 @@ const initialState = {
 
 const store = mockStore(initialState);
 
+describe('AllProductsContainer', () => {
 
-test('Renders the AllProductsContainer component', () => {
+it('Renders the AllProductsContainer component', () => {
   const { getByTestId } = render(
     <Provider store={store}>
       <AllProductsContainer />
@@ -40,7 +41,7 @@ test('Renders the AllProductsContainer component', () => {
   
 });
 
-test('Simulates the "Load more" button click', () => {
+it('Simulates the "Load more" button click', () => {
   const { getByText } = render(
     <Provider store={store}>
       <AllProductsContainer />
@@ -51,6 +52,7 @@ test('Simulates the "Load more" button click', () => {
   fireEvent.click(loadMoreButton);
 
   
-});
+})
+})
 
 
