@@ -46,10 +46,10 @@ export const cartReducer = createSlice({
             state.cart = []
         },
         openCartForm(state) {
-            state.status = true
+            state.cartStatus = true
         },
         closeCartForm(state) {
-            state.status = false
+            state.cartStatus = false
         },
         addArrayToCart(state, action) {
             const itemsToAdd = Array.isArray(action.payload) ? action.payload : [];
