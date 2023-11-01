@@ -39,17 +39,10 @@ export default function ProductItem({ props }) {
   }
 useEffect(()=>{
   if(userStatus){
-      const isObjectInWIshlist = wishlist.find(obj => {
-        console.log(obj._id);
-        return obj._id === product._id});
-
+      const isObjectInWIshlist = wishlist.find(obj => obj._id === product._id);
       if (isObjectInWIshlist) {
-      console.log("Nashol object yoba")
-      console.log(isObjectInWIshlist);
       setIsInWishlist(true);
-
         } else {
-        console.log('Об\'єкт не знайдено');
         setIsInWishlist(false)
       }}
 },[product, wishlist])
