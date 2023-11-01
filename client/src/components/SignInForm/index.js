@@ -11,6 +11,7 @@ import {
   setToken,
 } from '../../Redux/reducers/userReducers'
 import axios from 'axios'
+import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
 
 export default function OrderForm() {
   const dispatch = useDispatch()
@@ -36,6 +37,7 @@ export default function OrderForm() {
       })
     const customer = await getCustomer()
     dispatch(changeData(customer))
+    dispatch(fetchWishlist())
     resetForm()
   }
 
