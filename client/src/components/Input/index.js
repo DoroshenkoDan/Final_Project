@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 import ShowPasswordIcon from '../Icons/ShowPasswordIcon'
 import HiddenPasswordIcon from "../Icons/HiddenPasswordIcon";
+import InputMask from 'react-input-mask';
 
 export default function Input(props) {
     const [visibilityPassword, setVisibilityPassword] = useState(false)
@@ -16,7 +17,20 @@ export default function Input(props) {
     return (
         <div className={styles['input-container']}>
             <label>
-                <input {...field} {...rest}  type={((field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'} className={styles['form-input']}/>
+                {field.name === 'telephone' &&
+                    <InputMask
+                        mask="+380999999999"
+                        maskChar="_"
+                        {...field}
+                        {...rest}
+                        type="tel"
+                        className={styles['form-input']}
+                    />
+                }
+                {field.name !== 'telephone' &&
+                    <input {...field} {...rest}
+                           type={((field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
+                           className={styles['form-input']}/>}
                 {(field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword &&
                     <span className={styles['icon-password']}
                           onClick={toggleVisibilityPassword}>
