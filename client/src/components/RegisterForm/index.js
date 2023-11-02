@@ -10,34 +10,49 @@ import PropTypes from 'prop-types'
 export default function RegisterForm(props) {
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
-  const handleSubmit = (orderInfo, { resetForm }) => {
-    axios
-      .post(HOST + '/customers', orderInfo)
-      .then((savedCustomer) => {
-        setFormStatus({
-          type: 'success',
-          message: 'You are successfully registered',
-        })
-        props.setActiveBtnSignIn()
-      })
-      .catch((err) => {
-        if (err.response && err.response.data) {
-          const massageData = err.response.data
-          const objectKey = Object.keys(massageData)[0]
-          const errorMessage = massageData[objectKey]
-          setFormStatus({
-            type: 'error',
-            message: `Registration failed! ${errorMessage}`,
+  const handleSubmit = (customerInfo, { resetForm }) => {
+    console.log(customerInfo)
+    if(customerInfo.password === customerInfo.repeatPassword){
+      const customerData = {
+        firstName: customerInfo.firstName,
+        lastName: customerInfo.lastName,
+        login: customerInfo.login,
+        email: customerInfo.email,
+        password: customerInfo.password,
+        telephone: customerInfo.telephone,
+      }
+      axios
+          .post(HOST + '/customers', customerData)
+          .then((savedCustomer) => {
+            setFormStatus({
+              type: 'success',
+              message: 'You are successfully registered',
+            })
+            props.setActiveBtnSignIn()
+            resetForm()
           })
-        } else {
-          // Fallback error message in case the structure of the error object is unexpected
-          setFormStatus({
-            type: 'error',
-            message: 'Registration failed due to an unknown error.',
+          .catch((err) => {
+            if (err.response && err.response.data) {
+              const massageData = err.response.data
+              const objectKey = Object.keys(massageData)[0]
+              const errorMessage = massageData[objectKey]
+              setFormStatus({
+                type: 'error',
+                message: `Registration failed! ${errorMessage}`,
+              })
+            } else {
+              setFormStatus({
+                type: 'error',
+                message: 'Registration failed due to an unknown error.',
+              })
+            }
           })
-        }
+    } else {
+      setFormStatus({
+        type: 'error',
+        message: 'The passwords do not match. Please check the entered data in the appropriate fields.',
       })
-    resetForm()
+    }
   }
 
   return (
