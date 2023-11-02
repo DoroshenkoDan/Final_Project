@@ -11,9 +11,12 @@ import {
   setToken,
 } from '../../Redux/reducers/userReducers'
 import axios from 'axios'
+import {useNavigate } from 'react-router-dom';
 
-export default function OrderForm() {
+
+export default function SignInForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
   const handleSubmit = async (userData, { resetForm }) => {
@@ -24,6 +27,7 @@ export default function OrderForm() {
         dispatch(setToken(loginResult.data.token))
         setAuthToken(loginResult.data.token)
         setFormStatus({ type: 'success', message: 'Welcome to Avion' })
+        navigate(-1);
       })
       .catch((err) => {
         const massageData = err.response.data
@@ -77,13 +81,13 @@ export default function OrderForm() {
         <Form className="form__user-address" noValidate>
           <Field
             type="text"
-            placeholder="login or email"
+            placeholder="Login or Email"
             name="loginOrEmail"
             component={Input}
           />
           <Field
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             component={Input}
           />

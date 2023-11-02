@@ -102,37 +102,37 @@ export default function RegisterForm(props) {
         <Form className="form__user-address" noValidate>
           <Field
             type="text"
-            placeholder="firstName"
+            placeholder="First name"
             name="firstName"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="lastName"
+            placeholder="Last name"
             name="lastName"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="login"
+            placeholder="Login"
             name="login"
             component={Input}
           />
           <Field
             type="email"
-            placeholder="email"
+            placeholder="Email"
             name="email"
             component={Input}
           />
           <Field
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             component={Input}
           />
           <Field
             type="tel"
-            placeholder="telephone"
+            placeholder="Telephone"
             name="telephone"
             component={Input}
           />
