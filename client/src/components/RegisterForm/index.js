@@ -66,12 +66,12 @@ export default function RegisterForm(props) {
           firstName: Yup.string()
             .max(25, 'Must be 25 characters or less')
             .min(2, 'Must be more than 1 characters')
-            .required('Firstname is required')
+            .required('First name is required')
             .matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid firstname format'),
           lastName: Yup.string()
             .max(25, 'Must be 25 characters or less')
             .min(2, 'Must be more than 1 character')
-            .required('Lastname is required')
+            .required('Last name is required')
             .matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid lastname format'),
           login: Yup.string()
             .max(10, 'Login must be between 3 and 10 characters')
