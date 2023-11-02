@@ -17,7 +17,7 @@ export default function Input(props) {
     return (
         <div className={styles['input-container']}>
             <label>
-                {field.name === 'telephone' &&
+                {name === 'telephone' &&
                     <InputMask
                         mask="+380999999999"
                         maskChar="_"
@@ -27,17 +27,17 @@ export default function Input(props) {
                         className={styles['form-input']}
                     />
                 }
-                {field.name !== 'telephone' &&
+                {name !== 'telephone' &&
                     <input {...field} {...rest}
-                           type={((field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
+                           type={((name === 'password' || name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
                            className={styles['form-input']}/>}
-                {(field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword &&
+                {(name === 'password' || name === 'repeatPassword') && !visibilityPassword &&
                     <span className={styles['icon-password']}
                           onClick={toggleVisibilityPassword}>
                         <ShowPasswordIcon/>
                     </span>
                 }
-                {(field.name === 'password' || field.name === 'repeatPassword') && visibilityPassword &&
+                {(name === 'password' || name === 'repeatPassword') && visibilityPassword &&
                     <span className={styles['icon-password']}
                           onClick={toggleVisibilityPassword}>
                         <HiddenPasswordIcon/>
