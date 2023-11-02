@@ -78,7 +78,7 @@ export default function SignInForm() {
             .min(7, 'Password must be between 7 and 30 characters'),
         })}
       >
-        <Form className="form__user-address" noValidate>
+        <Form className="form__user-auth" noValidate>
           <Field
             type="text"
             placeholder="Login or Email"

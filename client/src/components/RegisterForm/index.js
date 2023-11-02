@@ -123,7 +123,7 @@ export default function RegisterForm(props) {
             .required('Mobile is required'),
         })}
       >
-        <Form className="form__user-address" noValidate>
+        <Form className="form__user-register" noValidate>
           <Field
             type="text"
             placeholder="First name"
