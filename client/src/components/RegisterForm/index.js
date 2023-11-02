@@ -58,6 +58,7 @@ export default function RegisterForm(props) {
           login: '',
           email: '',
           password: '',
+          repeatPassword: '',
           telephone: '',
         }}
         onSubmit={handleSubmit}
@@ -76,7 +77,7 @@ export default function RegisterForm(props) {
             .max(10, 'Login must be between 3 and 10 characters')
             .min(3, 'Login must be between 3 and 10 characters')
             .matches(/^[a-zA-Z0-9]+$/, 'Invalid login format')
-            .required('Email is required'),
+            .required('Login is required'),
           email: Yup.string()
             .matches(
               /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -88,9 +89,17 @@ export default function RegisterForm(props) {
               /^[a-zA-Z0-9]+$/,
               'Allowed characters for password is a-z, A-Z, 0-9.',
             )
-            .required('Email is required')
+            .required('Password is required')
             .max(30, 'Password must be between 7 and 30 characters')
             .min(7, 'Password must be between 7 and 30 characters'),
+          repeatPassword: Yup.string()
+              .matches(
+                  /^[a-zA-Z0-9]+$/,
+                  'Allowed characters for password is a-z, A-Z, 0-9.',
+              )
+              .required('Password is required')
+              .max(30, 'Password must be between 7 and 30 characters')
+              .min(7, 'Password must be between 7 and 30 characters'),
           telephone: Yup.string()
             .matches(
               /^\+380\d{3}\d{2}\d{2}\d{2}$/,
@@ -129,6 +138,12 @@ export default function RegisterForm(props) {
             placeholder="Password"
             name="password"
             component={Input}
+          />
+          <Field
+              type="password"
+              placeholder="Repeat Password"
+              name="repeatPassword"
+              component={Input}
           />
           <Field
             type="tel"

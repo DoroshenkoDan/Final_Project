@@ -16,14 +16,14 @@ export default function Input(props) {
     return (
         <div className={styles['input-container']}>
             <label>
-                <input {...field} {...rest}  type={(field.name === 'password' && !visibilityPassword) ? 'password' : 'text'} className={styles['form-input']}/>
-                {field.name === 'password' && !visibilityPassword &&
+                <input {...field} {...rest}  type={((field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'} className={styles['form-input']}/>
+                {(field.name === 'password' || field.name === 'repeatPassword') && !visibilityPassword &&
                     <span className={styles['icon-password']}
                           onClick={toggleVisibilityPassword}>
                         <ShowPasswordIcon/>
                     </span>
                 }
-                {field.name === 'password' && visibilityPassword &&
+                {(field.name === 'password' || field.name === 'repeatPassword') && visibilityPassword &&
                     <span className={styles['icon-password']}
                           onClick={toggleVisibilityPassword}>
                         <HiddenPasswordIcon/>
