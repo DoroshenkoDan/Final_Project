@@ -27,6 +27,7 @@ export default function SignInForm() {
         dispatch(setToken(loginResult.data.token))
         setAuthToken(loginResult.data.token)
         setFormStatus({ type: 'success', message: 'Welcome to Avion' })
+        resetForm()
         navigate(-1);
       })
       .catch((err) => {
@@ -40,7 +41,6 @@ export default function SignInForm() {
       })
     const customer = await getCustomer()
     dispatch(changeData(customer))
-    resetForm()
   }
 
   const getCustomer = async () => {
