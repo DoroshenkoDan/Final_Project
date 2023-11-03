@@ -46,6 +46,8 @@ export default function Cart() {
     fetchData()
   }, [cartReducer, userStatus])
 
+  console.log(cartReducer);
+
   async function getCart() {
     const response = await axios.get(HOST + '/cart')
 

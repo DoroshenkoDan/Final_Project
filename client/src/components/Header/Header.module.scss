@@ -59,10 +59,27 @@ color: #2A254B;
 margin-left: 20px;
 }
 .shlash {
+  display: none;
   position: absolute;
   top: 23px;
   right: 15px;
   color: #2A254B;
+}
+.counter{
+  display: none;
+  position: absolute;
+  background: #f0ecec;
+  text-align: center;
+  color: #020107;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-family: 'Clash Display Regular';
+  font-weight: 400;
+  font-size: 12px;
+  top: 17px;
+  right: 76px;
+ 
 }
 
 
@@ -102,5 +119,11 @@ margin-left: 20px;
     position: absolute;
     top: 23px;
     right: 0;
+  }
+  .counter{    
+    display: block;
+  }
+  .shlash{
+    display: block;
   }
 }
