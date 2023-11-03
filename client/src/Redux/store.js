@@ -17,7 +17,7 @@ import userReducers from './reducers/userReducers'
 import cartReducer from './reducers/cartReducer'
 import FilterReducers from './reducers/FilterReducers.js'
 import wishlistReducers from './reducers/wishlistReducers.js'
-import modalReducer from './reducers/modalReducer.js'
+
 
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
@@ -28,8 +28,7 @@ const storeReducers = combineReducers({
   products: productsReducer,
   user: userReducers,
   cart: cartReducer,
-  wishlist: wishlistReducers,
-  modal: modalReducer
+  wishlist: wishlistReducers
 })
 
 const persistedReducers = persistReducer(

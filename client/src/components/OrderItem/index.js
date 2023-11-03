@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import styles from "./OrderItem.module.scss";
@@ -6,8 +6,7 @@ import CloseBtnIcon from "../Icons/CloseBtnIcon";
 import axios from "axios";
 import { HOST } from "../Token";
 import Modal from "../Modal/index";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "../../Redux/reducers/modalReducer.js";
+
 
 export default function OrderPage(props) {
   function deleteOrders() {
@@ -21,15 +20,14 @@ export default function OrderPage(props) {
       });
   }
 
-  const dispatch = useDispatch();
-  const isModalOpen = useSelector((state) => state.store.modal.isOpen);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleOpenModal = () => {
-    dispatch(openModal(props.order._id));
+  const openModal = () => {
+    setIsModalOpen(true)
   };
 
-  const handleCloseModal = () => {
-    dispatch(closeModal());
+  const closeModal = () => {
+    setIsModalOpen(false)
   };
 
   return (
@@ -70,18 +68,18 @@ export default function OrderPage(props) {
       <span
         data-testid="btn-close"
         className={styles["btn-close"]}
-        onClick={handleOpenModal}
+        onClick={openModal}
       >
         <CloseBtnIcon></CloseBtnIcon>
       </span>
       {isModalOpen && (
           <Modal
-            header = "Are you sure?"
+            title = "Sure you want to delete?"
             closeButton = {true}
-            closeMod = {handleCloseModal}
-            text = "Ok"
-            actionBtn = "Ok"
-            cancelBtn = "Cancel"
+            closeModal = {closeModal}
+            text = "Are you sure you want to delete this?"
+            actionBtn = "Yes, confirm"
+            cancelBtn = "No, cancel"
             removeOrder = {deleteOrders}
           />
 )} 
