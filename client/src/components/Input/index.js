@@ -9,7 +9,6 @@ export default function Input(props) {
     const [visibilityPassword, setVisibilityPassword] = useState(false)
     const {field, form, ...rest} = props
     const {name} = field
-    console.log(visibilityPassword)
     const toggleVisibilityPassword = () => {
         setVisibilityPassword(prevState => !prevState)
     }

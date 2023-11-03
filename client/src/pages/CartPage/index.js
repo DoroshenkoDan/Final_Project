@@ -10,7 +10,7 @@ import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
 import {NavLink} from 'react-router-dom'
 
 export default function Cart() {
-    const [visibilityOrderForm, setVisibilityOrderForm] = useState('')
+    const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
     const [orderPlaced, setOrderPlaced] = useState({status: '', massage: ''})
     const cartReducer = useSelector((state) => state.store.cart.cart)
     const allProducts = useSelector((state) => state.products.data)
@@ -111,11 +111,7 @@ export default function Cart() {
     }, 0)
 
     function showOrderForm() {
-        if (userStatus) {
-            setVisibilityOrderForm('registered user')
-        } else {
-            setVisibilityOrderForm('unregistered user')
-        }
+            setVisibilityOrderForm(true)
     }
 
     function changeOrderPlaced(orderInfo) {
@@ -184,7 +180,7 @@ export default function Cart() {
           </span>
                 </p>
                 <p>Taxes and shipping are calculated at checkout</p>
-                {visibilityOrderForm === '' &&
+                {!visibilityOrderForm &&
                     <button
                         onClick={() => {
                             showOrderForm()
@@ -195,7 +191,7 @@ export default function Cart() {
                     </button>
                 }
             </div>
-            {visibilityOrderForm !== '' && (
+            {visibilityOrderForm && (
                 <OrderForm
                     changeOrderPlaced={changeOrderPlaced}
                     orderPlaced={orderPlaced}

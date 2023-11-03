@@ -2,7 +2,6 @@ import React from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {HOST} from '../Token'
-import {useNavigate} from 'react-router-dom'
 import Input from '../Input'
 import styles from './OrderForm.module.scss'
 import PropTypes from 'prop-types'
@@ -13,25 +12,50 @@ import {clearCart} from '../../Redux/reducers/cartReducer'
 export default function OrderForm(props) {
     const userStatus = useSelector((state) => state.store.user.status)
     const userData = useSelector((state) => state.store.user.data)
-    const navigate = useNavigate()
+    const cartReducer = useSelector((state) => state.store.cart.cart)
+    const products = useSelector((state) => state.products.data)
     const dispatch = useDispatch()
-    console.log(userData)
+    console.log(cartReducer)
 
 
-    // const getCart = async () => {
-    //   try {
-    //     const response = await axios.get(HOST + '/cart')
-    //     return response.data
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // }
+    const sendOrder = async (newOrder) => {
+        try {
+            await axios.post(HOST + '/orders', newOrder);
+            props.changeOrderPlaced({
+                status: true,
+                massage: 'Thank you for your order! You are welcome!',
+            });
+            dispatch(clearCart());
+            if(userStatus) {
+                await deleteCart();
+            }
+        } catch (err) {
+            props.changeOrderPlaced({
+                status: false,
+                massage:
+                    'The order has not been processed. Check that the entered data is correct and that you are logged in',
+            });
+            console.log(err);
+        }
+    }
     const deleteCart = async () => {
         try {
             await axios.delete(HOST + '/cart')
         } catch (err) {
             console.log(err)
         }
+
+    }
+
+    const findProductsInCart = () => {
+        const mergedObjects = []
+        for (const productInCart of cartReducer) {
+            const matchingProduct = products.find(product => product._id === productInCart.product)
+            if (matchingProduct) {
+                mergedObjects.push({product: matchingProduct, cartQuantity: productInCart.cartQuantity})
+            }
+        }
+        return mergedObjects
     }
 
 
@@ -52,28 +76,45 @@ export default function OrderForm(props) {
                 letterSubject: 'Thank you for order! You are welcome!',
                 letterHtml: '<h1>Your order is placed.</h1>',
             }
-            axios
-                .post(HOST + '/orders', newOrder)
-                .then((newOrder) => {
-                    props.changeOrderPlaced({
-                        status: true,
-                        massage: 'Thank you for order! You are welcome!',
-                    })
-                })
-                .catch((err) => {
-                    props.changeOrderPlaced({
-                        status: false,
-                        massage:
-                            'The order has not been processed. Check that the entered data is correct and that you are logged in',
-                    })
-                    console.log(err)
-                })
-            dispatch(clearCart())
-            await deleteCart()
+            await sendOrder(newOrder)
         } else {
-            navigate('/login/')
+            const {firstName, lastName, email, telephone, country, city, address, postal} = orderInfo
+            const products = findProductsInCart()
+            console.log(products)
+            const newOrder = {
+                products: products,
+                deliveryAddress: {
+                    country: country,
+                    city: city,
+                    address: address,
+                    postal: `${postal}`,
+                },
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                canceled: false,
+                mobile: telephone,
+                letterSubject: 'Thank you for order! You are welcome!',
+                letterHtml: '<h1>Your order is placed.</h1>',
+            }
+            console.log(newOrder)
+            await sendOrder(newOrder)
+            await getOrders()
         }
     }
+
+    const getOrders = () => {
+        axios
+            .get(HOST + '/orders')
+            .then((receivedOrders) => {
+                console.log(receivedOrders)
+                return receivedOrders
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
 
     return (
         <>
