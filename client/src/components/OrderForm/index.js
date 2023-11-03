@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {clearCart} from '../../Redux/reducers/cartReducer'
+import {changeData} from "../../Redux/reducers/userReducers";
 
 export default function OrderForm(props) {
     const userStatus = useSelector((state) => state.store.user.status)
@@ -26,6 +27,14 @@ export default function OrderForm(props) {
             dispatch(clearCart());
             if(userStatus) {
                 await deleteCart();
+                const updatedCustomers = {...userData, ...newOrder.deliveryAddress}
+                await axios.put(HOST + "/customers" , updatedCustomers)
+                    .then( UpdatedCustomer => {
+                        dispatch(changeData(updatedCustomers))
+                    })
+                    .catch( err => {
+                        console.log(err) })
+                console.log(updatedCustomers)
             }
         } catch (err) {
             props.changeOrderPlaced({
@@ -66,7 +75,7 @@ export default function OrderForm(props) {
                     country: country,
                     city: city,
                     address: address,
-                    postal: `${postal}`,
+                    postal: postal,
                 },
                 email: email,
                 canceled: false,
@@ -85,7 +94,7 @@ export default function OrderForm(props) {
                     country: country,
                     city: city,
                     address: address,
-                    postal: `${postal}`,
+                    postal: postal,
                 },
                 firstName: firstName,
                 lastName: lastName,
@@ -123,17 +132,21 @@ export default function OrderForm(props) {
                         ? {
                             email: userData.email,
                             telephone: userData.telephone,
+                            country: userData.country !== '' ? userData.country: '',
+                            city: userData.city !== '' ? userData.city: '',
+                            address: userData.address !== '' ? userData.address: '',
+                            postal: userData.postal !== '' ? userData.postal: '',
                         }
                         : {
                             firstName: '',
                             lastName: '',
                             email: '',
                             telephone: '',
+                            country: '',
+                            city: '',
+                            address: '',
+                            postal: '',
                         }),
-                    country: '',
-                    city: '',
-                    address: '',
-                    postal: '',
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={Yup.object().shape({

@@ -10,9 +10,10 @@ import PropTypes from 'prop-types'
 export default function RegisterForm(props) {
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
-  const handleSubmit = (orderInfo, { resetForm }) => {
+  const handleSubmit = (userInfo, { resetForm }) => {
+    const userData = {...userInfo, country: '', city:'', address:'', postal: ''}
     axios
-      .post(HOST + '/customers', orderInfo)
+      .post(HOST + '/customers', userData)
       .then((savedCustomer) => {
         setFormStatus({
           type: 'success',
@@ -29,6 +30,7 @@ export default function RegisterForm(props) {
             type: 'error',
             message: `Registration failed! ${errorMessage}`,
           })
+          resetForm()
         } else {
           // Fallback error message in case the structure of the error object is unexpected
           setFormStatus({
@@ -37,7 +39,6 @@ export default function RegisterForm(props) {
           })
         }
       })
-    resetForm()
   }
 
   return (
@@ -102,37 +103,37 @@ export default function RegisterForm(props) {
         <Form className="form__user-address" noValidate>
           <Field
             type="text"
-            placeholder="firstName"
+            placeholder="First name"
             name="firstName"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="lastName"
+            placeholder="Last name"
             name="lastName"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="login"
+            placeholder="Login"
             name="login"
             component={Input}
           />
           <Field
             type="email"
-            placeholder="email"
+            placeholder="Email"
             name="email"
             component={Input}
           />
           <Field
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             component={Input}
           />
           <Field
             type="tel"
-            placeholder="telephone"
+            placeholder="Telephone"
             name="telephone"
             component={Input}
           />
