@@ -1,0 +1,81 @@
+.modal-container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #modal {
+    background-color: #fff;
+    width: 350px;
+    height: 180px;
+    border-radius: 5px;
+  
+  }
+  
+  .modalHeader {
+    margin-top: 0;
+    margin-bottom: 20px;
+    background-color: #929191;
+    position: relative;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 5px;
+  }
+  
+  .confirmBtn,
+  .cancelBtn {
+    background-color: #929191;
+    color: #fff;
+    width: 100px;
+    height: 35px;
+    margin: 0px 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .modalContent {
+    height: 45px;
+    text-align: center;
+    padding: 0 39px;
+    font-size: 15px;
+    line-height: 30px;
+  }
+  
+  .actionsBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  
+  .closeBtn {
+    cursor: pointer;
+    position: absolute;
+    top: 45%;
+    right: 15px;
+    width: 26px;
+    height: 2px;
+    background-color: #000;
+    transform: rotate(45deg);
+  
+    &::after {
+      content: "";
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 26px;
+      height: 2px;
+      background-color: #000;
+      transform: rotate(-90deg);
+    }
+  }
