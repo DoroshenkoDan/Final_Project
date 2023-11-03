@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import CartIcon from '../Icons/CartIcon'
 import FavoritesIcon from '../Icons/FavoritesIcon'
+import {IoPersonAddOutline} from 'react-icons/io5'
+import {RxSlash} from 'react-icons/rx'
 import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
@@ -41,11 +43,20 @@ export default function Header() {
         <span className={styles.icons}>
           <NavLink className={styles.icon} to="/favorites/">
             <FavoritesIcon />
-          </NavLink>
+          </NavLink>          
           <NavLink className={styles.icon} to="/cart/">
             <CartIcon />
           </NavLink>
+          {status && (
+            <NavLink className={styles.icon} to="/profile/">
+          <IoPersonAddOutline className={styles.profile}/>          
+        </NavLink>        
+          )}          
         </span>
+        {status && 
+        <RxSlash className={styles.shlash} />
+        }               
+        
         {status && (
           <NavLink
             onClick={logOutUser}
