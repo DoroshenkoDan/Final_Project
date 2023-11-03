@@ -143,11 +143,9 @@ export default function Cart() {
     return (
         <div className={styles['cart-container']}>
             <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-            {userStatus && (
                 <NavLink to="/orders/" className={styles['link-order']}>
                     <button className={styles['btn-order']}>Your orders</button>
                 </NavLink>
-            )}
             <div className={styles['cart-section-names']}>
                 <p>Product</p>
                 <p>Quantity</p>
