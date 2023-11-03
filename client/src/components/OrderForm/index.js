@@ -15,8 +15,6 @@ export default function OrderForm(props) {
     const cartReducer = useSelector((state) => state.store.cart.cart)
     const products = useSelector((state) => state.products.data)
     const dispatch = useDispatch()
-    console.log(cartReducer)
-
 
     const sendOrder = async (newOrder) => {
         try {
@@ -99,22 +97,8 @@ export default function OrderForm(props) {
             }
             console.log(newOrder)
             await sendOrder(newOrder)
-            await getOrders()
         }
     }
-
-    const getOrders = () => {
-        axios
-            .get(HOST + '/orders')
-            .then((receivedOrders) => {
-                console.log(receivedOrders)
-                return receivedOrders
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
 
     return (
         <>
