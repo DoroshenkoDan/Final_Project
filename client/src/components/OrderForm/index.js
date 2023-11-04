@@ -25,16 +25,21 @@ export default function OrderForm(props) {
                 massage: 'Thank you for your order! You are welcome!',
             });
             dispatch(clearCart());
-            if(userStatus) {
+
+            if (userStatus) {
                 await deleteCart();
-                const updatedCustomers = {...userData, ...newOrder.deliveryAddress}
-                await axios.put(HOST + "/customers" , updatedCustomers)
-                    .then( UpdatedCustomer => {
-                        dispatch(changeData(updatedCustomers))
+
+                if (!Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')) {
+                    await axios.put(HOST + "/customers", {
+                        deliveryAddress: newOrder.deliveryAddress
                     })
-                    .catch( err => {
-                        console.log(err) })
-                console.log(updatedCustomers)
+                        .then(UpdatedCustomer => {
+                            dispatch(changeData(UpdatedCustomer.data))
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
             }
         } catch (err) {
             props.changeOrderPlaced({
@@ -132,10 +137,10 @@ export default function OrderForm(props) {
                         ? {
                             email: userData.email,
                             telephone: userData.telephone,
-                            country: userData.country !== '' ? userData.country: '',
-                            city: userData.city !== '' ? userData.city: '',
-                            address: userData.address !== '' ? userData.address: '',
-                            postal: userData.postal !== '' ? userData.postal: '',
+                            country: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.country : '',
+                            city: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.city : '',
+                            address: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.address : '',
+                            postal: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.postal : '',
                         }
                         : {
                             firstName: '',

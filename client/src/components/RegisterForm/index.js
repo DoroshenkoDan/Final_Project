@@ -11,9 +11,8 @@ export default function RegisterForm(props) {
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
   const handleSubmit = (userInfo, { resetForm }) => {
-    const userData = {...userInfo, country: '', city:'', address:'', postal: ''}
     axios
-      .post(HOST + '/customers', userData)
+      .post(HOST + '/customers', userInfo)
       .then((savedCustomer) => {
         setFormStatus({
           type: 'success',
