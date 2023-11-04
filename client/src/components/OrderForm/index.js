@@ -139,32 +139,32 @@ export default function OrderForm(props) {
         <Form className={styles['form__user-address']} noValidate>
           <Field
             type="email"
-            placeholder="email"
+            placeholder="Email"
             name="email"
             component={Input}
           />
           <Field
             type="tel"
-            placeholder="mobile"
+            placeholder="Mobile"
             name="mobile"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="country"
+            placeholder="Country"
             name="country"
             component={Input}
           />
-          <Field type="text" placeholder="city" name="city" component={Input} />
+          <Field type="text" placeholder="City" name="city" component={Input} />
           <Field
             type="text"
-            placeholder="address"
+            placeholder="Adress"
             name="address"
             component={Input}
           />
           <Field
             type="text"
-            placeholder="postal"
+            placeholder="Postal"
             name="postal"
             component={Input}
           />
