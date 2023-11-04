@@ -20,7 +20,7 @@ import { setAuthToken } from '../Token'
 
 export default function Header() {
   const status = useSelector((state) => state.store.user.status)
-  const car = useSelector((state) => state.store.cart.cart)
+  const cart = useSelector((state) => state.store.cart.cart)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
 
@@ -34,7 +34,6 @@ export default function Header() {
     dispatch(resetToken())
     setAuthToken(false)
   }
-console.log(car.length);
 
   return (
     <header className={styles.headerContainer}>
@@ -47,7 +46,9 @@ console.log(car.length);
             <FavoritesIcon />
           </NavLink>          
           <NavLink className={styles.icon} to="/cart/">
+            <div className={styles.counter}>{cart.length}</div>
             <CartIcon />
+            
           </NavLink>
           {status && (
             <NavLink className={styles.icon} to="/profile/">
@@ -55,7 +56,7 @@ console.log(car.length);
         </NavLink>        
           )}          
         </span>
-        <div className={styles.counter}>{car.length}</div>
+        
         {status && 
         <RxSlash className={styles.shlash} />
         }               

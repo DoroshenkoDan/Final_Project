@@ -1,0 +1,77 @@
+.profile{
+    padding: 50px 0;
+    &__container {
+        width: 75%;
+        margin: 0 auto;
+        position: relative;
+    }
+    &__title{
+        font-size: 20px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+    &__user{
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    &__img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: darkgrey;
+        cursor: pointer;
+    }
+    &__btn {
+        padding: 10px 15px;
+        border: 1px solid #22ca46;
+        color:#22ca46;
+        border-radius: 12px;
+        background: transparent;
+        cursor: pointer;    
+    }
+    &__icon {
+        font-size: 25px;
+        cursor: pointer;
+    }
+    &__info {
+        font-size: 18px;
+        color:  gray;
+        margin-bottom: 20px;
+        border-bottom: 1px solid gray;
+        width: 600px;
+        padding-bottom: 40px;    
+    }
+    &__input {
+        width: 600px;
+        height: 40px;
+        outline: none;
+        padding-left: 20px;
+        border-radius: 10px;
+        // border: none;
+    }
+    &__btn2 {
+        display: block;
+        color: white;
+        background: #22ca46;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+    &__remove {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        font-size: 20px;
+        color: red;
+
+
+    }
+    
+
+
+}
