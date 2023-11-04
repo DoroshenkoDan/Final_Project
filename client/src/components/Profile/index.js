@@ -1,8 +1,60 @@
 import React from 'react';
 import styles from './Profile.module.scss'
 import {SlTrash} from "react-icons/sl"
+// import axios from 'axios'
+import { getCustomer } from '../Token';
+
+
 
 function Profile() {
+
+    const customer = async () => {
+    try {
+      const persistRoot = await JSON.parse(localStorage.getItem('persist:root'));
+      const user = await JSON.parse(persistRoot.user);
+      const response = await getCustomer(user.token);
+      return response.data;
+    } catch (error) {
+      console.error("Произошла ошибка:", error);
+    }
+  }
+
+  const user1 =[]
+
+  const customerPromise = customer();
+  
+
+  customerPromise.then((data) => {
+    user1.push(data);
+  });
+
+  console.log(user1);
+ 
+//  const getCustomer = async () => {
+//          const persistRoot = JSON.parse(localStorage.getItem('persist:root'))
+//         const user = JSON.parse(persistRoot.user)    
+//         setAuthToken(user.token)
+//         const response = await axios.get(HOST + '/customers/customer')
+        
+//             return response.data;
+                 
+        
+//       }
+
+      
+
+    //   console.log(getCustomer());
+   
+    // useEffect(()=>{
+              
+    //   getCustomer()
+    // }, [])
+
+    // console.log(customer);
+   
+
+
+
     return (
         <div className={styles.profile}>
             <div className={styles.profile__container}>                
