@@ -1,13 +1,13 @@
 import React from 'react'
 import ProductsContainer from '../../components/ProductsContainer'
 import ItStarted from '../../components/ItStarted'
-import MainImages from '../../components/MainImage'
+import MainVideo from '../../components/MainVideo'
 import Advantages from '../../components/AdvantagesSection'
 
 export default function HomePage() {
   return (
     <>
-      <MainImages />
+      <MainVideo />
       <Advantages />
       <ProductsContainer />
       <ItStarted />
