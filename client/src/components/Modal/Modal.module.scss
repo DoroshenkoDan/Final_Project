@@ -15,7 +15,7 @@
 
 .modal {
   position: relative;
-  width: 100%;
+  max-width: 90%;
   font-family: 'Clash Display Regular';
   color: #2a254b;
   background-color: #fff;
@@ -53,10 +53,10 @@
       line-height: 17px;
       font-family: 'Satoshi';
       cursor: pointer;
+      border: 1px solid #4f4f4f;
     }
 
     &__confirm {
-      border: 1px solid #4f4f4f;
       color: #2a254b;
     }
 

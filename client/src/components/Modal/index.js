@@ -3,31 +3,23 @@ import styles from './Modal.module.scss'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import PropTypes from 'prop-types'
 
-export default function Modal({
-  title,
-  closeButton,
-  closeModal,
-  text,
-  actionBtn,
-  cancelBtn,
-  removeOrder,
-}) {
+export default function Modal({ closeModal, removeOrder }) {
   return (
     <div className={styles.container} onClick={closeModal}>
       <div className={styles.modal}>
-        {closeButton && (
-          <span className={styles.btn__close} onClick={closeModal}>
-            <CloseBtnIcon></CloseBtnIcon>
-          </span>
-        )}
-        <h3 className={styles.modal__title}>{title}</h3>
-        <div className={styles.modal__text}>{text}</div>
+        <span className={styles.btn__close} data-testid="btn-close" onClick={closeModal}>
+          <CloseBtnIcon></CloseBtnIcon>
+        </span>
+        <h3 className={styles.modal__title}>Sure you want to delete?</h3>
+        <div className={styles.modal__text}>
+          Are you sure you want to delete this?
+        </div>
         <div className={styles.modal__btn}>
           <button className={styles.modal__btn__confirm} onClick={removeOrder}>
-            {actionBtn}
+            Yes, confirm
           </button>
           <button className={styles.modal__btn__cancel} onClick={closeModal}>
-            {cancelBtn}
+            No, cancel
           </button>
         </div>
       </div>
@@ -36,11 +28,6 @@ export default function Modal({
 }
 
 Modal.propTypes = {
-  title: PropTypes.string,
-  text: PropTypes.string,
-  closeButton: PropTypes.func,
   closeModal: PropTypes.func,
-  actionBtn: PropTypes.string,
-  cancelBtn: PropTypes.string,
-  removeOrder: PropTypes.func,
+  removeOrder: PropTypes.func
 }
