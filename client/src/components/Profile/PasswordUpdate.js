@@ -4,7 +4,7 @@ import {SlTrash} from "react-icons/sl"
 import { useSelector } from 'react-redux';
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import Input from '../Input';
+import Input from '../Profile/InputProfile';
 
 
 
@@ -19,18 +19,30 @@ function PasswordUpdate() {
     <Formik
         initialValues={{
           password: '',
-          newPassword: ''         
+          newPassword: '',
+          updatePassword: ''         
         }}
         // onSubmit={handleSubmit}
         validationSchema={Yup.object({          
           password: Yup.string()
             .matches(
               /^[a-zA-Z0-9]+$/,
-              'Allowed characters for password is a-z, A-Z, 0-9.',
+              'Allowed characters for password are a-z, A-Z, 0-9.'
             )
-            .required('Email is required')
+            .required('Password is required')
             .max(30, 'Password must be between 7 and 30 characters')
             .min(7, 'Password must be between 7 and 30 characters'),
+          newPassword: Yup.string()
+            .matches(
+              /^[a-zA-Z0-9]+$/,
+              'Allowed characters for password are a-z, A-Z, 0-9.'
+            )
+            .required('Password is required')
+            .max(30, 'Password must be between 7 and 30 characters')
+            .min(7, 'Password must be between 7 and 30 characters'),
+          updatePassword: Yup.string()
+            .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+            .required('Password is required')
           
         })}
       >
@@ -40,10 +52,9 @@ function PasswordUpdate() {
                 <h3 className={styles.profile__title}>Изменение пароля</h3>
                 <p className={styles.profile__title}>Тукущий пароль</p>
                 <Field
-                    // defaultValue={customer.password} 
                     className={styles.profile__input}
                     type="password"
-                    placeholder={customer.password}
+                    placeholder="password"
                     name="password"
                     component={Input}           
                 />
@@ -52,8 +63,8 @@ function PasswordUpdate() {
                     defaultValue={customer.password} 
                     className={styles.profile__input}
                     type="password"
-                    // placeholder="password"
-                    name="password"
+                    placeholder="password"
+                    name="newPassword"
                     component={Input}           
                 />
                 <p className={styles.profile__title}>Подтвердите пароль</p>
@@ -61,15 +72,15 @@ function PasswordUpdate() {
                     defaultValue={customer.password} 
                     className={styles.profile__input}
                     type="password"
-                    // placeholder="password"
-                    name="password"
+                    placeholder="password"
+                    name="updatePassword"
                     component={Input}           
                 />
                 <button className={styles.profile__btn2} type="submit">
               Send
             </button>
             <h3 className={styles.profile__title}>Удалить профиль</h3>
-            <p className={styles.profile__remove}><span className='profile__remove-icon'><SlTrash/></span>Удалить профиль</p>                                
+            <p className={styles.profile__remove}><span><SlTrash/></span>Удалить профиль</p>                                
             </div>
             </div>   
         </Form>        

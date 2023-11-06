@@ -6,6 +6,9 @@
         position: relative;
     }
     &__title{
+        font-family: 'Satoshi Regular';
+        font-weight: 400;        
+        color: #22202e;
         font-size: 20px;
         margin-bottom: 15px;
         font-weight: bold;
@@ -26,16 +29,23 @@
     }
     &__btn {
         padding: 10px 15px;
-        border: 1px solid #22ca46;
-        color:#22ca46;
+        border: 1px solid #2a254b;
+        color:#2a254b;
         border-radius: 12px;
         background: transparent;
         cursor: pointer;    
     }
+    &__btn:hover {
+        transform: scale(1.1);
+      }
     &__icon {
         font-size: 25px;
         cursor: pointer;
     }
+    &__icon:hover {
+        transform: scale(1.1);
+    }
+
     &__info {
         font-size: 18px;
         color:  gray;
@@ -45,33 +55,73 @@
         padding-bottom: 40px;    
     }
     &__input {
+        font-family: 'Satoshi Regular';
+        font-weight: 400;
+        font-size: 18px;
+        color: #22202e;
         width: 600px;
         height: 40px;
         outline: none;
         padding-left: 20px;
         border-radius: 10px;
+        margin-bottom: 20px;
         // border: none;
     }
     &__btn2 {
         display: block;
+        padding: 10px 20px;
+        font-family: 'Satoshi';
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        background-color: #2a254b;
         color: white;
-        background: #22ca46;
-        padding: 15px 20px;
-        border: none;
+        transition: all 0.1s ease-in-out;
+        transform: scale(1);
+        border-radius: 5px;
         cursor: pointer;
-        border-radius: 15px;
-        margin-top: 20px;
+        
     }
+    &__btn2:hover {
+        transform: scale(1.1);
+      }
     &__remove {
         display: flex;
         align-items: center;
         column-gap: 10px;
         font-size: 20px;
         color: red;
-
-
+       
     }
+
+     &__remove-icon{
+            font-family: 'Satoshi Regular';
+            font-weight: 400;        
+            color: #22202e;
+            font-size: 20px;
+        }
+    &__error {
+        font-family: 'Satoshi Regular';
+        font-weight: 400;
+        font-size: 18px;
+        color: #e4605e;
+        margin-bottom: 10px;
+      }
     
 
 
 }
+.form {
+    &__message{
+        font-family: 'Satoshi Regular';
+    font-weight: 400;
+    font-size: 18px;
+    color: #22202e;
+    line-height: 24px;
+    }
+    &__massageError {
+    color: #e4605e;
+  }
+    
+  }
+  
