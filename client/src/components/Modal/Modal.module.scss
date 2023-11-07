@@ -43,7 +43,6 @@
     display: flex;
     justify-content: space-between;
 
-
     &__confirm,
     &__cancel {
       width: 181px;
@@ -51,7 +50,7 @@
       border-radius: 8px;
       font-size: 14px;
       line-height: 17px;
-      font-family: 'Satoshi';
+      font-family: 'Satoshi Regular';
       cursor: pointer;
       border: 1px solid #4f4f4f;
     }
@@ -63,6 +62,16 @@
     &__cancel {
       background-color: #2a254b;
       color: #f5f5f5;
+    }
+
+    &__confirm:hover {
+      background-color: #2a254b;
+      color: #e9e9ed;
+    }
+
+    &__cancel:hover {
+      background-color: #e9e9ed;
+      color: #2a254b;
     }
   }
 }
@@ -77,4 +86,10 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out 0s;
+  transform: scale(1);
+}
+
+.btn__close:hover {
+  transform: scale(1.2);
 }

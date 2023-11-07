@@ -31,7 +31,7 @@ export default function OrderPage(props) {
         Order: № {props.order.orderNo}
       </h2>
       <p className={`${styles['order-sum']} ${styles['order-text']}`}>
-        Total Sum: {props.order.totalSum}$
+        Total Sum:  {Math.round(props.order.totalSum * 100) / 100}$
       </p>
       {props.order.products.map((product) => (
         <div key={product._id} className={styles['order-container__product']}>
