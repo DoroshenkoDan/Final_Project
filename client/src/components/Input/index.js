@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 import ShowPasswordIcon from '../Icons/ShowPasswordIcon'
@@ -9,6 +9,7 @@ export default function Input(props) {
     const [visibilityPassword, setVisibilityPassword] = useState(false)
     const {field, form, ...rest} = props
     const {name} = field
+
     const toggleVisibilityPassword = () => {
         setVisibilityPassword(prevState => !prevState)
     }

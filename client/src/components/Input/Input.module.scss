@@ -16,7 +16,6 @@
   border: 0;
   line-height: 40px;
 }
-
 .form-input:focus {
   outline: none;
 }
@@ -35,3 +34,6 @@
   right: 0;
 }
 
+.icon-password--display{
+  display: none;
+}
