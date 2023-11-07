@@ -15,11 +15,12 @@
 
 .modal {
   position: relative;
-  max-width: 90%;
+  width: 90%;
   font-family: 'Clash Display Regular';
   color: #2a254b;
   background-color: #fff;
-  width: 465px;
+  max-width: 465px;
+  min-width: 290px;
   height: 196px;
   border-radius: 8px;
 
