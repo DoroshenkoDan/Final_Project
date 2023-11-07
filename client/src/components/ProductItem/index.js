@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import { addToCart } from '../../Redux/reducers/cartReducer'
 import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { HOST } from '../../components/Token'
+// import axios from 'axios'
+// import { HOST } from '../../components/Token'
 export default function ProductItem({ props }) {
     const dispatch = useDispatch()
     const list = useSelector((state) => state.products.data)
@@ -84,20 +84,48 @@ export default function ProductItem({ props }) {
         }
     }
 
-    async function getOneProd(id) {
-        console.log("list", list);
-        console.log("IDgetoneProd", id);
-        axios
-            .get(HOST + `/products/${id}`)
-            .then(product => {
-                console.log("productGetOne", product);
-            })
-            .catch(err => {
-                console.log("productGetOneError", err);
+    // async function getOneProd(id) {
+    //    console.log("list", list);
+    //    console.log("IDgetoneProd", id, `/products/${id}`);
+    //    axios
+    //        .get(HOST + `/products/${id}`)
+    //        .then(product => {
+    //            console.log("productGetOne", product.data);
+    //        })
+    //        .catch(err => {
+    //            console.log("productGetOneError", err);
 
-            });
-    }
+    //        });
+    // }
 
+    // async function get4Prods() {
+    //    const response = await axios.get(
+    //        HOST + `/products?addItems=0&items=8`,
+    //    )
+    //    const data = response.data
+    //    console.log("Data4Items", data);
+    // }
+
+    // async function getRandom4Prods() {
+    //    const response = await axios.get(
+    //        HOST + `/products?addItems=0`
+    //    );
+    //    const data = response.data;
+    //    console.log("DAta", data);
+    //    const dataLength = data.length;
+
+    //    const randomIndexes = [];
+    //    while (randomIndexes.length < 4) {
+    //        const randomIndex = Math.floor(Math.random() * dataLength);
+    //        if (!randomIndexes.includes(randomIndex)) {
+    //            randomIndexes.push(randomIndex);
+    //        }
+    //    }
+
+    //    const random4Items = randomIndexes.map((index) => data[index]);
+
+    //    console.log("Random 4 Items", random4Items);
+    // }
 
 
     return (
@@ -151,7 +179,6 @@ export default function ProductItem({ props }) {
                                     )
                                     setIsInCart(true)
                                 }
-                                getOneProd(id)
                             }}
                             className={isInCart ? styles['disabled-button'] : ''}
                             disabled={isInCart}
