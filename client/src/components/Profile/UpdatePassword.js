@@ -1,0 +1,124 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { HOST } from '../Token';
+import styles from './Profile.module.scss';
+import { Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import Input from './InputProfile';
+
+function UpdatePassword() {
+  const [formStatus, setFormStatus] = useState({ type: null, message: '' });
+
+  const handleSuccess = (message) => {
+    setFormStatus({ type: 'success', message });
+  };
+
+  const handleError = (error) => {
+    let errorMessage = 'Update failed due to an unknown error.';
+    if (error.response && error.response.data) {
+      const messageData = error.response.data;
+      const objectKey = Object.keys(messageData)[0];
+      errorMessage = `Update failed! ${messageData[objectKey]}`;
+    }
+    setFormStatus({ type: 'error', message: errorMessage });
+  };
+
+  const handleSubmit = (passwords, { resetForm }) => {
+    axios
+      .put(HOST + '/customers/password', passwords)
+      .then((response) => {
+        console.log(response);
+        const result = response.data;
+        if (result.password) {
+          handleSuccess(result.password);
+        } else {
+          handleSuccess(result.message);
+        }
+      })
+      .catch((error) => {
+        handleError(error);
+      });
+
+    resetForm();
+  };
+
+  return (
+    <>
+      {formStatus.type !== null && (
+        <p
+          className={`${styles.form__message} ${
+            formStatus.type === 'error' && styles.form__messageError
+          }`}
+        >
+          {formStatus.message}
+        </p>
+      )}
+      <Formik
+        initialValues={{
+          password: '',
+          newPassword: '',
+          updatePassword: '',
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={Yup.object({
+          password: Yup.string()
+            .matches(
+              /^[a-zA-Z0-9]+$/,
+              'Allowed characters for password are a-z, A-Z, 0-9.'
+            )
+            .required('Password is required')
+            .max(30, 'Password must be between 7 and 30 characters')
+            .min(7, 'Password must be between 7 and 30 characters'),
+          newPassword: Yup.string()
+            .matches(
+              /^[a-zA-Z0-9]+$/,
+              'Allowed characters for password are a-z, A-Z, 0-9.'
+            )
+            .required('Password is required')
+            .max(30, 'Password must be between 7 and 30 characters')
+            .min(7, 'Password must be between 7 and 30 characters'),
+          updatePassword: Yup.string()
+            .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+            .required('Password is required'),
+        })}
+      >
+        <Form className={styles.profile} noValidate>
+          <div className={styles.profile__container}>
+            <div className={styles.profile__content}>
+              <h3 className={styles.profile__title__name}>Change password</h3>
+              <p className={styles.profile__title}>Current password</p>
+              <Field
+                className={styles.profile__input3}
+                type="password"
+                placeholder="Password"
+                name="password"
+                component={Input}
+              />
+              <p className={styles.profile__title}>New password</p>
+              <Field
+                className={styles.profile__input3}
+                type="password"
+                placeholder="Password"
+                name="newPassword"
+                component={Input}
+              />
+              <p className={styles.profile__title}>Confirm the password</p>
+              <Field
+                className={styles.profile__input3}
+                type="password"
+                placeholder="Password"
+                name="updatePassword"
+                component={Input}
+              />
+              <button className={styles.profile__btn2} type="submit">
+                Save
+              </button>
+            </div>
+          </div>
+        </Form>
+      </Formik>
+    </>
+  );
+}
+
+export default UpdatePassword;

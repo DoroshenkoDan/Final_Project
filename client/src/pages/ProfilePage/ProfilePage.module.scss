@@ -1,38 +1,53 @@
 .profile {
     &__container {
         display: flex;
+        justify-content: space-around;
+        
+        max-width: 1440px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: #f9f9f9;
+        font-family: 'Clash Display Regular';
+        
+    }
+    &__update {
+        background: white;
+        width: 50%;
+        margin: 50px 0 50px 50px;
+        padding: 15px;
     }
 
     &__order{
         text-decoration: none;
-    display: block;
-    // width: 100%;
-    // // position: absolute;
-    // top: 0;
-    // right: 0;
-    width: 170px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px;
+    
+        width: 50%;
     }
 
     &__btn {
         color: #2a254b;
-    background-color: #f9f9f9;
-    letter-spacing: 0em;
-    border: none;
-    height: 56px;
-    width: 170px;
-    font-size: 16px;
-    line-height: 24px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out 0s;
-    border-radius: 5px;
+        background-color: white;
+        letter-spacing: 0em;
+        border: none;
+        height: 56px;
+        width: 170px;
+        font-size: 16px;
+        line-height: 24px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out 0s;
+        border-radius: 5px;
     }
 
     &__btn:hover {
         background-color: #e9e9e9;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 
     }
+    
 
 }
 

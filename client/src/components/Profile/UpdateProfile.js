@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Profile.module.scss'
-import {SlTrash} from "react-icons/sl"
 import { useSelector, useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import Input from '../Profile/InputProfile';
+import Input from './InputProfile';
 import { HOST } from '../Token';
 import axios from 'axios';
 import { changeData } from '../../Redux/reducers/userReducers';
 
 
-function CustomerUpdate() {
+function UpdateProfile() {
   const customer = useSelector((state) => state.store.user).data
+  console.log(customer);
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
   const dispatch = useDispatch()
 
@@ -23,6 +23,7 @@ function CustomerUpdate() {
           type: 'success',
           message: 'You are successfully updated',
         })
+        dispatch(changeData(updatedCustomer))
         
        
       })
@@ -43,7 +44,7 @@ function CustomerUpdate() {
         }
       })
       useEffect(()=>{
-        dispatch(changeData(updatedCustomer))
+        dispatch(changeData(updatedCustomer))             
       },[])
     resetForm()
   }
@@ -62,11 +63,13 @@ function CustomerUpdate() {
       )}
       <Formik
         initialValues={{
+          
           firstName: customer.firstName || '',
           lastName: customer.lastName || '',
           login: customer.login || '',
           email: customer.email || '',
-          telephone: customer.telephone || '',     
+          telephone: customer.telephone || '',
+          avatarUrl: customer.avatarUrl || '',     
         }}
         onSubmit={handleSubmit}
         validationSchema={Yup.object({
@@ -90,7 +93,8 @@ function CustomerUpdate() {
               /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               'Invalid email format',
             )
-            .required('Email is required'),      
+            .required('Email is required'),
+                   
           
           
         })}
@@ -98,22 +102,26 @@ function CustomerUpdate() {
         <Form className={styles.profile} noValidate>
           <div className={styles.profile__container}>                
             <div className={styles.profile__content}>
-              <h2 className={styles.profile__title}>Фото профиля</h2>
+              <h2 className={styles.profile__title}>Profile photo</h2>              
               <div className={styles.profile__user}>
-                <img className={styles.profile__img} src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D'/>
-                <button className={styles.profile__btn}>Выберите файл</button>
-                <p className={styles.profile__icon}><SlTrash/></p>                        
+                 <img className={styles.profile__img} src={customer.avatarUrl}/>               
+                <Field
+                  className={styles.profile__input2}     
+                  type="text"            
+                  name="avatarUrl"
+                  component={Input}                              
+                />                                       
               </div>
-          <p className={styles.profile__info}>Максимальный размер фото 5МБ</p>
-          <h3 className={styles.profile__title}>Личная информация</h3>
-          <p className={styles.profile__title}>Мое имя</p>          
+          <p className={styles.profile__info}>Maximum photo size 5MB</p>
+          <h3 className={styles.profile__title__name}>Personal information</h3>
+          <p className={styles.profile__title}>First name</p>          
           <Field
             className={styles.profile__input}
             type="text"            
             name="firstName"
             component={Input}            
           />
-          <p className={styles.profile__title}>Введите Фамилию</p>
+          <p className={styles.profile__title}>Last name</p>
           <Field
             className={styles.profile__input}
             type="text"
@@ -122,7 +130,7 @@ function CustomerUpdate() {
             component={Input}
             
           />
-          <p className={styles.profile__title}>Введите логин</p>
+          <p className={styles.profile__title}>Login</p>
           <Field
             className={styles.profile__input}
             type="text"
@@ -141,7 +149,7 @@ function CustomerUpdate() {
           />          
           <div>
             <button className={styles.profile__btn2} type="submit">
-              Send
+            Save
             </button>
           </div>
           </div>
@@ -153,4 +161,4 @@ function CustomerUpdate() {
     );
 }
 
-export default CustomerUpdate;
+export default UpdateProfile;

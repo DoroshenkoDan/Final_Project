@@ -1,20 +1,28 @@
-import React from 'react';
-import CustomerUpdate from '../../components/Profile/CustomerUpdate';
-import PasswordUpdate from '../../components/Profile/PasswordUpdate';
-import { NavLink } from 'react-router-dom';
+import React, {useState} from 'react';
+import CustomerUpdate from '../../components/Profile/UpdateProfile';
+import PasswordUpdate from '../../components/Profile/UpdatePassword';
+
 import styles from './ProfilePage.module.scss'
+import OrderPage from '../OrderPage/OrderPage';
+
 
 function ProfilePage() {
+    const [showOrderPage, setShowOrderPage] = useState(false);
+
+    const handleShowOrderPage = () => {
+        setShowOrderPage(true);
+    }
      return (
           <div className={styles.profile__container}>
             <div className={styles.profile__update}>
                 <CustomerUpdate/>
                 <PasswordUpdate/>
             </div>            
-            <div className=''>
-                <NavLink to="/orders/" className={styles.profile__order}>
-                    <button className={styles.profile__btn}>Your orders</button>
-                </NavLink>
+            <div className={styles.profile__order}>                
+            <button className={styles.profile__btn} onClick={handleShowOrderPage}>
+                    Your orders
+                </button>
+                {showOrderPage && <OrderPage />}
             </div>
         </div>          
     
