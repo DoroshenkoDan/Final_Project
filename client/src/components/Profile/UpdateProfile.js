@@ -107,7 +107,8 @@ function UpdateProfile() {
                  <img className={styles.profile__img} src={customer.avatarUrl}/>               
                 <Field
                   className={styles.profile__input2}     
-                  type="text"            
+                  type="text"
+                  placeholder="enter the image address"                        
                   name="avatarUrl"
                   component={Input}                              
                 />                                       
@@ -125,7 +126,6 @@ function UpdateProfile() {
           <Field
             className={styles.profile__input}
             type="text"
-            placeholder="lastName"
             name="lastName"
             component={Input}
             
@@ -134,7 +134,6 @@ function UpdateProfile() {
           <Field
             className={styles.profile__input}
             type="text"
-            placeholder="login"
             name="login"
             component={Input}
             
@@ -143,7 +142,6 @@ function UpdateProfile() {
           <Field
             className={styles.profile__input}          
             type="email"
-            placeholder="email"
             name="email"
             component={Input}           
           />          
