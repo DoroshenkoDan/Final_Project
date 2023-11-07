@@ -27,7 +27,17 @@ export default function Input(props) {
                         className={styles['form-input']}
                     />
                 }
-                {name !== 'telephone' &&
+                {name === 'postal' &&
+                    <InputMask
+                        mask="99999"
+                        maskChar={null}
+                        {...field}
+                        {...rest}
+                        type="text"
+                        className={styles['form-input']}
+                    />
+                }
+                {name !== 'telephone' && name !== 'postal' &&
                     <input {...field} {...rest}
                            type={((name === 'password' || name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
                            className={styles['form-input']}/>}
