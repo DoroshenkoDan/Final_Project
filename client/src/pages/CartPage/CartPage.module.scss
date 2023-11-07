@@ -105,11 +105,9 @@
 .link-order {
   text-decoration: none;
   display: block;
-  width: 100%;
+  width: 90%;
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 170px;
+  top: 50px;
 }
 
 .btn-order {
@@ -118,7 +116,7 @@
   letter-spacing: 0em;
   border: none;
   height: 56px;
-  width: 170px;
+  width: 100%;
   font-size: 16px;
   line-height: 24px;
   cursor: pointer;
@@ -133,6 +131,12 @@
 }
 
 @media (min-width: 768px) {
+  .link-order {
+    top: 0px;
+    right: 0;
+    width: 170px;
+  }
+
   .cart-section-names {
     display: flex;
     justify-content: space-between;

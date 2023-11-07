@@ -14,59 +14,54 @@ export default function Input(props) {
     setVisibilityPassword((prevState) => !prevState)
   }
 
-  return (
-    <div className={styles['input-container']}>
-      <label>
-        {name === 'telephone' && (
-          <InputMask
-            mask="+380999999999"
-            maskChar="_"
-            {...field}
-            {...rest}
-            type="tel"
-            className={styles['form-input']}
-          />
-        )}
-        {name !== 'telephone' && (
-          <input
-            {...field}
-            {...rest}
-            type={
-              (name === 'password' || name === 'repeatPassword') &&
-              !visibilityPassword
-                ? 'password'
-                : 'text'
-            }
-            className={styles['form-input']}
-          />
-        )}
-        {(name === 'password' || name === 'repeatPassword') &&
-          !visibilityPassword && (
-            <span
-              className={styles['icon-password']}
-              onClick={toggleVisibilityPassword}
-            >
-              <ShowPasswordIcon />
-            </span>
-          )}
-        {(name === 'password' || name === 'repeatPassword') &&
-          visibilityPassword && (
-            <span
-              className={styles['icon-password']}
-              onClick={toggleVisibilityPassword}
-            >
-              <HiddenPasswordIcon />
-            </span>
-          )}
-        {form.errors[name] && form.touched[name] && (
-          <div className={styles['text-error']}>{form.errors[name]}</div>
-        )}
-      </label>
-    </div>
-  )
+    return (
+        <div className={styles['input-container']}>
+            <label>
+                {name === 'telephone' &&
+                    <InputMask
+                        mask="+380999999999"
+                        maskChar="_"
+                        {...field}
+                        {...rest}
+                        type="tel"
+                        className={styles['form-input']}
+                    />
+                }
+                {name === 'postal' &&
+                    <InputMask
+                        mask="99999"
+                        maskChar={null}
+                        {...field}
+                        {...rest}
+                        type="text"
+                        className={styles['form-input']}
+                    />
+                }
+                {name !== 'telephone' && name !== 'postal' &&
+                    <input {...field} {...rest}
+                           type={((name === 'password' || name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
+                           className={styles['form-input']}/>}
+                {(name === 'password' || name === 'repeatPassword') && !visibilityPassword &&
+                    <span className={styles['icon-password']}
+                          onClick={toggleVisibilityPassword}>
+                        <ShowPasswordIcon/>
+                    </span>
+                }
+                {(name === 'password' || name === 'repeatPassword') && visibilityPassword &&
+                    <span className={styles['icon-password']}
+                          onClick={toggleVisibilityPassword}>
+                        <HiddenPasswordIcon/>
+                    </span>
+                }
+                {form.errors[name] && form.touched[name] && (
+                    <div className={styles['text-error']}>{form.errors[name]}</div>
+                )}
+            </label>
+        </div>
+    )
 }
 
 Input.propTypes = {
-  field: PropTypes.object.isRequired,
-  form: PropTypes.object.isRequired,
+    field: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired,
 }
