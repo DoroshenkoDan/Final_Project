@@ -82,7 +82,7 @@ export const Footer = () => {
           <div className="footer__menu">
             <p className="footer__menu-heading">Menu</p>
             <ul className="footer__menu-list">
-              <NavLink className="footer__menu-line" to="/allproducts/">
+              <NavLink className="footer__menu-line" to="/All-products/">
                 All products
               </NavLink>
               <li>New arrivals</li>
@@ -143,7 +143,7 @@ export const Footer = () => {
 
         <div className="footer__menu">
           <p className="footer__menu-heading">Menu</p>
-          <NavLink className="footer__menu-line" to="/allproducts/">
+          <NavLink className="footer__menu-line" to="/All-products/">
             All products
           </NavLink>
           <p className="footer__menu-line">New arrivals</p>

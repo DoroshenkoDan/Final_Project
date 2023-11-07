@@ -17,7 +17,7 @@ function MainImages() {
             through to furniture today
           </h1>
           <p>Shop the new Spring 2022 collection today</p>
-          <NavLink to="/allProducts/" className={styles.link}>
+          <NavLink to="/All-products/" className={styles.link}>
             <button className={styles.button}>View collection</button>
           </NavLink>
           <img src="/img/baner/Baner2.webp" alt="Main" />

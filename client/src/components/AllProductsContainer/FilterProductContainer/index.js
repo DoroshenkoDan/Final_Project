@@ -13,11 +13,11 @@ export default function FilterProductContainer() {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filters)
   const { categories, brands, prices } = filters
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 590)
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 375)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth < 590)
+      setIsMobileView(window.innerWidth < 375)
     }
     window.addEventListener('resize', handleResize)
 
@@ -40,10 +40,13 @@ export default function FilterProductContainer() {
   if (checkBrand.length > 0) {
     params.brands = checkBrand.join(',');
   }
+  if (checkPrice.length > 0) {
+    params.prices = checkPrice.join(',');
+  }
 
   const search = new URLSearchParams(params).toString();
   setSearchParams(search);
-  }, [checkCategory, checkBrand]);
+  }, [checkCategory, checkBrand, checkPrice, setSearchParams]);
 
 
   const handleCategoryChange = (category) => {
