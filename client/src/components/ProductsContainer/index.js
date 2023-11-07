@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductsContainer.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { HOST } from '../Token'
+import axios from 'axios'
 
 export default function ProductsContainer({ id }) {
   const dispatch = useDispatch()
-  const list = useSelector((state) => state.products.data)
+  // const list = useSelector((state) => state.products.data)
   const [productsContainerArray, setProductsContainerArray] = useState([])
 
   function getProducts() {
@@ -18,61 +20,79 @@ export default function ProductsContainer({ id }) {
     getProducts()
   }, [])
 
-  if (id) {
-    useEffect(() => {
-      findCeramicsObjects(list, id)
-    }, [list, id])
+  // if (id) {
+  //   useEffect(() => {
+  //     findCeramicsObjects(list, id)
+  //   }, [list, id])
 
-    function findCeramicsObjects(data, idToExclude) {
-      const selectedObjects = data.find((item) => item.id === idToExclude)
-      const ceramicsObjects = data.filter(
-        (item) =>
-          item.categories === selectedObjects.categories &&
-          item.id !== idToExclude,
+  //   function findCeramicsObjects(data, idToExclude) {
+  //     const selectedObjects = data.find((item) => item.id === idToExclude)
+  //     const ceramicsObjects = data.filter(
+  //       (item) =>
+  //         item.categories === selectedObjects.categories &&
+  //         item.id !== idToExclude,
+  //     )
+  //     if (ceramicsObjects.length <= 4) {
+  //       return ceramicsObjects
+  //     }
+  //     const randomIndexes = []
+  //     while (randomIndexes.length < 4) {
+  //       const randomIndex = Math.floor(Math.random() * ceramicsObjects.length)
+  //       if (!randomIndexes.includes(randomIndex)) {
+  //         randomIndexes.push(randomIndex)
+  //       }
+  //     }
+  //     setProductsContainerArray([
+  //       ...randomIndexes.map((index) => ceramicsObjects[index]),
+  //     ])
+  //   }
+  // } else {
+  //   useEffect(() => {
+  //     getRandomObjects(list, productsContainerArray)
+  //   }, [list])
+
+  //   function getRandomInt(min, max) {
+  //     return Math.floor(Math.random() * (max - min + 1)) + min
+  //   }
+
+  //   function getRandomObjects(sourceArray, resultArray) {
+  //     const sourceCopy = [...sourceArray]
+  //     while (resultArray.length < 4 && sourceCopy.length > 0) {
+  //       const randomIndex = getRandomInt(0, sourceCopy.length - 1)
+  //       const randomObject = sourceCopy[randomIndex]
+
+  //       if (
+  //         !resultArray.some(
+  //           (item) => item.categories === randomObject.categories,
+  //         )
+  //       ) {
+  //         resultArray.push(randomObject)
+  //       }
+
+  //       sourceCopy.splice(randomIndex, 1)
+  //     }
+
+  //     setProductsContainerArray([...resultArray])
+  //   }
+  // }
+
+  /* ВОТ ЭТО ДОБАВИЛ */
+  useEffect(() => {
+    async function getRandomBackProduct() {
+      const response = await axios.get(
+        HOST + `/products/random`,
       )
-      if (ceramicsObjects.length <= 4) {
-        return ceramicsObjects
+      const data = response.data
+
+      const finallArray = []
+      for (let i = 0; i < 4; i++) {
+        finallArray.push(data[i])
       }
-      const randomIndexes = []
-      while (randomIndexes.length < 4) {
-        const randomIndex = Math.floor(Math.random() * ceramicsObjects.length)
-        if (!randomIndexes.includes(randomIndex)) {
-          randomIndexes.push(randomIndex)
-        }
-      }
-      setProductsContainerArray([
-        ...randomIndexes.map((index) => ceramicsObjects[index]),
-      ])
+      return setProductsContainerArray(finallArray)
     }
-  } else {
-    useEffect(() => {
-      getRandomObjects(list, productsContainerArray)
-    }, [list])
-
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
-    function getRandomObjects(sourceArray, resultArray) {
-      const sourceCopy = [...sourceArray]
-      while (resultArray.length < 4 && sourceCopy.length > 0) {
-        const randomIndex = getRandomInt(0, sourceCopy.length - 1)
-        const randomObject = sourceCopy[randomIndex]
-
-        if (
-          !resultArray.some(
-            (item) => item.categories === randomObject.categories,
-          )
-        ) {
-          resultArray.push(randomObject)
-        }
-
-        sourceCopy.splice(randomIndex, 1)
-      }
-
-      setProductsContainerArray([...resultArray])
-    }
-  }
+    getRandomBackProduct()
+  }, [ ])
+  /* ВОТ ЭТО ДОБАВИЛ */
 
   return (
     <>
