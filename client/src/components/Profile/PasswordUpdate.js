@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState}  from 'react';
+import axios from 'axios';
+import { HOST } from '../Token';
 import styles from './Profile.module.scss'
 import {SlTrash} from "react-icons/sl"
 import { useSelector } from 'react-redux';
@@ -10,19 +12,60 @@ import Input from '../Profile/InputProfile';
 
 
 function PasswordUpdate() {
-
   const customer = useSelector((state) => state.store.user).data
+  const [formStatus, setFormStatus] = useState({ type: null, message: '' })
+
+  const handleSubmit = (passwords, { resetForm }) => {
+    axios
+      .put(HOST + '/customers/password', passwords)
+      .then((savedCustomer) => {
+        setFormStatus({
+          type: 'success',
+          message: 'You are successfully updated',
+        })
+        
+       
+      })
+      .catch((err) => {
+        if (err.response && err.response.data) {
+          const massageData = err.response.data
+          const objectKey = Object.keys(massageData)[0]
+          const errorMessage = massageData[objectKey]
+          setFormStatus({
+            type: 'error',
+            message: `Update failed! ${errorMessage}`,
+          })
+        } else {          
+          setFormStatus({
+            type: 'error',
+            message: 'Update failed due to an unknown error.',
+          })
+        }
+      })
+      
+    resetForm()
+  }
+
 
   
     return (
       <>
+      {formStatus.type !== null && (
+        <p
+          className={`${styles.form__message} ${
+            formStatus.type === 'error' && styles.form__messageError
+          }`}
+        >
+          {formStatus.message}
+        </p>
+      )}
     <Formik
         initialValues={{
           password: '',
           newPassword: '',
           updatePassword: ''         
         }}
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         validationSchema={Yup.object({          
           password: Yup.string()
             .matches(
