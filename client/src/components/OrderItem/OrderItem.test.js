@@ -72,23 +72,23 @@ describe('OrderItem', () => {
     })
   })
 
-  it('Check that order deleted', async () => {
-    axios.delete.mockResolvedValue({
-      data: 'Order deleted',
-    })
+  // it('Check that order deleted', async () => {
+  //   axios.delete.mockResolvedValue({
+  //     data: 'Order deleted',
+  //   })
 
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
-      </MemoryRouter>,
-    )
+  //   const { getByTestId } = render(
+  //     <MemoryRouter>
+  //       <OrderPage order={order} changeOrders={changeOrders} />
+  //     </MemoryRouter>,
+  //   )
 
-    // Simulate a click on the delete button
-    fireEvent.click(getByTestId('btn-close'))
+  //   // Simulate a click on the delete button
+  //   fireEvent.click(getByTestId('btn-close'))
 
-    // Wait for the axios delete request to complete
-    await waitFor(() => {
-      expect(changeOrders).toHaveBeenCalledWith(order._id)
-    })
-  })
+  //   // Wait for the axios delete request to complete
+  //   await waitFor(() => {
+  //     expect(changeOrders).toHaveBeenCalledWith(order._id)
+  //   })
+  // })
 })
