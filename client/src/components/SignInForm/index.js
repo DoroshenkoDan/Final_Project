@@ -11,9 +11,12 @@ import {
   setToken,
 } from '../../Redux/reducers/userReducers'
 import axios from 'axios'
+import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
+import {useNavigate } from 'react-router-dom';
 
 export default function OrderForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
   const handleSubmit = async (userData, { resetForm }) => {
@@ -24,6 +27,8 @@ export default function OrderForm() {
         dispatch(setToken(loginResult.data.token))
         setAuthToken(loginResult.data.token)
         setFormStatus({ type: 'success', message: 'Welcome to Avion' })
+        resetForm()
+        navigate(-1);
       })
       .catch((err) => {
         const massageData = err.response.data
@@ -36,6 +41,7 @@ export default function OrderForm() {
       })
     const customer = await getCustomer()
     dispatch(changeData(customer))
+    dispatch(fetchWishlist())
     resetForm()
   }
 
@@ -69,15 +75,15 @@ export default function OrderForm() {
               /^[a-zA-Z0-9]+$/,
               'Allowed characters for password is a-z, A-Z, 0-9.',
             )
-            .required('Email is required')
+            .required('Password is required')
             .max(30, 'Password must be between 7 and 30 characters')
             .min(7, 'Password must be between 7 and 30 characters'),
         })}
       >
-        <Form className="form__user-address" noValidate>
+        <Form className="form__user-auth" noValidate>
           <Field
             type="text"
-            placeholder="login or email"
+            placeholder="Login or Email"
             name="loginOrEmail"
             component={Input}
           />
