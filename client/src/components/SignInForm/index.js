@@ -11,10 +11,10 @@ import {
   setToken,
 } from '../../Redux/reducers/userReducers'
 import axios from 'axios'
+import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
 import {useNavigate } from 'react-router-dom';
 
-
-export default function SignInForm() {
+export default function OrderForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
@@ -41,6 +41,8 @@ export default function SignInForm() {
       })
     const customer = await getCustomer()
     dispatch(changeData(customer))
+    dispatch(fetchWishlist())
+    resetForm()
   }
 
   const getCustomer = async () => {
@@ -87,7 +89,7 @@ export default function SignInForm() {
           />
           <Field
             type="password"
-            placeholder="Password"
+            placeholder="password"
             name="password"
             component={Input}
           />
