@@ -10,8 +10,7 @@ import { changeData } from '../../Redux/reducers/userReducers';
 
 
 function UpdateProfile() {
-  const customer = useSelector((state) => state.store.user).data
-  console.log(customer);
+  const customer = useSelector((state) => state.store.user).data  
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
   const dispatch = useDispatch()
 
