@@ -18,7 +18,6 @@ import cartReducer from './reducers/cartReducer'
 import FilterReducers from './reducers/FilterReducers.js'
 import wishlistReducers from './reducers/wishlistReducers.js'
 
-
 // Об'єднання редюсерів
 // Сюди додавати редюсери які потрібні в LocalStorage
 // Для виклику в файлі використовувати такий шлях " const list = useSelector(state => state.store.cart(name in store).cart(name in reducer))"
@@ -28,7 +27,7 @@ const storeReducers = combineReducers({
   products: productsReducer,
   user: userReducers,
   cart: cartReducer,
-  wishlist: wishlistReducers
+  wishlist: wishlistReducers,
 })
 
 const persistedReducers = persistReducer(

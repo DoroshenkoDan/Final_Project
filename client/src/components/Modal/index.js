@@ -6,8 +6,17 @@ import PropTypes from 'prop-types'
 export default function Modal({ closeModal, removeOrder }) {
   return (
     <div className={styles.container} onClick={closeModal}>
-      <div className={styles.modal}>
-        <span className={styles.btn__close} data-testid="btn-close" onClick={closeModal}>
+      <div
+        className={styles.modal}
+        onClick={(e) => {
+          e.stopPropagation()
+        }}
+      >
+        <span
+          className={styles.btn__close}
+          data-testid="btn-close"
+          onClick={closeModal}
+        >
           <CloseBtnIcon></CloseBtnIcon>
         </span>
         <h3 className={styles.modal__title}>Sure you want to delete?</h3>
@@ -29,5 +38,5 @@ export default function Modal({ closeModal, removeOrder }) {
 
 Modal.propTypes = {
   closeModal: PropTypes.func,
-  removeOrder: PropTypes.func
+  removeOrder: PropTypes.func,
 }

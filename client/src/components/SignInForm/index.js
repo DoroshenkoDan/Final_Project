@@ -16,7 +16,7 @@ import {useNavigate } from 'react-router-dom';
 
 export default function OrderForm() {
   const dispatch = useDispatch()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
 
   const handleSubmit = async (userData, { resetForm }) => {
@@ -28,7 +28,7 @@ export default function OrderForm() {
         setAuthToken(loginResult.data.token)
         setFormStatus({ type: 'success', message: 'Welcome to Avion' })
         resetForm()
-        navigate(-1);
+        navigate(-1)
       })
       .catch((err) => {
         const massageData = err.response.data

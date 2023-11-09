@@ -1,18 +1,18 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 import ShowPasswordIcon from '../Icons/ShowPasswordIcon'
-import HiddenPasswordIcon from "../Icons/HiddenPasswordIcon";
-import InputMask from 'react-input-mask';
+import HiddenPasswordIcon from '../Icons/HiddenPasswordIcon'
+import InputMask from 'react-input-mask'
 
 export default function Input(props) {
-    const [visibilityPassword, setVisibilityPassword] = useState(false)
-    const {field, form, ...rest} = props
-    const {name} = field
+  const [visibilityPassword, setVisibilityPassword] = useState(false)
+  const { field, form, ...rest } = props
+  const { name } = field
 
-    const toggleVisibilityPassword = () => {
-        setVisibilityPassword(prevState => !prevState)
-    }
+  const toggleVisibilityPassword = () => {
+    setVisibilityPassword((prevState) => !prevState)
+  }
 
     return (
         <div className={styles['input-container']}>
