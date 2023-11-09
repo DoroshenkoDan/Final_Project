@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './Input.module.scss'
 import ShowPasswordIcon from '../Icons/ShowPasswordIcon'
@@ -7,9 +7,8 @@ import InputMask from 'react-input-mask';
 
 export default function Input(props) {
     const [visibilityPassword, setVisibilityPassword] = useState(false)
-    const {field, form, ...rest} = props
-    const {name} = field
-
+    const { field, form, ...rest } = props
+    const { name } = field
     const toggleVisibilityPassword = () => {
         setVisibilityPassword(prevState => !prevState)
     }
@@ -29,18 +28,18 @@ export default function Input(props) {
                 }
                 {name !== 'telephone' &&
                     <input {...field} {...rest}
-                           type={((name === 'password' || name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
-                           className={styles['form-input']}/>}
+                        type={((name === 'password' || name === 'repeatPassword') && !visibilityPassword) ? 'password' : 'text'}
+                        className={styles['form-input']} />}
                 {(name === 'password' || name === 'repeatPassword') && !visibilityPassword &&
                     <span className={styles['icon-password']}
-                          onClick={toggleVisibilityPassword}>
-                        <ShowPasswordIcon/>
+                        onClick={toggleVisibilityPassword}>
+                        <ShowPasswordIcon />
                     </span>
                 }
                 {(name === 'password' || name === 'repeatPassword') && visibilityPassword &&
                     <span className={styles['icon-password']}
-                          onClick={toggleVisibilityPassword}>
-                        <HiddenPasswordIcon/>
+                        onClick={toggleVisibilityPassword}>
+                        <HiddenPasswordIcon />
                     </span>
                 }
                 {form.errors[name] && form.touched[name] && (

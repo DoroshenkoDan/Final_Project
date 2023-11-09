@@ -16,33 +16,33 @@ import PrivacyPage from '../pages/PrivacyPage/PrivacyPage'
 import ScrollToTop from './ScrollToTop'
 
 function Routes() {
-  return useRoutes([
-    {
-      path: '/',
-      element: <Layout />,
-      children: [
-        { path: '', element: <Navigate to="home/" /> },
-        { path: 'home/', element: <HomePage /> },
-        { path: 'cart/', element: <CartPage /> },
-        { path: 'favorites/', element: <FavoritesPage /> },
-        { path: 'login/', element: <AuthPage /> },
-        { path: 'allProducts/', element: <AllProductsPage /> },
-        { path: 'orders/', element: <OrderPage /> },
-        { path: 'category/:categoryId', element: <CategoryPage /> },
-        { path: 'products/:productId', element: <ProductPage /> },
-        { path: 'about-us/', element: <AboutPage /> },
-        { path: 'privacy-page/', element: <PrivacyPage /> },
-        { path: '*', element: <PageNotFound /> },
-      ],
-    },
-  ])
+    return useRoutes([
+        {
+            path: '/',
+            element: <Layout />,
+            children: [
+                { path: '', element: <Navigate to="home/" /> },
+                { path: 'home/', element: <HomePage /> },
+                { path: 'cart/', element: <CartPage /> },
+                { path: 'favorites/', element: <FavoritesPage /> },
+                { path: 'login/', element: <AuthPage /> },
+                { path: 'allProducts/', element: <AllProductsPage /> },
+                { path: 'orders/', element: <OrderPage /> },
+                { path: 'category/:categoryId', element: <CategoryPage /> },
+                { path: 'products/:productId', element: <ProductPage /> },
+                { path: 'about-us/', element: <AboutPage /> },
+                { path: 'privacy-page/', element: <PrivacyPage /> },
+                { path: '*', element: <PageNotFound /> },
+            ],
+        },
+    ])
 }
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes />
-    </BrowserRouter>
-  )
+    return (
+        <BrowserRouter>
+            <ScrollToTop />
+            <Routes />
+        </BrowserRouter>
+    )
 }

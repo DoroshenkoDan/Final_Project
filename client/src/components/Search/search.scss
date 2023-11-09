@@ -1,24 +1,60 @@
-$tl: 0.6s;
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #2a254b #c9c5c5;
+}
+
+
+*::-webkit-scrollbar {
+    width: 8px;
+    padding: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #c9c5c5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #2a254b;
+    border-radius: 10px;
+    border: 3px none #f00000;
+}
+
+* {
+    text-decoration: none;
+}
+
+
+$tl: 1.3s;
 
 .search-box {
-    transition: width $tl, border-radius $tl, box-shadow $tl;
+    transition: width $tl, border-radius $tl, box-shadow $tl, background-position $tl;
     width: 40px;
     height: 40px;
     border-radius: 20px;
     border: none;
     cursor: pointer;
     background: #f9f9f9;
-
+    position: relative;
+    z-index: 12;
+    background-image: url('./search-svg.svg');
+    background-size: 25px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    padding-right: 35px;
 
     &:hover {
         color: white;
         background: #f9f9f9;
         box-shadow: 0 0 0 2px #2a254b;
+        background-image: url('./search-svg.svg');
+        background-size: 25px;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
     }
 
     &:focus {
-        transition: width $tl cubic-bezier(0, 1.22, .66, 1.39), border-radius $tl ;
-        border: none;
+        transition: width $tl cubic-bezier(0, 1.22, .66, 1.39), border-radius $tl, background-position $tl ;
+        border: 1px solid #2a254b;
         outline: none;
         box-shadow: none;
         padding-left: 15px;
@@ -27,7 +63,11 @@ $tl: 0.6s;
         border-radius: auto;
         background: #f9f9f9;
         color: black;
-        box-shadow: 0 0 7px 2px #2a254b;
+        //box-shadow: 0 0 7px 2px #2a254b;
+        background-image: url('./search-svg.svg');
+        background-size: 25px;
+        background-repeat: no-repeat;
+        background-position: 97% 50%;
     }
 
     &:not(:focus) {
@@ -44,29 +84,50 @@ $tl: 0.6s;
     position: absolute;
     z-index: 10;
     left: 20px;
-    border-radius: 0 0 0.75rem 0.75rem;
-    width: 250px;
-    max-height: 500px;
+    top: 0;
+    border: 2px solid #2a254b;
     overflow-y: scroll;
     overflow-x: hidden;
-    box-shadow: 0px 3px 7px 2px #2a254b;
+    //box-shadow: 0px 3px 7px 2px #2a254b;
     background: #f9f9f9;
     padding-bottom: 10px;
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+    max-height: 0;
+    transition: opacity 1s ease-in-out, width 1s ease-in-out, max-height 1s ease-in-out;
+
 }
 
 .search-list-container p {
     font-size: 1rem;
     font-weight: 400px;
+    color: #2a254b;
 }
 
 
 .search-result-item {
+
     width: 100%;
     padding: 10px 10px 3px 10px;
     height: auto;
     display: flex;
     background: #f9f9f9;
-    border-bottom: 1px solid #2a254b;
+    border-bottom: 2px solid #2a254b;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out 0s;
+    transform: scale(1);
+}
+
+.search-result-item:first-of-type {
+    padding-top: 50px;
+}
+
+
+
+.search-result-item:hover {
+    transform: scale(1.1);
+    background: #c3c2c2;
 }
 
 .search-result-item p:first-of-type {
@@ -78,4 +139,12 @@ $tl: 0.6s;
     width: 45px;
     height: 45px;
     margin-right: 15px;
+    margin: 5px;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    width: 250px;
+    max-height: 500px;
 }
