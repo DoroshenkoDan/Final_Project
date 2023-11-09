@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import OrderList from './index'
+import OrderItem from './index'
 import { MemoryRouter } from 'react-router-dom'
 
 jest.mock('axios')
@@ -34,31 +34,33 @@ const order = {
     },
   ],
 }
-
 const changeOrders = jest.fn()
 
 describe('OrderItem', () => {
+
   it('OrderItem is render', () => {
     render(
       <MemoryRouter>
-        <OrderList order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
   })
+
   it('Check if order details are displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderList order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
     expect(getByText(`Order: № ${order.orderNo}`)).toBeInTheDocument()
     expect(getByText(`Total Sum: ${order.totalSum}$`)).toBeInTheDocument()
   })
+
   it('Check if each product is displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderList order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
