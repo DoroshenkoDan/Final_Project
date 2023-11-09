@@ -3,7 +3,7 @@ import styles from '../../components/AllProductsContainer/AllProductsContainer.m
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchFilter,
-  toggleCategory,
+  // toggleCategory,
 } from '../../Redux/reducers/FilterReducers.js'
 import { NavLink, useParams } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ export default function CategoryPage() {
     categoryId.charAt(0).toUpperCase() + categoryId.slice(1)
 
   useEffect(() => {
-    dispatch(toggleCategory(upperCaseCategoryId))
+    // dispatch(toggleCategory(upperCaseCategoryId))
     const params = { ...filters }
     const newCategories = {}
     newCategories[upperCaseCategoryId] = true

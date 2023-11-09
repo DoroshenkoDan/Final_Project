@@ -98,6 +98,6 @@ router.post("/search", searchProducts);
 // @route   GET /products/:id
 // @desc    GET existing product by id
 // @access  Public
-router.get("/:itemNo", getProductById);
+router.get("/:id", getProductById);
 
 module.exports = router;
