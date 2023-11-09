@@ -109,7 +109,6 @@ export default function OrderForm(props) {
                 letterSubject: 'Thank you for order! You are welcome!',
                 letterHtml: '<h1>Your order is placed.</h1>',
             }
-            console.log(newOrder)
             await sendOrder(newOrder)
         }
     }
