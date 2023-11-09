@@ -39,7 +39,6 @@ describe('testing NavContainer component', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
   it('renders the component', () => {
     render(
       <MemoryRouter>

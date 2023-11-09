@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { useDispatch, useSelector } from 'react-redux'
 import SignInForm from './index.js'
 import axios from 'axios'
+import {MemoryRouter} from "react-router-dom";
 
 jest.mock('axios')
 
@@ -40,26 +41,27 @@ describe('testing SignInForm component', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
+
   it('renders the component', () => {
-    render(<SignInForm />)
+    render(<MemoryRouter><SignInForm /></MemoryRouter>)
   })
   it('renders the form elements', () => {
-    const { getByPlaceholderText, getByText } = render(<SignInForm />)
-    expect(getByPlaceholderText('login or email')).toBeInTheDocument()
-    expect(getByPlaceholderText('password')).toBeInTheDocument()
+    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
+    expect(getByPlaceholderText('Login or Email')).toBeInTheDocument()
+    expect(getByPlaceholderText('Password')).toBeInTheDocument()
     expect(getByText('Send')).toBeInTheDocument()
   })
   it('submits the form and displays success message on successful login', async () => {
-    const { getByPlaceholderText, getByText } = render(<SignInForm />)
+    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
 
     axios.post.mockResolvedValue({
       data: { token: 'example_token' },
     })
 
-    fireEvent.change(getByPlaceholderText('login or email'), {
+    fireEvent.change(getByPlaceholderText('Login or Email'), {
       target: { value: 'testuser@example.com' },
     })
-    fireEvent.change(getByPlaceholderText('password'), {
+    fireEvent.change(getByPlaceholderText('Password'), {
       target: { value: 'testPassword123' },
     })
 
@@ -77,16 +79,16 @@ describe('testing SignInForm component', () => {
     })
   })
   it('displays error message on failed login', async () => {
-    const { getByPlaceholderText, getByText } = render(<SignInForm />)
+    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
 
     axios.post.mockRejectedValue({
       response: { data: { error: 'Invalid credentials' } },
     })
 
-    fireEvent.change(getByPlaceholderText('login or email'), {
+    fireEvent.change(getByPlaceholderText('Login or Email'), {
       target: { value: 'testuser@example.com' },
     })
-    fireEvent.change(getByPlaceholderText('password'), {
+    fireEvent.change(getByPlaceholderText('Password'), {
       target: { value: 'wrongPassword' },
     })
 

@@ -3,14 +3,12 @@ import axios from 'axios'
 import { configureStore } from '@reduxjs/toolkit'
 import { HOST } from '../../components/Token'
 
-
 jest.mock('axios')
 
 describe('categoriesReducers', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
-
   it('should dispatch the correct actions for a successful API request', async () => {
     const store = configureStore({
       reducer,

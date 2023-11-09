@@ -14,7 +14,7 @@ import axios from 'axios'
 import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
 import {useNavigate } from 'react-router-dom';
 
-export default function OrderForm() {
+export default function SignInForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [formStatus, setFormStatus] = useState({ type: null, message: '' })
@@ -88,7 +88,7 @@ export default function OrderForm() {
           />
           <Field
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             component={Input}
           />

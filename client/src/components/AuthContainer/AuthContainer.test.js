@@ -39,7 +39,6 @@ describe('testing AuthContainer component', () => {
     afterEach(() => {
         jest.clearAllMocks()
     })
-
     it('renders without crashing', () => {
         render(<MemoryRouter><AuthContainer/> </MemoryRouter>)
     })

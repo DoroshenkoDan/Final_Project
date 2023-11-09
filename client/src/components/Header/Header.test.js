@@ -39,7 +39,6 @@ describe('testing Header component', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
   it('renders without crashing', () => {
     render(
       <MemoryRouter>
