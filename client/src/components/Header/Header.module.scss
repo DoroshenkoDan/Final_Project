@@ -17,7 +17,9 @@
 }
 
 .logoLink {
+  display: block;
   text-decoration: none;
+  width: max-content;
 }
 
 .logo {
@@ -81,6 +83,9 @@
       border-top: 1px solid #00000020;
       transform: translateY(-50%);
     }
+  }
+  .logoLink{
+    margin: 0 auto;
   }
   .logo {
     margin: 0 auto;
