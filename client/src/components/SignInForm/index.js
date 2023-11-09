@@ -22,13 +22,16 @@ export default function OrderForm() {
   const handleSubmit = async (userData, { resetForm }) => {
     await axios
       .post(HOST + '/customers/login', userData)
-      .then((loginResult) => {
+      .then(async (loginResult) => {
         dispatch(changeStatusTrue())
         dispatch(setToken(loginResult.data.token))
         setAuthToken(loginResult.data.token)
+        const customer = await getCustomer()
+        dispatch(changeData(customer))
+        dispatch(fetchWishlist())
         setFormStatus({ type: 'success', message: 'Welcome to Avion' })
+        navigate(-1)
         resetForm()
-        navigate(-1);
       })
       .catch((err) => {
         const massageData = err.response.data
@@ -39,10 +42,6 @@ export default function OrderForm() {
           message: `Login failed! ${errorMessage}`,
         })
       })
-    const customer = await getCustomer()
-    dispatch(changeData(customer))
-    dispatch(fetchWishlist())
-    resetForm()
   }
 
   const getCustomer = async () => {
