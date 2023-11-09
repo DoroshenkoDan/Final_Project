@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import CartIcon from '../Icons/CartIcon'
 import FavoritesIcon from '../Icons/FavoritesIcon'
-import {IoPersonAddOutline} from 'react-icons/io5'
+import {IoPersonOutline} from 'react-icons/io5'
 import {RxSlash} from 'react-icons/rx'
 import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
@@ -47,16 +47,14 @@ export default function Header() {
           </NavLink>          
           <NavLink className={styles.icon} to="/cart/">
             <div className={styles.counter}>{cart.length}</div>
-            <CartIcon />
-            
-          </NavLink>
-          {status && (
-            <NavLink className={styles.icon} to="/profile/">
-          <IoPersonAddOutline className={styles.profile}/>          
-        </NavLink>        
-          )}          
+            <CartIcon />            
+          </NavLink>             
         </span>
-        
+        {status && (
+            <NavLink className={styles.icon__profile} to="/profile/">
+          <IoPersonOutline className={styles.profile}/>          
+        </NavLink>        
+          )}       
         {status && 
         <RxSlash className={styles.shlash} />
         }               

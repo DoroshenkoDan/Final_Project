@@ -1,22 +1,22 @@
 @import url(../../scss/fonts.scss);
-// .wrapper-orders {
-//   padding-left: 24px;
-//   padding-right: 24px;
-//   background-color: #f9f9f9;
-//   font-family: 'Clash Display Regular';
-// }
-// .orders-title {
-//   font-size: 24px;
-//   color: #2a254b;
-//   padding-top: 40px;
-//   margin-bottom: 40px;
-// }
-// .order-text__empty {
-//   font-family: 'Satoshi Regular';
-//   font-size: 14px;
-//   color: #2a254b;
-//   padding-bottom: 40px;
-// }
+.wrapper-orders {
+  padding-left: 24px;
+  padding-right: 24px;
+  background-color: #f9f9f9;
+  font-family: 'Clash Display Regular';
+}
+.orders-title {
+  font-size: 24px;
+  color: #2a254b;
+  padding-top: 40px;
+  margin-bottom: 40px;
+}
+.order-text__empty {
+  font-family: 'Satoshi Regular';
+  font-size: 14px;
+  color: #2a254b;
+  padding-bottom: 40px;
+}
 @media only screen and (min-width: 768px) {
   .wrapper-orders {
     display: flex;

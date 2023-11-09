@@ -1,7 +1,7 @@
 .profile{
-    padding: 0 0 50px 0;
+    
     &__container {
-        width: 75%;
+        width: 95%;
         margin: 0 auto;
         position: relative;
     }
@@ -9,19 +9,19 @@
         font-family: 'Satoshi Regular';
         font-weight: 400;        
         color: #22202e;
-        font-size: 20px;
-        margin-bottom: 15px;
+        font-size: 18px;
         font-weight: bold;
-        margin: 20px 0;
-         &__name{
-        font-family: 'Satoshi Regular';
-        font-weight: 400;        
-        color: #22202e;
-        font-size: 25px;
-        margin-bottom: 15px;
-        font-weight: bold;
-        margin: 20px 0;
-    }
+        margin: 10px 0;
+
+        &__name{
+            font-family: 'Satoshi Regular';
+            font-weight: 400;        
+            color: #22202e;
+            font-size: 23px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
     }
    
     &__user{
@@ -37,39 +37,21 @@
         background: darkgrey;
         cursor: pointer;
         margin-bottom: 10px;
-    }
-    &__btn {
-        padding: 10px 15px;
-        border: 1px solid #2a254b;
-        color:#2a254b;
-        border-radius: 12px;
-        background: transparent;
-        cursor: pointer;    
-    }
-    &__btn:hover {
-        transform: scale(1.1);
-      }
-    &__icon {
-        font-size: 25px;
-        cursor: pointer;
-        margin-bottom: 20px;
-    }
-    &__icon:hover {
-        transform: scale(1.1);
-    }
+    }    
+   
 
     &__info {
-        font-size: 18px;
+        font-size: 16px;
         color:  gray;
         margin-bottom: 15px;
         border-bottom: 1px solid gray;
         width: 100%;
-        padding-bottom: 40px;    
+        padding-bottom: 10px;    
     }
     &__input {
         font-family: 'Satoshi Regular';
         font-weight: 400;
-        font-size: 18px;
+        font-size: 16px;
         color: #22202e;
         width: 100%;
         height: 40px;
@@ -77,40 +59,17 @@
         padding-left: 20px;
         border-radius: 10px;
         margin-bottom: 10px;
-        // border: none;
+       
     }
 
-    &__input2{
-        font-family: 'Satoshi Regular';
-        font-weight: 400;
-        font-size: 15px;
-        color: #22202e;
-        width: 100%;
-        height: 40px;
-        outline: none;
-        padding: 10px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-    }
-    &__input3{
-        font-family: 'Satoshi Regular';
-        font-weight: 400;
-        font-size: 15px;
-        color: #22202e;
-        width: 100%;
-        height: 40px;
-        outline: none;
-        padding: 10px;
-        border-radius: 10px;
-        margin-top: 30px;
-    }
-
+   
     &__btn2 {
         display: block;
         margin-top: 10px;
-        padding: 10px 20px;
+        margin: auto;
+        padding: 10px 50px;
         font-family: 'Satoshi';
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
         line-height: 24px;
         background-color: #2a254b;
@@ -128,32 +87,27 @@
         display: flex;
         align-items: center;
         column-gap: 10px;
-        font-size: 20px;
+        font-size: 18px;
         color: red;
         cursor: pointer;
         &__icon{
             transform: scale(1.1);
         }
-    }
-       
+    }      
 
      &__remove-icon{
             font-family: 'Satoshi Regular';
             font-weight: 400;        
             color: #22202e;
-            font-size: 20px;
+            font-size: 18px;
         }
     &__error {
         font-family: 'Satoshi Regular';
         font-weight: 400;
-        font-size: 18px;
+        font-size: 16px;
         color: #e4605e;
-        margin-bottom: 10px;
-        
-      }
-    
-
-
+        margin-bottom: 10px;        
+      }   
 }
 .form {
     &__message{
@@ -167,5 +121,48 @@
     color: #e4605e;
   }
     
-  }
-  
+} 
+
+
+@media only screen and (min-width: 768px) {
+
+    .profile{
+    padding: 0 0 50px 0;
+
+    &__container {
+        width: 70%;       
+    }
+    &__btn2{
+        // margin-top: 10px;
+        margin: 20px 0;
+        padding: 10px 20px;
+        font-size: 20px;
+    }
+    &__info{
+        padding-bottom: 40px;
+        font-size: 18px;
+    }
+    &__title{
+        margin: 20px 0;
+        font-size: 20px;
+    }
+    &__name{        
+        font-size: 25px;       
+    }
+    &__input {        
+        font-size: 18px;
+        
+    }
+    &__remove {       
+        font-size: 20px;       
+    }      
+
+     &__remove-icon{           
+            font-size: 20px;
+        }
+    &__error {        
+        font-size: 18px;        
+      }     
+  }  
+}
+
