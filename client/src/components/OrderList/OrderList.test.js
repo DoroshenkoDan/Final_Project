@@ -1,7 +1,7 @@
 import React, { useState as useStateMock } from 'react'
 import axios from 'axios'
 import { act, render, waitFor } from '@testing-library/react'
-import FavoritesPage from './index'
+import OrderList from './index'
 import { HOST } from '../Token'
 import { MemoryRouter } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ describe('OrdersList', () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <FavoritesPage />
+          <OrderList />
         </MemoryRouter>,
       )
     })

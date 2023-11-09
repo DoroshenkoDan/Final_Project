@@ -1,6 +1,6 @@
 import React from 'react'
-import { fireEvent, render, waitFor } from '@testing-library/react'
-import OrderPage from './index'
+import { render } from '@testing-library/react'
+import OrderItem from './index'
 import { MemoryRouter } from 'react-router-dom'
 
 jest.mock('axios')
@@ -41,7 +41,7 @@ describe('OrderItem', () => {
   it('OrderItem is render', () => {
     render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
   })
@@ -49,7 +49,7 @@ describe('OrderItem', () => {
   it('Check if order details are displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
@@ -60,7 +60,7 @@ describe('OrderItem', () => {
   it('Check if each product is displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
