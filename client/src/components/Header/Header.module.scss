@@ -32,29 +32,30 @@
     width: max-content;
 }
 
-//.icons {
-//    display: none;
-//    position: absolute;
-//}
+.icons{
+    display: block;
+    &Display{
+        display: none;
+    }
+}
 
 .icon {
     display: inline-block;
     margin-right: 16px;
 }
 
-//.iconAuth {
-//    position: absolute;
-//    top: 26px;
-//    right: 32px;
-//}
 
 .iconMenu {
-    display: block;
     width: max-content;
-
+    display: inline-block;
+    margin-left: 16px;
     &Display {
         display: none;
     }
+}
+
+.iconAuth{
+    display: inline-block;
 }
 
 @media (min-width: 768px) {
@@ -63,24 +64,9 @@
         max-width: 1440px;
     }
 
-    //.logoLink {
-    //    margin: 0 auto;
-    //}
-
     .topMenu {
         height: 66px;
-        //display: block;
-
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            border-top: 1px solid #00000020;
-            transform: translateY(-50%);
-        }
+        border-bottom: 1px solid #00000020;;
     }
 
     .logo {
@@ -88,20 +74,14 @@
         line-height: 66px;
     }
 
-    //.icons {
-    //    display: block;
-    //    position: absolute;
-    //    top: 23px;
-    //    right: 16px;
-    //}
+    .icons{
+        &Display{
+            display: inline-block;
+        }
+    }
 
     .iconMenu {
         display: none;
     }
 
-    //.iconAuth {
-    //    position: absolute;
-    //    top: 23px;
-    //    right: 0;
-    //}
 }

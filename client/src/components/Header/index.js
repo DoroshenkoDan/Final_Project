@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, {useState} from 'react'
+import {NavLink} from 'react-router-dom'
 import CartIcon from '../Icons/CartIcon'
 import FavoritesIcon from '../Icons/FavoritesIcon'
 import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {
     resetStatus,
     resetData,
@@ -14,8 +14,9 @@ import {
 import IconLogin from '../Icons/IconLogin'
 import LogOutIcon from '../Icons/LogOutIcon'
 import NavContainer from '../NavContainer'
-import { setAuthToken } from '../Token'
+import {setAuthToken} from '../Token'
 import Search from '../Search/search'
+
 export default function Header() {
     const status = useSelector((state) => state.store.user.status)
     const [isMenuHidden, setIsMenuHidden] = useState(true)
@@ -35,47 +36,49 @@ export default function Header() {
     return (
         <header className={styles.headerContainer}>
             <div className={styles.topMenu}>
-                <Search />
+                <Search/>
                 <NavLink className={styles.logoLink} to="/">
                     <span className={styles.logo}>Avion</span>
                 </NavLink>
                 <span className={styles.icons}>
-                    <NavLink className={styles.icon} to="/favorites/">
-                        <FavoritesIcon />
-                    </NavLink>
+                <span className={styles.iconsDisplay}>
+                    {status && <NavLink className={styles.icon} to="/favorites/">
+                        <FavoritesIcon/>
+                    </NavLink>}
                     <NavLink className={styles.icon} to="/cart/">
-                        <CartIcon />
+                        <CartIcon/>
                     </NavLink>
                 </span>
-                {status && (
-                    <NavLink
-                        onClick={logOutUser}
-                        className={styles.iconAuth}
-                        to="/login/"
-                    >
-                        <LogOutIcon />
-                    </NavLink>
-                )}
-                {!status && (
-                    <NavLink className={styles.iconAuth} to="/login/">
-                        <IconLogin />
-                    </NavLink>
-                )}
-                <span
-                    className={`${styles.iconMenu} ${!isMenuHidden ? styles.iconMenuDisplay : ''
+                    {status && (
+                        <NavLink
+                            onClick={logOutUser}
+                            className={styles.iconAuth}
+                            to="/login/"
+                        >
+                            <LogOutIcon/>
+                        </NavLink>
+                    )}
+                    {!status && (
+                        <NavLink className={styles.iconAuth} to="/login/">
+                            <IconLogin/>
+                        </NavLink>
+                    )}
+                    <span
+                        className={`${styles.iconMenu} ${!isMenuHidden ? styles.iconMenuDisplay : ''
                         }`}
-                    data-testid="menu-icon"
-                    onClick={toggleHideItems}
-                >
-                    <MenuIcon />
+                        data-testid="menu-icon"
+                        onClick={toggleHideItems}
+                    >
+                    <MenuIcon/>
                 </span>
                 <span
                     className={`${styles.iconMenu} ${isMenuHidden ? styles.iconMenuDisplay : ''
-                        }`}
+                    }`}
                     onClick={toggleHideItems}
                 >
-                    <CloseBtnIcon />
+                    <CloseBtnIcon/>
                 </span>
+                    </span>
             </div>
             <NavContainer isMenuHidden={isMenuHidden}></NavContainer>
         </header>
