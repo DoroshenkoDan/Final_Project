@@ -62,7 +62,7 @@ export default function ProductsContainer({ id }) {
     //       const randomObject = sourceCopy[randomIndex]
 
     //       if (
-    //resultArray.some(
+    // resultArray.some(
     //           (item) => item.categories === randomObject.categories,
     //         )
     //       ) {
