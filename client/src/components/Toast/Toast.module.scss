@@ -1,0 +1,49 @@
+.toast{
+  position: fixed;
+  bottom: 16px;
+  left: 2%;
+  background-color: #fff;
+  color: #2a254b;
+  font-family: 'Clash Display';
+  font-size: 16px;
+  width: 300px;
+  height: 65px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &__message {
+    padding-top: 25px;
+    text-align: center;
+
+  }
+
+  &__progress__bar {
+    height: 5px;
+    background-color: #4caf50;
+    width: 0;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+.btn__close {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out 0s;
+  transform: scale(1);
+}
