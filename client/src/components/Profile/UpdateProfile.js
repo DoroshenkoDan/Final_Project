@@ -105,17 +105,7 @@ function UpdateProfile() {
               /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               'Invalid email format',
             )
-            .required('Email is required'),
-            avatarFile: Yup.mixed().test(
-              'fileSize',
-              'File size is too large (max 5MB)',
-              (value) => {
-                if (value) {
-                  return value.size <= 5 * 1024 * 1024;
-                }
-                return true;
-              }
-            ),                
+            .required('Email is required'),         
           
           
         })}
