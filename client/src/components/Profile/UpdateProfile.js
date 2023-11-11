@@ -47,6 +47,18 @@ function UpdateProfile() {
       },[])
     resetForm()
   }
+  const handleFileChange = (event, setFieldValue) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setFieldValue("avatarUrl", reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   
     return (
@@ -68,7 +80,8 @@ function UpdateProfile() {
           login: customer.login || '',
           email: customer.email || '',
           telephone: customer.telephone || '',
-          avatarUrl: customer.avatarUrl || '',     
+          avatarUrl: customer.avatarUrl || '',
+          avatarFile: null, // new field to store the selected file     
         }}
         onSubmit={handleSubmit}
         validationSchema={Yup.object({
@@ -97,22 +110,25 @@ function UpdateProfile() {
           
           
         })}
-      >
+      >{(formikProps) => (
         <Form className={styles.profile} noValidate>
           <div className={styles.profile__container}>                
-            <div className={styles.profile__content}>
-              <h2 className={styles.profile__title}>Profile photo</h2>              
+          <div className={styles.profile__content}>
+              <h2 className={styles.profile__title}>Profile photo</h2>
               <div className={styles.profile__user}>
-                 <img className={styles.profile__img} src={customer.avatarUrl}/>               
-                <Field
-                  className={styles.profile__input2}     
-                  type="text"
-                  placeholder="enter the image address"                        
-                  name="avatarUrl"
-                  component={Input}                              
-                />                                       
+                <img className={styles.profile__img} src={formikProps.values.avatarUrl} alt="Profile" />
+                <label htmlFor="avatarFile" className={styles.profile__fileLabel}>
+                  Choose file
+                </label>
+                    <input 
+                      id="avatarFile"
+                      className={styles.profile__input1}
+                      type="file"
+                      accept="image/*"
+                      onChange={(event) => handleFileChange(event, formikProps.setFieldValue)}
+                      />
               </div>
-          <p className={styles.profile__info}>Maximum photo size 5MB</p>
+              <p className={styles.profile__info}>Maximum photo size 5MB</p>
           <h3 className={styles.profile__title__name}>Personal information</h3>
           <p className={styles.profile__title}>First name</p>          
           <Field
@@ -151,7 +167,8 @@ function UpdateProfile() {
           </div>
           </div>
       </div>   
-        </Form>        
+        </Form>
+        )}        
       </Formik>
       </>
        

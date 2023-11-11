@@ -14,7 +14,7 @@ import AboutPage from '../pages/AboutPage/AboutPage'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import PrivacyPage from '../pages/PrivacyPage/PrivacyPage'
 import ScrollToTop from './ScrollToTop'
-import ProfilePage from '../pages/ProfilePage/ProfilePage.js'
+import ProfilePage from '../pages/ProfilePage/ProfilePage'
 
 function Routes() {
   return useRoutes([

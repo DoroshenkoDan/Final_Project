@@ -4,7 +4,7 @@
         width: 95%;
         margin: 0 auto;
         position: relative;
-    }
+    }    
     &__title{
         font-family: 'Satoshi Regular';
         font-weight: 400;        
@@ -23,12 +23,29 @@
             margin: 20px 0;
         }
     }
+    &__fileLabel {
+        font-size: 13px;       
+        cursor: pointer;
+        color: #333;
+        border: 1px solid #22202e;
+        padding: 5px;       
+        transition: all 0.1s ease-in-out;
+        transform: scale(1);
+        border-radius: 10px;         
+      }
+    &__input1 {
+        display: none;       
+    }
+
+    &__fileLabel:hover{
+        transform: scale(1.1);
+    }
    
     &__user{
         display: flex;
         column-gap: 20px;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 20px;        
     }
     &__img {
         width: 50px;
@@ -48,6 +65,9 @@
         width: 100%;
         padding-bottom: 10px;    
     }
+
+   
+
     &__input {
         font-family: 'Satoshi Regular';
         font-weight: 400;
@@ -123,7 +143,6 @@
     
 } 
 
-
 @media only screen and (min-width: 768px) {
 
     .profile{
@@ -131,6 +150,9 @@
 
     &__container {
         width: 70%;       
+    }
+    &__content{
+        text-align: start;
     }
     &__btn2{
         // margin-top: 10px;
@@ -142,6 +164,12 @@
         padding-bottom: 40px;
         font-size: 18px;
     }
+    &__fileLabel {
+        font-size: 15px;
+    }
+    &__user{
+        justify-content: start;
+    }       
     &__title{
         margin: 20px 0;
         font-size: 20px;
@@ -151,6 +179,7 @@
     }
     &__input {        
         font-size: 18px;
+        padding-left: 20px;
         
     }
     &__remove {       
