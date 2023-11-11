@@ -81,7 +81,7 @@ function UpdateProfile() {
           email: customer.email || '',
           telephone: customer.telephone || '',
           avatarUrl: customer.avatarUrl || '',
-          avatarFile: null, // new field to store the selected file     
+          avatarFile: null,    
         }}
         onSubmit={handleSubmit}
         validationSchema={Yup.object({
@@ -106,7 +106,16 @@ function UpdateProfile() {
               'Invalid email format',
             )
             .required('Email is required'),
-                   
+            avatarFile: Yup.mixed().test(
+              'fileSize',
+              'File size is too large (max 5MB)',
+              (value) => {
+                if (value) {
+                  return value.size <= 5 * 1024 * 1024;
+                }
+                return true;
+              }
+            ),                
           
           
         })}
