@@ -44,17 +44,10 @@ export default function Toast({message, duration = 2300, onClose}) {
                 }, 100);
             }
         };
-
-        // const timer = setTimeout(() => {
-        //     clearInterval(interval);
-        //     onClose && onClose();
-        // }, duration);
-
         startInterval();
 
         return () => {
             clearInterval(interval);
-            //   clearTimeout(timer);
         };
     }, [duration, onClose, animationStarted]);
 

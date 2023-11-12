@@ -1,9 +1,9 @@
 @import url(../../scss/fonts.scss);
 .toastContainer {
-  height: 100vh;
+  position: fixed;
+  bottom: 20px;
 }
 .toast{
-  position: fixed;
   background-color: #fff;
   color: #2a254b;
   font-family: 'Clash Display Regular';
