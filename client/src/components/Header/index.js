@@ -51,7 +51,7 @@ export default function Header() {
           </NavLink>             
         </span>       
         {status && (
-        <div>
+        <>
         <NavLink className={styles.icon__profile} to="/profile/">
           <IoPersonOutline className={styles.profile}/>          
         </NavLink> 
@@ -63,7 +63,7 @@ export default function Header() {
           >
             <LogOutIcon />
           </NavLink>
-        </div>          
+        </>          
         )}
         {!status && (
           <NavLink className={styles.iconAuth} to="/login/">
