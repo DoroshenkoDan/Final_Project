@@ -2,8 +2,6 @@ import axios from 'axios'
 
 export const HOST = 'http://localhost:4000/api'
 
-export let token
-
 export const setAuthToken = (token) => {
   if (token) {
     axios.defaults.headers.common.Authorization = token

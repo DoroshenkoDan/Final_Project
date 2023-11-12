@@ -1,55 +1,92 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import styles from './Toast.module.scss'
 import SuccessIcon from '../Icons/SuccessIcon'
+import {useSpring, animated} from 'react-spring';
 
-export default function Toast({ message, duration = 2300, onClose }) {
-  const [isVisible, setIsVisible] = useState(true)
-  const [progress, setProgress] = useState(100)
+export default function Toast({message, duration = 2300, onClose}) {
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => prevProgress - 100 / (duration / 100))
-    }, 100)
+    const [progress, setProgress] = useState(100)
+    const [animationStatus, setAnimationStatus] = useState('forward');
+    const [animationStarted, setAnimationStarted] = useState(false);
 
-    const timer = setTimeout(() => {
-      clearInterval(interval)
-      setIsVisible(false)
-      onClose && onClose()
-    }, duration)
+    const props = useSpring({
+        from: {transform: 'translateX(-100%)'},
+        to: async (next, cancel) => {
+            if (animationStatus === 'forward') {
+                await next({transform: 'translateX(0%)'});
+                setAnimationStarted(true);
+                await new Promise((resolve) => setTimeout(resolve, duration));
+                setAnimationStatus('reverse');
+            } else {
+                await next({transform: 'translateX(-100%)'});
+                await new Promise((resolve) => setTimeout(resolve, 1500));
+                setAnimationStarted(false);
+                setAnimationStatus('forward');
+            }
+        },
+        onRest: () => {
+            if (animationStatus === 'reverse') {
+                onClose && onClose();
+            }
+        },
+        config: {duration: 2000},
+    });
 
-    return () => {
-      clearInterval(interval)
-      clearTimeout(timer)
-    }
-  }, [duration, onClose])
+    useEffect(() => {
+        let interval;
 
-  return isVisible ? (
-    <div className={styles.toast}>
-      <span
-        className={styles.btn__close}
-        data-testid="btn-close"
-        onClick={onClose}
+        const startInterval = async () => {
+            if (animationStarted) {
+                interval = setInterval(() => {
+                    setProgress((prevProgress) => prevProgress - 100 / (duration / 100));
+                }, 100);
+            }
+        };
+
+        // const timer = setTimeout(() => {
+        //     clearInterval(interval);
+        //     onClose && onClose();
+        // }, duration);
+
+        startInterval();
+
+        return () => {
+            clearInterval(interval);
+            //   clearTimeout(timer);
+        };
+    }, [duration, onClose, animationStarted]);
+
+    return (
+        <div>
+            <animated.div style={props} className={styles.toastContainer}>
+                <div className={styles.toast}>
+       <span
+          className={styles.btn__close}
+          data-testid="btn-close"
+          onClick={onClose}
       >
         <CloseBtnIcon></CloseBtnIcon>
       </span>
-      <div className={styles.toast__message}>
-        <div className={styles.toast__message__icon}>
-          <SuccessIcon></SuccessIcon>
+                    <div className={styles.toast__message}>
+                        <div className={styles.toast__message__icon}>
+                            <SuccessIcon></SuccessIcon>
+                        </div>
+                        <p className={styles.toast__message__text}>{message}</p>
+                    </div>
+                    <div
+                        className={styles.toast__progress__bar}
+                        style={{width: `${progress}%`}}
+                    />
+                </div>
+            </animated.div>
         </div>
-        <p className={styles.toast__message__text}>{message}</p>
-      </div>
-      <div
-        className={styles.toast__progress__bar}
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  ) : null
+    )
 }
 
 Toast.propTypes = {
-  message: PropTypes.string,
-  duration: PropTypes.number,
-  onClose: PropTypes.func,
+    message: PropTypes.string,
+    duration: PropTypes.number,
+    onClose: PropTypes.func,
 }
