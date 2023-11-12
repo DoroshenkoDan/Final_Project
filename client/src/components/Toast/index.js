@@ -31,7 +31,7 @@ export default function Toast({message, duration = 2300, onClose}) {
                 onClose && onClose();
             }
         },
-        config: {duration: 2000},
+        config: {duration: 1500},
     });
 
     useEffect(() => {
