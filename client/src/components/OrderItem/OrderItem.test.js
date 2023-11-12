@@ -1,8 +1,7 @@
 import React from 'react'
-import { fireEvent, render, waitFor } from '@testing-library/react'
-import OrderPage from './index'
+import { render } from '@testing-library/react'
+import OrderItem from './index'
 import { MemoryRouter } from 'react-router-dom'
-import axios from 'axios'
 
 jest.mock('axios')
 
@@ -38,10 +37,11 @@ const order = {
 const changeOrders = jest.fn()
 
 describe('OrderItem', () => {
+
   it('OrderItem is render', () => {
     render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
   })
@@ -49,7 +49,7 @@ describe('OrderItem', () => {
   it('Check if order details are displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
@@ -60,7 +60,7 @@ describe('OrderItem', () => {
   it('Check if each product is displayed', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <OrderPage order={order} changeOrders={changeOrders} />
+        <OrderItem order={order} changeOrders={changeOrders} />
       </MemoryRouter>,
     )
 
@@ -71,24 +71,4 @@ describe('OrderItem', () => {
       expect(getByText(`${product.product.currentPrice}$`)).toBeInTheDocument()
     })
   })
-
-  // it('Check that order deleted', async () => {
-  //   axios.delete.mockResolvedValue({
-  //     data: 'Order deleted',
-  //   })
-
-  //   const { getByTestId } = render(
-  //     <MemoryRouter>
-  //       <OrderPage order={order} changeOrders={changeOrders} />
-  //     </MemoryRouter>,
-  //   )
-
-  //   // Simulate a click on the delete button
-  //   fireEvent.click(getByTestId('btn-close'))
-
-  //   // Wait for the axios delete request to complete
-  //   await waitFor(() => {
-  //     expect(changeOrders).toHaveBeenCalledWith(order._id)
-  //   })
-  // })
 })

@@ -46,12 +46,12 @@ describe('testing RegisterForm component', () => {
   })
   it('renders the form elements', () => {
     const { getByPlaceholderText, getByText } = render(<RegisterForm />)
-    expect(getByPlaceholderText('firstName')).toBeInTheDocument()
-    expect(getByPlaceholderText('lastName')).toBeInTheDocument()
-    expect(getByPlaceholderText('login')).toBeInTheDocument()
-    expect(getByPlaceholderText('email')).toBeInTheDocument()
-    expect(getByPlaceholderText('password')).toBeInTheDocument()
-    expect(getByPlaceholderText('telephone')).toBeInTheDocument()
+    expect(getByPlaceholderText('First name')).toBeInTheDocument()
+    expect(getByPlaceholderText('Last name')).toBeInTheDocument()
+    expect(getByPlaceholderText('Login')).toBeInTheDocument()
+    expect(getByPlaceholderText('Email')).toBeInTheDocument()
+    expect(getByPlaceholderText('Password')).toBeInTheDocument()
+    expect(getByPlaceholderText('Telephone')).toBeInTheDocument()
     expect(getByText('Send')).toBeInTheDocument()
   })
 
@@ -60,26 +60,30 @@ describe('testing RegisterForm component', () => {
 
     const { getByPlaceholderText, getByText } = render(<RegisterForm />)
 
-    fireEvent.change(getByPlaceholderText('firstName'), {
+    fireEvent.change(getByPlaceholderText('First name'), {
       target: { value: 'John' },
     })
-    fireEvent.change(getByPlaceholderText('lastName'), {
+    fireEvent.change(getByPlaceholderText('Last name'), {
       target: { value: 'DoeDoe' },
     })
-    fireEvent.change(getByPlaceholderText('login'), {
+    fireEvent.change(getByPlaceholderText('Login'), {
       target: { value: 'johndoe123' },
     })
-    fireEvent.change(getByPlaceholderText('email'), {
+    fireEvent.change(getByPlaceholderText('Email'), {
       target: { value: 'john@example.com' },
     })
-    fireEvent.change(getByPlaceholderText('password'), {
+    fireEvent.change(getByPlaceholderText('Password'), {
       target: { value: '123456789' },
     })
-    fireEvent.change(getByPlaceholderText('telephone'), {
+    fireEvent.change(getByPlaceholderText('Repeat Password'), {
+      target: { value: '123456789' },
+    })
+    fireEvent.change(getByPlaceholderText('Telephone'), {
       target: { value: '+380501234567' },
     })
 
     fireEvent.click(getByText('Send'))
+
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(

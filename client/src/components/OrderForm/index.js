@@ -45,7 +45,7 @@ export default function OrderForm(props) {
             props.changeOrderPlaced({
                 status: false,
                 massage:
-                    'The order has not been processed. Check that the entered data is correct and that you are logged in',
+                    'The order has not been processed. Check that the entered data is correct',
             });
             console.log(err);
         }
@@ -92,7 +92,6 @@ export default function OrderForm(props) {
         } else {
             const {firstName, lastName, email, telephone, country, city, address, postal} = orderInfo
             const products = findProductsInCart()
-            console.log(products)
             const newOrder = {
                 products: products,
                 deliveryAddress: {
@@ -109,7 +108,6 @@ export default function OrderForm(props) {
                 letterSubject: 'Thank you for order! You are welcome!',
                 letterHtml: '<h1>Your order is placed.</h1>',
             }
-            console.log(newOrder)
             await sendOrder(newOrder)
         }
     }

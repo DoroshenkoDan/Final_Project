@@ -7,7 +7,7 @@ import axios from 'axios'
 import {HOST} from '../Token'
 import Modal from '../Modal/index'
 
-export default function OrderPage(props) {
+export default function OrderItem(props) {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     function deleteOrders() {
@@ -74,7 +74,7 @@ export default function OrderPage(props) {
     )
 }
 
-OrderPage.propTypes = {
+OrderItem.propTypes = {
     order: PropTypes.object,
     changeOrders: PropTypes.func,
 }
