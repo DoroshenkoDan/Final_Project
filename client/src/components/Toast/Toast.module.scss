@@ -1,32 +1,40 @@
+@import url(../../scss/fonts.scss);
+
 .toast{
   position: fixed;
   bottom: 16px;
   left: 2%;
   background-color: #fff;
   color: #2a254b;
-  font-family: 'Clash Display';
-  font-size: 16px;
-  width: 300px;
-  height: 65px;
+  font-family: 'Clash Display Regular';
+  font-size: 15px;
+  min-width: 325px;
+  height: 64px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   z-index: 999;
   opacity: 0.9;
-  transition: opacity 0.3s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  transition: opacity 0.5s ease-in-out;
 
-  &__message {
-    padding-top: 25px;
-    text-align: center;
+  &__message{
+    &__icon{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
 
+    &__text {
+      padding-top: 24px;
+      text-align: center;
+    }
   }
 
   &__progress__bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     height: 5px;
-    background-color: #4caf50;
-    width: 0;
+    background-color: #21c179;
     border-radius: 4px;
   }
 
@@ -34,6 +42,7 @@
     opacity: 1;
   }
 }
+
 .btn__close {
   width: 24px;
   height: 24px;
