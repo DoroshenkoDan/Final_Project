@@ -30,7 +30,7 @@
   width: max-content;
 }
 
-.icons {
+.icons, .iconsStatus {
   display: none;
   position: absolute;
 }
@@ -125,6 +125,12 @@
     line-height: 66px;
   }
   .icons {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 25px;    
+  }
+  .iconsStatus{
     display: block;
     position: absolute;
     top: 23px;

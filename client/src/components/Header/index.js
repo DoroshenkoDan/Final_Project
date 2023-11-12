@@ -41,7 +41,7 @@ export default function Header() {
         <NavLink className={styles.logoLink} to="/">
           <span className={styles.logo}>Avion</span>
         </NavLink>
-        <span className={styles.icons}>
+        <span className={status ? `${styles.iconsStatus}` : `${styles.icons}`}>
           <NavLink className={styles.icon} to="/favorites/">
             <FavoritesIcon />
           </NavLink>          
@@ -49,17 +49,13 @@ export default function Header() {
             <div className={styles.counter}>{cart.length}</div>
             <CartIcon />            
           </NavLink>             
-        </span>
+        </span>       
         {status && (
-            <NavLink className={styles.icon__profile} to="/profile/">
+        <div>
+        <NavLink className={styles.icon__profile} to="/profile/">
           <IoPersonOutline className={styles.profile}/>          
-        </NavLink>        
-          )}       
-        {status && 
-        <RxSlash className={styles.shlash} />
-        }               
-        
-        {status && (
+        </NavLink> 
+          <RxSlash className={styles.shlash} />
           <NavLink
             onClick={logOutUser}
             className={styles.iconAuth}
@@ -67,6 +63,7 @@ export default function Header() {
           >
             <LogOutIcon />
           </NavLink>
+        </div>          
         )}
         {!status && (
           <NavLink className={styles.iconAuth} to="/login/">
