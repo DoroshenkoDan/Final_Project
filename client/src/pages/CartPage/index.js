@@ -8,7 +8,6 @@ import OrderForm from '../../components/OrderForm'
 // eslint-disable-next-line
 import { addArrayToCart } from '../../Redux/reducers/cartReducer.js'
 import { NavLink, useNavigate } from 'react-router-dom'
-import Search from '../../components/Search/search.js'
 
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
@@ -146,7 +145,6 @@ export default function Cart() {
 
     return (
         <div className={styles['cart-container']}>
-            <Search />
             <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
             {userStatus && (
                 <NavLink to="/orders/" className={styles['link-order']}>

@@ -14,6 +14,7 @@ import AboutPage from '../pages/AboutPage/AboutPage'
 import PageNotFound from '../pages/PageNotFound/PageNotFound'
 import PrivacyPage from '../pages/PrivacyPage/PrivacyPage'
 import ScrollToTop from './ScrollToTop'
+import ContactUs from '../pages/ContacUs/index.js'
 
 function Routes() {
     return useRoutes([
@@ -32,6 +33,7 @@ function Routes() {
                 { path: 'products/:productId', element: <ProductPage /> },
                 { path: 'about-us/', element: <AboutPage /> },
                 { path: 'privacy-page/', element: <PrivacyPage /> },
+                { path: 'contacts', element: <ContactUs /> },
                 { path: '*', element: <PageNotFound /> },
             ],
         },

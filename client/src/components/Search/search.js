@@ -8,7 +8,7 @@ const DEBOUNCE_THRESHOLD = 500;
 export default function Search() {
     const [searchList, setSearchList] = useState([]);
     const [isFocused, setIsFocused] = useState(false);
-
+    const [noItems, setNoItems] = useState(false)
     async function sendSearchRequest(query) {
         const searchPhrases = {
             query: query,
@@ -17,7 +17,16 @@ export default function Search() {
         axios
             .post(HOST + "/products/search", searchPhrases)
             .then((response) => {
-                setSearchList(response.data);
+                if (response.data.length === 0) {
+                    setNoItems(true)
+                    setSearchList([]);
+                }
+                else {
+                    setNoItems(false)
+                    setSearchList(response.data);
+                }
+                console.log("ServerResponse", response);
+
             })
             .catch((err) => {
                 console.log("Create request", err);
@@ -32,6 +41,7 @@ export default function Search() {
         }
         timeoutHandler.current = setTimeout(() => {
             if (event.target.value === "") {
+                setNoItems(false)
                 setSearchList([]);
             } else {
                 sendSearchRequest(event.target.value);
@@ -67,9 +77,13 @@ export default function Search() {
                 onBlur={handleBlur}
                 autoComplete="off"
             />
-            <div className={`search-list-container ${isFocused ? "visible" : ""}`}>
+
+            {noItems && <div className={`no-item-search-container ${isFocused ? "visible" : ""}`}>
+                <p className="no-item-search">No Items Found</p>
+            </div>}
+
+            <div className={`search-list-container ${isFocused && searchList.length > 0 ? "visible" : ""}`}>
                 {searchList.map((e) => {
-                    console.log(`/products/${e.id}`);
                     return (
                         <NavLink to={`/products/${e.id}`} className="search-result-item" key={e.id}>
                             <img src={e.imageUrls} />
