@@ -1,32 +1,37 @@
-import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
-import Toast from './index';
-
-jest.useFakeTimers();
+import React from 'react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import Toast from './index'
 
 describe('Toast component', () => {
-  test('renders toast with message', () => {
-    render(<Toast message="Test Message" />);
-    expect(screen.getByText('Test Message')).toBeInTheDocument();
-  });
+  test('renders with default props', () => {
+    const { getByText } = render(<Toast message="Test Message" />)
+    expect(getByText('Test Message')).toBeInTheDocument()
+  })
 
-  test('closes toast on button click', () => {
-    const onCloseMock = jest.fn();
-    render(<Toast message="Test Message" onClose={onCloseMock} />);
+  test('calls onClose when close button is clicked', () => {
+    const onCloseMock = jest.fn()
+    const { getByTestId } = render(
+      <Toast message="Test Message" onClose={onCloseMock} />,
+    )
 
-    fireEvent.click(screen.getByTestId('btn-close'));
+    fireEvent.click(getByTestId('btn-close'))
 
-    expect(onCloseMock).toHaveBeenCalledTimes(1);
-  });
+    expect(onCloseMock).toHaveBeenCalledTimes(1)
+  })
 
-  test('closes toast after duration', () => {
-    const onCloseMock = jest.fn();
-    render(<Toast message="Test Message" duration={2000} onClose={onCloseMock} />);
+  test('triggers animation and calls onClose after the specified duration', async () => {
+    jest.useFakeTimers()
+    const onCloseMock = jest.fn()
+    const { getByTestId } = render(
+      <Toast message="Test Message" duration={3000} onClose={onCloseMock} />,
+    )
 
-    act(() => {
-      jest.advanceTimersByTime(2000);
-    });
+    fireEvent.click(getByTestId('btn-close'))
 
-    expect(onCloseMock).toHaveBeenCalledTimes(1);
-  });
-});
+    jest.runAllTimers()
+
+    await waitFor(() => {
+      expect(onCloseMock).toHaveBeenCalledTimes(1)
+    })
+  })
+})

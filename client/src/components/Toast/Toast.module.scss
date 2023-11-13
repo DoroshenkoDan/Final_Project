@@ -1,9 +1,9 @@
 @import url(../../scss/fonts.scss);
-
-.toast{
+.toastContainer {
   position: fixed;
-  bottom: 16px;
-  left: 2%;
+  bottom: 20px;
+}
+.toast {
   background-color: #fff;
   color: #2a254b;
   font-family: 'Clash Display Regular';
@@ -16,8 +16,8 @@
   opacity: 0.9;
   transition: opacity 0.5s ease-in-out;
 
-  &__message{
-    &__icon{
+  &__message {
+    &__icon {
       position: absolute;
       top: 20px;
       left: 20px;

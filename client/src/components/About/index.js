@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './About.module.scss'
-import Toast from '../Toast/index'
 
 export default function About() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const [showToast, setShowToast] = useState(false);
-
-  const handleButtonClick = () => {
-    setShowToast(true);
-  };
-
-  const handleToastClose = () => {
-    setShowToast(false);
-  };
 
   return (
     <div className={styles.container}>
@@ -40,8 +29,6 @@ export default function About() {
                 live, breathe and design so our Chelsea boutique become the
                 hotbed for the London interior design community.
               </p>
-              <button onClick={handleButtonClick}>Toast</button> 
-              {showToast && <Toast message="Your data succesfully updated!" onClose={handleToastClose}/>}
             </div>
           </div>
           <img

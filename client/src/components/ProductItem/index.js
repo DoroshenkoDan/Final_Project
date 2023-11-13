@@ -37,15 +37,16 @@ export default function ProductItem({ props }) {
       navigate('/login/')
     }
   }
-useEffect(()=>{
-  if(userStatus){
-      const isObjectInWIshlist = wishlist.find(obj => obj._id === product._id);
+  useEffect(() => {
+    if (userStatus) {
+      const isObjectInWIshlist = wishlist.find((obj) => obj._id === product._id)
       if (isObjectInWIshlist) {
-      setIsInWishlist(true);
-        } else {
+        setIsInWishlist(true)
+      } else {
         setIsInWishlist(false)
-      }}
-},[product, wishlist])
+      }
+    }
+  }, [product, wishlist])
   useEffect(() => {
     findObj(list, props)
     setProductQuantity(1)
@@ -124,7 +125,15 @@ useEffect(()=>{
             </>
           )}
           <div className={styles['product-item-information-btns-container']}>
-            {userStatus && <button disabled={isInWishlist} className={isInWishlist ? styles['disabled-button'] : ''} onClick={() => putToWishlist()}>{isInWishlist ? 'Already in favorites' : 'Save to favorites'}</button>}
+            {userStatus && (
+              <button
+                disabled={isInWishlist}
+                className={isInWishlist ? styles['disabled-button'] : ''}
+                onClick={() => putToWishlist()}
+              >
+                {isInWishlist ? 'Already in favorites' : 'Save to favorites'}
+              </button>
+            )}
             <button
               onClick={() => {
                 if (!isInCart) {

@@ -12,7 +12,7 @@ import {
 } from '../../Redux/reducers/userReducers'
 import axios from 'axios'
 import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 export default function SignInForm() {
   const dispatch = useDispatch()
