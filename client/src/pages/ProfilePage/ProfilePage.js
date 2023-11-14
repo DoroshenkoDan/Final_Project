@@ -1,42 +1,43 @@
-import React from 'react';
-import CustomerUpdate from '../../components/Profile/UpdateProfile';
-import PasswordUpdate from '../../components/Profile/UpdatePassword';
+import React, {useState} from 'react';
+import UpdateProfile from '../../components/Profile/UpdateProfile';
+import UpdatePassword from '../../components/Profile/UpdatePassword';
 import { NavLink } from 'react-router-dom'
 import {PiNavigationArrowDuotone} from "react-icons/pi"
+import Toast from '../../components/Toast';
 
 import styles from './ProfilePage.module.scss'
-// import OrderPage from '../OrderPage/OrderPage';
-
 
 function ProfilePage() {
-    // const [showOrderPage, setShowOrderPage] = useState(false);
+    const [formStatus, setFormStatus] = useState({ type: null, message: '' });
+    const [showToast, setShowToast] = useState(false);
 
-    // const handleShowOrderPage = () => {
-    //     setShowOrderPage(true);
-    // }
+  const handleButtonClick = () => {
+    setShowToast(true);
+  };
+
+  const handleToastClose = () => {
+    setShowToast(false);
+  };
+
+
+    console.log(formStatus.message);
+  
      return (
-          <div className={styles.profile__container}>
-            <div className={styles.profile__update}>
-            <NavLink to="/orders/">
+            <>
+                <div className={styles.profile__container}>
+                    <div className={styles.profile__update}>
+                        <NavLink to="/orders/">
                             <p className={styles.profile__link}>Your orders<PiNavigationArrowDuotone/></p>                            
                         </NavLink>
-                <CustomerUpdate/>
-                <PasswordUpdate/>
-            </div>            
-            {/* <div className={styles.profile__order}>                
-            <button className={styles.profile__btn} onClick={handleShowOrderPage}>
-                    Your orders
-                </button>
-                {showOrderPage && <OrderPage />}
-            </div> */}
-        </div>          
-    
-    
+                        <UpdateProfile formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
+                        <UpdatePassword formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
+                    </div> 
+                </div>                
+                {showToast && <Toast message={formStatus.message} onClose={handleToastClose}/>} 
+
+            </>
+          
      )
-    
-    
-        
-    
 }
 
 export default ProfilePage;

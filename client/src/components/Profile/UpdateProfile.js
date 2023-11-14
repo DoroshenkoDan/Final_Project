@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from './Profile.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik'
@@ -7,11 +7,12 @@ import Input from './InputProfile';
 import { HOST } from '../Token';
 import axios from 'axios';
 import { changeData } from '../../Redux/reducers/userReducers';
+import PropTypes from 'prop-types';
 
 
-function UpdateProfile() {
-  const customer = useSelector((state) => state.store.user).data  
-  const [formStatus, setFormStatus] = useState({ type: null, message: '' })
+function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
+  const customer = useSelector((state) => state.store.user).data
+  
   const dispatch = useDispatch()
 
   const handleSubmit = (updatedCustomer, { resetForm }) => {
@@ -23,7 +24,7 @@ function UpdateProfile() {
           message: 'You are successfully updated',
         })
         dispatch(changeData(updatedCustomer))
-        
+        handleButtonClick()
        
       })
       .catch((err) => {
@@ -49,7 +50,7 @@ function UpdateProfile() {
   }
   const handleFileChange = (event, setFieldValue) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
+    const reader = new FileReader();   
 
     reader.onloadend = () => {
       setFieldValue("avatarUrl", reader.result);
@@ -173,5 +174,14 @@ function UpdateProfile() {
        
     );
 }
+
+UpdateProfile.propTypes = {
+  formStatus: PropTypes.shape({
+    type: PropTypes.string,
+    message: PropTypes.string,
+  }),
+  setFormStatus: PropTypes.func,
+  handleButtonClick: PropTypes.func
+};
 
 export default UpdateProfile;

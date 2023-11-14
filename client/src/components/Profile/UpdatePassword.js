@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { HOST } from '../Token';
 import styles from './Profile.module.scss';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Input from './InputProfile';
+import PropTypes from 'prop-types';
 
-function UpdatePassword() {
-  const [formStatus, setFormStatus] = useState({ type: null, message: '' });
+function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
+  
 
   const handleSuccess = (message) => {
     setFormStatus({ type: 'success', message });
@@ -31,12 +32,15 @@ function UpdatePassword() {
         const result = response.data;
         if (result.password) {
           handleSuccess(result.password);
+          handleButtonClick()
         } else {
           handleSuccess(result.message);
+          handleButtonClick()
         }
       })
       .catch((error) => {
         handleError(error);
+        handleButtonClick()
       });
 
     resetForm();
@@ -120,5 +124,13 @@ function UpdatePassword() {
     </>
   );
 }
+UpdatePassword.propTypes = {
+  formStatus: PropTypes.shape({
+    type: PropTypes.string,
+    message: PropTypes.string,
+  }),
+  setFormStatus: PropTypes.func,
+  handleButtonClick: PropTypes.func
+};
 
 export default UpdatePassword;

@@ -21,20 +21,17 @@ export default function SignInForm() {
 
   const handleSubmit = async (userData, { resetForm }) => {
     await axios
-      .post(HOST + '/customers/login', userData)
-      .then(async (loginResult) => {
-        dispatch(changeStatusTrue())
-        dispatch(setToken(loginResult.data.token))
-        setAuthToken(loginResult.data.token)
-        const customer = await getCustomer()
-        dispatch(changeData(customer))
-        dispatch(fetchWishlist())
-        setFormStatus({ type: 'success', message: 'Welcome to Avion' })
-        const customer = await getCustomer()
-        dispatch(changeData(customer))
-        dispatch(fetchWishlist())
-        navigate(-1)
-        resetForm()
+    .post(HOST + '/customers/login', userData)
+    .then(async (loginResult) => {
+      dispatch(changeStatusTrue())
+      dispatch(setToken(loginResult.data.token))
+      setAuthToken(loginResult.data.token)
+      setFormStatus({ type: 'success', message: 'Welcome to Avion' })
+      const customer = await getCustomer()
+      dispatch(changeData(customer))
+      dispatch(fetchWishlist())
+      navigate(-1)
+      resetForm()
       })
       .catch((err) => {
         const massageData = err.response.data
