@@ -10,7 +10,7 @@ import { changeData } from '../../Redux/reducers/userReducers';
 import PropTypes from 'prop-types';
 
 
-function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
+function UpdateProfile({formStatus, setFormStatus, handleButtonClick, handleStatus}) {
   const customer = useSelector((state) => state.store.user).data
   
   const dispatch = useDispatch()
@@ -25,6 +25,7 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
         })
         dispatch(changeData(updatedCustomer))
         handleButtonClick()
+        handleStatus(true)
        
       })
       .catch((err) => {
@@ -181,7 +182,8 @@ UpdateProfile.propTypes = {
     message: PropTypes.string,
   }),
   setFormStatus: PropTypes.func,
-  handleButtonClick: PropTypes.func
+  handleButtonClick: PropTypes.func,
+  handleStatus: PropTypes.func
 };
 
 export default UpdateProfile;

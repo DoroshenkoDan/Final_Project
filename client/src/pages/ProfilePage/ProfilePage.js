@@ -10,6 +10,11 @@ import styles from './ProfilePage.module.scss'
 function ProfilePage() {
     const [formStatus, setFormStatus] = useState({ type: null, message: '' });
     const [showToast, setShowToast] = useState(false);
+    const [errorStatus, setErrorStatus] = useState(false);
+
+    const handleStatus =()=>{
+        setErrorStatus(true)
+      }
 
   const handleButtonClick = () => {
     setShowToast(true);
@@ -29,11 +34,11 @@ function ProfilePage() {
                         <NavLink to="/orders/">
                             <p className={styles.profile__link}>Your orders<PiNavigationArrowDuotone/></p>                            
                         </NavLink>
-                        <UpdateProfile formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
+                        <UpdateProfile formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick} handleStatus={handleStatus}/>
                         <UpdatePassword formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
                     </div> 
                 </div>                
-                {showToast && <Toast message={formStatus.message} onClose={handleToastClose}/>} 
+                {showToast && <Toast message={formStatus.message} onClose={handleToastClose} errorStatus={errorStatus}/>} 
 
             </>
           
