@@ -27,7 +27,7 @@ function Routes() {
         { path: 'cart/', element: <CartPage /> },
         { path: 'favorites/', element: <FavoritesPage /> },
         { path: 'login/', element: <AuthPage /> },
-        { path: 'allProducts/', element: <AllProductsPage /> },
+        { path: 'All-products/', element: <AllProductsPage /> },
         { path: 'orders/', element: <OrderPage /> },
         { path: 'category/:categoryId', element: <CategoryPage /> },
         { path: 'products/:productId', element: <ProductPage /> },

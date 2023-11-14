@@ -1,7 +1,7 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import AuthPage from './AuthPage'
 import { useDispatch, useSelector } from 'react-redux'
-import NavContainer from './index.js'
+import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
 jest.mock('react-redux', () => ({
@@ -9,9 +9,9 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }))
-
-describe('testing NavContainer component', () => {
+describe('testing AuthPage', () => {
   const dispatchMock = jest.fn()
+
   beforeEach(() => {
     useDispatch.mockReturnValue(dispatchMock)
     useSelector.mockImplementation((selector) =>
@@ -39,32 +39,19 @@ describe('testing NavContainer component', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-
-  it('renders the component', () => {
+  it('renders without errors', () => {
     render(
       <MemoryRouter>
-        <NavContainer isMenuHidden={false} />
+        <AuthPage />
       </MemoryRouter>,
     )
   })
-
-  it('check PropTypes', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation(() => {})
-    render(
+  it('renders without errors', () => {
+    const { asFragment } = render(
       <MemoryRouter>
-        <NavContainer />
+        <AuthPage />
       </MemoryRouter>,
     )
-    expect(spy).toHaveBeenCalled()
-    spy.mockRestore()
-  })
-  it('display categories', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <NavContainer isMenuHidden={true} />
-      </MemoryRouter>,
-    )
-    expect(getByText('Category 1')).toBeInTheDocument()
-    expect(getByText('Category 2')).toBeInTheDocument()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

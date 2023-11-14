@@ -4,7 +4,7 @@ import { HOST } from '../Token'
 import axios from 'axios'
 import OrderItem from '../OrderItem'
 
-export default function FavoritesPage() {
+export default function OrderList() {
   const [orders, setOrders] = useState([])
 
   function changeOrders(idToRemove) {

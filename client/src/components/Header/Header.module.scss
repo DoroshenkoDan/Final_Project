@@ -53,11 +53,13 @@
 
 }
 
-.icon, .iconAuth {
+.icon,
+.iconAuth {
   transition: all 0.3s ease-in-out;
 }
 
-.icon:hover, .iconAuth:hover {
+.icon:hover,
+.iconAuth:hover {
   transform: scale(1.3);
 }
 
