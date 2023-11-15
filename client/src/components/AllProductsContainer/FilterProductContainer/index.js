@@ -26,52 +26,51 @@ export default function FilterProductContainer() {
     }
   }, [])
 
-  const [, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams()
 
-  const [checkCategory, setCheckCategory] = useState([]);
-  const [checkBrand, setCheckBrand] = useState([]);
-  const [checkPrice, setCheckPrice] = useState([]);
+  const [checkCategory, setCheckCategory] = useState([])
+  const [checkBrand, setCheckBrand] = useState([])
+  const [checkPrice, setCheckPrice] = useState([])
 
   useEffect(() => {
-    const params = {};
-  if (checkCategory.length > 0) {
-    params.categories = checkCategory.join(',');
-  }
-  if (checkBrand.length > 0) {
-    params.brands = checkBrand.join(',');
-  }
-  if (checkPrice.length > 0) {
-    params.prices = checkPrice.join(',');
-  }
+    const params = {}
+    if (checkCategory.length > 0) {
+      params.categories = checkCategory.join(',')
+    }
+    if (checkBrand.length > 0) {
+      params.brands = checkBrand.join(',')
+    }
+    if (checkPrice.length > 0) {
+      params.prices = checkPrice.join(',')
+    }
 
-  const search = new URLSearchParams(params).toString();
-  setSearchParams(search);
-  }, [checkCategory, checkBrand, checkPrice, setSearchParams]);
-
+    const search = new URLSearchParams(params).toString()
+    setSearchParams(search)
+  }, [checkCategory, checkBrand, checkPrice, setSearchParams])
 
   const handleCategoryChange = (category) => {
     if (!checkCategory.includes(category)) {
-      setCheckCategory([...checkCategory, category]);
+      setCheckCategory([...checkCategory, category])
     } else {
-      const index = checkCategory.indexOf(category);
-      checkCategory.splice(index, 1);
-      setCheckCategory([...checkCategory]);
+      const index = checkCategory.indexOf(category)
+      checkCategory.splice(index, 1)
+      setCheckCategory([...checkCategory])
     }
 
-    dispatch(toggleCategory(category));
-    const params = { ...filters };
-    params.categories = { ...filters.categories };
-    params.categories[category] = !params.categories[category];
-    dispatch(fetchFilter(params));
-  };
+    dispatch(toggleCategory(category))
+    const params = { ...filters }
+    params.categories = { ...filters.categories }
+    params.categories[category] = !params.categories[category]
+    dispatch(fetchFilter(params))
+  }
 
   const handleBrandChange = (brand) => {
     if (!checkBrand.includes(brand)) {
-      setCheckBrand([...checkBrand, brand]);
+      setCheckBrand([...checkBrand, brand])
     } else {
-      const index = checkBrand.indexOf(brand);
-      checkBrand.splice(index, 1);
-      setCheckBrand([...checkBrand]);
+      const index = checkBrand.indexOf(brand)
+      checkBrand.splice(index, 1)
+      setCheckBrand([...checkBrand])
     }
 
     dispatch(toggleBrand(brand))
@@ -89,11 +88,11 @@ export default function FilterProductContainer() {
     dispatch(fetchFilter(params))
 
     if (!checkPrice.includes(price)) {
-      setCheckPrice([...checkPrice, price]);
+      setCheckPrice([...checkPrice, price])
     } else {
-      const index = checkPrice.indexOf(price);
-      checkPrice.splice(index, 1);
-      setCheckPrice([...checkPrice]);
+      const index = checkPrice.indexOf(price)
+      checkPrice.splice(index, 1)
+      setCheckPrice([...checkPrice])
     }
   }
 

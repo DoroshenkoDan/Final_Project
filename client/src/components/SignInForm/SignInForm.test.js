@@ -3,7 +3,7 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import { useDispatch, useSelector } from 'react-redux'
 import SignInForm from './index.js'
 import axios from 'axios'
-import {MemoryRouter} from "react-router-dom";
+import { MemoryRouter } from 'react-router-dom'
 
 jest.mock('axios')
 
@@ -43,16 +43,28 @@ describe('testing SignInForm component', () => {
   })
 
   it('renders the component', () => {
-    render(<MemoryRouter><SignInForm /></MemoryRouter>)
+    render(
+      <MemoryRouter>
+        <SignInForm />
+      </MemoryRouter>,
+    )
   })
   it('renders the form elements', () => {
-    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <SignInForm />
+      </MemoryRouter>,
+    )
     expect(getByPlaceholderText('Login or Email')).toBeInTheDocument()
     expect(getByPlaceholderText('Password')).toBeInTheDocument()
     expect(getByText('Send')).toBeInTheDocument()
   })
   it('submits the form and displays success message on successful login', async () => {
-    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <SignInForm />
+      </MemoryRouter>,
+    )
 
     axios.post.mockResolvedValue({
       data: { token: 'example_token' },
@@ -79,7 +91,11 @@ describe('testing SignInForm component', () => {
     })
   })
   it('displays error message on failed login', async () => {
-    const { getByPlaceholderText, getByText } = render(<MemoryRouter><SignInForm /></MemoryRouter>)
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <SignInForm />
+      </MemoryRouter>,
+    )
 
     axios.post.mockRejectedValue({
       response: { data: { error: 'Invalid credentials' } },

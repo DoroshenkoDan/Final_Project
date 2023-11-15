@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../Redux/reducers/productsReducers'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { HOST } from '../Token'
+import axios from 'axios'
 
 export default function ProductsContainer({ id }) {
   const dispatch = useDispatch()
@@ -46,33 +48,39 @@ export default function ProductsContainer({ id }) {
     }
   } else {
     useEffect(() => {
-      getRandomObjects(list, productsContainerArray)
-    }, [list])
+      async function getRandomBackProduct() {
+        const response = await axios.get(
+          HOST + `/products/random`,
+        )
+        const data = response.data
 
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
-    function getRandomObjects(sourceArray, resultArray) {
-      const sourceCopy = [...sourceArray]
-      while (resultArray.length < 4 && sourceCopy.length > 0) {
-        const randomIndex = getRandomInt(0, sourceCopy.length - 1)
-        const randomObject = sourceCopy[randomIndex]
-
-        if (
-          !resultArray.some(
-            (item) => item.categories === randomObject.categories,
-          )
-        ) {
-          resultArray.push(randomObject)
+        const finallArray = []
+        for (let i = 0; i < 4; i++) {
+          finallArray.push(data[i])
         }
-
-        sourceCopy.splice(randomIndex, 1)
+        return setProductsContainerArray(finallArray)
       }
-
-      setProductsContainerArray([...resultArray])
-    }
+      getRandomBackProduct()
+    }, [ ])
   }
+
+  /* ВОТ ЭТО ДОБАВИЛ */
+  useEffect(() => {
+    async function getRandomBackProduct() {
+      const response = await axios.get(
+        HOST + `/products/random`,
+      )
+      const data = response.data
+
+      const finallArray = []
+      for (let i = 0; i < 4; i++) {
+        finallArray.push(data[i])
+      }
+      return setProductsContainerArray(finallArray)
+    }
+    getRandomBackProduct()
+  }, [ ])
+  /* ВОТ ЭТО ДОБАВИЛ */
 
   return (
     <>
@@ -103,7 +111,7 @@ export default function ProductsContainer({ id }) {
             </NavLink>
           ))}
         </div>
-        <NavLink to="/All-products/">
+        <NavLink to="/allProducts/">
           <button className={styles['products-container-btn']}>
             View collection
           </button>
