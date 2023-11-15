@@ -7,8 +7,7 @@ import * as Yup from 'yup';
 import Input from './InputProfile';
 import PropTypes from 'prop-types';
 
-function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
-  
+function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {  
 
   const handleSuccess = (message) => {
     setFormStatus({ type: 'success', message });
@@ -20,19 +19,20 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
       const messageData = error.response.data;
       const objectKey = Object.keys(messageData)[0];
       errorMessage = `Update failed! ${messageData[objectKey]}`;
+      handleButtonClick(true)
     }
     setFormStatus({ type: 'error', message: errorMessage });
+    handleButtonClick(true)
   };
 
   const handleSubmit = (passwords, { resetForm }) => {
     axios
       .put(HOST + '/customers/password', passwords)
-      .then((response) => {
-        console.log(response);
+      .then((response) => {        
         const result = response.data;
         if (result.password) {
           handleSuccess(result.password);
-          handleButtonClick()
+          handleButtonClick(true)
         } else {
           handleSuccess(result.message);
           handleButtonClick()
@@ -40,23 +40,14 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
       })
       .catch((error) => {
         handleError(error);
-        handleButtonClick()
+        handleButtonClick(true)
       });
 
     resetForm();
   };
 
   return (
-    <>
-      {formStatus.type !== null && (
-        <p
-          className={`${styles.form__message} ${
-            formStatus.type === 'error' && styles.form__messageError
-          }`}
-        >
-          {formStatus.message}
-        </p>
-      )}
+    <>      
       <Formik
         initialValues={{
           password: '',

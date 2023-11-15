@@ -4,7 +4,6 @@ import UpdatePassword from '../../components/Profile/UpdatePassword';
 import { NavLink } from 'react-router-dom'
 import {PiNavigationArrowDuotone} from "react-icons/pi"
 import Toast from '../../components/Toast';
-
 import styles from './ProfilePage.module.scss'
 
 function ProfilePage() {
@@ -12,20 +11,14 @@ function ProfilePage() {
     const [showToast, setShowToast] = useState(false);
     const [errorStatus, setErrorStatus] = useState(false);
 
-    const handleStatus =()=>{
-        setErrorStatus(true)
-      }
-
-  const handleButtonClick = () => {
+  const handleButtonClick = (status) => {
     setShowToast(true);
+    setErrorStatus(status)
   };
 
   const handleToastClose = () => {
     setShowToast(false);
-  };
-
-
-    console.log(formStatus.message);
+  };   
   
      return (
             <>
@@ -34,14 +27,13 @@ function ProfilePage() {
                         <NavLink to="/orders/">
                             <p className={styles.profile__link}>Your orders<PiNavigationArrowDuotone/></p>                            
                         </NavLink>
-                        <UpdateProfile formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick} handleStatus={handleStatus}/>
+                        <UpdateProfile formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
                         <UpdatePassword formStatus={formStatus} setFormStatus={setFormStatus} handleButtonClick={handleButtonClick}/>
                     </div> 
                 </div>                
                 {showToast && <Toast message={formStatus.message} onClose={handleToastClose} errorStatus={errorStatus}/>} 
 
-            </>
-          
+            </>          
      )
 }
 

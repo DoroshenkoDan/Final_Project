@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styles from './Profile.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik'
@@ -10,9 +10,8 @@ import { changeData } from '../../Redux/reducers/userReducers';
 import PropTypes from 'prop-types';
 
 
-function UpdateProfile({formStatus, setFormStatus, handleButtonClick, handleStatus}) {
-  const customer = useSelector((state) => state.store.user).data
-  
+function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
+  const customer = useSelector((state) => state.store.user).data  
   const dispatch = useDispatch()
 
   const handleSubmit = (updatedCustomer, { resetForm }) => {
@@ -25,8 +24,7 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick, handleStat
         })
         dispatch(changeData(updatedCustomer))
         handleButtonClick()
-        handleStatus(true)
-       
+               
       })
       .catch((err) => {
         if (err.response && err.response.data) {
@@ -44,9 +42,9 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick, handleStat
           })
         }
       })
-      useEffect(()=>{
+      // useEffect(()=>{
         dispatch(changeData(updatedCustomer))             
-      },[])
+      // },[])
     resetForm()
   }
   const handleFileChange = (event, setFieldValue) => {
@@ -62,18 +60,8 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick, handleStat
     }
   };
 
-  
     return (
-      <>
-      {formStatus.type !== null && (
-        <p
-          className={`${styles.form__message} ${
-            formStatus.type === 'error' && styles.form__messageError
-          }`}
-        >
-          {formStatus.message}
-        </p>
-      )}
+      <>      
       <Formik
         initialValues={{
           
@@ -182,8 +170,7 @@ UpdateProfile.propTypes = {
     message: PropTypes.string,
   }),
   setFormStatus: PropTypes.func,
-  handleButtonClick: PropTypes.func,
-  handleStatus: PropTypes.func
+  handleButtonClick: PropTypes.func, 
 };
 
 export default UpdateProfile;

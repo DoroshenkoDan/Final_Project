@@ -9,11 +9,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 export default function Toast({ message, duration = 2300, onClose, errorStatus }) {
   const [progress, setProgress] = useState(100)
   const [animationStatus, setAnimationStatus] = useState('forward')
-  const [animationStarted, setAnimationStarted] = useState(false)
- 
-
- 
-  
+  const [animationStarted, setAnimationStarted] = useState(false)  
 
   const props = useSpring({
     from: { transform: 'translateX(-100%)' },
@@ -68,17 +64,15 @@ export default function Toast({ message, duration = 2300, onClose, errorStatus }
           </span>
           <div className={styles.toast__message}>
             <div className={styles.toast__message__icon}>
-
-              {errorStatus ? <SuccessIcon className={styles.toast__message__icon}/> : < IoIosCloseCircle className={styles.toast__message__iconError} size={30}/>} 
-              
-              
+              {errorStatus ? 
+              <IoIosCloseCircle className={styles.toast__message__iconError} size={30}/> : 
+              <SuccessIcon className={styles.toast__message__icon}/>}               
             </div>
             <p className={styles.toast__message__text}>{message}</p>
           </div>
-          <div
-            className={styles.toast__progress__bar}
-            style={{ width: `${progress}%` }}
-          />
+          {errorStatus ?
+            <div className={styles.toast__progress__bar__error} style={{ width: `${progress}%` }}/> : 
+            <div className={styles.toast__progress__bar} style={{ width: `${progress}%` }}/>}
         </div>
       </animated.div>
     </div>
@@ -89,5 +83,5 @@ Toast.propTypes = {
   message: PropTypes.string,
   duration: PropTypes.number,
   onClose: PropTypes.func,
-  errorStatus: PropTypes.func
+  errorStatus: PropTypes.bool
 }
