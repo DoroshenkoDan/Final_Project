@@ -7,6 +7,12 @@ export const CheckAuth = createAsyncThunk('checkAuth/isAuth', async () => {
   return response.data
 })
 
+export const ChangeCustomer = createAsyncThunk('ChangeCustomer/NewCustomer', async (updatedCustomer) => {
+  const response = await axios.put(HOST + '/customers', updatedCustomer)
+  return response.data
+
+})
+
 const initialState = {
   data: {},
   status: false,
@@ -51,6 +57,16 @@ const userReducers = createSlice({
         state.data = action.payload
       })
       .addCase(CheckAuth.rejected, (state, action) => {
+        state.statusCustomer = 'failed'
+      })
+      .addCase(ChangeCustomer.pending, (state) => {
+        state.statusCustomer = 'loading'
+      })
+      .addCase(ChangeCustomer.fulfilled, (state, action) => {
+        state.statusCustomer = 'succeeded'
+        state.data = action.payload
+      })
+      .addCase(ChangeCustomer.rejected, (state, action) => {
         state.statusCustomer = 'failed'
       })
   },

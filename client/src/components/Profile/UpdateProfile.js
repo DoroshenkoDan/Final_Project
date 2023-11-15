@@ -4,25 +4,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import Input from './InputProfile';
-import { HOST } from '../Token';
-import axios from 'axios';
-import { changeData } from '../../Redux/reducers/userReducers';
+import { ChangeCustomer } from '../../Redux/reducers/userReducers';
 import PropTypes from 'prop-types';
 
-
-function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
-  const customer = useSelector((state) => state.store.user).data  
+function UpdateProfile({ setFormStatus, handleButtonClick}) {
+   
   const dispatch = useDispatch()
 
-  const handleSubmit = (updatedCustomer, { resetForm }) => {
-    axios
-      .put(HOST + '/customers', updatedCustomer)
-      .then((savedCustomer) => {
+  const handleSubmit = (updatedCustomer) => {
+    dispatch(ChangeCustomer(updatedCustomer))
+      .then((savedCustomer) => { 
         setFormStatus({
           type: 'success',
           message: 'You are successfully updated',
-        })
-        dispatch(changeData(updatedCustomer))
+        })       
         handleButtonClick()
                
       })
@@ -35,18 +30,20 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
             type: 'error',
             message: `Update failed! ${errorMessage}`,
           })
+          handleButtonClick(true)
         } else {          
           setFormStatus({
             type: 'error',
             message: 'Update failed due to an unknown error.',
           })
+          handleButtonClick(true)
         }
       })
-      // useEffect(()=>{
-        dispatch(changeData(updatedCustomer))             
-      // },[])
-    resetForm()
-  }
+         
+  };
+
+  const customer = useSelector((state) => state.store.user).data
+  
   const handleFileChange = (event, setFieldValue) => {
     const file = event.target.files[0];
     const reader = new FileReader();   
@@ -58,6 +55,7 @@ function UpdateProfile({formStatus, setFormStatus, handleButtonClick}) {
     if (file) {
       reader.readAsDataURL(file);
     }
+   
   };
 
     return (
