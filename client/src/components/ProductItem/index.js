@@ -19,10 +19,24 @@ export default function ProductItem({ props }) {
   const cartReducer = useSelector((state) => state.store.cart.cart)
   const wishlist = useSelector((state) => state.store.wishlist.wishlist)
   const [isInWishlist, setIsInWishlist] = useState(false)
+
+  function findObj(array, id) {
+    const object = array.filter((item) => item.id === id)
+    console.log(props, object, list)
+    setProduct(object[0])
+  }
+
+  useEffect(() => {
+
+    findObj(list, props)
+    setProductQuantity(1)
+  }, [list, props])
+
   useEffect(() => {
     findObj(list, props)
     setProductQuantity(1)
     if (product && cartReducer) {
+      console.log(product)
       const isProductInCart = cartReducer.some(
         (cartProduct) => cartProduct?.product === product._id,
       )
@@ -39,6 +53,7 @@ export default function ProductItem({ props }) {
   }
   useEffect(() => {
     if (userStatus) {
+      console.log(product)
       const isObjectInWIshlist = wishlist.find((obj) => obj._id === product._id)
       if (isObjectInWIshlist) {
         setIsInWishlist(true)
@@ -47,15 +62,8 @@ export default function ProductItem({ props }) {
       }
     }
   }, [product, wishlist])
-  useEffect(() => {
-    findObj(list, props)
-    setProductQuantity(1)
-  }, [list, props])
 
-  function findObj(array, id) {
-    const object = array.filter((item) => item.id === id)
-    setProduct(object[0])
-  }
+
 
   if (!product) {
     return null
