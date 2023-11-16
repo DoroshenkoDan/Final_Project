@@ -17,11 +17,12 @@
 }
 
 .logoLink {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
   text-decoration: none;
   display: block;
   max-width: max-content;
-  position: absolute;
-  left: 50%;
 }
 
 .logo {
@@ -95,11 +96,10 @@
 
   .topMenu {
     height: 66px;
-    border-bottom: 1px solid #00000020;;
+    border-bottom: 1px solid #00000020;
   }
 
   .logo {
-    margin: 0 auto;
     line-height: 66px;
   }
 
@@ -113,15 +113,6 @@
     display: none;
   }
 
-}
-
-.logoLink {
-  margin: 0 auto;
-}
-
-.logo {
-  margin: 0 auto;
-  line-height: 66px;
 }
 
 .counter {
