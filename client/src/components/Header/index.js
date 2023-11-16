@@ -21,6 +21,7 @@ import Search from '../Search/search'
 
 export default function Header() {
     const status = useSelector((state) => state.store.user.status)
+    const cart = useSelector((state) => state.store.cart.cart)
     const [isMenuHidden, setIsMenuHidden] = useState(true)
     const dispatch = useDispatch()
 
@@ -48,29 +49,30 @@ export default function Header() {
                         <FavoritesIcon/>
                     </NavLink>}
                     <NavLink className={styles.icon} to="/cart/">
+                         <div className={styles.counter}>{cart.length}</div>
                         <CartIcon/>
                     </NavLink>
                 </span>
-                  {status && (
-                      <>
-                        <NavLink className={styles.icon__profile} to="/profile/">
-                          <IoPersonOutline className={styles.profile}/>
+                    {status && (
+                        <>
+                            <NavLink className={styles.icon__profile} to="/profile/">
+                                <IoPersonOutline className={styles.profile}/>
+                            </NavLink>
+                            <RxSlash className={styles.shlash}/>
+                            <NavLink
+                                onClick={logOutUser}
+                                className={styles.iconAuth}
+                                to="/login/"
+                            >
+                                <LogOutIcon/>
+                            </NavLink>
+                        </>
+                    )}
+                    {!status && (
+                        <NavLink className={styles.iconAuth} to="/login/">
+                            <IconLogin/>
                         </NavLink>
-                        <RxSlash className={styles.shlash} />
-                        <NavLink
-                            onClick={logOutUser}
-                            className={styles.iconAuth}
-                            to="/login/"
-                        >
-                          <LogOutIcon />
-                        </NavLink>
-                      </>
-                  )}
-                  {!status && (
-                      <NavLink className={styles.iconAuth} to="/login/">
-                        <IconLogin />
-                      </NavLink>
-                  )}
+                    )}
                     <span
                         className={`${styles.iconMenu} ${!isMenuHidden ? styles.iconMenuDisplay : ''
                         }`}
