@@ -21,7 +21,7 @@ export default function Toast({ message, duration = 2300, onClose, errorStatus }
         setAnimationStatus('reverse')
       } else {
         await next({ transform: 'translateX(-100%)' })
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise((resolve) => setTimeout(resolve, 500))
         setAnimationStarted(false)
         setAnimationStatus('forward')
       }
@@ -31,7 +31,7 @@ export default function Toast({ message, duration = 2300, onClose, errorStatus }
         onClose && onClose()
       }
     },
-    config: { duration: 1500 },
+    config: { duration: 500 },
   })
 
   useEffect(() => {
