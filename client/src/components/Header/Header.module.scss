@@ -46,6 +46,11 @@
     margin-right: 16px;
 }
 
+.iconAuth {
+  position: absolute;
+  top: 26px;
+  right: 35px;
+}
 
 .iconMenu {
     width: max-content;
@@ -59,6 +64,31 @@
 .iconAuth{
     display: inline-block;
 }
+
+.shlash {
+  position: absolute;
+  top: 26px;
+  right: 51px;
+  color: #2A254B;
+  transition: all 0.3s ease-in-out;
+}
+.counter{
+  display: none;
+  position: absolute;
+  background: #f0ecec;
+  text-align: center;
+  color: #020107;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-family: 'Clash Display Regular';
+  font-weight: 400;
+  font-size: 12px;
+  top: -4px;
+  margin-left: 13px;
+
+}
+
 
 @media (min-width: 768px) {
     .headerContainer {
@@ -86,4 +116,38 @@
         display: none;
     }
 
+  }
+  .logoLink{
+    margin: 0 auto;
+  }
+  .logo {
+    margin: 0 auto;
+    line-height: 66px;
+  }
+  .icons {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 25px;
+  }
+  .iconsStatus{
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 55px;
+  }
+  .icon {
+    &__profile{
+      top: 23px;
+      right: 30px;
+    }
+
+  }
+  .counter{
+    display: block;
+  }
+  .shlash{
+    top: 23px;
+    right: 14px;
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import FavoriteItem from '../FavoriteItem'
-import {useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styles from './FavoriteList.module.scss'
 export default function FavoriteList() {
   const userStatus = useSelector((state) => state.store.user.status)

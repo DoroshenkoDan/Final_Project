@@ -53,16 +53,13 @@ describe('testing Header component', () => {
         <Header />
       </MemoryRouter>,
     )
-    const menuIcon = getByTestId('menu-icon') // Replace 'menu-icon' with an appropriate test ID
+    const menuIcon = getByTestId('menu-icon')
 
-    // Check if the menu is initially hidden
-    expect(menuIcon).toBeInTheDocument() // Assuming the menu icon is present
+    expect(menuIcon).toBeInTheDocument()
 
-    // Simulate click event
     fireEvent.click(menuIcon)
 
-    // Check if the menu is toggled and is now displayed
-    const menuAfterClick = getByTestId('menu-icon') // Replace with the appropriate test ID for the changed menu icon
-    expect(menuAfterClick).toBeInTheDocument() // Assuming the menu icon is now hidden
+    const menuAfterClick = getByTestId('menu-icon')
+    expect(menuAfterClick).toBeInTheDocument()
   })
 })

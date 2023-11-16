@@ -1,15 +1,14 @@
 import styles from './producItem.module.scss'
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useEffect, useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import PropTypes from 'prop-types'
-import { addToCart } from '../../Redux/reducers/cartReducer'
-import { addToWishlist } from '../../Redux/reducers/wishlistReducers'
-import { useNavigate } from 'react-router-dom'
-// import axios from 'axios'
-// import { HOST } from '../../components/Token'
-export default function ProductItem({ props }) {
+import {addToCart} from '../../Redux/reducers/cartReducer'
+import {addToWishlist} from '../../Redux/reducers/wishlistReducers'
+import {useNavigate} from 'react-router-dom'
+
+export default function ProductItem({props}) {
     const dispatch = useDispatch()
-    const list = useSelector((state) => state.products.data)
+    const list = useSelector((state) => state.store.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
     const [product, setProduct] = useState({})
     const [productQuantity, setProductQuantity] = useState(1)
@@ -20,6 +19,17 @@ export default function ProductItem({ props }) {
     const cartReducer = useSelector((state) => state.store.cart.cart)
     const wishlist = useSelector((state) => state.store.wishlist.wishlist)
     const [isInWishlist, setIsInWishlist] = useState(false)
+
+    function findObj(array, id) {
+        const object = array.filter((item) => item.id === id)
+        setProduct(object[0])
+    }
+
+    useEffect(() => {
+        findObj(list, props)
+        setProductQuantity(1)
+    }, [list, props])
+
     useEffect(() => {
         findObj(list, props)
         setProductQuantity(1)
@@ -38,25 +48,18 @@ export default function ProductItem({ props }) {
             navigate('/login/')
         }
     }
+
     useEffect(() => {
         if (userStatus) {
-            const isObjectInWIshlist = wishlist.find(obj => obj._id === product._id);
+            const isObjectInWIshlist = wishlist.find((obj) => obj._id === product._id)
             if (isObjectInWIshlist) {
-                setIsInWishlist(true);
+                setIsInWishlist(true)
             } else {
                 setIsInWishlist(false)
             }
         }
     }, [product, wishlist])
-    useEffect(() => {
-        findObj(list, props)
-        setProductQuantity(1)
-    }, [list, props])
 
-    function findObj(array, id) {
-        const object = array.filter((item) => item.id === id)
-        setProduct(object[0])
-    }
 
     if (!product) {
         return null
@@ -84,54 +87,10 @@ export default function ProductItem({ props }) {
         }
     }
 
-    // async function getOneProd(id) {
-    //    console.log("list", list);
-    //    console.log("IDgetoneProd", id, `/products/${id}`);
-    //    axios
-    //        .get(HOST + `/products/${id}`)
-    //        .then(product => {
-    //            console.log("productGetOne", product.data);
-    //        })
-    //        .catch(err => {
-    //            console.log("productGetOneError", err);
-
-    //        });
-    // }
-
-    // async function get4Prods() {
-    //    const response = await axios.get(
-    //        HOST + `/products?addItems=0&items=8`,
-    //    )
-    //    const data = response.data
-    //    console.log("Data4Items", data);
-    // }
-
-    // async function getRandom4Prods() {
-    //    const response = await axios.get(
-    //        HOST + `/products?addItems=0`
-    //    );
-    //    const data = response.data;
-    //    console.log("DAta", data);
-    //    const dataLength = data.length;
-
-    //    const randomIndexes = [];
-    //    while (randomIndexes.length < 4) {
-    //        const randomIndex = Math.floor(Math.random() * dataLength);
-    //        if (!randomIndexes.includes(randomIndex)) {
-    //            randomIndexes.push(randomIndex);
-    //        }
-    //    }
-
-    //    const random4Items = randomIndexes.map((index) => data[index]);
-
-    //    console.log("Random 4 Items", random4Items);
-    // }
-
-
     return (
         <div key={id} className={styles['product-item-background']}>
             <div className={styles['product-item-container']}>
-                <img className={styles['product-item-img']} src={imageUrls} />
+                <img className={styles['product-item-img']} src={imageUrls}/>
                 <div className={styles['product-item-information']}>
                     <div className={styles['product-item-information-price-and-name']}>
                         <h4>{name}</h4>
@@ -170,12 +129,20 @@ export default function ProductItem({ props }) {
                         </>
                     )}
                     <div className={styles['product-item-information-btns-container']}>
-                        {userStatus && <button disabled={isInWishlist} className={isInWishlist ? styles['disabled-button'] : ''} onClick={() => putToWishlist()}>{isInWishlist ? 'Already in favorites' : 'Save to favorites'}</button>}
+                        {userStatus && (
+                            <button
+                                disabled={isInWishlist}
+                                className={isInWishlist ? styles['disabled-button'] : ''}
+                                onClick={() => putToWishlist()}
+                            >
+                                {isInWishlist ? 'Already in favorites' : 'Save to favorites'}
+                            </button>
+                        )}
                         <button
                             onClick={() => {
                                 if (!isInCart) {
                                     dispatch(
-                                        addToCart({ product: _id, cartQuantity: productQuantity }),
+                                        addToCart({product: _id, cartQuantity: productQuantity}),
                                     )
                                     setIsInCart(true)
                                 }

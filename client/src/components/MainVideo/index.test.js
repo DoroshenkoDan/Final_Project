@@ -1,15 +1,15 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import MainImages from './index'
+import MainVideo from './index'
 
 /* eslint-env jest */
 
-describe('MainImages', () => {
+describe('MainVideo', () => {
   it('renders text and button', () => {
     const { getByText, getByRole } = render(
       <Router>
-        <MainImages />
+        <MainVideo />
       </Router>,
     )
 
@@ -22,40 +22,40 @@ describe('MainImages', () => {
       ),
     ).toBeInTheDocument()
     expect(
-      getByText('Shop the new Spring 2022 collection today'),
+      getByText('Shop the new Autumn 2023 collection today'),
     ).toBeInTheDocument()
     expect(getByRole('button', { name: 'View collection' })).toBeInTheDocument()
   })
 
-  it('renders image', () => {
-    const { getByAltText } = render(
+  it('renders Video', () => {
+    const { getByTitle } = render(
       <Router>
-        <MainImages />
+        <MainVideo />
       </Router>,
     )
 
-    expect(getByAltText('Main')).toBeInTheDocument()
+    expect(getByTitle('Main video')).toBeInTheDocument()
   })
 
-  it('has correct alt text for image', () => {
-    const { getByAltText } = render(
+  it('has correct title for Video', () => {
+    const { getByTitle } = render(
       <Router>
-        <MainImages />
+        <MainVideo />
       </Router>,
     )
 
-    const img = getByAltText('Main')
-    expect(img).toHaveAttribute('alt', 'Main')
+    const video = getByTitle('Main video')
+    expect(video).toHaveAttribute('title', 'Main video')
   })
 
   it('has correct link', () => {
     const { getByRole } = render(
       <Router>
-        <MainImages />
+        <MainVideo />
       </Router>,
     )
 
     const link = getByRole('link', { name: 'View collection' })
-    expect(link).toHaveAttribute('href', '/allProducts/')
+    expect(link).toHaveAttribute('href', '/All-products/')
   })
 })

@@ -37,7 +37,7 @@ const persistedReducers = persistReducer(
 
 // Сюди додавати звичайні редюсери
 // Для виклику в файлі використовувати такий шлях  "const list = useSelector(state => state.cart(name in store).)"
-console.log('=======ReducerPersist', persistedReducers)
+// console.log('=======ReducerPersist', persistedReducers)
 const store = configureStore({
   reducer: {
     // для прикладу додавати так: "cart: cartReducer,"

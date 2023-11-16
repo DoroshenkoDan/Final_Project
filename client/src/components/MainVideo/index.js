@@ -6,7 +6,14 @@ import mainVideo1 from './video/MainVideo1.mp4'
 function MainVideo() {
   return (
     <div className={styles.container}>
-      <video autoPlay loop muted playsInline className={styles.videoBackground}>
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        title="Main video"
+        className={styles.videoBackground}
+      >
         <source src={mainVideo1} type="video/mp4" />
         Ваш браузер не підтримує елемент <code>video</code>.
       </video>
@@ -22,7 +29,7 @@ function MainVideo() {
           through to furniture today
         </h1>
         <p>Shop the new Autumn 2023 collection today</p>
-        <NavLink to="/allProducts/" className={styles.link}>
+        <NavLink to="/All-products/" className={styles.link}>
           <button className={styles.button}>View collection</button>
         </NavLink>
         <video autoPlay loop muted playsInline>

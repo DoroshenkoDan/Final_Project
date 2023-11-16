@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import CartIcon from '../Icons/CartIcon'
 import FavoritesIcon from '../Icons/FavoritesIcon'
+import {IoPersonOutline} from 'react-icons/io5'
+import {RxSlash} from 'react-icons/rx'
 import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
@@ -49,20 +51,26 @@ export default function Header() {
                         <CartIcon/>
                     </NavLink>
                 </span>
-                    {status && (
+                  {status && (
+                      <>
+                        <NavLink className={styles.icon__profile} to="/profile/">
+                          <IoPersonOutline className={styles.profile}/>
+                        </NavLink>
+                        <RxSlash className={styles.shlash} />
                         <NavLink
                             onClick={logOutUser}
                             className={styles.iconAuth}
                             to="/login/"
                         >
-                            <LogOutIcon/>
+                          <LogOutIcon />
                         </NavLink>
-                    )}
-                    {!status && (
-                        <NavLink className={styles.iconAuth} to="/login/">
-                            <IconLogin/>
-                        </NavLink>
-                    )}
+                      </>
+                  )}
+                  {!status && (
+                      <NavLink className={styles.iconAuth} to="/login/">
+                        <IconLogin />
+                      </NavLink>
+                  )}
                     <span
                         className={`${styles.iconMenu} ${!isMenuHidden ? styles.iconMenuDisplay : ''
                         }`}

@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import styles from './OrderItem.module.scss'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import axios from 'axios'
 import { HOST } from '../Token'
+import Modal from '../Modal/index'
 
-export default function OrderPage(props) {
+export default function OrderItem(props) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   function deleteOrders() {
     axios
       .delete(HOST + `/orders/${props.order._id}`)
@@ -18,13 +21,17 @@ export default function OrderPage(props) {
       })
   }
 
+  function toggleModal() {
+    isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true)
+  }
+
   return (
     <>
       <h2 className={`${styles['order-num']} ${styles['order-text']}`}>
         Order: № {props.order.orderNo}
       </h2>
       <p className={`${styles['order-sum']} ${styles['order-text']}`}>
-        Total Sum: {props.order.totalSum}$
+        Total Sum: {Math.round(props.order.totalSum * 100) / 100}$
       </p>
       {props.order.products.map((product) => (
         <div key={product._id} className={styles['order-container__product']}>
@@ -56,15 +63,18 @@ export default function OrderPage(props) {
       <span
         data-testid="btn-close"
         className={styles['btn-close']}
-        onClick={deleteOrders}
+        onClick={toggleModal}
       >
         <CloseBtnIcon></CloseBtnIcon>
       </span>
+      {isModalOpen && (
+        <Modal closeModal={toggleModal} removeOrder={deleteOrders} />
+      )}
     </>
   )
 }
 
-OrderPage.propTypes = {
+OrderItem.propTypes = {
   order: PropTypes.object,
   changeOrders: PropTypes.func,
 }

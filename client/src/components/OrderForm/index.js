@@ -2,24 +2,54 @@ import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { HOST } from '../Token'
-import { useNavigate } from 'react-router-dom'
 import Input from '../Input'
 import styles from './OrderForm.module.scss'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCart } from '../../Redux/reducers/cartReducer'
+import { changeData } from '../../Redux/reducers/userReducers'
 
 export default function OrderForm(props) {
   const userStatus = useSelector((state) => state.store.user.status)
-  const navigate = useNavigate()
+  const userData = useSelector((state) => state.store.user.data)
+  const cartReducer = useSelector((state) => state.store.cart.cart)
+  const products = useSelector((state) => state.products.data)
   const dispatch = useDispatch()
 
-  const getCart = async () => {
+  const sendOrder = async (newOrder) => {
     try {
-      const response = await axios.get(HOST + '/cart')
-      return response.data
+      await axios.post(HOST + '/orders', newOrder)
+      props.changeOrderPlaced({
+        status: true,
+        massage: 'Thank you for your order! You are welcome!',
+      })
+      dispatch(clearCart())
+
+      if (userStatus) {
+        await deleteCart()
+
+        if (
+          !Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')
+        ) {
+          await axios
+            .put(HOST + '/customers', {
+              deliveryAddress: newOrder.deliveryAddress,
+            })
+            .then((UpdatedCustomer) => {
+              dispatch(changeData(UpdatedCustomer.data))
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
+      }
     } catch (err) {
+      props.changeOrderPlaced({
+        status: false,
+        massage:
+          'The order has not been processed. Check that the entered data is correct',
+      })
       console.log(err)
     }
   }
@@ -31,44 +61,69 @@ export default function OrderForm(props) {
     }
   }
 
+  const findProductsInCart = () => {
+    const mergedObjects = []
+    for (const productInCart of cartReducer) {
+      const matchingProduct = products.find(
+        (product) => product._id === productInCart.product,
+      )
+      if (matchingProduct) {
+        mergedObjects.push({
+          product: matchingProduct,
+          cartQuantity: productInCart.cartQuantity,
+        })
+      }
+    }
+    return mergedObjects
+  }
+
   const handleSubmit = async (orderInfo) => {
     if (userStatus) {
-      const { email, mobile, country, city, address, postal } = orderInfo
-      const productsInCart = await getCart()
+      const { email, telephone, country, city, address, postal } = orderInfo
       const newOrder = {
-        customerId: productsInCart.customerId._id,
+        customerId: userData._id,
         deliveryAddress: {
           country: country,
           city: city,
           address: address,
-          postal: `${postal}`,
+          postal: postal,
         },
         email: email,
         canceled: false,
-        mobile: mobile,
+        mobile: telephone,
         letterSubject: 'Thank you for order! You are welcome!',
         letterHtml: '<h1>Your order is placed.</h1>',
       }
-      axios
-        .post(HOST + '/orders', newOrder)
-        .then((newOrder) => {
-          props.changeOrderPlaced({
-            status: true,
-            massage: 'Thank you for order! You are welcome!',
-          })
-        })
-        .catch((err) => {
-          props.changeOrderPlaced({
-            status: false,
-            massage:
-              'The order has not been processed. Check that the entered data is correct and that you are logged in',
-          })
-          console.log(err)
-        })
-      dispatch(clearCart())
-      await deleteCart()
+      await sendOrder(newOrder)
     } else {
-      navigate('/login/')
+      const {
+        firstName,
+        lastName,
+        email,
+        telephone,
+        country,
+        city,
+        address,
+        postal,
+      } = orderInfo
+      const products = findProductsInCart()
+      const newOrder = {
+        products: products,
+        deliveryAddress: {
+          country: country,
+          city: city,
+          address: address,
+          postal: postal,
+        },
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        canceled: false,
+        mobile: telephone,
+        letterSubject: 'Thank you for order! You are welcome!',
+        letterHtml: '<h1>Your order is placed.</h1>',
+      }
+      await sendOrder(newOrder)
     }
   }
 
@@ -91,22 +146,69 @@ export default function OrderForm(props) {
       </div>
       <Formik
         initialValues={{
-          email: '',
-          mobile: '',
-          country: '',
-          city: '',
-          address: '',
-          postal: '',
+          ...(userStatus
+            ? {
+                email: userData.email,
+                telephone: userData.telephone,
+                country: Object.prototype.hasOwnProperty.call(
+                  userData,
+                  'deliveryAddress',
+                )
+                  ? userData.deliveryAddress.country
+                  : '',
+                city: Object.prototype.hasOwnProperty.call(
+                  userData,
+                  'deliveryAddress',
+                )
+                  ? userData.deliveryAddress.city
+                  : '',
+                address: Object.prototype.hasOwnProperty.call(
+                  userData,
+                  'deliveryAddress',
+                )
+                  ? userData.deliveryAddress.address
+                  : '',
+                postal: Object.prototype.hasOwnProperty.call(
+                  userData,
+                  'deliveryAddress',
+                )
+                  ? userData.deliveryAddress.postal
+                  : '',
+              }
+            : {
+                firstName: '',
+                lastName: '',
+                email: '',
+                telephone: '',
+                country: '',
+                city: '',
+                address: '',
+                postal: '',
+              }),
         }}
         onSubmit={handleSubmit}
-        validationSchema={Yup.object({
+        validationSchema={Yup.object().shape({
+          ...(userStatus
+            ? {}
+            : {
+                firstName: Yup.string()
+                  .max(25, 'Must be 25 characters or less')
+                  .min(2, 'Must be more than 1 character')
+                  .required('Firstname is required')
+                  .matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid firstname format'),
+                lastName: Yup.string()
+                  .max(25, 'Must be 25 characters or less')
+                  .min(2, 'Must be more than 1 character')
+                  .required('Lastname is required')
+                  .matches(/^[^\p{P}\p{S}\d]+$/u, 'Invalid lastname format'),
+              }),
           email: Yup.string()
             .matches(
               /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               'Invalid email format',
             )
             .required('Email is required'),
-          mobile: Yup.string()
+          telephone: Yup.string()
             .matches(
               /^\+380\d{3}\d{2}\d{2}\d{2}$/,
               'Invalid mobile format. Example: +380501231212',
@@ -137,6 +239,22 @@ export default function OrderForm(props) {
         })}
       >
         <Form className={styles['form__user-address']} noValidate>
+          {!userStatus && (
+            <>
+              <Field
+                type="text"
+                placeholder="First name"
+                name="firstName"
+                component={Input}
+              />
+              <Field
+                type="text"
+                placeholder="Last name"
+                name="lastName"
+                component={Input}
+              />
+            </>
+          )}
           <Field
             type="email"
             placeholder="Email"
@@ -146,7 +264,7 @@ export default function OrderForm(props) {
           <Field
             type="tel"
             placeholder="Mobile"
-            name="mobile"
+            name="telephone"
             component={Input}
           />
           <Field
@@ -158,7 +276,7 @@ export default function OrderForm(props) {
           <Field type="text" placeholder="City" name="city" component={Input} />
           <Field
             type="text"
-            placeholder="Adress"
+            placeholder="Address"
             name="address"
             component={Input}
           />
