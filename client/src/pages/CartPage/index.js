@@ -6,8 +6,8 @@ import CartProductList from '../../components/CartProductList/index.js'
 import { HOST } from '../../components/Token'
 import OrderForm from '../../components/OrderForm'
 // eslint-disable-next-line
-import { addArrayToCart } from '../../Redux/reducers/cartReducer.js'
-import { NavLink } from 'react-router-dom'
+import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
+
 
 export default function Cart() {
   const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
@@ -116,65 +116,54 @@ export default function Cart() {
     setOrderPlaced(orderInfo)
   }
 
-  if (cartProducts.length === 0) {
+    if (cartProducts.length === 0) {
+        return (
+            <>
+                <div className={styles['cart-no-item-wrapper']}>
+                    <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>                    
+                </div>
+                {orderPlaced.status && (
+                    <div className={styles['cart-no-item-wrapper']}>
+                        <h1 className={styles['cart-tittle-welcome']}>
+                            {orderPlaced.massage}
+                        </h1>
+                    </div>
+                )}
+            </>
+        )
+    }
+
     return (
-      <>
-        <div className={styles['cart-no-item-wrapper']}>
-          <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
-          {userStatus && (
-            <NavLink to="/orders/" className={styles['link-order']}>
-              <button className={styles['btn-order']}>Your orders</button>
-            </NavLink>
-          )}
-        </div>
-        {orderPlaced.status && (
-          <div className={styles['cart-no-item-wrapper']}>
-            <h1 className={styles['cart-tittle-welcome']}>
-              {orderPlaced.massage}
-            </h1>
-          </div>
-        )}
-      </>
-    )
-  }
-
-  return (
-    <div className={styles['cart-container']}>
-      <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-      {userStatus && (
-        <NavLink to="/orders/" className={styles['link-order']}>
-          <button className={styles['btn-order']}>Your orders</button>
-        </NavLink>
-      )}
-
-      <div className={styles['cart-section-names']}>
-        <p>Product</p>
-        <p>Quantity</p>
-        <p>Price</p>
-      </div>
-      <div className={styles['cart-list-container']}>
-        {cartProducts.map((product) => (
-          <CartProductList
-            key={product._id}
-            img={product.imageUrls}
-            name={product.name}
-            quantity={product.cartQuantity}
-            price={product.currentPrice}
-            discribe={product.description}
-            id={product._id}
-          />
-        ))}
-      </div>
-      <div className={styles['cart-total-and-order-btn-container']}>
-        <p className={styles['cart-total-price']}>
-          Subtotal
-          <span
-            style={{
-              color: '#2A254B',
-              fontSize: '24px',
-              padding: '0px 0px 0px 15px',
-            }}
-          >
+        <div className={styles['cart-container']}>
+            <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
+            <div className={styles['cart-section-names']}>
+                <p>Product</p>
+                <p>Quantity</p>
+                <p>Price</p>
+            </div>
+            <div className={styles['cart-list-container']}>
+                {cartProducts.map((product) => (
+                    <CartProductList
+                        key={product._id}
+                        img={product.imageUrls}
+                        name={product.name}
+                        quantity={product.cartQuantity}
+                        price={product.currentPrice}
+                        discribe={product.description}
+                        id={product._id}
+                    />
+                ))}
+            </div>
+            <div className={styles['cart-total-and-order-btn-container']}>
+                <p className={styles['cart-total-price']}>
+                    Subtotal
+                    <span
+                        style={{
+                            color: '#2A254B',
+                            fontSize: '24px',
+                            padding: '0px 0px 0px 15px',
+                        }}
+                    >
             {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}$
           </span>
         </p>

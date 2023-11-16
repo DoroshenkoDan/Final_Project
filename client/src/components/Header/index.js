@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import CartIcon from '../Icons/CartIcon'
 import FavoritesIcon from '../Icons/FavoritesIcon'
+import {IoPersonOutline} from 'react-icons/io5'
+import {RxSlash} from 'react-icons/rx'
 import styles from './Header.module.scss'
 import MenuIcon from '../Icons/MenuIcon'
 import CloseBtnIcon from '../Icons/CloseBtnIcon'
@@ -18,6 +20,7 @@ import { setAuthToken } from '../Token'
 
 export default function Header() {
   const status = useSelector((state) => state.store.user.status)
+  const cart = useSelector((state) => state.store.cart.cart)
   const [isMenuHidden, setIsMenuHidden] = useState(true)
   const dispatch = useDispatch()
 
@@ -38,15 +41,21 @@ export default function Header() {
         <NavLink className={styles.logoLink} to="/">
           <span className={styles.logo}>Avion</span>
         </NavLink>
-        <span className={styles.icons}>
+        <span className={status ? `${styles.iconsStatus}` : `${styles.icons}`}>
           <NavLink className={styles.icon} to="/favorites/">
             <FavoritesIcon />
-          </NavLink>
+          </NavLink>          
           <NavLink className={styles.icon} to="/cart/">
-            <CartIcon />
-          </NavLink>
-        </span>
+            <div className={styles.counter}>{cart.length}</div>
+            <CartIcon />            
+          </NavLink>             
+        </span>       
         {status && (
+        <>
+        <NavLink className={styles.icon__profile} to="/profile/">
+          <IoPersonOutline className={styles.profile}/>          
+        </NavLink> 
+          <RxSlash className={styles.shlash} />
           <NavLink
             onClick={logOutUser}
             className={styles.iconAuth}
@@ -54,6 +63,7 @@ export default function Header() {
           >
             <LogOutIcon />
           </NavLink>
+        </>          
         )}
         {!status && (
           <NavLink className={styles.iconAuth} to="/login/">
