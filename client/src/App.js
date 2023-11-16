@@ -4,7 +4,6 @@ import './scss/reset.scss'
 import { useDispatch } from 'react-redux'
 import { CheckAuth } from './Redux/reducers/userReducers'
 import { setAuthToken } from './components/Token'
-import {fetchProducts} from "./Redux/reducers/productsReducers";
 
 function App() {
 
