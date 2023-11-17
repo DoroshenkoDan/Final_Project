@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 export default function SignInForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [formStatus, setFormStatus] = useState({ type: null, message: '' })
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' })
 
   const handleSubmit = async (userData, { resetForm }) => {
     await axios
@@ -26,7 +26,6 @@ export default function SignInForm() {
       dispatch(changeStatusTrue())
       dispatch(setToken(loginResult.data.token))
       setAuthToken(loginResult.data.token)
-      setFormStatus({ type: 'success', message: 'Welcome to Avion' })
       const customer = await getCustomer()
       dispatch(changeData(customer))
       dispatch(fetchWishlist())
@@ -52,7 +51,7 @@ export default function SignInForm() {
 
   return (
     <>
-      {formStatus.type !== null && (
+      {formStatus.type !== '' && (
         <p
           className={`${styles['text-massage']} ${
             formStatus.type === 'error' && styles['text-massage__error']
