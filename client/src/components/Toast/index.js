@@ -4,11 +4,12 @@ import CloseBtnIcon from '../Icons/CloseBtnIcon'
 import styles from './Toast.module.scss'
 import SuccessIcon from '../Icons/SuccessIcon'
 import { useSpring, animated } from 'react-spring'
+import { IoIosCloseCircle } from "react-icons/io";
 
-export default function Toast({ message, duration = 2300, onClose }) {
+export default function Toast({ message, duration = 2300, onClose, errorStatus }) {
   const [progress, setProgress] = useState(100)
   const [animationStatus, setAnimationStatus] = useState('forward')
-  const [animationStarted, setAnimationStarted] = useState(false)
+  const [animationStarted, setAnimationStarted] = useState(false)  
 
   const props = useSpring({
     from: { transform: 'translateX(-100%)' },
@@ -20,7 +21,7 @@ export default function Toast({ message, duration = 2300, onClose }) {
         setAnimationStatus('reverse')
       } else {
         await next({ transform: 'translateX(-100%)' })
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise((resolve) => setTimeout(resolve, 500))
         setAnimationStarted(false)
         setAnimationStatus('forward')
       }
@@ -30,7 +31,7 @@ export default function Toast({ message, duration = 2300, onClose }) {
         onClose && onClose()
       }
     },
-    config: { duration: 1500 },
+    config: { duration: 500 },
   })
 
   useEffect(() => {
@@ -63,14 +64,15 @@ export default function Toast({ message, duration = 2300, onClose }) {
           </span>
           <div className={styles.toast__message}>
             <div className={styles.toast__message__icon}>
-              <SuccessIcon></SuccessIcon>
+              {errorStatus ? 
+              <IoIosCloseCircle className={styles.toast__message__iconError} size={30}/> : 
+              <SuccessIcon className={styles.toast__message__icon}/>}               
             </div>
             <p className={styles.toast__message__text}>{message}</p>
           </div>
-          <div
-            className={styles.toast__progress__bar}
-            style={{ width: `${progress}%` }}
-          />
+          {errorStatus ?
+            <div className={styles.toast__progress__bar__error} style={{ width: `${progress}%` }}/> : 
+            <div className={styles.toast__progress__bar} style={{ width: `${progress}%` }}/>}
         </div>
       </animated.div>
     </div>
@@ -81,4 +83,5 @@ Toast.propTypes = {
   message: PropTypes.string,
   duration: PropTypes.number,
   onClose: PropTypes.func,
+  errorStatus: PropTypes.bool
 }
