@@ -8,10 +8,9 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 
 export default function RegisterForm(props) {
-  const [formStatus, setFormStatus] = useState({ type: null, message: '' })
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' })
 
   const handleSubmit = (customerInfo, { resetForm }) => {
-    console.log(customerInfo)
     if (customerInfo.password === customerInfo.repeatPassword) {
       const customerData = {
         firstName: customerInfo.firstName,
@@ -24,10 +23,8 @@ export default function RegisterForm(props) {
       axios
         .post(HOST + '/customers', customerData)
         .then((savedCustomer) => {
-          setFormStatus({
-            type: 'success',
-            message: 'You are successfully registered',
-          })
+          props.changeFormStatus( 'success', 'You are successfully registered')
+          props.changeVisibilityToast()
           props.setActiveBtnSignIn()
           resetForm()
         })
@@ -180,4 +177,6 @@ export default function RegisterForm(props) {
 
 RegisterForm.propTypes = {
   setActiveBtnSignIn: PropTypes.func,
+  changeFormStatus: PropTypes.func,
+  changeVisibilityToast: PropTypes.func,
 }
