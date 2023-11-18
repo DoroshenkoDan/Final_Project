@@ -9,7 +9,7 @@ import axios from 'axios'
 
 export default function ProductsContainer({ id }) {
   const dispatch = useDispatch()
-  const list = useSelector((state) => state.products.data)
+  const list = useSelector((state) => state.store.products.data)
   const [productsContainerArray, setProductsContainerArray] = useState([])
 
   function getProducts() {
