@@ -34,7 +34,8 @@ $tl: 1.5s;
     border: none;
     cursor: pointer;
     background: transparent;
-    position: relative;
+    position: absolute;
+    top: -23px;
     z-index: 12;
     background: white;
     background-image: url('./search-svg.svg');
@@ -86,7 +87,7 @@ $tl: 1.5s;
     position: absolute;
     z-index: 10;
     left: 20px;
-    top: 0;
+    top: -23px;
     border: 2px solid #2a254b;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -125,7 +126,14 @@ $tl: 1.5s;
     padding-top: 50px;
 }
 
-
+.search-item-description-container p {
+    width: 120px;
+    white-space: nowrap;
+    /* Предотвращает перенос текста */
+    overflow: hidden;
+    /* Предотвращает выход текста за границы блока */
+    text-overflow: ellipsis;
+}
 
 .search-result-item:hover {
     transform: scale(1.1);
@@ -150,7 +158,7 @@ $tl: 1.5s;
     position: absolute;
     z-index: 21;
     left: 20px;
-    top: 40px;
+    top: 17px;
     border: 1px solid #2a254b;
     border-top: none;
     background: #f9f9f9;
@@ -177,4 +185,38 @@ $tl: 1.5s;
     opacity: 1;
     width: 250px;
     max-height: 500px;
+}
+
+@media (max-width: 420px) {
+
+    .search-box:focus {
+        transition: width $tl cubic-bezier(0, 1.22, 0.66, 1), border-radius $tl, background-position $tl ;
+        width: 250px;
+    }
+
+    .no-item-search-container {
+        transition: opacity 0.7s cubic-bezier(0, 1.22, 0.66, 1), width 1.5s cubic-bezier(0, 1.22, 0.66, 1), max-height 0.7s cubic-bezier(0, 1.22, 0.66, 1);
+    }
+
+    .visible {
+        width: 200px;
+
+    }
+
+}
+
+@media (max-width: 1080px) {
+    .search-box:focus {
+        transition: width $tl cubic-bezier(0, 1.22, 0.66, 1), border-radius $tl, background-position $tl ;
+        width: 280px;
+    }
+
+    .no-item-search-container {
+        transition: opacity 0.7s cubic-bezier(0, 1.22, 0.66, 1), width 1.5s cubic-bezier(0, 1.22, 0.66, 1), max-height 0.7s cubic-bezier(0, 1.22, 0.66, 1);
+    }
+
+    .visible {
+        width: 240px;
+
+    }
 }

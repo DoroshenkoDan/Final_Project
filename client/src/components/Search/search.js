@@ -71,6 +71,7 @@ export default function Search() {
         <form className="search-container">
             <input
                 id="search-box"
+                data-testid="search-box"
                 className="search-box"
                 onChange={handleChange}
                 onFocus={handleFocus}
@@ -78,14 +79,14 @@ export default function Search() {
                 autoComplete="off"
             />
 
-            {noItems && <div className={`no-item-search-container ${isFocused ? "visible" : ""}`}>
+            {noItems && <div className={`no-item-search-container ${isFocused ? "visible" : ""}`} data-testid="no-items-found-container">
                 <p className="no-item-search">No Items Found</p>
             </div>}
 
-            <div className={`search-list-container ${isFocused && searchList.length > 0 ? "visible" : ""}`}>
+            <div className={`search-list-container ${isFocused && searchList.length > 0 ? "visible" : ""}`} data-testid="search-list-container">
                 {searchList.map((e) => {
                     return (
-                        <NavLink to={`/products/${e.id}`} className="search-result-item" key={e.id}>
+                        <NavLink to={`/products/${e.id}`} className="search-result-item" key={e.id} data-testid={`search-result-item-${e.id}`}>
                             <img src={e.imageUrls} />
                             <div className="search-item-description-container">
                                 <p>{e.name}</p>
