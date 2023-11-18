@@ -120,14 +120,16 @@ function UpdateProfile({ setFormStatus, handleButtonClick}) {
           <p className={styles.profile__title}>First name</p>          
           <Field
             className={styles.profile__input}
-            type="text"            
-            name="firstName"
+            type="text"
+            data-testid = 'first-name-input'            
+            name="firstName"              
             component={Input}            
           />
           <p className={styles.profile__title}>Last name</p>
           <Field
             className={styles.profile__input}
             type="text"
+            data-testid = 'last-name-input'
             name="lastName"
             component={Input}
             
@@ -136,6 +138,7 @@ function UpdateProfile({ setFormStatus, handleButtonClick}) {
           <Field
             className={styles.profile__input}
             type="text"
+            data-testid = 'login-input'
             name="login"
             component={Input}
             
@@ -144,6 +147,7 @@ function UpdateProfile({ setFormStatus, handleButtonClick}) {
           <Field
             className={styles.profile__input}          
             type="email"
+            data-testid = 'email-input'
             name="email"
             component={Input}           
           />          
