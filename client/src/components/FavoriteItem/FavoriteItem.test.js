@@ -54,7 +54,6 @@ jest.mock('react-redux', () => ({
         expect(screen.getByText('Plate')).toBeInTheDocument();
         expect(screen.getByText('This ocean-blue, glazed plate, with golden-brown details, turns every meal into pure joy. Decorate your table with clean classic shapes and a strong crafted look. A timeless feel with a unique design.')).toBeInTheDocument();
       })
-
       it('delete item from wishlist', () => {
         render(
           <MemoryRouter>

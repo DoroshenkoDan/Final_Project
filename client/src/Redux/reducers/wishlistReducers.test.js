@@ -11,7 +11,6 @@ describe('wishlistReducers', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
-
   it('should dispatch the correct actions for a successful API request', async () => {
     const store = configureStore({
       reducer,

@@ -71,7 +71,6 @@ describe('testing AuthPage', () => {
     afterEach(() => {
       jest.clearAllMocks()
   })
-
   it('renders without errors', () => {
     render(<MemoryRouter><FavoritesPage/></MemoryRouter>);
     expect(screen.getByText('Wishlist')).toBeInTheDocument();

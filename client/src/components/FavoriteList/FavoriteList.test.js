@@ -12,8 +12,9 @@ jest.mock('react-redux', () => ({
   }))
 
 describe('testing FavoriteList component', () => {
-
+    const dispatchMock = jest.fn()
     beforeEach(() => {
+        useDispatch.mockReturnValue(dispatchMock)
         useSelector.mockImplementation((selector) =>
       selector({
         store: {
@@ -69,7 +70,6 @@ describe('testing FavoriteList component', () => {
     afterEach(() => {
         jest.clearAllMocks()
       })
-
     it('renders the wishlist', () => {
         render(
           <MemoryRouter>
