@@ -39,6 +39,7 @@ export default function FavoriteItem(props) {
           </div>
         </NavLink>
         <svg
+        data-testid="close-icon"
           className={styles['favourite-close-icon']}
           onClick={() => {
             deleteFavItem()
