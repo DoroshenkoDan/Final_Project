@@ -47,6 +47,7 @@ export default function Input(props) {
                 ? 'password'
                 : 'text'
             }
+            autoComplete="current-password"
             className={styles['form-input']}
           />
         )}

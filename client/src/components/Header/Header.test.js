@@ -55,7 +55,6 @@ describe('testing Header component', () => {
       </MemoryRouter>,
     )
   })
-
   it('Menu toggles when menu icon is clicked', () => {
     const { getByTestId } = render(
       <MemoryRouter>
