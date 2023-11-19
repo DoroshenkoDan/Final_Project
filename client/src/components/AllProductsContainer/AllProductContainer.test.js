@@ -34,6 +34,7 @@ describe('AllProductsContainer', () => {
     expect(getByTestId('data-products-container')).toBeInTheDocument()
   })
 
+
   it('Simulates the "Load more" button click', () => {
     const { getByText } = render(
       <Provider store={store}>

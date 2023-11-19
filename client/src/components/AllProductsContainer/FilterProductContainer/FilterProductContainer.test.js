@@ -61,6 +61,7 @@ describe('FilterProductContainer', () => {
     fireEvent.click(categoryLabel)
   })
 
+
   it('handles brand change', () => {
     const { getByText } = render(
       <Provider store={store}>
