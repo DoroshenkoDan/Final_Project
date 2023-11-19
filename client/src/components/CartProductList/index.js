@@ -38,7 +38,7 @@ export default function CartProductList({
         onClick={() => dispatch(removeFromCart(id))}
       />
       <div className={styles['photo-and-text-section']}>
-        <img className={styles['product-photo']} src={img} />
+        <img className={styles['product-photo']} src={img[0]} />
         <div className={styles['cart-product-info-box']}>
           <p className={styles['cart-product-name']}>{name}</p>
           <p className={styles['cart-product-discribe']}>

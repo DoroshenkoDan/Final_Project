@@ -7,14 +7,16 @@ import {HOST} from '../../components/Token'
 import OrderForm from '../../components/OrderForm'
 // eslint-disable-next-line
 import {addArrayToCart} from '../../Redux/reducers/cartReducer.js'
-import {NavLink} from 'react-router-dom'
+import Toast from "../../components/Toast";
+
 
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
-    const [orderPlaced, setOrderPlaced] = useState({status: '', massage: ''})
     const cartReducer = useSelector((state) => state.store.cart.cart)
-    const allProducts = useSelector((state) => state.products.data)
+    const allProducts = useSelector((state) => state.store.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
+    const [showToast, setShowToast] = useState(false);
+    const [formStatus, setFormStatus] = useState({type: '', message: ''})
     // eslint-disable-next-line
     const dispatch = useDispatch()
 
@@ -114,91 +116,90 @@ export default function Cart() {
         setVisibilityOrderForm(true)
     }
 
-    function changeOrderPlaced(orderInfo) {
-        setOrderPlaced(orderInfo)
+    const changeFormStatus = (type, massage) => {
+        setFormStatus({
+            type: type,
+            message: massage,
+        })
     }
+
+    const changeVisibilityToast = () => {
+        setShowToast(true)
+    }
+
+    const handleToastClose = () => {
+        setShowToast(false);
+    };
 
     if (cartProducts.length === 0) {
         return (
             <>
                 <div className={styles['cart-no-item-wrapper']}>
                     <p className={styles['cart-tittle-welcome']}>Your cart is empty </p>
-                    {userStatus && (
-                        <NavLink to="/orders/" className={styles['link-order']}>
-                            <button className={styles['btn-order']}>Your orders</button>
-                        </NavLink>
-                    )}
                 </div>
-                {orderPlaced.status && (
-                    <div className={styles['cart-no-item-wrapper']}>
-                        <h1 className={styles['cart-tittle-welcome']}>
-                            {orderPlaced.massage}
-                        </h1>
-                    </div>
-                )}
+                {
+                    showToast && <Toast message={formStatus.message} onClose={handleToastClose}/>
+                }
             </>
         )
     }
 
     return (
-        <div className={styles['cart-container']}>
-            <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
-            {
-                userStatus &&
-                <NavLink to="/orders/" className={styles['link-order']}>
-                    <button className={styles['btn-order']}>Your orders</button>
-                </NavLink>
-            }
-
-            <div className={styles['cart-section-names']}>
-                <p>Product</p>
-                <p>Quantity</p>
-                <p>Price</p>
-            </div>
-            <div className={styles['cart-list-container']}>
-                {cartProducts.map((product) => (
-                    <CartProductList
-                        key={product._id}
-                        img={product.imageUrls}
-                        name={product.name}
-                        quantity={product.cartQuantity}
-                        price={product.currentPrice}
-                        discribe={product.description}
-                        id={product._id}
-                    />
-                ))}
-            </div>
-            <div className={styles['cart-total-and-order-btn-container']}>
-                <p className={styles['cart-total-price']}>
-                    Subtotal
-                    <span
-                        style={{
-                            color: '#2A254B',
-                            fontSize: '24px',
-                            padding: '0px 0px 0px 15px',
-                        }}
-                    >
+        <>
+            <div className={styles['cart-container']}>
+                <h3 className={styles['cart-tittle-welcome']}>Your shopping cart</h3>
+                <div className={styles['cart-section-names']}>
+                    <p>Product</p>
+                    <p>Quantity</p>
+                    <p>Price</p>
+                </div>
+                <div className={styles['cart-list-container']}>
+                    {cartProducts.map((product) => (
+                        <CartProductList
+                            key={product._id}
+                            img={product.imageUrls}
+                            name={product.name}
+                            quantity={product.cartQuantity}
+                            price={product.currentPrice}
+                            discribe={product.description}
+                            id={product._id}
+                        />
+                    ))}
+                </div>
+                <div className={styles['cart-total-and-order-btn-container']}>
+                    <p className={styles['cart-total-price']}>
+                        Subtotal
+                        <span
+                            style={{
+                                color: '#2A254B',
+                                fontSize: '24px',
+                                padding: '0px 0px 0px 15px',
+                            }}
+                        >
             {totalCurrentPrice && Math.round(totalCurrentPrice * 100) / 100}$
           </span>
-                </p>
-                <p>Taxes and shipping are calculated at checkout</p>
-                {!visibilityOrderForm &&
-                    <button
-                        onClick={() => {
-                            showOrderForm()
-                        }}
-                        className={styles['cart-order-btn']}
-                    >
-                        Go to checkout
-                    </button>
-                }
+                    </p>
+                    <p>Taxes and shipping are calculated at checkout</p>
+                    {!visibilityOrderForm && (
+                        <button
+                            onClick={() => {
+                                showOrderForm()
+                            }}
+                            className={styles['cart-order-btn']}
+                        >
+                            Go to checkout
+                        </button>
+                    )}
+                </div>
+                {visibilityOrderForm && (
+                    <OrderForm
+                        changeFormStatus={changeFormStatus}
+                        changeVisibilityToast={changeVisibilityToast}
+                        formStatusType={formStatus.type}
+                        formStatusMassage={formStatus.massage}
+                    ></OrderForm>
+                )}
             </div>
-            {visibilityOrderForm && (
-                <OrderForm
-                    changeOrderPlaced={changeOrderPlaced}
-                    orderPlaced={orderPlaced}
-                ></OrderForm>
-            )}
-        </div>
+        </>
     )
 }

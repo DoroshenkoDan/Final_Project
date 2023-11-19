@@ -6,9 +6,14 @@ import mainVideo1 from './video/MainVideo1.mp4'
 function MainVideo() {
   return (
     <div className={styles.container}>
-      <video autoPlay loop muted playsInline
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
         title="Main video"
-        className={styles.videoBackground}>
+        className={styles.videoBackground}
+      >
         <source src={mainVideo1} type="video/mp4" />
         Ваш браузер не підтримує елемент <code>video</code>.
       </video>

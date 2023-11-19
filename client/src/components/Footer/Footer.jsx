@@ -82,7 +82,7 @@ export const Footer = () => {
           <div className="footer__menu">
             <p className="footer__menu-heading">Menu</p>
             <ul className="footer__menu-list">
-              <NavLink className="footer__menu-line" to="/All-products/">
+              <NavLink className="footer__menu-line" to="/allproducts/">
                 All products
               </NavLink>
               <li>New arrivals</li>
@@ -175,19 +175,19 @@ export const Footer = () => {
           </NavLink>
         </div>
 
-        <div className="footer__company">
-          <p className="footer__company-heading">Our company</p>
-          <NavLink className="footer__company-line" to="/about-us">
-            About us
-          </NavLink>
-          <NavLink className="footer__company-line" to="/privacy-page">
-            Privacy page
-          </NavLink>
-          <p className="footer__company-line">Vacancies</p>
-          <p className="footer__company-line">Contact us</p>
-          <p className="footer__company-line">Returns policy</p>
-          <p className="footer__company-line">News</p>
-        </div>
+                <div className="footer__company">
+                    <p className="footer__company-heading">Our company</p>
+                    <NavLink className="footer__company-line" to="/about-us">
+                        About us
+                    </NavLink>
+                    <NavLink className="footer__company-line" to="/privacy-page">
+                        Privacy page
+                    </NavLink>
+                    <p className="footer__company-line">Vacancies</p>
+                    <NavLink className="footer__company-line" to="/contacts/">Contact us</NavLink>
+                    <p className="footer__company-line">Returns policy</p>
+                    <p className="footer__company-line">News</p>
+                </div>
 
         <div className="footer__line-container">
           <div className="footer__line"></div>

@@ -19,7 +19,7 @@ describe('Modal component', () => {
 
     const closeButton = getByTestId('btn-close')
     fireEvent.click(closeButton)
-    expect(closeModal).toHaveBeenCalledTimes(2)
+    expect(closeModal).toHaveBeenCalledTimes(1)
 
     const confirmButton = getByText('Yes, confirm')
     expect(confirmButton).toBeInTheDocument()
@@ -29,6 +29,6 @@ describe('Modal component', () => {
     const cancelButton = getByText('No, cancel')
     expect(cancelButton).toBeInTheDocument()
     fireEvent.click(cancelButton)
-    expect(closeModal).toHaveBeenCalledTimes(5)
+    expect(closeModal).toHaveBeenCalledTimes(2)
   })
 })

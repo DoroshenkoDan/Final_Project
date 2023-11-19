@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {HOST} from '../Token'
@@ -8,46 +8,48 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {clearCart} from '../../Redux/reducers/cartReducer'
-import {changeData} from "../../Redux/reducers/userReducers";
+import {changeData} from '../../Redux/reducers/userReducers'
 
 export default function OrderForm(props) {
     const userStatus = useSelector((state) => state.store.user.status)
     const userData = useSelector((state) => state.store.user.data)
     const cartReducer = useSelector((state) => state.store.cart.cart)
-    const products = useSelector((state) => state.products.data)
+    const products = useSelector((state) => state.store.products.data)
+    const [formStatus, setFormStatus] = useState({type: '', message: ''})
     const dispatch = useDispatch()
+
 
     const sendOrder = async (newOrder) => {
         try {
-            await axios.post(HOST + '/orders', newOrder);
-            props.changeOrderPlaced({
-                status: true,
-                massage: 'Thank you for your order! You are welcome!',
-            });
-            dispatch(clearCart());
+            await axios.post(HOST + '/orders', newOrder)
+            props.changeFormStatus('success', 'Thank you for your order!')
+            dispatch(clearCart())
 
             if (userStatus) {
-                await deleteCart();
+                await deleteCart()
 
-                if (!Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')) {
-                    await axios.put(HOST + "/customers", {
-                        deliveryAddress: newOrder.deliveryAddress
-                    })
-                        .then(UpdatedCustomer => {
+                if (
+                    !Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')
+                ) {
+                    await axios
+                        .put(HOST + '/customers', {
+                            deliveryAddress: newOrder.deliveryAddress,
+                        })
+                        .then((UpdatedCustomer) => {
                             dispatch(changeData(UpdatedCustomer.data))
                         })
-                        .catch(err => {
+                        .catch((err) => {
                             console.log(err)
                         })
                 }
             }
+            props.changeVisibilityToast()
         } catch (err) {
-            props.changeOrderPlaced({
-                status: false,
-                massage:
-                    'The order has not been processed. Check that the entered data is correct',
-            });
-            console.log(err);
+            setFormStatus({
+                type: 'error',
+                massage: 'The order has not been processed. Check that the entered data is correct'
+            })
+            console.log(err)
         }
     }
     const deleteCart = async () => {
@@ -56,20 +58,23 @@ export default function OrderForm(props) {
         } catch (err) {
             console.log(err)
         }
-
     }
 
     const findProductsInCart = () => {
         const mergedObjects = []
         for (const productInCart of cartReducer) {
-            const matchingProduct = products.find(product => product._id === productInCart.product)
+            const matchingProduct = products.find(
+                (product) => product._id === productInCart.product,
+            )
             if (matchingProduct) {
-                mergedObjects.push({product: matchingProduct, cartQuantity: productInCart.cartQuantity})
+                mergedObjects.push({
+                    product: matchingProduct,
+                    cartQuantity: productInCart.cartQuantity,
+                })
             }
         }
         return mergedObjects
     }
-
 
     const handleSubmit = async (orderInfo) => {
         if (userStatus) {
@@ -90,7 +95,16 @@ export default function OrderForm(props) {
             }
             await sendOrder(newOrder)
         } else {
-            const {firstName, lastName, email, telephone, country, city, address, postal} = orderInfo
+            const {
+                firstName,
+                lastName,
+                email,
+                telephone,
+                country,
+                city,
+                address,
+                postal,
+            } = orderInfo
             const products = findProductsInCart()
             const newOrder = {
                 products: products,
@@ -114,13 +128,12 @@ export default function OrderForm(props) {
 
     return (
         <>
-            {props.orderPlaced.status === false && (
+            {formStatus.type === 'error' && (
                 <div className={styles['order__text-container']}>
                     <h1
                         className={`${styles['order-text']} ${styles['order-text--error']}`}
                     >
-                        {' '}
-                        {props.orderPlaced.massage}
+                        {formStatus.massage}
                     </h1>
                 </div>
             )}
@@ -135,10 +148,30 @@ export default function OrderForm(props) {
                         ? {
                             email: userData.email,
                             telephone: userData.telephone,
-                            country: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.country : '',
-                            city: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.city : '',
-                            address: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.address : '',
-                            postal: Object.prototype.hasOwnProperty.call(userData, 'deliveryAddress')  ? userData.deliveryAddress.postal : '',
+                            country: Object.prototype.hasOwnProperty.call(
+                                userData,
+                                'deliveryAddress',
+                            )
+                                ? userData.deliveryAddress.country
+                                : '',
+                            city: Object.prototype.hasOwnProperty.call(
+                                userData,
+                                'deliveryAddress',
+                            )
+                                ? userData.deliveryAddress.city
+                                : '',
+                            address: Object.prototype.hasOwnProperty.call(
+                                userData,
+                                'deliveryAddress',
+                            )
+                                ? userData.deliveryAddress.address
+                                : '',
+                            postal: Object.prototype.hasOwnProperty.call(
+                                userData,
+                                'deliveryAddress',
+                            )
+                                ? userData.deliveryAddress.postal
+                                : '',
                         }
                         : {
                             firstName: '',
@@ -204,8 +237,7 @@ export default function OrderForm(props) {
                 })}
             >
                 <Form className={styles['form__user-address']} noValidate>
-                    {
-                        !userStatus &&
+                    {!userStatus && (
                         <>
                             <Field
                                 type="text"
@@ -220,7 +252,7 @@ export default function OrderForm(props) {
                                 component={Input}
                             />
                         </>
-                    }
+                    )}
                     <Field
                         type="email"
                         placeholder="Email"
@@ -264,6 +296,7 @@ export default function OrderForm(props) {
 }
 
 OrderForm.propTypes = {
-    changeOrderPlaced: PropTypes.func,
-    orderPlaced: PropTypes.object,
+    changeFormStatus: PropTypes.func,
+    changeVisibilityToast: PropTypes.func,
+    formStatus: PropTypes.object
 }

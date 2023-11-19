@@ -182,14 +182,26 @@ exports.getProducts = (req, res, next) => {
   );
 };
 
+  /* ВОТ ЭТО ДОБАВИЛ */
+exports.getProductsRandom = (req, res, next) => {
+  Product.aggregate([{ $sample: { size: 4 } }])
+    .then(products => res.send(products))
+    .catch(err =>
+      res.status(400).json({
+        message: `Error happened on server: "${err}" `
+      })
+    );
+}
+  /* ВОТ ЭТО ДОБАВИЛ */
+
 exports.getProductById = (req, res, next) => {
   Product.findOne({
-    id: req.params.id
+    itemNo: req.params.itemNo
   })
     .then(product => {
       if (!product) {
         res.status(400).json({
-          message: `Product with id ${req.params.id} is not found`
+          message: `Product with itemNo ${req.params.itemNo} is not found`
         });
       } else {
         res.json(product);

@@ -7,6 +7,12 @@ export const CheckAuth = createAsyncThunk('checkAuth/isAuth', async () => {
   return response.data
 })
 
+export const ChangeCustomer = createAsyncThunk('ChangeCustomer/NewCustomer', async (updatedCustomer) => {
+  const response = await axios.put(HOST + '/customers', updatedCustomer)
+  return response.data
+
+})
+
 const initialState = {
   data: {},
   status: false,

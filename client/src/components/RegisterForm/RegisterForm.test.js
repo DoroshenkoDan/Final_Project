@@ -84,7 +84,6 @@ describe('testing RegisterForm component', () => {
 
     fireEvent.click(getByText('Send'))
 
-
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
         'http://localhost:4000/api/customers',

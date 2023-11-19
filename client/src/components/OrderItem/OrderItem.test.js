@@ -37,7 +37,6 @@ const order = {
 const changeOrders = jest.fn()
 
 describe('OrderItem', () => {
-
   it('OrderItem is render', () => {
     render(
       <MemoryRouter>

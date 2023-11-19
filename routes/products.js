@@ -11,6 +11,7 @@ const {
   updateProduct,
   getProducts,
   getProductById,
+  getProductsRandom,
   getProductsFilterParams,
   searchProducts, getAllProducts
 } = require("../controllers/products");
@@ -85,6 +86,10 @@ router.put(
 router.get("/", getProducts);
 router.get("/allproducts", getAllProducts);
 
+  /* ВОТ ЭТО ДОБАВИЛ */
+router.get("/random", getProductsRandom);
+  /* ВОТ ЭТО ДОБАВИЛ */
+
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
 // @access  Public
@@ -98,6 +103,6 @@ router.post("/search", searchProducts);
 // @route   GET /products/:id
 // @desc    GET existing product by id
 // @access  Public
-router.get("/:id", getProductById);
+router.get("/:itemNo", getProductById);
 
 module.exports = router;
