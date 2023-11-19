@@ -14,7 +14,7 @@ export default function OrderForm(props) {
     const userStatus = useSelector((state) => state.store.user.status)
     const userData = useSelector((state) => state.store.user.data)
     const cartReducer = useSelector((state) => state.store.cart.cart)
-    const products = useSelector((state) => state.products.data)
+    const products = useSelector((state) => state.store.products.data)
     const dispatch = useDispatch()
     const [formStatus, setFormStatus] = useState({type: '', message: ''})
 
