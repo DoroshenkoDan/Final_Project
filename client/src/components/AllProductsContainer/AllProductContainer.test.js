@@ -24,6 +24,7 @@ const initialState = {
 const store = mockStore(initialState)
 
 describe('AllProductsContainer', () => {
+
   it('Renders the AllProductsContainer component', () => {
     const { getByTestId } = render(
       <Provider store={store}>
