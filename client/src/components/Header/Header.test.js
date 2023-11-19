@@ -20,6 +20,15 @@ describe('testing Header component', () => {
           user: {
             status: false,
           },
+          cart: {
+            cart: [
+              {
+                id: 1,
+                name: 'Product 1',
+                quantity: 2,
+              },
+            ],
+          },
         },
         categories: {
           categories: [
