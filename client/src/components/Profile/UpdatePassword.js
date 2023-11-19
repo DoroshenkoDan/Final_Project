@@ -85,7 +85,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
               <Field
                 className={styles.profile__input3}
                 type="password"
-                placeholder="Password"
+                placeholder="Enter current password"
                 name="password"
                 component={Input}
               />
@@ -93,7 +93,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
               <Field
                 className={styles.profile__input3}
                 type="password"
-                placeholder="Password"
+                placeholder="Enter new password"
                 name="newPassword"
                 component={Input}
               />
@@ -101,7 +101,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
               <Field
                 className={styles.profile__input3}
                 type="password"
-                placeholder="Password"
+                placeholder="Confirm new password"
                 name="updatePassword"
                 component={Input}
               />

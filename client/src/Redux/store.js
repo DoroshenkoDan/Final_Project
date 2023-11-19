@@ -42,7 +42,6 @@ const store = configureStore({
   reducer: {
     // для прикладу додавати так: "cart: cartReducer,"
     store: persistedReducers,
-    products: productsReducer,
     filters: FilterReducers,
     categories: categoriesReducer,
   },
