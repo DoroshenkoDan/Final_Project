@@ -13,7 +13,7 @@ import Toast from "../../components/Toast";
 export default function Cart() {
     const [visibilityOrderForm, setVisibilityOrderForm] = useState(false)
     const cartReducer = useSelector((state) => state.store.cart.cart)
-    const allProducts = useSelector((state) => state.products.data)
+    const allProducts = useSelector((state) => state.store.products.data)
     const userStatus = useSelector((state) => state.store.user.status)
     const [showToast, setShowToast] = useState(false);
     const [formStatus, setFormStatus] = useState({type: '', message: ''})

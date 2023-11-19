@@ -17,7 +17,6 @@ export default function FavoriteList() {
     useEffect(() => {
         if (userStatus) {
             dispatch(fetchWishlist())
-            console.log('fetch')
         }
     }, [userStatus])
 
