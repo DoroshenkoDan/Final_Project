@@ -104,6 +104,7 @@ describe('testing FavoriteList component', () => {
 
 
     })
+
     it('renders wishlist when user is not logged in', ()=>{
       useSelector.mockImplementation((selector) =>
       selector({
