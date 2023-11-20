@@ -61,19 +61,48 @@ export default function contactUs() {
                 <MarkerF onLoad={onLoad} position={center} icon={{ url: iconMarker, scaledSize: new window.google.maps.Size(40, 40), anchor: new window.google.maps.Point(17, 17) }} />
             </GoogleMap>
             <div className={styles["contacts-info"]}>
-                <p className={styles['info-phone']}>Phone Number:+380638302732</p>
-                <div className={styles['info-work-hours']}>
-                    <p>Work Hours:</p>
-                    <div className={styles['info-time-table']}>Monday: 10:00 AM - 5:00 PM
-                        Tuesday: 10:00 AM - 5:00 PM
-                        Wednesday: 10:00 AM - 5:00 PM
-                        Thursday: 10:00 AM - 5:00 PM
-                        Friday: 10:00 AM - 5:00 PM
+                <p className={styles['info-phone']}>
+                    <div className={styles["phone"]}>
+                        <span className={styles["loader"]}></span>
+                        <span className={styles["text"]}>Phone Number: +380638302732</span>
                     </div>
-
+                </p>
+                <div className={styles['info-work-hours']}>
+                    <div className={styles['info-work-hours-center']}>
+                        <p className={styles['info-work-hours-header']}>Work Hours:</p>
+                    <div className={styles['cloader']}>
+                        <div className={styles['clface']}>
+                            <div className={styles['clsface']}>
+                                <div id={styles['h2']} className={styles['hand']}></div>
+                            </div>
+                            <div className={styles['top']}></div>
+                            <div className={styles['bottom']}></div>
+                            <div className={styles['left']}></div>
+                            <div className={styles['right']}></div>
+                            <div id={styles['sub']} className={styles['pin']}></div>
+                            <div id={styles['h1']} className={styles['hand']}></div>
+                            <div id={styles['main']} className={styles['pin']}></div>
+                        </div>
+                    </div>
                 </div>
-                <p className={styles['info-location']}>Location : 34th Street Herald Square</p>
+
+                <div className={styles['info-time-table']}>
+                    Monday: 10:00 AM - 5:00 PM
+                    Tuesday: 10:00 AM - 5:00 PM
+                    Wednesday: 10:00 AM - 5:00 PM
+                    Thursday: 10:00 AM - 5:00 PM
+                    Friday: 10:00 AM - 5:00 PM
+                </div>
+
             </div>
+            <div className={styles['info-work-location']}>
+                    <p className={styles['info-work-location-header']}>Location:</p>
+                    <div className={styles['loader-main']}>
+                    <div className={styles['loader-location']}></div>
+                    <p className={styles['info-location']}>34th Street Herald Square</p>
+                    </div>
+                </div>
         </div>
+    </div >
     </>)
 }
