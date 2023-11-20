@@ -59,6 +59,16 @@ const userReducers = createSlice({
       .addCase(CheckAuth.rejected, (state, action) => {
         state.statusCustomer = 'failed'
       })
+      .addCase(ChangeCustomer.pending, (state) => {
+        state.statusCustomer = 'loading'
+      })
+      .addCase(ChangeCustomer.fulfilled, (state, action) => {
+        state.statusCustomer = 'succeeded'
+        state.data = action.payload
+      })
+      .addCase(ChangeCustomer.rejected, (state, action) => {
+        state.statusCustomer = 'failed'
+      })
   },
 })
 
