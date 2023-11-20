@@ -20,9 +20,9 @@ const store = mockStore({
     user: {
       status: false,
     },
-  },
-  products: {
-    data: [],
+    products: {
+      data: [],
+    },
   },
 })
 
