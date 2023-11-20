@@ -13,6 +13,7 @@ import {
 import axios from 'axios'
 import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
 import { useNavigate } from 'react-router-dom'
+import {addArrayToCart} from "../../Redux/reducers/cartReducer";
 
 export default function SignInForm() {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ export default function SignInForm() {
       setAuthToken(loginResult.data.token)
       const customer = await getCustomer()
       dispatch(changeData(customer))
+      await сheсkCart()
       dispatch(fetchWishlist())
       navigate(-1)
       resetForm()
@@ -48,6 +50,21 @@ export default function SignInForm() {
     const customerData = response.data
     return customerData
   }
+
+  async function сheсkCart() {
+    try {
+      const response = await axios.get(HOST + '/cart')
+      if (response && response.data && response.data.products) {
+        dispatch(addArrayToCart(response.data.products))
+      } else {
+        console.error(' getChekCart: объект или свойство products отсутствуют')
+      }
+      return response
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <>
