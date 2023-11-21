@@ -12,7 +12,6 @@ export const setAuthToken = (token) => {
   }
 }
 
-
 export const getCustomer = async () => {
   const response = await axios.get(HOST + '/customers/customer')
   const customerData = response.data

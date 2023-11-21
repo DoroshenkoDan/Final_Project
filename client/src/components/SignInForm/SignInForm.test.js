@@ -1,5 +1,5 @@
 import React from 'react'
-import {render, fireEvent, waitFor, act} from '@testing-library/react'
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
 import { useDispatch, useSelector } from 'react-redux'
 import SignInForm from './index.js'
 import axios from 'axios'
@@ -71,10 +71,10 @@ describe('testing SignInForm component', () => {
     })
     await act(async () => {
       fireEvent.change(getByPlaceholderText('Login or Email'), {
-        target: {value: 'testuser@example.com'},
+        target: { value: 'testuser@example.com' },
       })
       fireEvent.change(getByPlaceholderText('Password'), {
-        target: {value: 'testPassword123'},
+        target: { value: 'testPassword123' },
       })
 
       fireEvent.click(getByText('Send'))

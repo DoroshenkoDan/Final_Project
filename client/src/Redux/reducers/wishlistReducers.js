@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import {api} from '../api/api'
+import { api } from '../api/api'
 import apiWishlist, { deleteFromList } from '../api/apiWishlist'
 
 export const initialState = {
@@ -11,12 +11,10 @@ export const fetchWishlist = createAsyncThunk(
   'wishlistReducer/fetchWishlist',
   async () => {
     const response = await api('wishlist')
-    console.log("response")
 
     if (response === null) {
       return
     }
-    console.log(response.products)
     return response.products
   },
 )

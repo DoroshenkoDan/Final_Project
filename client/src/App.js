@@ -6,7 +6,6 @@ import { CheckAuth } from './Redux/reducers/userReducers'
 import { setAuthToken } from './components/Token'
 
 function App() {
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +19,6 @@ function App() {
     }
 
     window.scrollTo({ top: 0, left: 0 })
-
   })
 
   return <Router></Router>

@@ -175,19 +175,21 @@ export const Footer = () => {
           </NavLink>
         </div>
 
-                <div className="footer__company">
-                    <p className="footer__company-heading">Our company</p>
-                    <NavLink className="footer__company-line" to="/about-us">
-                        About us
-                    </NavLink>
-                    <NavLink className="footer__company-line" to="/privacy-page">
-                        Privacy page
-                    </NavLink>
-                    <p className="footer__company-line">Vacancies</p>
-                    <NavLink className="footer__company-line" to="/contacts/">Contact us</NavLink>
-                    <p className="footer__company-line">Returns policy</p>
-                    <p className="footer__company-line">News</p>
-                </div>
+        <div className="footer__company">
+          <p className="footer__company-heading">Our company</p>
+          <NavLink className="footer__company-line" to="/about-us">
+            About us
+          </NavLink>
+          <NavLink className="footer__company-line" to="/privacy-page">
+            Privacy page
+          </NavLink>
+          <p className="footer__company-line">Vacancies</p>
+          <NavLink className="footer__company-line" to="/contacts/">
+            Contact us
+          </NavLink>
+          <p className="footer__company-line">Returns policy</p>
+          <p className="footer__company-line">News</p>
+        </div>
 
         <div className="footer__line-container">
           <div className="footer__line"></div>

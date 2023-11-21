@@ -31,11 +31,6 @@ exports.addProduct = (req, res, next) => {
       .trim()
       .replace(/\s\s+/g, " ");
 
-    // const imageUrls = req.body.previewImages.map(img => {
-    //   return `/img/products/${productFields.itemNo}/${img.name}`;
-    // });
-
-    // productFields.imageUrls = _.cloneDeep(imageUrls);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `
@@ -182,7 +177,6 @@ exports.getProducts = (req, res, next) => {
   );
 };
 
-  /* ВОТ ЭТО ДОБАВИЛ */
 exports.getProductsRandom = (req, res, next) => {
   Product.aggregate([{ $sample: { size: 4 } }])
     .then(products => res.send(products))
@@ -192,7 +186,6 @@ exports.getProductsRandom = (req, res, next) => {
       })
     );
 }
-  /* ВОТ ЭТО ДОБАВИЛ */
 
 exports.getProductById = (req, res, next) => {
   Product.findOne({
@@ -241,16 +234,13 @@ exports.searchProducts = async (req, res, next) => {
     res.status(400).json({ message: "Query string is empty" });
   }
 
-  //Taking the entered value from client in lower-case and trimed
   let query = req.body.query
     .toLowerCase()
     .trim()
     .replace(/\s\s+/g, " ");
 
-  // Creating the array of key-words from taken string
   let queryArr = query.split(" ");
 
-  // Finding ALL products, that have at least one match
   let matchedProducts = await Product.find({
     $text: { $search: query }
   });

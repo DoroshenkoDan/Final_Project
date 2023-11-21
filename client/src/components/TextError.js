@@ -4,7 +4,7 @@
 // function TextError(props) {
 //     const { input, form, ...rest } = props
 //     const { name } = input
-   
+
 //     return <div {...input} {...rest} className='errors'>{form.errors[name] && form.touched[name] && (
 //         <div >{form.errors[name]}</div>
 //       )}</div>

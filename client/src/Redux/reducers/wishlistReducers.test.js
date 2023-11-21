@@ -1,7 +1,9 @@
-import reducer, { fetchWishlist,
-    addToWishlist,
-    removeFromWishlist,
-initialState } from './wishlistReducers.js'
+import reducer, {
+  fetchWishlist,
+  addToWishlist,
+  removeFromWishlist,
+  initialState,
+} from './wishlistReducers.js'
 import axios from 'axios'
 import { configureStore } from '@reduxjs/toolkit'
 import { HOST } from '../../components/Token'
@@ -17,11 +19,9 @@ describe('wishlistReducers', () => {
       preloadedState: initialState,
     })
     const newData = [
-        { id: '2', name: 'Product 2' },
-        { id: '3', name: 'Product 3' },
-      ]
-      ;
-
+      { id: '2', name: 'Product 2' },
+      { id: '3', name: 'Product 3' },
+    ]
     axios.get.mockResolvedValue({ data: { products: newData } })
 
     await store.dispatch(fetchWishlist())
