@@ -67,6 +67,7 @@ export const cartReducer = createSlice({
       )
 
       state.cart = [...state.cart, ...uniqueItemsToAdd]
+      console.log(state.cart)
     },
   },
 })

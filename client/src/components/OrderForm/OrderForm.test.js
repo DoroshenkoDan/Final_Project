@@ -29,15 +29,14 @@ describe('OrderForm', () => {
           cart: {
             cart: [{ product: 'item1', cartQuantity: 1 }],
           },
+          products: {
+            data: [
+              { _id: 'item1', name: 'Product 1' },
+              { _id: 'item2', name: 'Product 2' },
+              // Добавьте ожидаемые данные для state.products.data
+            ],
+          },
         },
-        products: {
-          data: [
-            { _id: 'item1', name: 'Product 1' },
-            { _id: 'item2', name: 'Product 2' },
-            // Добавьте ожидаемые данные для state.products.data
-          ],
-        },
-        // Другие свойства вашего хранилища Redux, если они используются в компоненте
       }
 
       if (selector(mockState)) {
