@@ -13,7 +13,8 @@
   "rules": {
     "no-useless-escape": "off",
     "dot-notation": "off",
-    "prefer-dot-notation": "off"
+    "prefer-dot-notation": "off",
+    "object-shorthand": "off"
   },
   "overrides": [
     {
