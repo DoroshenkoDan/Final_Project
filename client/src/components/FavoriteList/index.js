@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react'
 import FavoriteItem from '../FavoriteItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
 import styles from './FavoriteList.module.scss'
+import { fetchWishlist } from '../../Redux/reducers/wishlistReducers'
+
 export default function FavoriteList() {
   const userStatus = useSelector((state) => state.store.user.status)
   const wishlist = useSelector((state) => state.store.wishlist.wishlist)
+  const dispatch = useDispatch()
+
   const realWishlist = Array.from(
     new Set(wishlist.map(JSON.stringify)),
     JSON.parse,
   )
-  const dispatch = useDispatch()
-  function getWishlist() {
+
+  useEffect(() => {
     if (userStatus) {
       dispatch(fetchWishlist())
     }
-  }
-
-  useEffect(() => {
-    getWishlist()
-  }, [])
+  }, [userStatus])
 
   return (
     <div className={styles['favourite-list']}>

@@ -5,7 +5,6 @@ export const fetchFilter = createAsyncThunk(
   'products/fetchFilterProducts',
   async (input) => {
     const response = await exportedObject.getAllProducts(input)
-    // console.log(response);
     return response
   },
 )

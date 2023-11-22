@@ -143,7 +143,7 @@ export const Footer = () => {
 
         <div className="footer__menu">
           <p className="footer__menu-heading">Menu</p>
-          <NavLink className="footer__menu-line" to="/allproducts/">
+          <NavLink className="footer__menu-line" to="/All-products/">
             All products
           </NavLink>
           <p className="footer__menu-line">New arrivals</p>
@@ -184,7 +184,9 @@ export const Footer = () => {
             Privacy page
           </NavLink>
           <p className="footer__company-line">Vacancies</p>
-          <p className="footer__company-line">Contact us</p>
+          <NavLink className="footer__company-line" to="/contacts/">
+            Contact us
+          </NavLink>
           <p className="footer__company-line">Returns policy</p>
           <p className="footer__company-line">News</p>
         </div>

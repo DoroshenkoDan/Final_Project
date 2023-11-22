@@ -4,6 +4,8 @@
   min-height: 100vh;
 }
 
-.main{
+.main {
   flex: 1;
+  position: relative;
+  min-height: 1000px;
 }

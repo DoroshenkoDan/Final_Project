@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const HOST = 'http://localhost:4000/api'
+export const HOST = 'https://store-avion.vercel.app/api'
 
 export let token
 
@@ -13,7 +13,7 @@ export const setAuthToken = (token) => {
 }
 
 export const getCustomer = async () => {
-  const response = await axios.get(HOST + "/customers/customer");
-  const customerData = response.data;
-  return customerData;
+  const response = await axios.get(HOST + '/customers/customer')
+  const customerData = response.data
+  return customerData
 }

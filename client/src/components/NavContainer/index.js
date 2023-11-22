@@ -22,25 +22,28 @@ export default function NavContainer(props) {
       className={`${styles.nav} ${props.isMenuHidden ? styles.navDisplay : ''}`}
     >
       <ul className={styles.navList}>
-        <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-          <NavLink className={styles.navLink} to="/cart/">
-            Cart
-          </NavLink>
-        </li>
-        <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
-          <NavLink className={styles.navLink} to="/favorites/">
+        <NavLink
+          className={`${styles.navLink} ${styles.navItemDisplay}`}
+          to="/cart/"
+        >
+          <li className={styles.navItem}>Cart</li>
+        </NavLink>
+        <NavLink
+          className={`${styles.navLink} ${styles.navItemDisplay}`}
+          to="/favorites/"
+        >
+          <li className={`${styles.navItem} ${styles.navItemDisplay}`}>
             Favorites
-          </NavLink>
-        </li>
-        {categories.map((category) => (
-          <li key={category.id} className={styles.navItem}>
-            <NavLink
-              to={`/category/${category.id}/`}
-              className={styles.navLink}
-            >
-              {category.name}
-            </NavLink>
           </li>
+        </NavLink>
+        {categories.map((category) => (
+          <NavLink
+            key={category.id}
+            to={`/category/${category.id}/`}
+            className={styles.navLink}
+          >
+            <li className={styles.navItem}>{category.name}</li>
+          </NavLink>
         ))}
       </ul>
     </nav>

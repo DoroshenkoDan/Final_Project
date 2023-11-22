@@ -1,42 +1,57 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Cart from './index';
-import { useSelector } from 'react-redux';
-
-
-jest.mock('react-redux', () => ({
-  useSelector: jest.fn(),
-  useDispatch: jest.fn(),
-}));
-
+import React from 'react'
+import { render } from '@testing-library/react'
+import Cart from './index'
+import OrderForm from '../../components/OrderForm'
+import { Provider } from 'react-redux'
+import configureStore from 'redux-mock-store'
 
 jest.mock('react-router-dom', () => {
   return {
     useNavigate: jest.fn(),
-  };
-});
+  }
+})
 
-jest.mock('axios');
+const mockStore = configureStore()
+const store = mockStore({
+  store: {
+    cart: {
+      cart: [],
+    },
+    user: {
+      status: false,
+    },
+    products: {
+      data: [],
+    },
+  },
+})
 
 describe('Cart Component', () => {
-  
-  beforeEach(() => {
-    useSelector.mockReset();
-  });
+  it('renders without crashing', () => {
+    const wrapper = render(
+      <Provider store={store}>
+        <Cart />
+      </Provider>,
+    )
+    expect(wrapper).toMatchSnapshot()
+  })
 
-  it('renders a message when the cart is empty', () => {
-    
-    useSelector.mockReturnValue({
-      store: { cart: { cart: [] }, user: { status: true } },
-      products: { data: [] },
-    });
+  it('renders and getByText Your cart is empty', () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <Cart />
+      </Provider>,
+    )
 
-    render(<Cart />);
-    
-    const emptyCartMessage = screen.getByText('Your cart is empty');
-    expect(emptyCartMessage).toBeInTheDocument();
-  });
+    expect(getByText('Your cart is empty')).toBeInTheDocument()
+  })
 
-  
-});
-
+  it('renders OrderForm component', () => {
+    const wrapper = render(
+      <Provider store={store}>
+        <Cart />
+      </Provider>,
+    )
+    expect(wrapper.findByText(OrderForm))
+  })
+})

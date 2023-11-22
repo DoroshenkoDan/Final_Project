@@ -69,11 +69,11 @@ export default function AllProductsContainer() {
 
   async function getProducts() {
     try {
-      await dispatch(fetchFilter({ items, addItems })); // Wait for the asynchronous action to complete
-      dispatch(toggleItems(items));
-      dispatch(toggleAddItems(addItems));
+      await dispatch(fetchFilter({ items, addItems })) // Wait for the asynchronous action to complete
+      dispatch(toggleItems(items))
+      dispatch(toggleAddItems(addItems))
     } catch (error) {
-     console.log(error);
+      console.log(error)
     }
   }
 
@@ -96,7 +96,10 @@ export default function AllProductsContainer() {
   }, [list])
 
   return (
-    <div data-testid="data-products-container" className={styles['products-container-container']}>
+    <div
+      data-testid="data-products-container"
+      className={styles['products-container-container']}
+    >
       {isLoading ? (
         <div className={styles.loading}>Загрузка данных...</div>
       ) : (

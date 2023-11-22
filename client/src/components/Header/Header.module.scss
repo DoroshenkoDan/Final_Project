@@ -5,6 +5,7 @@
   height: 69px;
   margin: 0 auto;
   position: relative;
+  padding-right: 15px;
 }
 
 .topMenu {
@@ -17,7 +18,12 @@
 }
 
 .logoLink {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
   text-decoration: none;
+  display: block;
+  max-width: max-content;
 }
 
 .logo {
@@ -31,28 +37,77 @@
 }
 
 .icons {
-  display: none;
-  position: absolute;
+  display: block;
+
+  &Display {
+    display: none;
+  }
 }
 
 .icon {
   display: inline-block;
   margin-right: 16px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  &__profile {
+    display: inline-block;
+    color: #22202e;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+  }
+  &__profile:hover {
+    transform: scale(1.3);
+  }
 }
 
-.iconAuth {
-  position: absolute;
-  top: 26px;
-  right: 32px;
+.icon:hover {
+  transform: scale(1.3);
 }
 
 .iconMenu {
-  display: block;
   width: max-content;
+  display: inline-block;
+  margin-left: 16px;
+  transition: all 0.3s ease-in-out;
 
   &Display {
     display: none;
   }
+}
+.iconMenu:hover {
+  transform: scale(1.3);
+}
+
+.iconAuth {
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.iconAuth:hover {
+  transform: scale(1.3);
+}
+
+.shlash {
+  right: 51px;
+  color: #2a254b;
+  transition: all 0.3s ease-in-out;
+}
+
+.counter {
+  display: none;
+  position: absolute;
+  background: #f0ecec;
+  text-align: center;
+  color: #020107;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  font-family: 'Clash Display Regular';
+  font-weight: 400;
+  font-size: 12px;
+  top: -4px;
+  margin-left: 13px;
 }
 
 @media (min-width: 768px) {
@@ -60,36 +115,27 @@
     height: 132px;
     max-width: 1440px;
   }
+
   .topMenu {
     height: 66px;
-    display: block;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      border-top: 1px solid #00000020;
-      transform: translateY(-50%);
-    }
+    border-bottom: 1px solid #00000020;
   }
+
   .logo {
-    margin: 0 auto;
     line-height: 66px;
   }
+
   .icons {
-    display: block;
-    position: absolute;
-    top: 23px;
-    right: 16px;
+    &Display {
+      display: inline-block;
+    }
   }
+
   .iconMenu {
     display: none;
   }
-  .iconAuth {
-    position: absolute;
-    top: 23px;
-    right: 0;
+
+  .counter {
+    display: block;
   }
 }

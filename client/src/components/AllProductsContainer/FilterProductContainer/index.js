@@ -7,16 +7,17 @@ import {
   toggleCategory,
   togglePrice,
 } from '../../../Redux/reducers/FilterReducers'
+import { useSearchParams } from 'react-router-dom'
 
 export default function FilterProductContainer() {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filters)
   const { categories, brands, prices } = filters
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 590)
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 375)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth < 590)
+      setIsMobileView(window.innerWidth < 375)
     }
     window.addEventListener('resize', handleResize)
 
@@ -25,7 +26,37 @@ export default function FilterProductContainer() {
     }
   }, [])
 
+  const [, setSearchParams] = useSearchParams()
+
+  const [checkCategory, setCheckCategory] = useState([])
+  const [checkBrand, setCheckBrand] = useState([])
+  const [checkPrice, setCheckPrice] = useState([])
+
+  useEffect(() => {
+    const params = {}
+    if (checkCategory.length > 0) {
+      params.categories = checkCategory.join(',')
+    }
+    if (checkBrand.length > 0) {
+      params.brands = checkBrand.join(',')
+    }
+    if (checkPrice.length > 0) {
+      params.prices = checkPrice.join(',')
+    }
+
+    const search = new URLSearchParams(params).toString()
+    setSearchParams(search)
+  }, [checkCategory, checkBrand, checkPrice, setSearchParams])
+
   const handleCategoryChange = (category) => {
+    if (!checkCategory.includes(category)) {
+      setCheckCategory([...checkCategory, category])
+    } else {
+      const index = checkCategory.indexOf(category)
+      checkCategory.splice(index, 1)
+      setCheckCategory([...checkCategory])
+    }
+
     dispatch(toggleCategory(category))
     const params = { ...filters }
     params.categories = { ...filters.categories }
@@ -34,6 +65,14 @@ export default function FilterProductContainer() {
   }
 
   const handleBrandChange = (brand) => {
+    if (!checkBrand.includes(brand)) {
+      setCheckBrand([...checkBrand, brand])
+    } else {
+      const index = checkBrand.indexOf(brand)
+      checkBrand.splice(index, 1)
+      setCheckBrand([...checkBrand])
+    }
+
     dispatch(toggleBrand(brand))
     const params = { ...filters }
     params.brands = { ...filters.brands }
@@ -47,6 +86,14 @@ export default function FilterProductContainer() {
     params.prices = { ...filters.prices }
     params.prices[price] = !params.prices[price]
     dispatch(fetchFilter(params))
+
+    if (!checkPrice.includes(price)) {
+      setCheckPrice([...checkPrice, price])
+    } else {
+      const index = checkPrice.indexOf(price)
+      checkPrice.splice(index, 1)
+      setCheckPrice([...checkPrice])
+    }
   }
 
   return (
@@ -89,18 +136,18 @@ export default function FilterProductContainer() {
           <h1 className={styles['products-header']}>Brand</h1>
           {isMobileView ? (
             <div className={styles['products-container-mobile']}>
-            {Object.keys(brands).map((brand) => (
-              <span key={brand}>
-                <input
-                  type="checkbox"
-                  checked={brands[brand]}
-                  onChange={() => handleBrandChange(brand)}
-                  className={styles['products-checkbox']}
-                />
-                {brand}
-              </span>
-            ))}
-          </div>
+              {Object.keys(brands).map((brand) => (
+                <span key={brand}>
+                  <input
+                    type="checkbox"
+                    checked={brands[brand]}
+                    onChange={() => handleBrandChange(brand)}
+                    className={styles['products-checkbox']}
+                  />
+                  {brand}
+                </span>
+              ))}
+            </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(brands).map((brand) => (
@@ -123,18 +170,18 @@ export default function FilterProductContainer() {
           <h1 className={styles['products-header']}>Price</h1>
           {isMobileView ? (
             <div className={styles['products-container-mobile']}>
-            {Object.keys(prices).map((price) => (
-              <span key={price}>
-                <input
-                  type="checkbox"
-                  checked={prices[price]}
-                  onChange={() => handlePriceChange(price)}
-                  className={styles['products-checkbox']}
-                />
-                {price}
-              </span>
-            ))}
-          </div>
+              {Object.keys(prices).map((price) => (
+                <span key={price}>
+                  <input
+                    type="checkbox"
+                    checked={prices[price]}
+                    onChange={() => handlePriceChange(price)}
+                    className={styles['products-checkbox']}
+                  />
+                  {price}
+                </span>
+              ))}
+            </div>
           ) : (
             <div className={styles['products-container']}>
               {Object.keys(prices).map((price) => (
