@@ -13,13 +13,14 @@
         },
         {
             "src": "/(.*)",
-            "dest": "server/$1"
+            "dest": "server/$1",
+            "status": 200
         }
     ],
     "rewrites": [
         {
-            "source": "/(.*)",
-            "destination": "/"
+            "source": "^/(?!api)(.*)",
+            "destination": "/$1"
         }
     ]
 }
