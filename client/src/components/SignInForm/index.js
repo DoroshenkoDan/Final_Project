@@ -15,6 +15,7 @@ import axios from 'axios'
 import {fetchWishlist} from '../../Redux/reducers/wishlistReducers'
 import {useNavigate} from 'react-router-dom'
 import {addArrayToCart} from '../../Redux/reducers/cartReducer'
+import { jwtDecode } from "jwt-decode";
 
 export default function SignInForm() {
     const dispatch = useDispatch()
@@ -25,11 +26,11 @@ export default function SignInForm() {
         await axios
             .post(HOST + '/customers/login', userData)
             .then(async (loginResult) => {
-                const expirationTime = new Date();
-                expirationTime.setHours(expirationTime.getHours() + 4);
                 dispatch(changeStatusTrue())
-                dispatch(setExpirationTime(expirationTime))
                 dispatch(setToken(loginResult.data.token))
+                const decodedToken = jwtDecode(loginResult.data.token);
+                const expirationDate = new Date(decodedToken.exp * 1000);
+                dispatch(setExpirationTime(expirationDate))
                 setAuthToken(loginResult.data.token)
                 const customer = await getCustomer()
                 dispatch(changeData(customer))
