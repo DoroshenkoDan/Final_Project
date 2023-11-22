@@ -9,6 +9,9 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+
+    const expirationTime = new Date(user.expirationTime).getTime()
+
     const persistRoot = JSON.parse(localStorage.getItem('persist:root'))
     const user = JSON.parse(persistRoot.user)
     if (user.status === true) {
