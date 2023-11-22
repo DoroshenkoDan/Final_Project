@@ -12,7 +12,8 @@
   "plugins": ["react"],
   "rules": {
     "no-useless-escape": "off",
-    "dot-notation": "off"
+    "dot-notation": "off",
+    "prefer-dot-notation": "off"
   },
   "overrides": [
     {
