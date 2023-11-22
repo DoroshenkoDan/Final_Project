@@ -33,7 +33,6 @@ function App() {
         } else {
             setAuthToken(false)
         }
-
         window.scrollTo({top: 0, left: 0})
     })
 
