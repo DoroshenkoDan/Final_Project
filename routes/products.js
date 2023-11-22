@@ -11,8 +11,9 @@ const {
   updateProduct,
   getProducts,
   getProductById,
+  getProductsRandom,
   getProductsFilterParams,
-  searchProducts
+  searchProducts, getAllProducts
 } = require("../controllers/products");
 
 // Configurations for multer
@@ -83,6 +84,11 @@ router.put(
 // @desc    GET existing products
 // @access  Public
 router.get("/", getProducts);
+router.get("/allproducts", getAllProducts);
+
+  /* ВОТ ЭТО ДОБАВИЛ */
+router.get("/random", getProductsRandom);
+  /* ВОТ ЭТО ДОБАВИЛ */
 
 // @route   GET /products/filter
 // @desc    GET appropriate filtered products
