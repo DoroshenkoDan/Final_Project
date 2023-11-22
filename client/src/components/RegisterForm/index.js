@@ -23,7 +23,7 @@ export default function RegisterForm(props) {
       axios
         .post(HOST + '/customers', customerData)
         .then((savedCustomer) => {
-          props.changeFormStatus( 'success', 'You are successfully registered')
+          props.changeFormStatus('success', 'You are successfully registered')
           props.changeVisibilityToast()
           props.setActiveBtnSignIn()
           resetForm()

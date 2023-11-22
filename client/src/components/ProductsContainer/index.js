@@ -49,9 +49,7 @@ export default function ProductsContainer({ id }) {
   } else {
     useEffect(() => {
       async function getRandomBackProduct() {
-        const response = await axios.get(
-          HOST + `/products/random`,
-        )
+        const response = await axios.get(HOST + `/products/random`)
         const data = response.data
 
         const finallArray = []
@@ -61,15 +59,13 @@ export default function ProductsContainer({ id }) {
         return setProductsContainerArray(finallArray)
       }
       getRandomBackProduct()
-    }, [ ])
+    }, [])
   }
 
   /* ВОТ ЭТО ДОБАВИЛ */
   useEffect(() => {
     async function getRandomBackProduct() {
-      const response = await axios.get(
-        HOST + `/products/random`,
-      )
+      const response = await axios.get(HOST + `/products/random`)
       const data = response.data
 
       const finallArray = []
@@ -79,7 +75,7 @@ export default function ProductsContainer({ id }) {
       return setProductsContainerArray(finallArray)
     }
     getRandomBackProduct()
-  }, [ ])
+  }, [])
   /* ВОТ ЭТО ДОБАВИЛ */
 
   return (

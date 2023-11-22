@@ -7,17 +7,20 @@ export const CheckAuth = createAsyncThunk('checkAuth/isAuth', async () => {
   return response.data
 })
 
-export const ChangeCustomer = createAsyncThunk('ChangeCustomer/NewCustomer', async (updatedCustomer) => {
-  const response = await axios.put(HOST + '/customers', updatedCustomer)
-  return response.data
-
-})
+export const ChangeCustomer = createAsyncThunk(
+  'ChangeCustomer/NewCustomer',
+  async (updatedCustomer) => {
+    const response = await axios.put(HOST + '/customers', updatedCustomer)
+    return response.data
+  },
+)
 
 const initialState = {
   data: {},
   status: false,
   token: false,
   statusCustomer: 'idle',
+  expirationTime: '',
   error: '',
 }
 
@@ -36,6 +39,10 @@ const userReducers = createSlice({
       const token = action.payload
       state.token = token
     },
+    setExpirationTime(state, action) {
+      const expirationTime = action.payload
+      state.expirationTime = expirationTime
+    },
     resetData(state) {
       const data = {}
       state.data = { ...data }
@@ -45,6 +52,9 @@ const userReducers = createSlice({
     },
     resetToken(state) {
       state.token = false
+    },
+    resetExpirationTime(state) {
+      state.expirationTime = ""
     },
   },
   extraReducers(builder) {
@@ -79,6 +89,8 @@ export const {
   resetData,
   setToken,
   resetToken,
+  setExpirationTime,
+  resetExpirationTime
 } = userReducers.actions
 
 export default userReducers.reducer

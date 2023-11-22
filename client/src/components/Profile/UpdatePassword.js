@@ -1,53 +1,52 @@
-import React from 'react';
-import axios from 'axios';
-import { HOST } from '../Token';
-import styles from './Profile.module.scss';
-import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import Input from './InputProfile';
-import PropTypes from 'prop-types';
+import React from 'react'
+import axios from 'axios'
+import { HOST } from '../Token'
+import styles from './Profile.module.scss'
+import { Field, Form, Formik } from 'formik'
+import * as Yup from 'yup'
+import Input from './InputProfile'
+import PropTypes from 'prop-types'
 
-function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {  
-
+function UpdatePassword({ formStatus, setFormStatus, handleButtonClick }) {
   const handleSuccess = (message) => {
-    setFormStatus({ type: 'success', message });
-  };
+    setFormStatus({ type: 'success', message })
+  }
 
   const handleError = (error) => {
-    let errorMessage = 'Update failed due to an unknown error.';
+    let errorMessage = 'Update failed due to an unknown error.'
     if (error.response && error.response.data) {
-      const messageData = error.response.data;
-      const objectKey = Object.keys(messageData)[0];
-      errorMessage = `Update failed! ${messageData[objectKey]}`;
+      const messageData = error.response.data
+      const objectKey = Object.keys(messageData)[0]
+      errorMessage = `Update failed! ${messageData[objectKey]}`
       handleButtonClick(true)
     }
-    setFormStatus({ type: 'error', message: errorMessage });
+    setFormStatus({ type: 'error', message: errorMessage })
     handleButtonClick(true)
-  };
+  }
 
   const handleSubmit = (passwords, { resetForm }) => {
     axios
       .put(HOST + '/customers/password', passwords)
-      .then((response) => {        
-        const result = response.data;
+      .then((response) => {
+        const result = response.data
         if (result.password) {
-          handleSuccess(result.password);
+          handleSuccess(result.password)
           handleButtonClick(true)
         } else {
-          handleSuccess(result.message);
+          handleSuccess(result.message)
           handleButtonClick()
         }
       })
       .catch((error) => {
-        handleError(error);
+        handleError(error)
         handleButtonClick(true)
-      });
+      })
 
-    resetForm();
-  };
+    resetForm()
+  }
 
   return (
-    <>      
+    <>
       <Formik
         initialValues={{
           password: '',
@@ -59,7 +58,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
           password: Yup.string()
             .matches(
               /^[a-zA-Z0-9]+$/,
-              'Allowed characters for password are a-z, A-Z, 0-9.'
+              'Allowed characters for password are a-z, A-Z, 0-9.',
             )
             .required('Password is required')
             .max(30, 'Password must be between 7 and 30 characters')
@@ -67,7 +66,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
           newPassword: Yup.string()
             .matches(
               /^[a-zA-Z0-9]+$/,
-              'Allowed characters for password are a-z, A-Z, 0-9.'
+              'Allowed characters for password are a-z, A-Z, 0-9.',
             )
             .required('Password is required')
             .max(30, 'Password must be between 7 and 30 characters')
@@ -113,7 +112,7 @@ function UpdatePassword({formStatus, setFormStatus, handleButtonClick}) {
         </Form>
       </Formik>
     </>
-  );
+  )
 }
 UpdatePassword.propTypes = {
   formStatus: PropTypes.shape({
@@ -121,7 +120,7 @@ UpdatePassword.propTypes = {
     message: PropTypes.string,
   }),
   setFormStatus: PropTypes.func,
-  handleButtonClick: PropTypes.func
-};
+  handleButtonClick: PropTypes.func,
+}
 
-export default UpdatePassword;
+export default UpdatePassword

@@ -12,6 +12,7 @@ import {
     resetStatus,
     resetData,
     resetToken,
+    resetExpirationTime
 } from '../../Redux/reducers/userReducers'
 import IconLogin from '../Icons/IconLogin'
 import LogOutIcon from '../Icons/LogOutIcon'
@@ -33,6 +34,7 @@ export default function Header() {
         dispatch(resetStatus())
         dispatch(resetData())
         dispatch(resetToken())
+        dispatch(resetExpirationTime())
         setAuthToken(false)
     }
 
@@ -44,15 +46,17 @@ export default function Header() {
                     <span className={styles.logo}>Avion</span>
                 </NavLink>
                 <span className={styles.icons}>
-                <span className={styles.iconsDisplay}>
-                    {status && <NavLink className={styles.icon} to="/favorites/">
-                        <FavoritesIcon/>
-                    </NavLink>}
-                    <NavLink className={styles.icon} to="/cart/">
-                         <div className={styles.counter}>{cart.length}</div>
-                        <CartIcon/>
-                    </NavLink>
-                </span>
+          <span className={styles.iconsDisplay}>
+            {status && (
+                <NavLink className={styles.icon} to="/favorites/">
+                    <FavoritesIcon/>
+                </NavLink>
+            )}
+              <NavLink className={styles.icon} to="/cart/">
+              <div className={styles.counter}>{cart.length}</div>
+              <CartIcon/>
+            </NavLink>
+          </span>
                     {status && (
                         <>
                             <NavLink className={styles.icon__profile} to="/profile/">
@@ -74,21 +78,23 @@ export default function Header() {
                         </NavLink>
                     )}
                     <span
-                        className={`${styles.iconMenu} ${!isMenuHidden ? styles.iconMenuDisplay : ''
+                        className={`${styles.iconMenu} ${
+                            !isMenuHidden ? styles.iconMenuDisplay : ''
                         }`}
                         data-testid="menu-icon"
                         onClick={toggleHideItems}
                     >
-                    <MenuIcon/>
-                </span>
-                <span
-                    className={`${styles.iconMenu} ${isMenuHidden ? styles.iconMenuDisplay : ''
-                    }`}
-                    onClick={toggleHideItems}
-                >
-                    <CloseBtnIcon/>
-                </span>
-                    </span>
+            <MenuIcon/>
+          </span>
+          <span
+              className={`${styles.iconMenu} ${
+                  isMenuHidden ? styles.iconMenuDisplay : ''
+              }`}
+              onClick={toggleHideItems}
+          >
+            <CloseBtnIcon/>
+          </span>
+        </span>
             </div>
             <NavContainer isMenuHidden={isMenuHidden}></NavContainer>
         </header>

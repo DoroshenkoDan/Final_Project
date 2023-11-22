@@ -12,6 +12,7 @@ const initialState = {
   status: false,
   token: false,
   statusCustomer: 'idle',
+  expirationTime: '',
   error: '',
 }
 
@@ -27,6 +28,7 @@ describe('userReducers reducer', () => {
       status: true,
       token: false,
       statusCustomer: 'idle',
+      expirationTime: '',
       error: '',
     }
 
@@ -46,6 +48,7 @@ describe('userReducers reducer', () => {
       status: false,
       token: false,
       statusCustomer: 'idle',
+      expirationTime: '',
       error: '',
     }
 
@@ -60,6 +63,7 @@ describe('userReducers reducer', () => {
       data: {},
       status: false,
       token,
+      expirationTime: '',
       statusCustomer: 'idle',
       error: '',
     }

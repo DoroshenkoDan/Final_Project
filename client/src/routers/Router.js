@@ -37,18 +37,16 @@ function Routes() {
         { path: 'profile/', element: <ProfilePage /> },
         { path: 'contacts', element: <ContactUs /> },
         { path: '*', element: <PageNotFound /> },
-
       ],
     },
   ])
 }
 
 export default function Router() {
-    return (
-        <BrowserRouter>
-            <ScrollToTop />
-            <Routes />
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes />
+    </BrowserRouter>
+  )
 }
-
